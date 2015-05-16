@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 try:
-    from .local_settings import SECRET_KEY
+    from .local_settings import *
 except ImportError:
     raise RuntimeError("SECRET_KEY missing. Add to local_settings.py")
 
@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap3',
     'reminder',
+    'telephony'
 )
 
 MIDDLEWARE_CLASSES = (
