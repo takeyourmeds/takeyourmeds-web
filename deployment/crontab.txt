@@ -1,0 +1,1 @@
+* * * * * <venv>/bin/python <app>/manage.py run_tasks
