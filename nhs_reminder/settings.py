@@ -115,4 +115,7 @@ BROKER_URL = 'redis://localhost:6379/0'
 try:
     from .local_settings import *
 except ImportError:
-    raise RuntimeError("SECRET_KEY missing. Add to local_settings.py.  Make sure it's at least 50 random characters.")
+    raise RuntimeError(
+        "SECRET_KEY missing. Add to local_settings.py. "
+        "Make sure it's at least 50 random characters."
+    )

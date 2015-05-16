@@ -13,8 +13,13 @@ class Migration(migrations.Migration):
     operations = [
         migrations.CreateModel(
             name='Reminder',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+            fields=[(
+                'id', models.AutoField(
+                    verbose_name='ID',
+                    serialize=False,
+                    auto_created=True,
+                    primary_key=True)
+                ),
                 ('crontab', models.CharField(max_length=100, blank=True)),
                 ('message', models.CharField(max_length=100, blank=True)),
                 ('phone_number', models.CharField(max_length=200)),

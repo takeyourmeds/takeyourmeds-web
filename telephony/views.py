@@ -1,12 +1,11 @@
 import os
 import json
 
-from django.conf import settings
 from django.http import HttpResponse
-from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
-import actions
+from . import actions
+
 
 def info(request, uuid):
     """
@@ -25,6 +24,7 @@ def make_call(request):
 
     incoming["id"] = actions.make_call(to_number, message_url)
     return HttpResponse(json.dumps(incoming), content_type='application/json')
+
 
 @csrf_exempt
 def send_sms(request):

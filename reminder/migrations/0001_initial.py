@@ -12,8 +12,13 @@ class Migration(migrations.Migration):
     operations = [
         migrations.CreateModel(
             name='Reminder',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+            fields=[(
+                'id', models.AutoField(
+                    verbose_name='ID',
+                    serialize=False,
+                    auto_created=True,
+                    primary_key=True)
+                ),
                 ('freq', models.IntegerField()),
                 ('phone_number', models.CharField(max_length=200)),
             ],

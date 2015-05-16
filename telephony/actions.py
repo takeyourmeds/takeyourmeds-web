@@ -1,5 +1,4 @@
 import os
-import tempfile
 import uuid
 from urlparse import urljoin
 
@@ -14,10 +13,13 @@ def send_sms(to_number, message_text):
         Send an SMS message 'message_text' to a telephone
         number in 'to_number'
     """
-    message = _get_client().messages.create(body=message_text,
+    message = _get_client().messages.create(
+        body=message_text,
         to=to_number,
-        from_=settings.TW_FROM_NUMBER)
+        from_=settings.TW_FROM_NUMBER,
+    )
     return message.sid
+
 
 def make_call(to_number, audio_url):
     """
@@ -28,8 +30,10 @@ def make_call(to_number, audio_url):
 
     # Write out the XML with the URL of the audio
     _write_twiml(name, audio_url)
-    callback_url = urljoin(settings.TW_ROOT_URL,
-        reverse("info", kwargs={'uuid': name}) )
+    callback_url = urljoin(
+        settings.TW_ROOT_URL,
+        reverse("info", kwargs={'uuid': name})
+    )
 
     call = _get_client().calls.create(
         to=to_number,
@@ -41,6 +45,7 @@ def make_call(to_number, audio_url):
         record="false"
     )
     return call.sid
+
 
 def _write_twiml(name, audio_url):
     # Generate XML file, save with name

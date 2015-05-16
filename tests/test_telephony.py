@@ -1,7 +1,8 @@
 from django.test import Client, TestCase
-import json
-import requests
+# import json
+# import requests
 from telephony import actions
+
 
 class TestTelephony(TestCase):
 
@@ -17,7 +18,8 @@ class TestTelephony(TestCase):
             "message_url": "https://api.twilio.com/cowbell.mp3"
         }
 
-        response = self.client.post("/telephony/call", json.dumps(d), content_type="application/json")
+        response = self.client.post(
+            "/telephony/call", json.dumps(d), content_type="application/json")
 
 
     def test_sms(self):
@@ -28,7 +30,8 @@ class TestTelephony(TestCase):
             "message": "This is a message"
         }
 
-        response = self.client.post("/telephony/sms", json.dumps(d), content_type="application/json")
+        response = self.client.post(
+            "/telephony/sms", json.dumps(d), content_type="application/json")
 
         result = json.loads(response.content)
         for k, v in result.iteritems():
@@ -38,5 +41,8 @@ class TestTelephony(TestCase):
     """
 
     def test_actions(self):
-        actions.make_call("+447472785934", "http://servercode.co.uk/nhshackday/hi_mum_medication_reminder.mp3")
+        actions.make_call(
+            "+447472785934",
+            "http://servercode.co.uk/nhshackday/hi_mum_medication_reminder.mp3"
+        )
         actions.send_sms("+447472785934", "Hello again Ross!")

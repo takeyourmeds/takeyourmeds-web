@@ -1,6 +1,7 @@
-from rest_framework import routers, serializers, viewsets
+from rest_framework import serializers, viewsets
 
 from .models import Reminder
+
 
 class ReminderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
