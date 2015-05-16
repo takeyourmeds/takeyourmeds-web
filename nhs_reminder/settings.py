@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 try:
     from .local_settings import SECRET_KEY
 except ImportError:
-    raise RuntimeError("SECRET_KEY missing. Add to local_settings.py")
+    raise RuntimeError("SECRET_KEY missing. Add to local_settings.py.  Make sure it's at least 50 random characters.")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
