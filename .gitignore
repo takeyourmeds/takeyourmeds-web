@@ -1,5 +1,6 @@
 db.sqlite3
 local_settings.py
+.DS_Store
 #
 #
 # Byte-compiled / optimized / DLL files
