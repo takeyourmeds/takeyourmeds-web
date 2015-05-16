@@ -19,12 +19,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-try:
-    from .local_settings import *
-except ImportError:
-    raise RuntimeError("SECRET_KEY missing. Add to local_settings.py.  Make sure it's at least 50 random characters.")
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -114,3 +108,10 @@ STATIC_URL = '/static/'
 import djcelery
 djcelery.setup_loader()
 BROKER_URL = 'redis://localhost:6379/0'
+
+
+# SECURITY WARNING: keep the secret key used in production secret!
+try:
+    from .local_settings import *
+except ImportError:
+    raise RuntimeError("SECRET_KEY missing. Add to local_settings.py.  Make sure it's at least 50 random characters.")
