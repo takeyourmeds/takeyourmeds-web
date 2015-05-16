@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 try:
     from .local_settings import *
 except ImportError:
-    raise RuntimeError("SECRET_KEY missing. Add to local_settings.py")
+    raise RuntimeError("SECRET_KEY missing. Add to local_settings.py.  Make sure it's at least 50 random characters.")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'flat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,6 +44,7 @@ INSTALLED_APPS = (
     'bootstrap3',
     'reminder',
     'telephony'
+    'djcelery',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -108,3 +110,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+import djcelery
+djcelery.setup_loader()
+BROKER_URL = 'redis://localhost:6379/0'
