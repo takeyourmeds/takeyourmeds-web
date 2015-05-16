@@ -17,8 +17,6 @@ $(document).ready(function(){
 
 	var reminder_form = $('#reminder-setup');
 
-	var audio_messages = [];
-
 	var schedule = {
 		1: ["8:00"],
 		2: ["8:00", "17:00"],
@@ -74,16 +72,22 @@ $(document).ready(function(){
 
 		$.post(post_url, dataobject, function(){
 
-			// Do something on success
-			alert("Yay");
+			// Show success message on success
+			var content_container = $('#content .container');
+			
+			content_container.empty();
+
+			var success_template = $('.success-message');
+			
+			success_template.appendTo(content_container);
+			
+			success_template.show();
 
 		})
 
-
 	});
 
-
-	// Configure time to take based on frequency
+	// Configure medication schedule based on frequency
 
 	var frequency_selector = reminder_form.find('#frequency');
 
@@ -103,9 +107,9 @@ $(document).ready(function(){
 
 			var time = template.clone().appendTo(reminder_schedule_list);
 
-			var time_value = time.find("input");
+			var time_value = time.find("select");
 
-			time_value.attr('value', t);
+			time_value.val(t);
 			time_value.attr('name', 'time_' + String(n));
 			time_value.attr('id', 'time_' + String(n));
 
@@ -115,5 +119,25 @@ $(document).ready(function(){
 
 	});
 
+
+	// Show the right message details option
+
+	$('.radio-selector').each(function() {
+
+		var el = $(this);
+
+		el.click(function() {
+
+			$('.message-type').each(function() {
+				$(this).hide();
+			});
+
+			var element = $('#'+this.dataset.element);
+
+			element.show();
+
+		});
+
+	});
 
 });
