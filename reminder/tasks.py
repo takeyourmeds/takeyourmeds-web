@@ -9,6 +9,7 @@ logger = get_task_logger(__name__)
 
 from .models import Reminder
 
+
 @shared_task()
 def send_reminder_task(reminder_id):
     reminder = Reminder.objects.get(pk=reminder_id)

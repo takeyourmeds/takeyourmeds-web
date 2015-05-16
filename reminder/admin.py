@@ -11,11 +11,11 @@ def dispatch_tasks(modeladmin, request, queryset):
 @admin.register(Reminder)
 class Reminder(admin.ModelAdmin):
     list_display = [
-            'id',
-            'cronstring',
-            'message',
-            'audiourl',
-            'telnumber',
-            'last_run',
-        ]
+        'id',
+        'cronstring',
+        'message',
+        'audiourl',
+        'telnumber',
+        'last_run',
+    ]
     actions = [dispatch_tasks]

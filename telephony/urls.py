@@ -12,12 +12,13 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import include, url
+from django.conf.urls import url
 
 from telephony.views import info, send_sms, make_call
 
+
 urlpatterns = [
-        url('^info/(?P<uuid>.*)$', info, name='info'),
-        url('^call$', make_call, name='call'),
-        url('^sms$', send_sms, name='sms'),
+    url('^info/(?P<uuid>.*)$', info, name='info'),
+    url('^call$', make_call, name='call'),
+    url('^sms$', send_sms, name='sms'),
 ]
