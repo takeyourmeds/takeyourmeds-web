@@ -7,16 +7,17 @@
 	<meta name="robots" content="noindex, nofollow">
 	<link href="./static/css/normalize.css" rel="stylesheet" media="screen" />
 	<link href="./static/css/main.css" rel="stylesheet" media="screen" />
-	<title>Pill Popper App</title>
+	<title>Pill Timer App</title>
 	<script type="text/javascript" src="./static/js/jquery-2.1.4.js"></script>
 	<script type="text/javascript" src="./static/js/main.js"></script>
+	<script type="text/javascript" src="./static/js/jquery.cookie.js"></script>
 </head>
- 
+
 <body>
 
 <script type="text/javascript">
 
-	var post_url = "http://reminders.duckdns.org/";
+	var post_url = "/api/reminders/";
 
 </script>
 
@@ -27,7 +28,7 @@
 </header>
 
 <div id="content">
- 
+
 	<form action="" method="post" id="reminder-setup" name="reminder-setup">
 
 	<div>
@@ -35,9 +36,9 @@
 	<h1>Create a new medication reminder</h1>
 
 	<div class="controls">
-		
+
 		<label for="frequency">How many times a day?</label>
-		
+
 		<select id="frequency" name="frequency">
 			<option value="0" selected> Please select</option>
 			<option value="1">1</option>
@@ -45,11 +46,11 @@
 			<option value="3">3</option>
 			<option value="4">4</option>
 		</select>
-		
+
 		<div id="reminder-schedule">
 
 			<p>The reminders will be sent at the following times:</p>
-			
+
 			<ol>
 				<li id="reminder_template" class="reminder-time"><input type="text" name="time[1]" value="8:00am" readonly></li>
 			</ol>
@@ -65,18 +66,18 @@
 			<option value="http://servercode.co.uk/nhshackday/hi_mum_medication_reminder.mp3">Hi Mum!</option>
 			<option value="http://servercode.co.uk/nhshackday/its_fiona_mouthwash_reminder.mp3">Dental Hygienist</option>
 		</select>
-		 
+
 		<label for="phone_number">What phone number should we send them to?</label>
 		<input type="text" name="phone_number" value="" />
 
 	</div>
 
 	<input value="Create my reminder" name="submit" type="submit" class="submit" />
-	 
+
 	</form>
 
 </div>
- 
+
 
 </body>
 </html>

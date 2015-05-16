@@ -1,5 +1,20 @@
 $(document).ready(function(){
 
+    // fix for django csrf
+    var csrftoken = $.cookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
 	var reminder_form = $('#reminder-setup');
 
 	var audio_messages = [];
@@ -11,8 +26,8 @@ $(document).ready(function(){
 		4: ["8:00", "11:00", "14:00", "17:00"]
 	}
 
-	
-	// Capture form submit and send ajax 
+
+	// Capture form submit and send ajax
 	// request with data
 
 	reminder_form.submit(function(e) {
@@ -20,7 +35,7 @@ $(document).ready(function(){
 		e.preventDefault();
 
 		var data = reminder_form.serializeArray();
-		
+
 		var telnumber = "";
 		var message = "";
 		var cronstring = "";
@@ -58,10 +73,10 @@ $(document).ready(function(){
 		console.log(jsonresult);
 
 		$.post(post_url, dataobject, function(){
-			
+
 			// Do something on success
 			alert("Yay");
-			
+
 		})
 
 
@@ -75,7 +90,7 @@ $(document).ready(function(){
 	var reminder_schedule_container = reminder_form.find('#reminder-schedule');
 
 	var reminder_schedule_list = reminder_schedule_container.find('ol');
-	
+
 	frequency_selector.change(function() {
 
 		var times = schedule[frequency_selector.val()];
@@ -84,7 +99,7 @@ $(document).ready(function(){
 
 		reminder_schedule_list.empty()
 
-		times.forEach(function(t, n){ 
+		times.forEach(function(t, n){
 
 			var time = template.clone().appendTo(reminder_schedule_list);
 
