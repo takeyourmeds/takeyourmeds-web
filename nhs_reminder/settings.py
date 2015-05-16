@@ -43,7 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap3',
     'reminder',
-    'telephony'
+    'telephony',
     'djcelery',
 )
 
