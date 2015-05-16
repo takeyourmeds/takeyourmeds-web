@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'reminder',
     'telephony',
     'djcelery',
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
