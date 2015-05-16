@@ -13,8 +13,8 @@ from .models import Reminder
 def send_reminder_task(reminder_id):
     reminder = Reminder.objects.get(pk=reminder_id)
     if reminder.message:
-        send_sms(reminder.phone_number, reminder.message)
-    elif reminder.url:
-            make_call(reminder.phone_number, reminder.url)
+        send_sms(reminder.telnumber, reminder.message)
+    elif reminder.audiourl:
+            make_call(reminder.telnumber, reminder.audiourl)
     else:
         logger.warn('Reminder %s has neither message nor url', reminder.pk)
