@@ -6,9 +6,10 @@ from django.db import models
 
 
 class Reminder(models.Model):
-    crontab = models.CharField(blank=True, max_length=100)
+    cronstring = models.CharField(blank=True, max_length=100)
     message = models.CharField(blank=True, max_length=100)
-    phone_number = models.CharField(max_length=200)
+    audiourl = models.CharField(blank=True, max_length=100)
+    telnumber = models.CharField(max_length=200)
     last_run = models.DateTimeField(auto_now_add=True)
 
     def should_run(self):
