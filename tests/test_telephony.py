@@ -1,6 +1,7 @@
 from django.test import Client, TestCase
 import json
 import requests
+from telephony import actions
 
 class TestTelephony(TestCase):
 
@@ -36,12 +37,6 @@ class TestTelephony(TestCase):
             assert result[k] == d[k]
     """
 
-    def test_remote(self):
-        d = {
-            # Who to call
-            "to": "+447472785934",
-            # URL or the MP3 to play
-            "message_url": "http://servercode.co.uk/nhshackday/hi_mum_medication_reminder.mp3"
-        }
-        r = requests.post("http://144.76.19.150:8000", data=json.dumps(d))
-        print r.content
+    def test_actions(self):
+        actions.make_call("+447472785934", "http://servercode.co.uk/nhshackday/hi_mum_medication_reminder.mp3")
+        actions.send_sms("+447472785934", "Hello again Ross!")
