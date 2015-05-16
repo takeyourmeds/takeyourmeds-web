@@ -1,6 +1,11 @@
-# 'reminder' - a low-tech phone reminder application which has come about from the joining of 2 projects pitched at NHS Hackday London 2015.
+# 'reminder'
+a low-tech phone reminder application which has come about from the joining of 2 projects pitched at NHS Hackday London 2015.
 
-Fiona Stacey, a Dental Hygienist from the North East, pitched an idea about reminding post-radiotherapy head and neck cancer patients to use mouthwash regularly.
+Fiona Stacey, a Dental Hygienist from the North East, pitched an idea about using a low-tech means to remind post-radiotherapy head and neck cancer patients to use mouthwash regularly.
+
+Helen Jackson (@DeckOfPandas) also pitched an idea about a simpler type of medication reminder using standard phone calls, for patients unable to use a smartphone.
+
+The two teams quickly realised they were designing different facets of the same project and joined forces to work on a single application that would send a configurable audio message via phone call to a patient.
 
 ## What is it?
 Patients, carers or friends can enable a reminder to be set via a phone message advising the patient it is time to take their medication. Medication reminder applications are readily available for smartphones, however many patients, especially in vulnerable groups do not have or are unable to use a smartphone. They usually have a standard telephone though, so our application calls patients with a recorded reminder message.
