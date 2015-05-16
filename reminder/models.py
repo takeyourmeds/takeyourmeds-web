@@ -13,7 +13,7 @@ class Reminder(models.Model):
     last_run = models.DateTimeField(auto_now_add=True)
 
     def should_run(self):
-        times = croniter(self.crontab, self.last_run)
+        times = croniter(self.cronstring, self.last_run)
         return times.get_next(datetime) < datetime.now(pytz.utc)
 
     def dispatch_task(self):
