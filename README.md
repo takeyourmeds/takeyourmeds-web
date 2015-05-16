@@ -12,16 +12,13 @@ Patients, carers or friends can enable a reminder to be set via a phone message 
 
 ##technology stack
 * reminder is a Python/Django application with a lightweight HTML5 frontend
-* the Celery/Redis-based scheduler within the Django app makes calls to a thin wrapper around the Twilio API, enabling the application to place a telephone call or send an SMS. The current 'proof-of-concept' is set to deliver one of two prerecorded audio files:
-
-<audio controls>
-  <source src="horse.ogg" type="audio/ogg">
-  <source src="horse.mp3" type="audio/mpeg">
-Your browser does not support the audio element.
-</audio> 
+* the Celery/Redis-based scheduler within the Django app makes calls to a thin wrapper around the Twilio API, enabling the application to place a telephone call or send an SMS. The current 'proof-of-concept' is set to deliver one of two prerecorded audio files.
 
 #TODO
 * improve frontend to allow flexible configuration of reminder times (currently the options for reminder frequency are hard-coded in the UI to offer 1 times, 2 times, 3, times or 4 times per day which was sufficient for our NHSHD proof of concept)
+* create multi-user interface with username/password login and persistence of settings
+* enable creation of a customised reminder message
+* emanble creation of multiple customised reminder messages depending on the time of the message
 * closing app feedback loop - the patient receiving the call should be able to press a key during the call to acknowledge the reminder and to indicate that they have taken the medication/used the mouthwash. This information should propagate back to the user interface, giving a real-time indication of the patient's use of medication. This would serve as an 'early warning' of poor comliance which might indicate increased confusion or patient intercurrent illness.
 
 ##Contributing
