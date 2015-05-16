@@ -13,4 +13,4 @@ TW_FROM_NUMBER="+44......"
 # The root URL from where the Twilio service can pick
 # up the TwilML because Ross is too lazy to work out the
 # server name dynamically.
-TW_ROOT_URL="http://127.0.0.1:8000/info"
+TW_ROOT_URL="http://127.0.0.1:8000/telephony/info"

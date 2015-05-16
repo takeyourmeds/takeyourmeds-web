@@ -51,7 +51,7 @@ def _write_twiml(name, audio_url):
                 <Play loop="1">{}</Play>
             </Response>
         """.format(audio_url)
-        f.write(doc)
+        f.write(doc.strip())
 
 
 def _get_client():
