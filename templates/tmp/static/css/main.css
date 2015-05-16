@@ -1,0 +1,93 @@
+.site_header { 
+	background: #2975CD;
+	color: #fff;
+	padding: 1em 0;
+}
+
+.site_header h2 { 
+	background: url('../img/logo.png') center left no-repeat;
+	height: 46px;
+	margin: 0 auto;
+	max-width: 536px;
+	padding: 0 32px;
+	text-indent: -1000%;
+}
+
+#content { 
+	margin: 0 auto;
+	padding: 32px;
+	max-width: 600px;
+}
+
+#content h1 {
+	border-bottom: 1px solid #eee;
+	padding-bottom: 0.5em;
+}
+
+#content label, #content p {
+	display: block;
+	font-size: 1.125em;
+	margin: 1.5em 0 0.5em;
+}
+
+#content .controls {
+	border-bottom: 1px solid #eee;
+	margin-bottom: 2em;
+	padding-bottom: 1.5em;
+}
+
+#content select#frequency {
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 1.125em;
+}
+
+#content #reminder-schedule {
+	background: #f3f1eb;
+	display: none;
+	margin: 1em 0;
+	max-width: 100%;
+	padding: 1em 1.5em;
+	width: 32em;
+}
+
+#content #reminder-schedule p {
+	margin-top: 0;
+}
+
+#content #reminder-schedule ol {
+	margin: 0;
+	padding: 0;
+}
+
+#content .reminder-time {
+	list-style: none;
+	margin: 0 0 0.5em;
+	padding: 0;
+}
+
+#content .submit {
+	background: #FF6132;
+	border: 0;
+	border-radius: 4px;
+	color: #fff;
+	font-size: 14px;
+	padding: 1em 1.5em;
+	text-transform: uppercase;
+}
+
+#content .submit:hover {
+	background: #C93E15;
+}
+
+#content input[type=text], #content textarea {
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 0.5em;
+}
+
+#content textarea {
+	height: 8em;
+	max-width: 100%;
+	width: 35em;
+}
