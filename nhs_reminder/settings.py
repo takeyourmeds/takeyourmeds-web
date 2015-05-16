@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 try:
-    from .local_settings import SECRET_KEY
+    from .local_settings import *
 except ImportError:
     raise RuntimeError("SECRET_KEY missing. Add to local_settings.py.  Make sure it's at least 50 random characters.")
 
@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'flat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap3',
     'reminder',
+    'telephony'
     'djcelery',
 )
 
