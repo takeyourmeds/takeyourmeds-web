@@ -8,11 +8,17 @@ Helen Jackson (@DeckOfPandas) also pitched an idea about a simpler type of medic
 The two teams quickly realised they were designing different facets of the same project and joined forces to work on a single application that would send a configurable audio message via phone call to a patient.
 
 ## What is it?
-Patients, carers or friends can enable a reminder to be set via a phone message advising the patient it is time to take their medication. Medication reminder applications are readily available for smartphones, however many patients, especially in vulnerable groups do not have or are unable to use a smartphone. They usually have a standard telephone though, so our application calls patients with a recorded reminder message.
+Patients, carers or friends can enable a reminder to be set via a phone message advising the patient it is time to take their medication. Medication reminder applications are readily available for smartphones, however many patients, especially in vulnerable groups, do not own or are unable to use a smartphone. They usually have a standard telephone though, so our application calls patients with a recorded reminder message.
 
 ##technology stack
 * reminder is a Python/Django application with a lightweight HTML5 frontend
-* the scheduler within the Django app makes calls to a thin wrapper around the Twilio API enabling the application to place a telephone call or send an SMS. The current 'proof-of-concept' is set to deliver one of two prerecorded audio files 
+* the Celery/Redis-based scheduler within the Django app makes calls to a thin wrapper around the Twilio API, enabling the application to place a telephone call or send an SMS. The current 'proof-of-concept' is set to deliver one of two prerecorded audio files:
+
+<audio controls>
+  <source src="horse.ogg" type="audio/ogg">
+  <source src="horse.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio> 
 
 #TODO
 * improve frontend to allow flexible configuration of reminder times (currently the options for reminder frequency are hard-coded in the UI to offer 1 times, 2 times, 3, times or 4 times per day which was sufficient for our NHSHD proof of concept)
