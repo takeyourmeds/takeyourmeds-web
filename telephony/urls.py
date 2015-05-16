@@ -1,5 +1,4 @@
-"""nhs_reminder URL Configuration
-
+"""
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.8/topics/http/urls/
 Examples:
@@ -14,14 +13,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import include, url
-from django.contrib import admin
 
-from reminder.views import index, send, sent
+from telephony.views import info, send_sms, make_call
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
-    url('^$', index),
-    url('^send/$', send, name='send'),
-    url('^sent/$', sent, name='sent'),
-    url('^telephony/', include("telephony.urls")),
+        url('^info/(?P<uuid>.*)$', info, name='info'),
+        url('^call$', make_call, name='call'),
+        url('^sms$', send_sms, name='sms'),
 ]
