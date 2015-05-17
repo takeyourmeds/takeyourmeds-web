@@ -25,6 +25,26 @@ body {
 	text-indent: -1000%;
 }
 
+.site_header .site_nav {
+	float: right;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.site_header .site_nav li {
+	float: left;
+	font-weight: lighter;
+	font-size: 0.8em;
+	margin: 1.2em 1em;
+}
+
+.site_header .site_nav li a {
+	color: #fff;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
 .container {
 	margin: 0 auto;
 	max-width: 720px;
@@ -50,7 +70,7 @@ body {
 	font-size: 1.875em;
 	font-weight: 400;
 	letter-spacing: -1px;
-	margin: 0 0 0.33em;
+	margin: 0;
 }
 
 #content .content_header p {
@@ -58,7 +78,7 @@ body {
 	font-family: "Merriweather", Georgia, Times, serif;
 	font-weight: 300;
 	line-height: 1.5;
-	margin: 0 auto;
+	margin: 0.5em auto 0;
 	max-width: 450px;
 }
 
@@ -230,7 +250,7 @@ footer .credit a {
 	padding: 4em 0;
 }
 
-.home .container {
+.home .container, .about .container {
 	max-width: 940px;
 }
 
@@ -283,12 +303,16 @@ footer .credit a {
 	font-weight: 400;
 }
 
-.home #content p {
+.home #content p, .about #content p {
 	color: #6A6A6A;
 	font-family: "Merriweather", Georgia, Times, serif;
 	font-size: 1em;
 	font-weight: 300;
 	line-height: 1.4;
+}
+
+.about #content p {
+	color: #4C4C4C
 }
 
 .home #content .selling-point p {
@@ -316,4 +340,9 @@ footer .credit a {
 		float: none;
 		width: auto;
 	}
+}
+
+.about #content blockquote p {
+	color: #DC2E2B;
+	font-size: 1.5em;
 }
