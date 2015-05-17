@@ -34,12 +34,12 @@ see Wiki pages at https://github.com/open-health-hub/reminder/wiki/Installation
 * submit a pull request
 
 ## Credits
-* Fiona Stacey [http://twitter.com/fiona_stacey] (Dental Hygienist) - pitched Mouthwash reminder idea
-* Helen @DeckOfPandas (Doctor & Dev) - pitched Medication reminder idea
-* Ross Jones @rossjones - Twilio wrapper code
-* Sym Roe @symroe - Scheduler code
-* Jude Gibbons @judegibbons - UI/frontend
-* Mike Thompson @mikejthompson - UI/frontend
-* Carrie Christensen @c-christensen - Twilio wrapper
-* David Szotten @szotten - Django/Python app
-* Marcus Baw @marcus_baw - Documentation
+* Fiona Stacey [@fiona_stacey](http://twitter.com/fiona_stacey) (Dental Hygienist) - pitched Mouthwash reminder idea
+* Helen [@DeckOfPandas](http://twitter.com/DeckOfPandas) (Doctor & Dev) - pitched Medication reminder idea
+* Ross Jones [@rossjones](http://twitter.com/rossjones) - Twilio wrapper code
+* Sym Roe [@symroe](http://twitter.com/symroe) - Scheduler code
+* Jude Gibbons [@judegibbons](http://twitter.com/judegibbons) - UI/frontend
+* Mike Thompson [@mikejthompson](http://twitter.com/mikejthompson) - UI/frontend
+* Carrie Christensen [@c-christensen](http://twitter.com/c-christensen) - Twilio wrapper
+* David Szotten [@szotten](http://twitter.com/szotten) - Django/Python app
+* Marcus Baw [@marcus_baw](http://twitter.com/marcus_baw) - Documentation
