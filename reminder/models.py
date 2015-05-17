@@ -3,6 +3,7 @@ from datetime import datetime
 import pytz
 from croniter import croniter
 from django.db import models
+from django.contrib.auth.models import User
 
 class ReminderTime(models.Model):
     reminder = models.ForeignKey('Reminder', related_name='reminder_times')
@@ -20,6 +21,7 @@ class ReminderTime(models.Model):
 
 
 class Reminder(models.Model):
+    user = models.ForeignKey(User)
     message = models.CharField(blank=True, max_length=100)
     audiourl = models.CharField(blank=True, max_length=100)
     telnumber = models.CharField(max_length=200)

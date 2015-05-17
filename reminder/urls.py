@@ -1,15 +1,7 @@
-from django.conf.urls import patterns, include, url
-from rest_framework import routers
+from django.conf.urls import url
 
-from .api import ReminderViewSet
+from reminder.views import new_reminder
 
-router = routers.DefaultRouter()
-router.register(r'reminders', ReminderViewSet)
-
-from reminder.views import new_reminder, send, sent
-
-urlpatterns = patterns(
-    '',
-    url(r'^new$',new_reminder, name="reminder_new" ),
-    url(r'', include(router.urls)),
-)
+urlpatterns = [
+    url(r'^new/$', new_reminder, name="reminder_new" ),
+]

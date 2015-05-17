@@ -1,4 +1,5 @@
 from rest_framework import serializers, viewsets
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Reminder, ReminderTime
 
@@ -12,9 +13,9 @@ class ReminderSerializer(serializers.ModelSerializer):
     reminder_times = ReminderTimeField(many=True, read_only=True)
 
     def create(self, data):
-        obj = super(ReminderSerializer, self).create(data)
         req = self.context['request']
-        print req.data
+        data['user_id'] = req.user.pk
+        obj = super(ReminderSerializer, self).create(data)
         for reminder_time in req.data.get('reminder_times', []):
             rt = ReminderTime(
                 reminder=obj,
@@ -37,5 +38,8 @@ class ReminderSerializer(serializers.ModelSerializer):
 class ReminderViewSet(viewsets.ModelViewSet):
     queryset = Reminder.objects.all()
     serializer_class = ReminderSerializer
+    permission_classes = [IsAuthenticated]
 
-
+    def get_queryset(self):
+        user = self.request.user
+        return Reminder.objects.filter(user=user)
