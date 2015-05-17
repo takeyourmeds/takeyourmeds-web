@@ -1,11 +1,11 @@
 from django.core.management.base import BaseCommand
 
-from reminder.models import Reminder
+from reminder.models import Reminder, ReminderTime
 
 
 class Command(BaseCommand):
 
     def handle(self, **options):
-        for reminder in Reminder.objects.all():
-            if reminder.should_run():
-                reminder.dispatch_task()
+        for reminder_time in ReminderTime.objects.all():
+            if reminder_time.should_run():
+                reminder_time.run()

@@ -37,7 +37,7 @@ $(document).ready(function(){
 		var telnumber = "";
 		var message = "";
 		var cronstring = "";
-		var timeDigits = "";
+		var reminder_times = [];
 		var audiourl = "";
 		var dataobject = {};
 
@@ -52,38 +52,36 @@ $(document).ready(function(){
 				audiourl = formField.value;
 			};
 			if (formField.name.lastIndexOf("time", 0) === 0) {
-				var timeDigit = formField.value.split(":")[0];
-				if (timeDigits == "") {
-					timeDigits = timeDigits + timeDigit;
-				} else {
-					timeDigits = timeDigits + "," + timeDigit;
-				};
-				cronstring = "0 " + timeDigits + " * * *";
+				var hourDigits = formField.value.split(":")[0];
+				var minDigits = formField.value.split(":")[1].substr(0,2);
+      var cronstring = minDigits + " " + hourDigits + " * * *";
+      reminder_times.push(cronstring);
 			};
 		});
 
 		dataobject.telnumber = telnumber;
 		dataobject.message = message;
-		dataobject.cronstring = cronstring;
+		dataobject.reminder_times = reminder_times;
 		dataobject.audiourl = audiourl;
 
 		var jsonresult = JSON.stringify(dataobject);
 		console.log(jsonresult);
 
-		$.post(post_url, dataobject, function(){
+    $.ajax(post_url, {
+      data : jsonresult,
+      contentType : 'application/json',
+      type : 'POST',
+      success: function() {
+        // Show success message on success
+        var content_container = $('#content .container');
+        content_container.empty();
+        var success_template = $('.success-message');
+        success_template.appendTo(content_container);
+        success_template.show();
+    }
 
-			// Show success message on success
-			var content_container = $('#content .container');
-			
-			content_container.empty();
+    })
 
-			var success_template = $('.success-message');
-			
-			success_template.appendTo(content_container);
-			
-			success_template.show();
-
-		})
 
 	});
 
