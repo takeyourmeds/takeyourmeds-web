@@ -28,6 +28,7 @@ body {
 	background: #2975CD;
 	color: #fff;
 	padding: 0.75em 0;
+	position: relative;
 }
 
 .site_header h2 {
@@ -50,12 +51,42 @@ body {
 	font-weight: lighter;
 	font-size: 0.8em;
 	margin: 1.2em 1em;
+		text-align: center;
 }
 
 .site_header .site_nav li a {
 	color: #fff;
 	text-decoration: none;
 	text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+
+	.site_header {
+		padding-bottom: 3.5em;
+	}
+
+	.site_header .site_nav {
+		background: #235DA0;
+		bottom: 0;
+		display: block;
+		float: none;
+		left: 0px;
+		margin: 0;
+		position: absolute;
+		text-align: center;
+		width: 100%;
+	}
+
+	.site_header .site_nav li {
+		display: inline-block;
+		float: none;
+		padding: 0.2em;
+	}
+
+	.site_header .site_nav a:hover, .site_header .site_nav a:active {
+		text-decoration: underline;
+	}
 }
 
 .container {
