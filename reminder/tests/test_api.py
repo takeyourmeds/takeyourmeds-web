@@ -5,6 +5,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from rest_framework.test import force_authenticate
 
+from reminder.models import Reminder
 
 class ReminderTests(APITestCase):
     def setUp(self):
@@ -55,3 +56,9 @@ class ReminderTests(APITestCase):
 
         res = self.client.get(url)
         self.assertEqual(len(res.data), 1)
+
+    def test_trigger_now(self):
+        r1 = Reminder(user=self.u)
+        r1.save()
+        url = reverse('trigger_now')
+        self.client.post(url, {'id': 1}, format='json')
