@@ -7,6 +7,14 @@ def new_reminder(request):
     return render(request, 'new_reminder.html')
 
 
+@login_required
+def list_reminders(request):
+    user = request.user
+    return render(request, 'list_reminders.html', {
+        'reminders': user.reminder_set.all(),
+    })
+
+
 def send(request):
     if request.method == 'POST':
         return redirect('sent')

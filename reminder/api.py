@@ -1,5 +1,7 @@
 from rest_framework import serializers, viewsets
+from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from .models import Reminder, ReminderTime
 
@@ -43,3 +45,11 @@ class ReminderViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
         return Reminder.objects.filter(user=user)
+
+
+@api_view(['POST', ])
+def trigger_now(request):
+    pk = request.data.get('id')
+    reminder = Reminder.objects.get(pk=pk)
+    reminder.dispatch_task()
+    return Response({"message": "Triggered",})
