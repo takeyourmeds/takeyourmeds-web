@@ -27,7 +27,11 @@ body {
 .site_header {
 	background: #2975CD;
 	color: #fff;
-	padding: 0.75em 0;
+	min-height: 56px;
+	padding-top: 0.5em;
+}
+
+.site_header .container { 
 	position: relative;
 }
 
@@ -40,10 +44,12 @@ body {
 }
 
 .site_header .site_nav {
-	float: right;
+	position: absolute;
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	top: 0px;
+	right: 0px;
 }
 
 .site_header .site_nav li {
@@ -60,22 +66,24 @@ body {
 	text-transform: uppercase;
 }
 
-@media screen and (max-width: 600px) {
-
-	.site_header {
-		padding-bottom: 3.5em;
-	}
+@media (max-width: 600px) {
 
 	.site_header .site_nav {
 		background: #235DA0;
 		bottom: 0;
 		display: block;
 		float: none;
-		left: 0px;
-		margin: 0;
-		position: absolute;
+		margin: 0.333em 0 0;
+		position: static;
 		text-align: center;
-		width: 100%;
+	}
+
+	.site_header h2 {
+		margin-left: 0.667em;
+	}
+
+	.site_header .container {
+		padding: 0;
 	}
 
 	.site_header .site_nav li {
@@ -156,7 +164,7 @@ Create reminder form
 	margin-left: 2%;
 }
 
-@media screen and (max-width: 475px) {
+@media (max-width: 475px) {
 
 	#message-selector label {
 		margin-bottom: 0.5em;
@@ -379,7 +387,7 @@ Home Page
 	margin-right: 1.5em;
 }
 
-@media screen and (max-width: 720px) {
+@media (max-width: 720px) {
 
 	.home #hero .container {
 		background: none;
