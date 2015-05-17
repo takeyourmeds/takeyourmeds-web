@@ -152,8 +152,8 @@ $('.cron').each(function(i, el) {
 
 
 if (document.location.search == "?flash=1") {
-  $('.reminder').first().stop()
-  .css('background-color', 'yellow').animate({
-    'background-color': 'white'
-  }, 1000);
+  $('.reminder').find('.info-right').first().stop()
+  .css('background-color', '#FCEF33').animate({
+    'background-color': '#F3F1EB'
+  }, 1500);
 }
