@@ -39,20 +39,3 @@ Patients, carers or friends can enable a reminder to be set via a phone message 
 * Carrie Christensen - Twilio wrapper
 * David Szotten - Django/Python app
 * Marcus Baw @marcus_baw - Documentation
-
-
-## Configuration
-
-### Telephony
-
-To be able to make calls and send SMS you will need to sign up for an account at [Twilio](https://www.twilio.com). Once you have done this, you can visit the [Manage Numbers page](https://www.twilio.com/user/account/phone-numbers/incoming) to purchase a new number from which to make calls and send SMS.
-
-If you visit your [Account Settings](https://www.twilio.com/user/account/settings) you will also be able to retrieve your *AccountSID* and *AuthToken* which you will need for the next steps.
-
-
-   * Copy the file nhs_reminders/local_settings.py.sample to nhs_reminders/local_settings.py
-   * Set the string value for ```TW_ACCOUNT_SID``` to the value from *AccountSID* above.
-   * Set the string value for ```TW_AUTH_TOKEN``` to the value from *AuthToken* above.
-   * Set the ```TW_FROM_NUMBER``` to the phone number that you purchased during Twilio setup.
-   * Set the ```TW_ROOT_URL``` string value to the location of the /telephony/info url.
-   
