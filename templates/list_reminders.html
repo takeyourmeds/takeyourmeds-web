@@ -18,9 +18,11 @@
 {% endif %}
 </p>
 
+<p>
 {% for time in reminder.reminder_times.all %}
-<span class="cron">{{ time.cronstring }}</span>
+<span class="cron">{{ time.cronstring }}</span>{% if not forloop.last %},{% endif %}
 {% endfor %}
+</p>
 
 <button class="trigger" data-reminder-id={{ reminder.id }}>Test reminder</button>
 </p>
