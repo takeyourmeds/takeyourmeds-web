@@ -2,11 +2,17 @@ import datetime
 
 import pytz
 from django.test import TestCase
+from django.contrib.auth.models import User
 
 from reminder.models import Reminder, ReminderTime
 
 
 class TestCron(TestCase):
+
+    def setUp(self):
+        self.u = User(username='test')
+        self.u.save()
+
     def test_cron(self):
 
         ten_min_ago = (
@@ -14,6 +20,7 @@ class TestCron(TestCase):
             datetime.timedelta(minutes=10)
         )
         r = Reminder(
+            user=self.u,
             message="test",
             telnumber="123",
         )
