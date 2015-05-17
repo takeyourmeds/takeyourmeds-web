@@ -7,6 +7,11 @@
 
 {% block content %}
 
+{% if form.errors %}
+  <div class="alert alert-danger">
+  There was a problem with the details you provided. Please try again.
+  </div>
+{% endif %}
 
 <div class="row">
   <br/><br/>
@@ -14,11 +19,14 @@
   <div class="well">
     <h1>{% trans "Sign In" %}</h1>
 
-    <form id="loginForm" method="POST" action="{% url 'login' %}" novalidate="novalidate">
+    <form id="loginForm" method="POST" action="{% url 'account_login' %}" novalidate="novalidate">
       {% csrf_token %}
+       {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
       <div class="form-group">
-        <label for="username" class="control-label">Username</label>
-        <input type="text" class="form-control" id="username" name="username" value="" required="" title="Please enter you username" placeholder="Username">
+        <label for="login" class="control-label">Username</label>
+        <input type="text" class="form-control" id="login" name="login" value="" required="" title="Please enter you username" placeholder="Username">
         <span class="help-block"></span>
       </div>
       <div class="form-group">
@@ -34,7 +42,6 @@
         <p class="help-block">(if this is a private computer)</p>
       </div>
       <button type="submit" class="btn btn-success btn-block">Login</button>
-      <a href="/forgot/" class="btn btn-default btn-block">Help to login</a>
     </form>
   </div>
  </div>
