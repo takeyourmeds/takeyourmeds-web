@@ -15,7 +15,7 @@ Patients, carers or friends can enable a reminder to be set via a phone message 
 * reminder is a Python/Django application with a lightweight HTML5 frontend.
 * the Celery/Redis-based scheduler within the Django app
 * Calls are made to a thin wrapper around the Twilio API, enabling the application to place a telephone call or send an SMS. The current 'proof-of-concept' is set to deliver one of two prerecorded audio files.
-* 
+
 ## Installation
 see Wiki pages at https://github.com/open-health-hub/reminder/wiki/Installation
 
