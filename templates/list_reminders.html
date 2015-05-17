@@ -1,33 +1,52 @@
 {% extends "base.html" %}
-
+{% block bodyclass %}reminder-list{% endblock %}
 {% block content %}
 <div id="content">
 
-<h1>My reminders</h1>
-{% for reminder in reminders %}
-<div>
-<h3> {{ reminder.telnumber }} </h3>
-<p>
-{% if reminder.message %}
-    {{ reminder.message }}
-{% else %}
+    <header class="content_header">
+        <h1>My reminders</h1>
+    </header>
 
-<audio src="{{ reminder.audiourl }}" controls>
-  Unfortunately your browser does not support the <code>audio</code> element.
-</audio>
-{% endif %}
-</p>
+    <div class="container">
 
-<p>
-{% for time in reminder.reminder_times.all %}
-<span class="cron">{{ time.cronstring }}</span>{% if not forloop.last %},{% endif %}
-{% endfor %}
-</p>
+        {% for reminder in reminders %}
+      
+        <div class="reminder clearfix">
 
-<button class="trigger" data-reminder-id={{ reminder.id }}>Test reminder</button>
-</p>
-</div>
-{% endfor %}
+            <div class="info-left box-sizing-border">
+            
+                <h3><span class="meta">Send to</span> {{ reminder.telnumber }} </h3>
+                <a class="trigger submit" data-reminder-id={{ reminder.id }}>Test</a>
+
+            </div>
+
+            <div class="info-right box-sizing-border">
+                <span class="meta">Message</span>
+                {% if reminder.message %}
+                    <p>{{ reminder.message }}</p>
+                {% else %}
+                    <audio src="{{ reminder.audiourl }}" controls>
+                        Unfortunately your browser does not support the <code>audio</code> element.
+                    </audio>
+                {% endif %}
+
+                <p>
+                    <span class="meta">Timings</span>
+                    {% for time in reminder.reminder_times.all %}
+                    <span class="cron">{{ time.cronstring }}</span>{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                </p>
+
+            </div>
+
+            
+            </p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
 </div>
 
 

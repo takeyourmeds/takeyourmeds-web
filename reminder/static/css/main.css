@@ -1,3 +1,9 @@
+/* --------
+
+General
+
+-------- */
+
 .clearfix:before,
 .clearfix:after {
     content: "";
@@ -6,6 +12,13 @@
 .clearfix:after {
     clear: both;
 }
+
+
+/* --------
+
+Site structure
+
+-------- */
 
 body {
 	background: #1C3048;
@@ -81,6 +94,12 @@ body {
 	margin: 0.5em auto 0;
 	max-width: 450px;
 }
+
+/* --------
+
+Create reminder form
+
+-------- */
 
 #content label, #content p.label {
 	display: block;
@@ -245,6 +264,12 @@ footer .credit a {
 	box-sizing: border-box;
 }
 
+/* --------
+
+Home Page
+
+-------- */
+
 .home #content {
 	background: #F5F5F5;
 	padding: 4em 0;
@@ -342,7 +367,60 @@ footer .credit a {
 	}
 }
 
+/* --------
+
+About Page
+
+-------- */
+
 .about #content blockquote p {
 	color: #DC2E2B;
 	font-size: 1.5em;
+}
+
+
+
+/* --------
+
+Reminder List Page
+
+-------- */
+
+.reminder-list .reminder {
+	border-bottom: 1px solid #eee;
+	margin: 0 0 2em;
+	padding: 0 0 2em;
+}
+
+.reminder-list #content .submit {
+	margin: 0;
+}
+
+.reminder-list #content .info-left {
+	float: left;
+	padding: 1em 1.5em 0 0;
+	width: 28%;
+	text-align: right;
+}
+
+.reminder-list #content .info-right {
+	background: #f3f1eb;
+	border-radius: 6px;
+	float: left;
+	font-family: "Merriweather", Georgia, Times, serif;
+	padding: 1.5em 1em 1em;
+	width: 70%;
+}
+
+.reminder-list #content h3 {
+	margin: 0 0 1em;
+}
+
+.reminder-list #content .meta {
+	display: block;
+	font-family: "Helvetica", Arial, sans-serif;
+	font-size: 12px;
+	font-weight: lighter;
+	margin-bottom: 0.33em;
+	text-transform: uppercase;
 }
