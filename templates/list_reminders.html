@@ -3,9 +3,12 @@
 {% block content %}
 <div id="content">
 
+<div class="container">
+
+
 <h1>My reminders</h1>
 {% for reminder in reminders %}
-<div>
+<div class="reminder">
 <h3> {{ reminder.telnumber }} </h3>
 <p>
 {% if reminder.message %}
@@ -30,6 +33,8 @@
 {% endfor %}
 </div>
 
+
+</div>
 
 {% endblock %}
 

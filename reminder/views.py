@@ -11,7 +11,7 @@ def new_reminder(request):
 def list_reminders(request):
     user = request.user
     return render(request, 'list_reminders.html', {
-        'reminders': user.reminder_set.all(),
+        'reminders': user.reminder_set.all().order_by('-pk'),
     })
 
 
