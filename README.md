@@ -21,6 +21,7 @@ Patients, carers or friends can enable a reminder to be set via a phone message 
 * enable creation of a customised reminder message instead of the choice of 2 default messages in the proof-of-concept version.
 * enable creation of multiple customised reminder messages depending on the time of the message, ie "Remember to take your morning medications Mum", "Remember to take your evening medications Mum", etc
 * closing app feedback loop - the patient receiving the call should be able to press a key during the call to acknowledge the reminder and to indicate that they have taken the medication/used the mouthwash. This information should propagate back to the user interface, giving a real-time indication of the patient's use of medication. This would serve as an 'early warning' of poor comliance which might indicate increased confusion or patient intercurrent illness.
+* Investigate whether it is possible to upgrade the call to a conference after some trigger, and call the reminder owner to invite them to the conference.
 * Work out the telephony root url (using build_absolute_url) instead of configuring it.
 
 ##Contributing
