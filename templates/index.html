@@ -1,35 +1,12 @@
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html>
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<meta charset="UTF-8">
-	<meta name="robots" content="noindex, nofollow">
-	<title>MedMinder - Helping you and the people you care for remember to take your medication</title>
+{% block extra_js %}
+{% endblock %}
 
-	<link href='http://fonts.googleapis.com/css?family=Merriweather:300,400,700' rel='stylesheet' type='text/css' />
-	<link href="./static/css/normalize.css" rel="stylesheet" media="screen" />
-	<link href="./static/css/main.css" rel="stylesheet" media="screen" />
 
-	<script type="text/javascript" src="./static/js/jquery-2.1.4.js"></script>
-	<script type="text/javascript" src="./static/js/main.js"></script>
-	<script type="text/javascript" src="./static/js/jquery.cookie.js"></script>
-</head>
-
-<body>
-
-<script type="text/javascript">
-	var post_url = "/api/reminders/";
-</script>
-
-<header class="site_header">
-	<div class="container">
-		<h2>Take Your Meds</h2>
-	</div>
-</header>
-
+{% block content %}
 <div id="content">
+
 	<header class="content_header">
       <img src="/static/img/logo.png" />
 		<h1>words</h1>
@@ -42,19 +19,4 @@
 
 	</div>
 </div>
-
-
-<footer>
-	<div class="container">
-		<p>&copy; 2015 "Take Your Meds"</p>
-	</div>
-
-</footer>
-
-<div class="success-message">
-	<p><strong>Thanks!</strong> Your reminders have been successfully set up.</p>
-</div>
-
-
-</body>
-</html>
+{% endblock%}
