@@ -26,4 +26,4 @@ class Reminder(models.Model):
 
     def dispatch_task(self):
         from .tasks import send_reminder_task
-        send_reminder_task.delay(self.reminder_id)
+        send_reminder_task.delay(self.pk)

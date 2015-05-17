@@ -14,6 +14,7 @@ class ReminderSerializer(serializers.ModelSerializer):
     def create(self, data):
         obj = super(ReminderSerializer, self).create(data)
         req = self.context['request']
+        print req.data
         for reminder_time in req.data.get('reminder_times', []):
             rt = ReminderTime(
                 reminder=obj,
