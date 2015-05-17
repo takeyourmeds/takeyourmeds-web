@@ -3,7 +3,7 @@ import datetime
 import pytz
 from django.test import TestCase
 
-from .models import Reminder
+from reminder.models import Reminder, ReminderTime
 
 
 class TestCron(TestCase):
@@ -14,9 +14,14 @@ class TestCron(TestCase):
             datetime.timedelta(minutes=10)
         )
         r = Reminder(
-            crontab="* * * * *",
             message="test",
-            phone_number="123",
-            last_run=ten_min_ago,
+            telnumber="123",
         )
         r.save()
+
+        rt = ReminderTime(
+            cronstring="* * * * *",
+            last_run=ten_min_ago,
+            reminder=r,
+        )
+        rt.save()
