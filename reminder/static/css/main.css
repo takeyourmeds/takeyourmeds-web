@@ -243,9 +243,8 @@ footer .credit a {
 
 .home #hero .container {
 	background: url('../img/clock.png') bottom left no-repeat;
-	height: 273px;
-	min-height: 200px;
-	padding: 64px 0 0 200px;
+	min-height: 273px;
+	padding: 64px 2em 2em 200px;
 }
 
 .home #hero h1 {
@@ -294,4 +293,27 @@ footer .credit a {
 
 .home #content .selling-point p {
 	margin-right: 2.5em;
+}
+
+.home #content .selling-point h3 {
+	margin-right: 1.5em;
+}
+
+@media screen and (max-width: 720px) {
+
+	.home #hero .container {
+		background: none;
+		min-height: inherit;
+		padding: 2em;
+		text-align: center;
+	}
+
+	.home #content {
+		padding: 2em 0;
+	}
+
+	.home #content .selling-point {
+		float: none;
+		width: auto;
+	}
 }
