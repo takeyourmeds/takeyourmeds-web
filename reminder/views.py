@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
+@login_required
+def new_reminder(request):
+    return render(request, 'new_reminder.html')
 
 def index(request):
     return render(request, 'index.html')
-
 
 def send(request):
     if request.method == 'POST':
