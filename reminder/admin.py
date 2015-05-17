@@ -1,7 +1,10 @@
 from django.contrib import admin
 
-from .models import Reminder
+from .models import Reminder, ReminderTime
 
+
+class ReminderTimesInline(admin.TabularInline):
+    model = ReminderTime
 
 def dispatch_tasks(modeladmin, request, queryset):
     for reminder in queryset:
@@ -10,12 +13,11 @@ def dispatch_tasks(modeladmin, request, queryset):
 
 @admin.register(Reminder)
 class Reminder(admin.ModelAdmin):
+    inlines = [ReminderTimesInline, ]
     list_display = [
         'id',
-        'cronstring',
         'message',
         'audiourl',
         'telnumber',
-        'last_run',
     ]
     actions = [dispatch_tasks]
