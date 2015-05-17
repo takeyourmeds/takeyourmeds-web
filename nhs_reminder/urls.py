@@ -26,4 +26,5 @@ urlpatterns = [
     url('^telephony/', include("telephony.urls")),
     url('^reminder/', include("reminder.urls")),
     url(r'^api/', include('reminder.urls')),
+    url(r'^accounts/', include('allauth.urls')),
 ]
