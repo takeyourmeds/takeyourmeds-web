@@ -11,9 +11,6 @@
     <link href="/static/css/normalize.css" rel="stylesheet" media="screen" />
     <link href="/static/css/main.css" rel="stylesheet" media="screen" />
 
-    {% block extra_js %}
-
-    {% endblock extra_js%}
 </head>
 <body class="{%block bodyclass%}{%endblock%}">
 
@@ -40,3 +37,6 @@
     <script type="text/javascript" src="/static/js/prettycron.js"></script>
     <script type="text/javascript" src="/static/js/main.js"></script>
     <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
+    {% block extra_js %}
+
+    {% endblock extra_js%}

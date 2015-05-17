@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="content">
+
+<h1>My reminders</h1>
+{% for reminder in reminders %}
+<div>
+<h3> {{ reminder.telnumber }} </h3>
+<p>
+{% if reminder.message %}
+    {{ reminder.message }}
+{% else %}
+
+<audio src="{{ reminder.audiourl }}" controls>
+  Unfortunately your browser does not support the <code>audio</code> element.
+</audio>
+{% endif %}
+</p>
+
+{% for time in reminder.reminder_times.all %}
+<span class="cron">{{ time.cronstring }}</span>
+{% endfor %}
+
+<button class="trigger" data-reminder-id={{ reminder.id }}>Test reminder</button>
+</p>
+</div>
+{% endfor %}
+</div>
+
+
+{% endblock %}
+
+
+    {% block extra_js %}
+
+<script>
+$('body').on('click', '.trigger', function(event) {
+    var target=$(event.target);
+    var id = target.data('reminder-id');
+    $.post('/reminder/trigger/', {
+        'id': id,
+    });
+    target.text('Sent');
+    target.attr('disabled', 'disabled');
+})
+</script>
+
+
+    {% endblock extra_js%}
