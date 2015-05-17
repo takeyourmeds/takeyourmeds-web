@@ -18,7 +18,7 @@
 
     {% endblock extra_js%}
 </head>
-<body>
+<body class="{%block bodyclass%}{%endblock%}">
 
 <script type="text/javascript">
     var post_url = "/api/reminders/";
@@ -33,9 +33,9 @@
 {% block content %}
 {% endblock %}
 
-
 <footer>
     <div class="container">
-        <p>© 2015 "Take Your Meds"</p>
+        <p>&copy; 2015 "Take Your Meds" <span class="credit">Pill image created by <a href="https://thenounproject.com/misterabrams/">Josh Abrams</a>, from the <a href="http://thenounproject.com">Noun Project</a></span></p>
     </div>
+
 </footer>

@@ -1,14 +1,23 @@
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+
 body {
 	background: #1C3048;
 }
 
-.site_header { 
+.site_header {
 	background: #2975CD;
 	color: #fff;
 	padding: 0.75em 0;
 }
 
-.site_header h2 { 
+.site_header h2 {
 	background: url('../img/logo.png') center left no-repeat;
 	height: 46px;
 	margin: 0;
@@ -16,13 +25,13 @@ body {
 	text-indent: -1000%;
 }
 
-.container { 
+.container {
 	margin: 0 auto;
 	max-width: 720px;
 	padding: 0 1em;
 }
 
-#content { 
+#content {
 	background: #fff;
 	margin: 0 auto;
 	padding-bottom: 3em;
@@ -162,19 +171,25 @@ body {
 	height: 8em;
 }
 
-#content .submit {
-	background: #FF6132;
+#content .submit, #hero .submit {
+	background: #DC2E2B;
 	border: 0;
 	border-radius: 4px;
 	color: #fff;
+	display: inline-block;
 	font-size: 14px;
-	margin: 3em 0 2em;
+	margin: 4em 0 2em;
 	padding: 1em 1.5em;
+	text-decoration: none;
 	text-transform: uppercase;
 }
 
-#content .submit:hover {
-	background: #C93E15;
+#hero .submit {
+	margin: 0;
+}
+
+#content .submit:hover, #hero .submit:hover {
+	background: #A82522;
 }
 
 footer {
@@ -184,6 +199,16 @@ footer {
 
 footer p {
 	color: #92A1B2;
+}
+
+footer .credit {
+	margin-left: 2em;
+	font-style: italic;
+}
+
+footer .credit a {
+	color: #fff;
+	text-decoration: underline;
 }
 
 .success-message {
@@ -198,4 +223,75 @@ footer p {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+}
+
+.home #content {
+	background: #F5F5F5;
+	padding: 4em 0;
+}
+
+.home .container {
+	max-width: 940px;
+}
+
+.home #hero {
+	background: -webkit-linear-gradient(rgba(255,255,255,1), rgba(240,241,209,1));
+	background: -o-linear-gradient(rgba(255,255,255,1), rgba(240,241,209,1));
+	background: -moz-linear-gradient(rgba(255,255,255,1), rgba(240,241,209,1));
+	background: linear-gradient(rgba(255,255,255,1), rgba(240,241,209,1));
+}
+
+.home #hero .container {
+	background: url('../img/clock.png') bottom left no-repeat;
+	height: 273px;
+	min-height: 200px;
+	padding: 64px 0 0 200px;
+}
+
+.home #hero h1 {
+	font-family: "Merriweather", Georgia, Times, serif;
+	font-size: 1.875em;
+	font-weight: 400;
+	line-height: 1.4;
+	margin: 0 0 0.5em;
+}
+
+.home #introduction {
+	background: #fff;
+	border-bottom: 1px solid #EEE;
+	padding: 4em 0;
+	text-align: center;
+}
+
+.home #introduction p {
+	color: #4C4C4C;
+	font-family: "Merriweather", Georgia, Times, serif;
+	font-size: 1.25em;
+	font-weight: 300;
+	line-height: 1.5;
+	margin: 0 auto;
+	max-width: 760px;
+}
+
+.home #content .selling-point {
+	float: left;
+	width: 33%;
+}
+
+.home #content h3 {
+	font-family: "Merriweather", Georgia, Times, serif;
+	font-size: 1.125em;
+	font-weight: 400;
+}
+
+.home #content p {
+	color: #6A6A6A;
+	font-family: "Merriweather", Georgia, Times, serif;
+	font-size: 1em;
+	font-weight: 300;
+	line-height: 1.4;
+}
+
+.home #content .selling-point p {
+	margin-right: 2.5em;
 }
