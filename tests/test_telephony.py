@@ -1,4 +1,5 @@
 from django.test import Client, TestCase
+from django.conf import settings
 # import json
 # import requests
 from telephony import actions
@@ -41,8 +42,9 @@ class TestTelephony(TestCase):
     """
 
     def test_actions(self):
-        actions.make_call(
-            "+447472785934",
-            "http://servercode.co.uk/nhshackday/hi_mum_medication_reminder.mp3"
-        )
-        actions.send_sms("+447472785934", "Hello again Ross!")
+        if not getattr(settings, 'RUN_TW_TESTS', False):
+            actions.make_call(
+                "+447472785934",
+                "http://servercode.co.uk/nhshackday/hi_mum_medication_reminder.mp3"
+            )
+            actions.send_sms("+447472785934", "Hello again Ross!")
