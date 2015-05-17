@@ -139,3 +139,9 @@ $(document).ready(function(){
 	});
 
 });
+
+
+$('.cron').each(function(i, el) {
+  var cronstring = $(el).text();
+  $(el).text(prettyCron.toString(cronstring))
+})
