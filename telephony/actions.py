@@ -13,10 +13,12 @@ def send_sms(to_number, message_text):
         Send an SMS message 'message_text' to a telephone
         number in 'to_number'
     """
+    config = settings.TWILIO_CONFIG
+
     message = _get_client().messages.create(
         body=message_text,
         to=to_number,
-        from_=settings.TW_FROM_NUMBER,
+        from_=config["FROM_NUMBER"],
     )
     return message.sid
 
@@ -28,16 +30,18 @@ def make_call(to_number, audio_url):
     """
     name = str(uuid.uuid4())
 
+    config = settings.TWILIO_CONFIG
+
     # Write out the XML with the URL of the audio
     _write_twiml(name, audio_url)
     callback_url = urljoin(
-        settings.TW_ROOT_URL,
+        config["ROOT_URL"],
         reverse("info", kwargs={'uuid': name})
     )
 
     call = _get_client().calls.create(
         to=to_number,
-        from_=settings.TW_FROM_NUMBER,
+        from_=config["FROM_NUMBER"],
         url=callback_url,
         method="GET",
         fallback_method="GET",
@@ -59,5 +63,10 @@ def _write_twiml(name, audio_url):
         f.write(doc.strip())
 
 
+def _get_config():
+    return settings.TWILIO_CONFIG
+
+
 def _get_client():
-    return TwilioRestClient(settings.TW_ACCOUNT_SID, settings.TW_AUTH_TOKEN)
+    config = settings.TWILIO_CONFIG
+    return TwilioRestClient(config["ACCOUNT_SID"], config["AUTH_TOKEN"])
