@@ -2,7 +2,7 @@
 
 a low-tech phone reminder application which has come about from the joining of 2 projects pitched at NHS Hackday London 2015, at King's College Hospital.
 
-Fiona Stacey, a Dental Hygienist from the North East, pitched an idea about using a low-tech means to remind post-radiotherapy head and neck cancer patients to use mouthwash regularly.
+Fiona Stacey, a Dental Hygienist from the North East, pitched an idea about using a low-tech means to remind radiotherapy head and neck cancer patients to use mouthwash regularly.
 
 Helen Jackson (@DeckOfPandas) also pitched an idea about a simpler type of medication reminder using standard phone calls, for patients unable to use a smartphone.
 
