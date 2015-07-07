@@ -30,6 +30,14 @@
             <li><a href="/reminder/new/">New Reminder</a></li>
             <li><a href="/reminder/list/">My Reminders</a></li>
             <li><a href="/accounts/signup/">Register</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="/accounts/logout/">Logout</a></li>
+            {% else %}
+            <li><a href="/accounts/login/">Login</a></li>
+            {% endif %}
+
+
+
         </ul>
 
     </div>
