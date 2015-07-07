@@ -16,6 +16,7 @@
 
                 <h3><span class="meta">Send to</span> {{ reminder.telnumber }} </h3>
                 <a class="trigger submit" data-reminder-id={{ reminder.id }}>Test</a>
+                <a href="{% url 'delete_reminder' reminder.id %}" class="delete submit">Delete</a>
 
             </div>
 
@@ -67,6 +68,5 @@ $('body').on('click', '.trigger', function(event) {
     target.attr('disabled', 'disabled');
 })
 </script>
-
 
     {% endblock extra_js%}
