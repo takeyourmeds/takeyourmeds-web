@@ -314,7 +314,7 @@ Home Page
 	padding: 4em 0;
 }
 
-.home .container, .about .container {
+.home .container, .about .container, .privacy-policy .container {
 	max-width: 940px;
 }
 
@@ -367,7 +367,7 @@ Home Page
 	font-weight: 400;
 }
 
-.home #content p, .about #content p {
+.home #content p, .about #content p, .privacy-policy #content p{
 	color: #6A6A6A;
 	font-family: "Merriweather", Georgia, Times, serif;
 	font-size: 1em;
@@ -375,7 +375,7 @@ Home Page
 	line-height: 1.4;
 }
 
-.about #content p {
+.about #content p, .privacy-policy #content p{
 	color: #4C4C4C
 }
 
@@ -470,7 +470,7 @@ Privacy Policy Page
 
 -------- */
 
-ul {
+.privacy-policy #content ul {
 	color: #4C4C4C;
 	font-family: "Merriweather", Georgia, Times, serif;
 	font-size: 1em;
