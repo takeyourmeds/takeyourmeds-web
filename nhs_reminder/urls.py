@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url('^$', TemplateView.as_view(template_name='index.html')),
     url('^about$', TemplateView.as_view(template_name='about.html')),
+    url('^terms-and-conditions$', TemplateView.as_view(template_name='terms-and-conditions.html')),
     url('^telephony/', include("telephony.urls")),
     url('^reminder/', include("reminder.urls")),
     url(r'^api/', include(router.urls)),
