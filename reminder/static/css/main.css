@@ -463,3 +463,17 @@ Reminder List Page
 	margin-bottom: 0.33em;
 	text-transform: uppercase;
 }
+
+/* --------
+
+Privacy Policy Page
+
+-------- */
+
+ul {
+	color: #4C4C4C;
+	font-family: "Merriweather", Georgia, Times, serif;
+	font-size: 1em;
+	font-weight: 300;
+	line-height: 1.4;
+}
