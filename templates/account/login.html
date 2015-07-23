@@ -26,7 +26,7 @@
       {% endif %}
       <div class="form-group">
         <label for="login" class="control-label">Username</label>
-        <input type="text" class="form-control" id="login" name="login" value="" required="" title="Please enter you username" placeholder="Username">
+        <input type="text" class="form-control" id="login" name="login" value="{{ form.login.value|default:"" }}" required="" title="Please enter you username" placeholder="Username">
         <span class="help-block"></span>
       </div>
       <div class="form-group">
@@ -37,7 +37,7 @@
       <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
       <div class="checkbox">
         <label>
-            <input type="checkbox" name="remember" id="remember"> Remember login
+            <input type="checkbox" name="remember" id="remember" {% if form.remember.value %}checked {% endif %}> Remember login
         </label>
         <p class="help-block">(if this is a private computer)</p>
       </div>
