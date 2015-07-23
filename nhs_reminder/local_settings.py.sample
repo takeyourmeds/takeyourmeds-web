@@ -1,6 +1,8 @@
 # A secret key!
 SECRET_KEY = 'wombles'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 # Your Twilio account SID
 TW_ACCOUNT_SID="xxxxxx"
 

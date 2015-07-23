@@ -129,6 +129,7 @@ import djcelery
 djcelery.setup_loader()
 BROKER_URL = 'redis://localhost:6379/0'
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # SECURITY WARNING: keep the secret key used in production secret!
 try:
