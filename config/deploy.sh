@@ -12,7 +12,7 @@ Template () {
 	sed \
 		-e "s@__BASE_DIR__@${BASE_DIR}@g" \
 		"${SOURCE}" \
-		> sudo tee "${TARGET}"
+		| sudo tee "${TARGET}"
 }
 
 
