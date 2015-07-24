@@ -37,6 +37,7 @@ sudo apt-get install --yes \
 	nginx \
 	gunicorn \
 	postgresql-9.3 \
+	redis-server \
 	libpq-dev \
 	python-dev
 
