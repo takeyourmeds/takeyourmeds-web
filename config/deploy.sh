@@ -79,9 +79,9 @@ sudo -u postgres createuser takeyourmeds -SDR || true
 sudo -u postgres createdb -E UTF-8 -O takeyourmeds takeyourmeds || true
 python manage.py migrate --verbosity=2
 
-# Queue
+# Start queue and block until it appears
 python manage.py celery worker --pidfile="${CELERY_WORKER_PIDFILE}" --detach
-python manage.py celery status
+python manage.py celery status --timeout=5
 
 sudo /etc/init.d/gunicorn restart
 sudo /etc/init.d/nginx restart
