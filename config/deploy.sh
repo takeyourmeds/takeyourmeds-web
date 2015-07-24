@@ -15,7 +15,6 @@ Template () {
 		| sudo tee "${TARGET}"
 }
 
-
 if [ "$(id -u)" = 0 ]
 then
 	echo "${0}: should not be run as root"
