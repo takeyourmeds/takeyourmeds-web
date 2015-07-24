@@ -22,6 +22,7 @@ then
 fi
 
 BASE_DIR="$(dirname $(readlink -f "$(dirname ${0})"))"
+CELERY_WORKER_PIDFILE="${BASE_DIR}/celery-worker.pid"
 
 if [ ! -d "${BASE_DIR}" ]
 then
@@ -40,7 +41,15 @@ sudo apt-get install --yes \
 	libpq-dev \
 	python-dev
 
+
 # Stop services so we don't get race conditions
+start-stop-daemon \
+	--stop \
+	--retry forever/TERM/1 \
+	--quiet \
+	--oknodo \
+	--pidfile "${CELERY_WORKER_PIDFILE}"
+rm -f "${CELERY_WORKER_PIDFILE}"
 sudo /etc/init.d/gunicorn stop
 sudo /etc/init.d/nginx stop
 
@@ -69,6 +78,10 @@ Template config/nginx /etc/nginx/sites-enabled/takeyourmeds
 sudo -u postgres createuser takeyourmeds -SDR || true
 sudo -u postgres createdb -E UTF-8 -O takeyourmeds takeyourmeds || true
 python manage.py migrate --verbosity=2
+
+# Queue
+python manage.py celery worker --pidfile="${CELERY_WORKER_PIDFILE}" --detach
+python manage.py celery status
 
 sudo /etc/init.d/gunicorn restart
 sudo /etc/init.d/nginx restart
