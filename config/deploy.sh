@@ -22,7 +22,7 @@ then
 	exit 1
 fi
 
-BASE_DIR="$(readlink -f "$(dirname ${0})"./)"
+BASE_DIR="$(dirname $(readlink -f "$(dirname ${0})"))"
 
 if [ ! -d "${BASE_DIR}" ]
 then
