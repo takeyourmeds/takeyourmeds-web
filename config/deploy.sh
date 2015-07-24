@@ -7,7 +7,7 @@ Template () {
 	TARGET="${2}"
 
 	# Could be a symlink
-	rm -f ${TARGET}
+	sudo rm -f ${TARGET}
 
 	sed \
 		-e "s@__BASE_DIR__@${BASE_DIR}@g" \
