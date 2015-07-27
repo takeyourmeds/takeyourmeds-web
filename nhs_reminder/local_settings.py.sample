@@ -1,7 +1,7 @@
 # A secret key!
 SECRET_KEY = 'wombles'
 
-TWILIO_CONFIG = {
+TWILIO_CONFIGS = {
     #"test": {
     #    # You can retrieve these settings from
     #    # https://www.twilio.com/user/account/developer-tools/test-credentials
