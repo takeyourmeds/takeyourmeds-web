@@ -14,11 +14,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 
-from telephony.views import info, send_sms, make_call
+from telephony.views import info
 
 
 urlpatterns = [
     url('^info/(?P<uuid>.*)$', info, name='info'),
-    url('^call$', make_call, name='call'),
-    url('^sms$', send_sms, name='sms'),
 ]

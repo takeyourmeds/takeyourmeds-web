@@ -1,7 +1,5 @@
 /* --------
-
 General
-
 -------- */
 
 .clearfix:before,
@@ -15,9 +13,7 @@ General
 
 
 /* --------
-
 Site structure
-
 -------- */
 
 body {
@@ -135,9 +131,7 @@ body {
 }
 
 /* --------
-
 Create reminder form
-
 -------- */
 
 #content label, #content p.label {
@@ -304,9 +298,7 @@ footer .credit a {
 }
 
 /* --------
-
 Home Page
-
 -------- */
 
 .home #content {
@@ -407,9 +399,7 @@ Home Page
 }
 
 /* --------
-
 About Page
-
 -------- */
 
 .about #content blockquote p {
@@ -420,9 +410,7 @@ About Page
 
 
 /* --------
-
 Reminder List Page
-
 -------- */
 
 .reminder-list .reminder {
@@ -465,9 +453,7 @@ Reminder List Page
 }
 
 /* --------
-
 Privacy Policy Page
-
 -------- */
 
 .privacy-policy #content ul {
