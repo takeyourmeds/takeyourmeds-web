@@ -81,7 +81,7 @@ python manage.py migrate --verbosity=2
 
 # Start queue and block until it appears
 python manage.py celery worker --pidfile="${CELERY_WORKER_PIDFILE}" --detach
-python manage.py celery status --timeout=5
+python manage.py celery status --timeout=10
 
 sudo /etc/init.d/gunicorn restart
 sudo /etc/init.d/nginx restart
