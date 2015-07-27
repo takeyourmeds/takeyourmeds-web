@@ -7,7 +7,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Take Your Meds - Phone reminders to help you and yours remember to take your medication</title>
 
-    <link href='http://fonts.googleapis.com/css?family=Merriweather:300,400,700' rel='stylesheet' type='text/css' />
+    <link href='//fonts.googleapis.com/css?family=Merriweather:300,400,700' rel='stylesheet' type='text/css' />
     <link href="/static/css/normalize.css" rel="stylesheet" media="screen" />
     <link href="/static/css/main.css" rel="stylesheet" media="screen" />
 
@@ -29,6 +29,13 @@
             <li><a href="/about">About</a></li>
             <li><a href="/reminder/new/">New Reminder</a></li>
             <li><a href="/reminder/list/">My Reminders</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="/accounts/logout/">Logout</a></li>
+            {% else %}
+            <li><a href="/accounts/signup/">Register</a></li>
+            <li><a href="/accounts/login/">Login</a></li>
+            {% endif %}
+
         </ul>
 
     </div>
@@ -40,7 +47,10 @@
 
 <footer>
     <div class="container">
-        <p>&copy; 2015 "Take Your Meds"</p>
+        <p>Copyright &copy; 2015 Take Your Meds Ltd<br>
+            Registered company number 9686492, England and Wales<br>
+        </p>
+        <p>Please read our <a href="terms-and-conditions">Terms and Conditions</a> and <a href="privacy-policy">Privacy Policy</a>.</p>
     </div>
 </footer>
     <script type="text/javascript" src="/static/js/jquery-2.1.4.js"></script>

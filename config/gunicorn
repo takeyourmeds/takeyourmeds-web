@@ -1,0 +1,13 @@
+CONFIG = {
+    'mode': 'wsgi',
+    'python': '__BASE_DIR__/env/bin/python',
+    'working_dir': '__BASE_DIR__',
+    'user': '%username%',
+    'group': '%username%',
+    'args': (
+        '--bind=127.0.0.1:8000',
+        '--workers=4',
+        '--timeout=30',
+        'nhs_reminder.wsgi:application',
+    ),
+}

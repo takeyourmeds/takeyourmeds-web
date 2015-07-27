@@ -22,3 +22,5 @@ TWILIO_CONFIG = {
 }
 TWILIO_CONFIG = TWILIO_CONFIGS["default"]
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+

@@ -1,7 +1,5 @@
 /* --------
-
 General
-
 -------- */
 
 .clearfix:before,
@@ -15,9 +13,7 @@ General
 
 
 /* --------
-
 Site structure
-
 -------- */
 
 body {
@@ -135,9 +131,7 @@ body {
 }
 
 /* --------
-
 Create reminder form
-
 -------- */
 
 #content label, #content p.label {
@@ -304,9 +298,7 @@ footer .credit a {
 }
 
 /* --------
-
 Home Page
-
 -------- */
 
 .home #content {
@@ -314,7 +306,7 @@ Home Page
 	padding: 4em 0;
 }
 
-.home .container, .about .container {
+.home .container, .about .container, .privacy-policy .container {
 	max-width: 940px;
 }
 
@@ -367,7 +359,7 @@ Home Page
 	font-weight: 400;
 }
 
-.home #content p, .about #content p {
+.home #content p, .about #content p, .privacy-policy #content p{
 	color: #6A6A6A;
 	font-family: "Merriweather", Georgia, Times, serif;
 	font-size: 1em;
@@ -375,7 +367,7 @@ Home Page
 	line-height: 1.4;
 }
 
-.about #content p {
+.about #content p, .privacy-policy #content p{
 	color: #4C4C4C
 }
 
@@ -407,9 +399,7 @@ Home Page
 }
 
 /* --------
-
 About Page
-
 -------- */
 
 .about #content blockquote p {
@@ -420,9 +410,7 @@ About Page
 
 
 /* --------
-
 Reminder List Page
-
 -------- */
 
 .reminder-list .reminder {
@@ -462,4 +450,16 @@ Reminder List Page
 	font-weight: lighter;
 	margin-bottom: 0.33em;
 	text-transform: uppercase;
+}
+
+/* --------
+Privacy Policy Page
+-------- */
+
+.privacy-policy #content ul {
+	color: #4C4C4C;
+	font-family: "Merriweather", Georgia, Times, serif;
+	font-size: 1em;
+	font-weight: 300;
+	line-height: 1.4;
 }

@@ -1,23 +1,23 @@
 # 'TakeYourMeds'
 
-a low-tech phone reminder application which has come about from the joining of 2 projects pitched at NHS Hackday London 2015, at King's College Hospital.
+A low-tech phone reminder application which has come about from the joining of 2 projects pitched at NHS Hackday London 2015, at King's College Hospital.
 
-Fiona Stacey, a Dental Hygienist from the North East, pitched an idea about using a low-tech means to remind post-radiotherapy head and neck cancer patients to use mouthwash regularly.
+Fiona Stacey, a Dental Hygienist from the North East, pitched an idea about using a low-tech means to remind radiotherapy head and neck cancer patients to use mouthwash regularly.
 
-Helen Jackson (@DeckOfPandas) also pitched an idea about a simpler type of medication reminder using standard phone calls, for patients unable to use a smartphone.
+Helen Jackson (@DeckOfPandas), a grad-entry medical student and programmer from London, also pitched an idea about a simple type of medication reminder using standard phone calls, for patients unable to use a smartphone.
 
 The two teams quickly realised they were designing different facets of the same project and joined forces to work on a single application that would send a configurable audio message via phone call to a patient, reminding them to use the mouthwash, or take their medication.
 
 ## What is it?
-Patients, carers or friends can enable a reminder to be set via a phone message advising the patient it is time to take their medication. Medication reminder applications are readily available for smartphones, however many patients, especially in vulnerable groups, do not own or are unable to use a smartphone. They usually have a standard telephone though, so our application calls patients with a recorded reminder message.
+Patients, carers or friends can enable a reminder to be sent via a phone message advising the patient it is time to take their medication. Medication reminder applications are readily available for smartphones; however many patients, especially in vulnerable groups, do not own or are unable to use a smartphone. These patients are also more likely to have complex medical needs and to be on more different medications. Our application calls patients on their landline with a recorded reminder message.
 
 ## Technology Stack
-* reminder is a Python/Django application with a lightweight HTML5 frontend.
-* the Celery/Redis-based scheduler within the Django app
+* Take Your Meds is a Python/Django application with a lightweight HTML5 frontend.
+* It uses a Celery/Redis-based scheduler within the Django app
 * Calls are made to a thin wrapper around the Twilio API, enabling the application to place a telephone call or send an SMS. The current 'proof-of-concept' is set to deliver one of two prerecorded audio files.
 
 ## Installation
-see Wiki pages at https://github.com/open-health-hub/reminder/wiki/Installation
+See Wiki pages at https://github.com/open-health-hub/reminder/wiki/Installation
 
 # TODO
 * improve frontend to allow flexible configuration of reminder times. (currently the options for reminder frequency are hard-coded in the UI to offer 1 times, 2 times, 3 times or 4 times per day which was sufficient for our NHSHD proof-of-concept)
@@ -35,7 +35,7 @@ see Wiki pages at https://github.com/open-health-hub/reminder/wiki/Installation
 
 ## Credits
 * Fiona Stacey [@fiona_stacey](http://twitter.com/fiona_stacey) (Dental Hygienist) - pitched Mouthwash reminder idea
-* Helen [@DeckOfPandas](http://twitter.com/DeckOfPandas) (Doctor & Dev) - pitched Medication reminder idea
+* Helen [@DeckOfPandas](http://twitter.com/DeckOfPandas) (Med student & Dev) - pitched Medication reminder idea, copy writing
 * Ross Jones [@rossjones](http://twitter.com/rossjones) - Twilio wrapper code
 * Sym Roe [@symroe](http://twitter.com/symroe) - Scheduler code
 * Jude Gibbons [@judegibbons](http://twitter.com/judegibbons) - UI/frontend
