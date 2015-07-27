@@ -266,33 +266,8 @@ Create reminder form
 	margin: 0;
 }
 
-#content .submit, #hero .submit {
-	background: #DC2E2B;
-}
-
 #content .submit:hover, #hero .submit:hover {
-	background: #a01d1a;
-}
-
-#content .add, #hero .add {
-	background: #2bd9dc;
-	float:right;
-}
-
-#content .add:hover, #hero .add:hover {
-	background: #198284;
-}
-
-#content .call, #hero .call {
-	background: #2BDC2E;
-}
-
-#content .call:hover, #hero .call:hover {
-	background: #19841b;
-}
-
-#hero .call {
-	margin: 0;
+	background: #A82522;
 }
 
 footer {
