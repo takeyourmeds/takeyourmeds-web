@@ -1,6 +1,6 @@
 # 'TakeYourMeds'
 
-A low-tech phone reminder application which has come about from the joining of 2 projects pitched at NHS Hackday 10 in London 2015, at King's College London.
+A low-tech phone reminder application which has come about from the joining of 2 projects pitched at NHS Hackday London 2015, at King's College Hospital.
 
 Fiona Stacey, a Dental Hygienist from the North East, pitched an idea about using a low-tech means to remind radiotherapy head and neck cancer patients to use mouthwash regularly.
 
@@ -17,7 +17,7 @@ Patients, carers or friends can enable a reminder to be sent via a phone message
 * Calls are made to a thin wrapper around the Twilio API, enabling the application to place a telephone call or send an SMS. The current 'proof-of-concept' is set to deliver one of two prerecorded audio files.
 
 ## Installation
-See Wiki pages at https://github.com/takeyourmeds/takeyourmeds-web/wiki/Installation
+See Wiki pages at https://github.com/open-health-hub/reminder/wiki/Installation
 
 # TODO
 * improve frontend to allow flexible configuration of reminder times. (currently the options for reminder frequency are hard-coded in the UI to offer 1 times, 2 times, 3 times or 4 times per day which was sufficient for our NHSHD proof-of-concept)
