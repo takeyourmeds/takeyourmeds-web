@@ -15,6 +15,25 @@ Template () {
 		| sudo tee "${TARGET}"
 }
 
+Wait_for () {
+	PIDFILE="${1}"
+	TIMEOUT="${2}"
+
+	for X in $(seq ${TIMEOUT})
+	do
+		if kill -0 "$(cat "${PIDFILE}" 2>/dev/null)" 2>/dev/null
+		then
+			return 0
+		fi
+
+		echo "I: Process in ${PIDFILE} doesn't exist yet (${X}/${TIMEOUT})"
+
+		sleep 1
+	done
+
+	return 1
+}
+
 if [ "$(id -u)" = 0 ]
 then
 	echo "${0}: should not be run as root"
@@ -81,7 +100,7 @@ python manage.py migrate --verbosity=2
 
 # Start queue and block until it appears
 python manage.py celery worker --pidfile="${CELERY_WORKER_PIDFILE}" --detach
-python manage.py celery status --timeout=10
+Wait_for "${CELERY_WORKER_PIDFILE}" 30
 
 sudo /etc/init.d/gunicorn restart
 sudo /etc/init.d/nginx restart
