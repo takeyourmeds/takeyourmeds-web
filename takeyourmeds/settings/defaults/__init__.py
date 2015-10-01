@@ -57,7 +57,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'nhs_reminder.urls'
+ROOT_URLCONF = 'takeyourmeds.urls'
 
 TEMPLATES = [
     {
