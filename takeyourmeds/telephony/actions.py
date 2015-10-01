@@ -61,6 +61,8 @@ def make_call(to_number, audio_url):
     return call.sid
 
 def _write_twiml(name, audio_url):
+    # FIXME: Not /tmp, please!
+
     # Generate XML file, save with name
     with open(os.path.join('/tmp/', '%s.xml' % name), 'w') as f:
         print >>f, """
