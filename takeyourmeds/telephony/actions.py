@@ -15,12 +15,10 @@ def send_sms(to_number, message_text):
     if not settings.TWILIO_ENABLED:
         return 'dummy-sid'
 
-    config = settings.TWILIO_CONFIG
-
     message = _get_client().messages.create(
         to=to_number,
         body=message_text,
-        from_=config['FROM_NUMBER'],
+        from_=settings.TWILIO_FROM,
     )
 
     return message.sid
@@ -36,8 +34,6 @@ def make_call(to_number, audio_url):
 
     name = str(uuid.uuid4())
 
-    config = settings.TWILIO_CONFIG
-
     # Write out the XML with the URL of the audio
     _write_twiml(name, audio_url)
 
@@ -48,7 +44,7 @@ def make_call(to_number, audio_url):
 
     call = _get_client().calls.create(
         to=to_number,
-        from_=config['FROM_NUMBER'],
+        from_=settings.TWILIO_FROM,
         url=callback_url,
         method='GET',
         fallback_method='GET',
@@ -69,10 +65,8 @@ def _write_twiml(name, audio_url):
         """.format(audio_url)
         f.write(doc.strip())
 
-def _get_config():
-    return settings.TWILIO_CONFIG
-
 def _get_client():
-    config = settings.TWILIO_CONFIG
-
-    return TwilioRestClient(config["ACCOUNT_SID"], config["AUTH_TOKEN"])
+    return TwilioRestClient(
+        settings.TWILIO_ACCOUNT_SID,
+        settings.TWILIO_AUTH_TOKEN,
+    )
