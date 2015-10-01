@@ -6,10 +6,7 @@ from django.test.utils import override_settings
 
 from telephony import actions
 
-@override_settings(TWILIO_CONFIG=settings.TWILIO_CONFIGS.get('test'))
-@unittest.skipIf('test' not in settings.TWILIO_CONFIGS, "Missing test config")
 class TestActions(TestCase):
-
     def test_call(self):
         sid = actions.make_call(
             "+441324430099",
