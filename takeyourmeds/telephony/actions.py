@@ -13,6 +13,10 @@ def send_sms(to_number, message_text):
         Send an SMS message 'message_text' to a telephone
         number in 'to_number'
     """
+
+    if not settings.TWILIO_ENABLED:
+        return 'dummy-sid'
+
     config = settings.TWILIO_CONFIG
 
     message = _get_client().messages.create(
@@ -28,6 +32,10 @@ def make_call(to_number, audio_url):
     Make a call to the number at 'to_number' and play the MP3 specified
     in 'audio_url'.
     """
+
+    if not settings.TWILIO_ENABLED:
+        return 'dummy-sid'
+
     name = str(uuid.uuid4())
 
     config = settings.TWILIO_CONFIG
