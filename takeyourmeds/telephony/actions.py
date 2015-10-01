@@ -56,7 +56,7 @@ def make_call(to_number, audio_url):
 
 def _write_twiml(name, audio_url):
     # Generate XML file, save with name
-    with open(os.path.join("/tmp", name + ".xml"), "w") as f:
+    with open(os.path.join('/tmp/', '%s.xml' % name), 'w') as f:
         print >>f, """
             <?xml version="1.0" encoding="UTF-8"?>
             <Response>
