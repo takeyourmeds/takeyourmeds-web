@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from rest_framework.test import force_authenticate
 
-from reminder.models import Reminder
+from ..models import Reminder
 
 class ReminderTests(APITestCase):
     def setUp(self):

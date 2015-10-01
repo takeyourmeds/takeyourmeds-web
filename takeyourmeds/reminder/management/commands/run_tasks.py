@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from reminder.models import Reminder, ReminderTime
+from ..models import Reminder, ReminderTime
 
 
 class Command(BaseCommand):
