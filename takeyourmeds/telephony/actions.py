@@ -7,6 +7,12 @@ from django.core.urlresolvers import reverse
 
 from twilio.rest import TwilioRestClient
 
+def get_client():
+    return TwilioRestClient(
+        settings.TWILIO_ACCOUNT_SID,
+        settings.TWILIO_AUTH_TOKEN,
+    )
+
 def send_sms(to_number, message_text):
     """
     Send SMS message.
@@ -63,9 +69,3 @@ def _write_twiml(name, audio_url):
                 <Play loop="1">{}</Play>
             </Response>
         """.format(audio_url).strip()
-
-def get_client():
-    return TwilioRestClient(
-        settings.TWILIO_ACCOUNT_SID,
-        settings.TWILIO_AUTH_TOKEN,
-    )
