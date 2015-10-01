@@ -15,8 +15,8 @@ urlpatterns = [
     url('^about$', TemplateView.as_view(template_name='about.html')),
     url('^terms-and-conditions$', TemplateView.as_view(template_name='terms-and-conditions.html')),
     url('^privacy-policy$', TemplateView.as_view(template_name='privacy-policy.html')),
-    url('^telephony/', include("telephony.urls")),
-    url('^reminder/', include("reminder.urls")),
+    url('^telephony/', include("takeyourmeds.telephony.urls")),
+    url('^reminder/', include("takeyourmeds.reminder.urls")),
     url(r'^api/', include(router.urls)),
     url(r'^accounts/', include('allauth.urls')),
 ]
