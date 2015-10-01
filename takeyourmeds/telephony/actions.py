@@ -35,7 +35,7 @@ def make_call(to_number, audio_url):
     # Write out the XML with the URL of the audio
     _write_twiml(name, audio_url)
     callback_url = urljoin(
-        config["ROOT_URL"],
+        settings.SITE_URL,
         reverse("info", kwargs={'uuid': name})
     )
 
