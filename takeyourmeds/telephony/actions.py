@@ -19,7 +19,7 @@ def send_sms(to_number, message_text):
     """
 
     if not settings.TWILIO_ENABLED:
-        return 'dummy-sid'
+        return generate_dummy_sid()
 
     message = get_client().messages.create(
         to=to_number,
@@ -36,7 +36,7 @@ def make_call(to_number, audio_url):
     """
 
     if not settings.TWILIO_ENABLED:
-        return 'dummy-sid'
+        return generate_dummy_sid()
 
     name = str(uuid.uuid4())
 
@@ -71,3 +71,6 @@ def _write_twiml(name, audio_url):
                 <Play loop="1">{}</Play>
             </Response>
         """.format(audio_url).strip()
+
+def generate_dummy_sid():
+    return str(uuid.uuid4())[:34]
