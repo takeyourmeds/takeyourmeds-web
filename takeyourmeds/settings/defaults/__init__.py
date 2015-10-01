@@ -131,11 +131,4 @@ BROKER_URL = 'redis://localhost:6379/0'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# SECURITY WARNING: keep the secret key used in production secret!
-try:
-    from .local_settings import *
-except ImportError:
-    raise RuntimeError(
-        "SECRET_KEY missing. Add to local_settings.py. "
-        "Make sure it's at least 50 random characters."
-    )
+SECRET_KEY = 'secret'
