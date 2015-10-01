@@ -78,3 +78,5 @@ BROKER_URL = 'redis://localhost:6379/0'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 SITE_URL = 'http://takeyourmeds.fixme'
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
