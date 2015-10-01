@@ -9,3 +9,5 @@ TWILIO_CONFIG = {
     # server name dynamically.
     "ROOT_URL": "http://127.0.0.1:8000/telephony/info",
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
