@@ -2,10 +2,10 @@ import os
 import uuid
 import urlparse
 
+from twilio.rest import TwilioRestClient
+
 from django.conf import settings
 from django.core.urlresolvers import reverse
-
-from twilio.rest import TwilioRestClient
 
 def get_client():
     return TwilioRestClient(
