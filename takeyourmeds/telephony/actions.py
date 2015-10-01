@@ -57,13 +57,12 @@ def make_call(to_number, audio_url):
 def _write_twiml(name, audio_url):
     # Generate XML file, save with name
     with open(os.path.join("/tmp", name + ".xml"), "w") as f:
-        doc = """
+        print >>f, """
             <?xml version="1.0" encoding="UTF-8"?>
             <Response>
                 <Play loop="1">{}</Play>
             </Response>
-        """.format(audio_url)
-        f.write(doc.strip())
+        """.format(audio_url).strip()
 
 def _get_client():
     return TwilioRestClient(
