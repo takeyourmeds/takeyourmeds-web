@@ -132,3 +132,5 @@ BROKER_URL = 'redis://localhost:6379/0'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 SECRET_KEY = 'secret'
+
+SITE_URL = 'http://takeyourmeds.fixme'
