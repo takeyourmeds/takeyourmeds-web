@@ -26,10 +26,7 @@ ALLOWED_HOSTS = []
 
 LOGIN_URL = "/accounts/login"
 
-# Application definition
-
 INSTALLED_APPS = (
-    'flat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,13 +34,16 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrap3',
-    'reminder',
-    'telephony',
-    'djcelery',
-    'rest_framework',
+
     'allauth',
     'allauth.account',
+    'bootstrap3',
+    'djcelery',
+    'flat',
+    'rest_framework',
+    'telephony',
+
+    'reminder',
 )
 
 MIDDLEWARE_CLASSES = (
