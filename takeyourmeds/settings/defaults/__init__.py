@@ -1,5 +1,6 @@
 import os
 
+from apps import *
 from third_party import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -15,25 +16,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite'),
     },
 }
-
-INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-
-    'allauth',
-    'allauth.account',
-    'bootstrap3',
-    'djcelery',
-    'flat',
-    'rest_framework',
-
-    'takeyourmeds.reminder',
-    'takeyourmeds.telephony',
-)
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
