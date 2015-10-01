@@ -40,9 +40,9 @@ INSTALLED_APPS = (
     'djcelery',
     'flat',
     'rest_framework',
-    'telephony',
 
-    'reminder',
+    'takeyourmeds.reminder',
+    'takeyourmeds.telephony',
 )
 
 MIDDLEWARE_CLASSES = (
