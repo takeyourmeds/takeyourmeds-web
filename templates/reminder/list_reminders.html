@@ -8,7 +8,7 @@
   $('body').on('click', '.trigger', function(event) {
       var target=$(event.target);
       var id = target.data('reminder-id');
-      $.post('/reminder/trigger/', {
+      $.post('{% url "trigger-now" %}', {
           'id': id,
       });
       target.text('Sent');
