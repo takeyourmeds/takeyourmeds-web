@@ -11,7 +11,7 @@ class ReminderTests(APITestCase):
 
     def test_create_reminder(self):
         self.client.force_authenticate(user=self.u)
-        url = reverse('reminder-list')
+        url = reverse('api:reminder-list')
         data = {
             'message': 'lorem',
             'audiourl': '',
@@ -30,7 +30,7 @@ class ReminderTests(APITestCase):
 
     def test_create_reminder_for_user(self):
         self.client.force_authenticate(user=self.u2)
-        url = reverse('reminder-list')
+        url = reverse('api:reminder-list')
         data = {
             'message': 'lorem',
             'audiourl': '',
