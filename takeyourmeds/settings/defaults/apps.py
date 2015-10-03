@@ -12,7 +12,7 @@ INSTALLED_APPS = (
     'rest_framework',
 
     'takeyourmeds.api',
-    'takeyourmeds.reminder',
+    'takeyourmeds.reminders',
     'takeyourmeds.static',
     'takeyourmeds.telephony',
     'takeyourmeds.utils',

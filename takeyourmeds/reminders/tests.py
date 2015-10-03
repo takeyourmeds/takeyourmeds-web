@@ -21,6 +21,6 @@ class TestCron(TestCase):
     def test_delete(self):
         instance = self.user.reminders.create()
 
-        self.assertHTTP302('reminder:delete', instance.pk, login=True)
+        self.assertHTTP302('reminders:delete', instance.pk, login=True)
 
         self.failIf(self.user.reminders.exists())

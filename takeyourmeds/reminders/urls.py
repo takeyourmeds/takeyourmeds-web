@@ -1,6 +1,6 @@
 from django.conf.urls import url, patterns
 
-urlpatterns = patterns('takeyourmeds.reminder.views',
+urlpatterns = patterns('takeyourmeds.reminders.views',
     url(r'^reminder/new$', 'new',
         name='new'),
     url(r'^reminder/list$', 'list_',

@@ -27,7 +27,7 @@ def delete(request, reminder_id):
 
     messages.success(request, "Your reminder has been deleted.")
 
-    return redirect('reminder:list')
+    return redirect('reminders:list')
 
 def send(request):
     if request.method == 'POST':
