@@ -1,6 +1,8 @@
 import pytz
 import datetime
 
+from django.core.urlresolvers import reverse
+
 from takeyourmeds.utils.test import TestCase
 
 class TestCron(TestCase):
@@ -17,3 +19,13 @@ class TestCron(TestCase):
             cronstring="* * * * *",
             last_run=ten_min_ago,
         )
+
+    def test_delete(self):
+        r = self.user.reminders.create()
+        url = reverse('reminder:delete', args=(r.pk,))
+        self.client.delete(url, format='json')
+
+    def test_cannot_delete_other_users_reminder(self):
+        r = self.user.reminders.create()
+        url = reverse('reminder:delete', args=(r.pk,))
+        self.client.delete(url, format='json')
