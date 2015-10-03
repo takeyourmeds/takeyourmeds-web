@@ -4,11 +4,7 @@ from django.contrib.auth.models import User
 
 class TestCase(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(
-            'testuser',
-            'test@example.com',
-            'password',
-        )
+        self.user = self.create_user('testuser')
 
     def assertStatusCode(self, status_code, fn, urlconf, *args, **kwargs):
         if kwargs.pop('login', False):
@@ -29,6 +25,13 @@ class TestCase(TestCase):
 
         return self.assertStatusCode(
             status_code, lambda x: self.client.post(x, data), *args, **kwargs
+        )
+
+    def create_user(self, username):
+        return User.objects.create_user(
+            username,
+            '%s@example.org' % username,
+            'password',
         )
 
 class SuperuserTestCase(TestCase):
