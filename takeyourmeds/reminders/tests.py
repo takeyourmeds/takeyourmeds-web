@@ -10,7 +10,12 @@ class SmokeTest(TestCase):
     def test_create(self):
         self.assertHTTP200('reminders:create', login=True)
 
-    def test_delete(self):
+class DeleteTests(TestCase):
+    def test_GET(self):
+        instance = self.user.reminders.create()
+        self.assertHTTP405('reminders:delete', instance.pk, login=True)
+
+    def test_POST(self):
         instance = self.user.reminders.create()
         self.assert_(self.user.reminders.exists())
         self.assertPOST({}, 'reminders:delete', instance.pk, login=True)
