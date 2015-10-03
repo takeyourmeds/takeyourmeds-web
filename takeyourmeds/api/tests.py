@@ -60,5 +60,5 @@ class ReminderTests(APITestCase):
     def test_trigger_now(self):
         r1 = Reminder(user=self.u)
         r1.save()
-        url = reverse('trigger_now')
+        url = reverse('api:trigger_now')
         self.client.post(url, {'id': 1}, format='json')
