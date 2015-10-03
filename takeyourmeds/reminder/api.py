@@ -1,15 +1,13 @@
 from rest_framework import serializers, viewsets
+from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
 
 from .models import Reminder, ReminderTime
-
 
 class ReminderTimeField(serializers.RelatedField):
     def to_representation(self, model):
         return model.cronstring
-
 
 class ReminderSerializer(serializers.ModelSerializer):
     reminder_times = ReminderTimeField(many=True, read_only=True)
@@ -19,13 +17,11 @@ class ReminderSerializer(serializers.ModelSerializer):
         data['user_id'] = req.user.pk
         obj = super(ReminderSerializer, self).create(data)
         for reminder_time in req.data.get('reminder_times', []):
-            rt = ReminderTime(
+            ReminderTime.objects.create(
                 reminder=obj,
                 cronstring=reminder_time,
             )
-            rt.save()
         return obj
-
 
     class Meta:
         model = Reminder
@@ -36,21 +32,19 @@ class ReminderSerializer(serializers.ModelSerializer):
             'telnumber',
         )
 
-
 class ReminderViewSet(viewsets.ModelViewSet):
     queryset = Reminder.objects.all()
     serializer_class = ReminderSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        user = self.request.user
-        return Reminder.objects.filter(user=user)
+        return Reminder.objects.filter(user=self.request.user)
 
-
-@api_view(['POST', ])
+@api_view(('POST',))
 def trigger_now(request):
     # FIXME: Move parameter to urlconf
     pk = request.data.get('id')
     reminder = Reminder.objects.get(pk=pk)
     reminder.dispatch_task()
-    return Response({"message": "Triggered",})
+
+    return Response({'message': "Triggered"})
