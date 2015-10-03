@@ -1,11 +1,10 @@
 {% extends "base/base.html" %}
 
-{% block extra_js %}
-<script type="text/javascript">
-
+{% block script %}
+  {{ block.super }}
+  <script type="text/javascript">
     var post_url = "/api/reminders/";
-
-</script>
+  </script>
 {% endblock %}
 
 {% block content %}
@@ -110,4 +109,3 @@
 </div>
 
 {% endblock %}
-
