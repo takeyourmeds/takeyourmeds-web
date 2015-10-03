@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 
 from rest_framework import status
 from rest_framework.test import APITestCase
-from rest_framework.test import force_authenticate
 
 class ReminderTests(APITestCase):
     def setUp(self):
@@ -23,7 +22,9 @@ class ReminderTests(APITestCase):
                 '45 8 * * *',
             ],
         }
+
         response = self.client.post(url, data, format='json')
+
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data, data)
 
@@ -40,10 +41,11 @@ class ReminderTests(APITestCase):
                 u'45 8 * * *',
             ],
         }
+
         # Make 3 objects
-        response = self.client.post(url, data, format='json')
-        response = self.client.post(url, data, format='json')
-        response = self.client.post(url, data, format='json')
+        self.client.post(url, data, format='json')
+        self.client.post(url, data, format='json')
+        self.client.post(url, data, format='json')
 
         res = self.client.get(url)
         self.assertEqual(len(res.data), 3)
@@ -54,6 +56,6 @@ class ReminderTests(APITestCase):
         self.assertEqual(len(res.data), 1)
 
     def test_trigger_now(self):
-        r1 = self.u.reminders.create()
+        self.u.reminders.create()
         url = reverse('api:trigger-now')
         self.client.post(url, {'id': 1}, format='json')
