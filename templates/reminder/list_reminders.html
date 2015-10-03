@@ -48,7 +48,7 @@
 
                 <p>
                     <span class="meta">Timings</span>
-                    {% for time in reminder.reminder_times.all %}
+                    {% for time in reminder.times.all %}
                     <span class="cron">{{ time.cronstring }}</span>{% if not forloop.last %},{% endif %}
                     {% endfor %}
                 </p>

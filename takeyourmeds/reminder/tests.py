@@ -13,7 +13,7 @@ class TestCron(TestCase):
             telnumber='123',
         )
 
-        reminder.reminder_times.create(
+        reminder.times.create(
             cronstring="* * * * *",
             last_run=ten_min_ago,
         )

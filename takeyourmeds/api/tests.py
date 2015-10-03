@@ -17,7 +17,7 @@ class ReminderTests(APITestCase):
             'message': 'lorem',
             'audiourl': '',
             'telnumber': '123',
-            'reminder_times': [
+            'times': [
                 u'0 7 * * *',
                 u'30 12 * * *',
                 u'45 8 * * *',
@@ -34,7 +34,7 @@ class ReminderTests(APITestCase):
             'message': 'lorem',
             'audiourl': '',
             'telnumber': '123',
-            'reminder_times': [
+            'times': [
                 u'0 7 * * *',
                 u'30 12 * * *',
                 u'45 8 * * *',

@@ -10,23 +10,23 @@ class ReminderTimeField(serializers.RelatedField):
         return model.cronstring
 
 class ReminderSerializer(serializers.ModelSerializer):
-    reminder_times = ReminderTimeField(many=True, read_only=True)
+    times = ReminderTimeField(many=True, read_only=True)
 
     def create(self, data):
         req = self.context['request']
         data['user_id'] = req.user.pk
         obj = super(ReminderSerializer, self).create(data)
-        for reminder_time in req.data.get('reminder_times', []):
+        for time in req.data.get('times', []):
             ReminderTime.objects.create(
                 reminder=obj,
-                cronstring=reminder_time,
+                cronstring=time,
             )
         return obj
 
     class Meta:
         model = Reminder
         fields = (
-            'reminder_times',
+            'times',
             'message',
             'audiourl',
             'telnumber',
