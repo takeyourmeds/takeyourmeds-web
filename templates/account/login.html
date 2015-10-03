@@ -1,7 +1,6 @@
-{% extends "account/base.html" %}
+{% extends "base/base.html" %}
 
 {% load i18n %}
-{% load account %}
 
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
@@ -19,7 +18,7 @@
   <div class="well">
     <h1>{% trans "Sign In" %}</h1>
 
-    <form id="loginForm" method="POST" action="{% url 'account_login' %}" novalidate="novalidate">
+    <form id="loginForm" method="POST" action="" novalidate="novalidate">
       {% csrf_token %}
        {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />

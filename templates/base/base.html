@@ -28,10 +28,10 @@
         <li><a href="{% url "reminders:create" %}">New Reminder</a></li>
         <li><a href="{% url "reminders:index" %}">My Reminders</a></li>
         {% if request.user.is_authenticated %}
-        <li><a href="{% url "account_logout" %}">Logout</a></li>
+        <li><a href="{% url "account:logout" %}">Logout</a></li>
         {% else %}
-        <li><a href="{% url "account_signup" %}">Register</a></li>
-        <li><a href="{% url "account_login" %}">Login</a></li>
+        <li><a href="{% url "registration:view" %}">Register</a></li>
+        <li><a href="{% url "account:login" %}">Login</a></li>
         {% endif %}
       </ul>
     </div>

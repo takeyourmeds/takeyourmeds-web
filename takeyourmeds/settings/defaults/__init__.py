@@ -53,8 +53,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'takeyourmeds.wsgi.application'
 
-LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/login' # 'account:login'
+LOGIN_REDIRECT_URL = '/' # 'static:landing'
 
 USE_TZ = False
 TIME_ZONE = 'UTC'
