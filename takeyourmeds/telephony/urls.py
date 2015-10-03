@@ -1,6 +1,6 @@
 from django.conf.urls import url, patterns
 
 urlpatterns = patterns('takeyourmeds.telephony.views',
-    url('^telephony/info/(?P<uuid>.*)$', 'info',
-        name='info'),
+    url(r'^telephony/info/(?P<ident>\w{40})$', 'callback',
+        name='callback'),
 )

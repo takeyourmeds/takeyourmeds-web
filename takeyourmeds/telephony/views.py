@@ -1,13 +1,13 @@
-import os
-
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 
-def info(request, uuid):
+from .models import TwilioMLCallback
+
+def callback(request, ident):
     """
     Return the Twillio ML that we generated when the user called /call
     """
 
-    with open(os.path.join('/tmp', '%s.xml' % uuid)) as f:
-        data = f.read()
+    instance = get_object_or_404(TwilioMLCallback, ident=ident)
 
-    return HttpResponse(data, content_type='text/xml')
+    return HttpResponse(instance.content, content_type='text/xml')
