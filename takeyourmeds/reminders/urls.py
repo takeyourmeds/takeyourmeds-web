@@ -1,7 +1,7 @@
 from django.conf.urls import url, patterns
 
 urlpatterns = patterns('takeyourmeds.reminders.views',
-    url(r'^reminder$', 'index',
+    url(r'^reminders$', 'index',
         name='index'),
     url(r'^reminders/new$', 'create',
         name='create'),
