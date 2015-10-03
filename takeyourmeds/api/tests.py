@@ -18,10 +18,10 @@ class ReminderTests(APITestCase):
             'audiourl': '',
             'telnumber': '123',
             'times': [
-                u'0 7 * * *',
-                u'30 12 * * *',
-                u'45 8 * * *',
-            ]
+                '0 7 * * *',
+                '30 12 * * *',
+                '45 8 * * *',
+            ],
         }
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -38,7 +38,7 @@ class ReminderTests(APITestCase):
                 u'0 7 * * *',
                 u'30 12 * * *',
                 u'45 8 * * *',
-            ]
+            ],
         }
         # Make 3 objects
         response = self.client.post(url, data, format='json')
