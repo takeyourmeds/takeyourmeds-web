@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-def index(request):
-    return render(request, 'static/index.html', {
+def landing(request):
+    return render(request, 'static/landing.html', {
     })
 
 def about(request):
