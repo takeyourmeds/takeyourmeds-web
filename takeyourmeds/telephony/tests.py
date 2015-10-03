@@ -1,20 +1,18 @@
-import unittest
+from takeyourmeds.utils.test import TestCase
 
-from django.conf import settings
-from django.test import TestCase
-from django.test.utils import override_settings
-
-from . import actions
+from .actions import make_call, send_sms
 
 class TestActions(TestCase):
     def test_call(self):
-        sid = actions.make_call(
-            "+441324430099",
-            "https://api.twilio.com/cowbell.mp3"
+        sid = make_call(
+            '+441324430099',
+            'https://api.twilio.com/cowbell.mp3'
         )
-        assert len(sid) == 34
+
+        self.assertEqual(len(sid), 34)
 
     def test_sms(self):
-        sid = actions.send_sms("+441324430099", "Hello!")
-        assert len(sid) == 34
+        sid = send_sms('+441324430099', "Hello!")
+
+        self.assertEqual(len(sid), 34)
 
