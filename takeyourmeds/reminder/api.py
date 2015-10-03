@@ -49,6 +49,7 @@ class ReminderViewSet(viewsets.ModelViewSet):
 
 @api_view(['POST', ])
 def trigger_now(request):
+    # FIXME: Move parameter to urlconf
     pk = request.data.get('id')
     reminder = Reminder.objects.get(pk=pk)
     reminder.dispatch_task()
