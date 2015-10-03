@@ -8,6 +8,17 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 
 def get_client():
+    if not settings.TWILIO_ENABLED:
+        class Attribute(object):
+            def create(self):
+                return str(uuid.uuid4())[:34]
+
+        class MockTwilioRestClient(object):
+            calls = Attribute()
+            messages = Attribute()
+
+        return MockTwilioRestClient()
+
     return TwilioRestClient(
         settings.TWILIO_ACCOUNT_SID,
         settings.TWILIO_AUTH_TOKEN,
@@ -17,9 +28,6 @@ def send_sms(to_number, message_text):
     """
     Send SMS message.
     """
-
-    if not settings.TWILIO_ENABLED:
-        return generate_dummy_sid()
 
     message = get_client().messages.create(
         to=to_number,
@@ -34,9 +42,6 @@ def make_call(to_number, audio_url):
     Make a call to the specified number and play the MP3 specified in
     `audio_url`.
     """
-
-    if not settings.TWILIO_ENABLED:
-        return generate_dummy_sid()
 
     name = str(uuid.uuid4())
 
@@ -71,6 +76,3 @@ def _write_twiml(name, audio_url):
                 <Play loop="1">{}</Play>
             </Response>
         """.format(audio_url).strip()
-
-def generate_dummy_sid():
-    return str(uuid.uuid4())[:34]
