@@ -22,6 +22,10 @@ class DeleteTests(TestCase):
         self.failIf(self.user.reminders.exists())
 
     def test_forbidden(self):
+        """
+        Users cannot delete other user's reminders.
+        """
+
         other = self.create_user('other')
         instance = self.user.reminders.create()
 
