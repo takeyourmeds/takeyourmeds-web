@@ -1,9 +1,9 @@
-from datetime import datetime
-
 import pytz
-from croniter import croniter
+import datetime
+
 from django.db import models
-from django.contrib.auth.models import User
+
+from croniter import croniter
 
 class ReminderTime(models.Model):
     reminder = models.ForeignKey('Reminder', related_name='reminder_times')
@@ -12,16 +12,17 @@ class ReminderTime(models.Model):
 
     def should_run(self):
         times = croniter(self.cronstring, self.last_run)
-        return times.get_next(datetime) < datetime.now(pytz.utc)
+
+        return times.get_next(datetime.datetime) < \
+            datetime.datetime.now(pytz.utc)
 
     def run(self):
         self.reminder.dispatch_task()
-        self.last_run = datetime.now(pytz.utc)
+        self.last_run = datetime.datetime.now(pytz.utc)
         self.save()
 
-
 class Reminder(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey('auth.User')
     message = models.CharField(blank=True, max_length=100)
     audiourl = models.CharField(blank=True, max_length=100)
     telnumber = models.CharField(max_length=200)
