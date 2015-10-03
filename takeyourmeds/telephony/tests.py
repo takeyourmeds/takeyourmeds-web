@@ -4,10 +4,7 @@ from .actions import make_call, send_sms
 
 class TestActions(TestCase):
     def test_call(self):
-        sid = make_call(
-            '+441324430099',
-            'https://api.twilio.com/cowbell.mp3'
-        )
+        sid = make_call('+441324430099', 'https://api.twilio.com/cowbell.mp3')
 
         self.assertEqual(len(sid), 34)
 
