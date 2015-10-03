@@ -51,12 +51,6 @@ TEMPLATES = [
     },
 ]
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.request',
-    'allauth.account.context_processors.account',
-    'allauth.socialaccount.context_processors.socialaccount',
-)
-
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
