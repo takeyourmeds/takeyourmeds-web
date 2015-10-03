@@ -12,7 +12,15 @@ class TestCase(TestCase):
 
         response = fn(reverse(urlconf, args=args, kwargs=kwargs))
 
-        self.assertEqual(response.status_code, status_code, response)
+        self.assertEqual(
+            response.status_code,
+            status_code,
+            "Got HTTP %d but expected HTTP %d. Response:\n%s" % (
+                response.status_code,
+                status_code,
+                response,
+            )
+        )
 
     def assertHTTP200(self, urlconf, *args, **kwargs):
         self.assertStatusCode(200, self.client.get, urlconf, *args, **kwargs)
