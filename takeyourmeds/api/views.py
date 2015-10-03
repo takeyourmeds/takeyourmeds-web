@@ -35,7 +35,7 @@ class ReminderViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Reminder.objects.filter(user=self.request.user)
+        return self.request.user.reminders.all()
 
 @api_view(('POST',))
 def trigger_now(request):
