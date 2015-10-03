@@ -21,19 +21,19 @@
 
     <div class="container">
 
-        <a href="/">
+        <a href="{% url "static:index" %}">
             <h2>Take Your Meds</h2>
         </a>
 
         <ul class="site_nav">
-            <li><a href="/about">About</a></li>
-            <li><a href="/reminder/new/">New Reminder</a></li>
-            <li><a href="/reminder/list/">My Reminders</a></li>
+            <li><a href="{% url "static:about" %}">About</a></li>
+            <li><a href="{% url "reminder_new" %}">New Reminder</a></li>
+            <li><a href="{% url "list-reminders" %}">My Reminders</a></li>
             {% if user.is_authenticated %}
-            <li><a href="/accounts/logout/">Logout</a></li>
+            <li><a href="{% url "account_logout" %}">Logout</a></li>
             {% else %}
-            <li><a href="/accounts/signup/">Register</a></li>
-            <li><a href="/accounts/login/">Login</a></li>
+            <li><a href="{% url "account_signup" %}">Register</a></li>
+            <li><a href="{% url "account_login" %}">Login</a></li>
             {% endif %}
 
         </ul>
@@ -50,7 +50,7 @@
         <p>Copyright &copy; 2015 Take Your Meds Ltd<br>
             Registered company number 9686492, England and Wales<br>
         </p>
-        <p>Please read our <a href="terms-and-conditions">Terms and Conditions</a> and <a href="privacy-policy">Privacy Policy</a>.</p>
+        <p>Please read our <a href="{% url "static:terms-and-conditions" %}">Terms and Conditions</a> and <a href="{% url "static:privacy-policy" %}">Privacy Policy</a>.</p>
     </div>
 </footer>
     <script type="text/javascript" src="/static/js/jquery-2.1.4.js"></script>
