@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 
-from takeyourmeds.reminder.models import Reminder, ReminderTime
+from takeyourmeds.reminder.models import Reminder
 
 class ReminderTimeField(serializers.RelatedField):
     def to_representation(self, model):
@@ -16,11 +16,8 @@ class ReminderSerializer(serializers.ModelSerializer):
         req = self.context['request']
         data['user_id'] = req.user.pk
         obj = super(ReminderSerializer, self).create(data)
-        for time in req.data.get('times', []):
-            ReminderTime.objects.create(
-                reminder=obj,
-                cronstring=time,
-            )
+        for x in req.data.get('times', []):
+            obj.times.create(cronstring=x)
         return obj
 
     class Meta:
