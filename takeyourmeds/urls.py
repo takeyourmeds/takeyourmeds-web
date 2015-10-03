@@ -8,7 +8,7 @@ router = routers.DefaultRouter()
 router.register(r'reminders', ReminderViewSet)
 
 urlpatterns = [
-    url(r'', include('takeyourmeds.api.urls')),
+    url(r'', include('takeyourmeds.api.urls', namespace='api')),
     url(r'', include('takeyourmeds.static.urls', namespace='static')),
 
     url('^telephony/', include("takeyourmeds.telephony.urls")),
