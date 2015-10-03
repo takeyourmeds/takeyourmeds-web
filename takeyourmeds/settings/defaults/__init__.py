@@ -83,3 +83,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 SITE_URL = 'http://takeyourmeds.fixme'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
+SITE_ID = 1
