@@ -1,8 +1,6 @@
-from django.conf.urls import url
+from django.conf.urls import url, patterns
 
-from .views import info
-
-urlpatterns = (
-    url('^info/(?P<uuid>.*)$', info,
+urlpatterns = patterns('takeyourmeds.telephony.views',
+    url('^info/(?P<uuid>.*)$', 'info',
         name='info'),
 )
