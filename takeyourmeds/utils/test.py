@@ -8,7 +8,8 @@ class TestCase(TestCase):
 
     def assertStatusCode(self, status_code, fn, urlconf, *args, **kwargs):
         if kwargs.pop('login', False):
-            self.client.login(username='testuser', password='password')
+            user = kwargs.pop('user', self.user)
+            self.client.login(username=user.username, password='password')
 
         response = fn(reverse(urlconf, args=args, kwargs=kwargs))
 
