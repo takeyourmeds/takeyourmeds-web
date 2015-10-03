@@ -62,6 +62,8 @@ AUTHENTICATION_BACKENDS = (
 )
 
 WSGI_APPLICATION = 'takeyourmeds.wsgi.application'
+
+LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
 USE_TZ = False
