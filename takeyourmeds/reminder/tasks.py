@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from celery import shared_task
 from celery.utils.log import get_task_logger
 
-from takeyourmeds.telephony.actions import send_sms, make_call
+from takeyourmeds.telephony.utils import send_sms, make_call
 
 from .models import Reminder
 
