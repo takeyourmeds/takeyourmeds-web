@@ -48,5 +48,6 @@ class SuperuserTestCase(TestCase):
     def setUp(self):
         super(SuperuserTestCase, self).setUp()
 
+        self.user.is_staff = True
         self.user.is_superuser = True
         self.user.save()
