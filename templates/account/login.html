@@ -1,22 +1,24 @@
 {% extends "base/base.html" %}
 
-{% load i18n %}
+{% block head_title %}Login{% endblock %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% block container %}
 
-{% block content %}
-
-{% if form.errors %}
-  <div class="alert alert-danger">
-  There was a problem with the details you provided. Please try again.
-  </div>
+{% if form.non_field_errors %}
+<div class="has-error">
+  {% for x in form.non_field_errors %}
+  <p class="help-block">{{ x }}</p>
+  {% endfor %}
+</div>
 {% endif %}
+
+{{ form.errors }}
 
 <div class="row">
   <br/><br/>
   <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
   <div class="well">
-    <h1>{% trans "Sign In" %}</h1>
+    <h1>Login</h1>
 
     <form id="loginForm" method="POST" action="" novalidate="novalidate">
       {% csrf_token %}
@@ -25,20 +27,13 @@
       {% endif %}
       <div class="form-group">
         <label for="login" class="control-label">Username</label>
-        <input type="text" class="form-control" id="login" name="login" value="{{ form.login.value|default:"" }}" required="" title="Please enter you username" placeholder="Username">
+        <input type="text" class="form-control" id="login" name="username" value="{{ form.login.value|default:"" }}" required="" title="Please enter you username" placeholder="Username">
         <span class="help-block"></span>
       </div>
       <div class="form-group">
         <label for="password" class="control-label">Password</label>
         <input type="password" class="form-control" id="password" name="password" value="" required="" title="Please enter your password" placeholder="Password">
         <span class="help-block"></span>
-      </div>
-      <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
-      <div class="checkbox">
-        <label>
-            <input type="checkbox" name="remember" id="remember" {% if form.remember.value %}checked {% endif %}> Remember login
-        </label>
-        <p class="help-block">(if this is a private computer)</p>
       </div>
       <button type="submit" class="btn btn-success btn-block">Login</button>
     </form>

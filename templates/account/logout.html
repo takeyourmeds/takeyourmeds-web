@@ -1,24 +1,21 @@
 {% extends "base/base.html" %}
 
-{% load i18n %}
+{% block head_title %}Logout{% endblock %}
 
-{% block head_title %}{% trans "Sign Out" %}{% endblock %}
+{% block container %}
 
+  <h1 style="margin-top: 40px;">Logout</h1>
 
-{% block content %}
-<div class="container" >
+  <p>
+    Are you sure you want to sign out?
+  </p>
 
-    <h1 style="margin-top: 40px;">{% trans "Sign Out" %}</h1>
+  <form method="POST" action="">
+    {% csrf_token %}
 
-    <p>{% trans 'Are you sure you want to sign out?' %}</p>
+    <button class="btn btn-primary" type="submit">
+      Logout
+    </button>
+  </form>
 
-    <form method="POST" action="">
-      {% csrf_token %}
-      {% if redirect_field_value %}
-      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-      {% endif %}
-      <button class="btn btn-primary" type="submit">{% trans 'Sign Out' %}</button>
-    </form>
-
-</div>
 {% endblock %}

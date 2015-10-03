@@ -45,7 +45,13 @@
   </ul>
   {% endif %}
 
-  {% block content %}{% endblock %}
+  {% block content %}
+  <div id="content">
+    <div class="container">
+      {% block container %}{% endblock %}
+    </div>
+  </div>
+  {% endblock %}
 
   <footer>
     <div class="container">
