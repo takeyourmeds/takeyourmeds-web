@@ -7,23 +7,6 @@ from twilio.rest import TwilioRestClient
 from django.conf import settings
 from django.core.urlresolvers import reverse
 
-def get_client():
-    if not settings.TWILIO_ENABLED:
-        class Attribute(object):
-            def create(self):
-                return str(uuid.uuid4())[:34]
-
-        class MockTwilioRestClient(object):
-            calls = Attribute()
-            messages = Attribute()
-
-        return MockTwilioRestClient()
-
-    return TwilioRestClient(
-        settings.TWILIO_ACCOUNT_SID,
-        settings.TWILIO_AUTH_TOKEN,
-    )
-
 def send_sms(to_number, message_text):
     """
     Send SMS message.
@@ -64,6 +47,23 @@ def make_call(to_number, audio_url):
     )
 
     return call.sid
+
+def get_client():
+    if not settings.TWILIO_ENABLED:
+        class Attribute(object):
+            def create(self):
+                return str(uuid.uuid4())[:34]
+
+        class MockTwilioRestClient(object):
+            calls = Attribute()
+            messages = Attribute()
+
+        return MockTwilioRestClient()
+
+    return TwilioRestClient(
+        settings.TWILIO_ACCOUNT_SID,
+        settings.TWILIO_AUTH_TOKEN,
+    )
 
 def _write_twiml(name, audio_url):
     # FIXME: Not /tmp, please!
