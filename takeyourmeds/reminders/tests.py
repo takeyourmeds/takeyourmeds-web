@@ -13,7 +13,7 @@ class SmokeTest(TestCase):
     def test_delete(self):
         instance = self.user.reminders.create()
         self.assert_(self.user.reminders.exists())
-        self.assertHTTP302('reminders:delete', instance.pk, login=True)
+        self.assertPOST({}, 'reminders:delete', instance.pk, login=True)
         self.failIf(self.user.reminders.exists())
 
 class TestCron(TestCase):

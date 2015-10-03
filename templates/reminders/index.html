@@ -33,7 +33,11 @@
 
                 <h3><span class="meta">Send to</span> {{ reminder.telnumber }} </h3>
                 <a class="trigger submit" data-reminder-id={{ reminder.id }}>Test</a>
-                <a href="{% url "reminder.delete" reminder.id %}" class="delete submit">Delete</a>
+
+                <form method="POST" action="{% url "reminder.delete" reminder.pk %}">
+                  {% csrf_token %}
+                  <button type="submit" class="delete">Delete</button>
+                </form>
             </div>
 
             <div class="info-right box-sizing-border">
