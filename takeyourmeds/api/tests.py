@@ -5,14 +5,10 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from rest_framework.test import force_authenticate
 
-from takeyourmeds.reminder.models import Reminder
-
 class ReminderTests(APITestCase):
     def setUp(self):
-        self.u = User(username='test')
-        self.u.save()
-        self.u2 = User(username='test2')
-        self.u2.save()
+        self.u = User.objects.create(username='test')
+        self.u2 = User.objects.create(username='test2')
 
     def test_create_reminder(self):
         self.client.force_authenticate(user=self.u)
@@ -58,7 +54,6 @@ class ReminderTests(APITestCase):
         self.assertEqual(len(res.data), 1)
 
     def test_trigger_now(self):
-        r1 = Reminder(user=self.u)
-        r1.save()
+        r1 = self.u.reminder_set.create()
         url = reverse('api:trigger-now')
         self.client.post(url, {'id': 1}, format='json')
