@@ -71,6 +71,7 @@ USE_L10N = False
 LANGUAGE_CODE = 'en-gb'
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 import djcelery
 djcelery.setup_loader()
