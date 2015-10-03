@@ -51,11 +51,6 @@ TEMPLATES = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-)
-
 WSGI_APPLICATION = 'takeyourmeds.wsgi.application'
 
 LOGIN_URL = '/accounts/login/'
@@ -80,5 +75,3 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 SITE_URL = 'http://takeyourmeds.fixme'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
-
-SITE_ID = 1
