@@ -21,6 +21,21 @@ class DeleteTests(TestCase):
         self.assertPOST({}, 'reminders:delete', instance.pk, login=True)
         self.failIf(self.user.reminders.exists())
 
+    def test_forbidden(self):
+        other = self.create_user('other')
+        instance = self.user.reminders.create()
+
+        self.assertPOST(
+            {},
+            'reminders:delete',
+            instance.pk,
+            login=True,
+            user=other,
+            status_code=404,
+        )
+
+        self.assert_(self.user.reminders.exists())
+
 class TestCron(TestCase):
     def test_cron(self):
         ten_min_ago = datetime.datetime.now(pytz.utc) - \
