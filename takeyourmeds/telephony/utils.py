@@ -51,8 +51,13 @@ def make_call(to_number, audio_url):
 def get_client():
     if not settings.TWILIO_ENABLED:
         class Attribute(object):
-            def create(self):
-                return str(uuid.uuid4())[:34]
+            def create(self, *args, **kwargs):
+                resource = Resource()
+                resource.sid = str(uuid.uuid4())[:34]
+                return resource
+
+        class Resource(object):
+            pass
 
         class MockTwilioRestClient(object):
             calls = Attribute()
