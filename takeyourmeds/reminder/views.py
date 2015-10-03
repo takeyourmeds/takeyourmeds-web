@@ -5,11 +5,11 @@ from django.contrib.auth.decorators import login_required
 from .models import Reminder
 
 @login_required
-def new_reminder(request):
+def new(request):
     return render(request, 'reminder/new_reminder.html')
 
 @login_required
-def list_reminders(request):
+def list_(request):
     reminders = request.user.reminders.order_by('-pk')
 
     return render(request, 'reminder/list_reminders.html', {
