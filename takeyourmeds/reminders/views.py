@@ -4,13 +4,13 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def new(request):
-    return render(request, 'reminder/new_reminder.html')
+    return render(request, 'reminder/new.html')
 
 @login_required
 def list_(request):
     reminders = request.user.reminders.order_by('-pk')
 
-    return render(request, 'reminder/list_reminders.html', {
+    return render(request, 'reminder/list.html', {
         'reminders': reminders,
     })
 
