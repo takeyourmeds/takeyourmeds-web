@@ -2,8 +2,6 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from .models import Reminder
-
 @login_required
 def new(request):
     return render(request, 'reminder/new_reminder.html')
