@@ -7,7 +7,7 @@ from takeyourmeds.api.views import ReminderViewSet
 router = routers.DefaultRouter()
 router.register(r'reminders', ReminderViewSet)
 
-urlpatterns = [
+urlpatterns = (
     url(r'', include('takeyourmeds.api.urls', namespace='api')),
     url(r'', include('takeyourmeds.static.urls', namespace='static')),
     url(r'', include('takeyourmeds.telephony.urls', namespace='telephony')),
@@ -15,4 +15,4 @@ urlpatterns = [
     url('^reminder/', include("takeyourmeds.reminder.urls")),
     url(r'^api/', include(router.urls)),
     url(r'^accounts/', include('allauth.urls')),
-]
+)
