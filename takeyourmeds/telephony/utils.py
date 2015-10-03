@@ -45,7 +45,7 @@ def make_call(to_number, audio_url):
 
     callback_url = urlparse.urljoin(
         settings.SITE_URL,
-        reverse('info', kwargs={'uuid': name})
+        reverse('telephony:info', kwargs={'uuid': name})
     )
 
     call = get_client().calls.create(
