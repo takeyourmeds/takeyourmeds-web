@@ -7,9 +7,7 @@ INSTALLED_APPS = (
 
     'allauth',
     'allauth.account',
-    'bootstrap3',
     'djcelery',
-    'flat',
     'rest_framework',
 
     'takeyourmeds.reminder',
