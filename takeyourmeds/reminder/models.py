@@ -5,6 +5,16 @@ from django.db import models
 
 from croniter import croniter
 
+class Reminder(models.Model):
+    user = models.ForeignKey('auth.User')
+    message = models.CharField(blank=True, max_length=100)
+    audiourl = models.CharField(blank=True, max_length=100)
+    telnumber = models.CharField(max_length=200)
+
+    def dispatch_task(self):
+        from .tasks import send_reminder_task
+        send_reminder_task.delay(self.pk)
+
 class ReminderTime(models.Model):
     reminder = models.ForeignKey('Reminder', related_name='reminder_times')
     cronstring = models.CharField(blank=True, max_length=100)
@@ -20,13 +30,3 @@ class ReminderTime(models.Model):
         self.reminder.dispatch_task()
         self.last_run = datetime.datetime.now(pytz.utc)
         self.save()
-
-class Reminder(models.Model):
-    user = models.ForeignKey('auth.User')
-    message = models.CharField(blank=True, max_length=100)
-    audiourl = models.CharField(blank=True, max_length=100)
-    telnumber = models.CharField(max_length=200)
-
-    def dispatch_task(self):
-        from .tasks import send_reminder_task
-        send_reminder_task.delay(self.pk)
