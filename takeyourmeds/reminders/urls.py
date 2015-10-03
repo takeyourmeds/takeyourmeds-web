@@ -5,6 +5,6 @@ urlpatterns = patterns('takeyourmeds.reminders.views',
         name='index'),
     url(r'^reminders/new$', 'create',
         name='create'),
-    url(r'^reminders/delete/(?P<reminder_id>\d+)$', 'delete',
+    url(r'^reminders/reminder/(?P<reminder_id>\d+)/delete$', 'delete',
         name='delete'),
 )
