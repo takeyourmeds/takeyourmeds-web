@@ -8,10 +8,10 @@ def about(request):
     return render(request, 'static/about.html', {
     })
 
-def terms_and_conditions(request):
-    return render(request, 'static/terms_and_conditions.html', {
+def terms(request):
+    return render(request, 'static/terms.html', {
     })
 
-def privacy_policy(request):
-    return render(request, 'static/privacy_policy.html', {
+def privacy(request):
+    return render(request, 'static/privacy.html', {
     })

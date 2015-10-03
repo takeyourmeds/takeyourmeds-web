@@ -8,7 +8,7 @@ class SmokeTest(TestCase):
         self.assertHTTP200('static:about')
 
     def test_terms_and_conditions(self):
-        self.assertHTTP200('static:terms-and-conditions')
+        self.assertHTTP200('static:terms')
 
     def test_privacy_policy(self):
-        self.assertHTTP200('static:privacy-policy')
+        self.assertHTTP200('static:privacy')
