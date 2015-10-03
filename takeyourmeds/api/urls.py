@@ -8,7 +8,7 @@ router = routers.DefaultRouter()
 router.register(r'reminders', ReminderViewSet)
 
 urlpatterns = patterns('takeyourmeds.api.views',
-    url(r'^api/trigger/$', 'trigger_now',
+    url(r'^api/trigger$', 'trigger_now',
         name='trigger-now'),
 
     url(r'^api/', include(router.urls)),
