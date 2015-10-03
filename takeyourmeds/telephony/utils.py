@@ -1,8 +1,7 @@
-import uuid
-
 from twilio.rest import TwilioRestClient
 
 from django.conf import settings
+from django.utils.crypto import get_random_string
 
 from .models import TwilioMLCallback
 
@@ -49,7 +48,7 @@ def get_client():
         class Attribute(object):
             def create(self, *args, **kwargs):
                 resource = Resource()
-                resource.sid = str(uuid.uuid4())[:34]
+                resource.sid = get_random_string(34)
                 return resource
 
         class Resource(object):
