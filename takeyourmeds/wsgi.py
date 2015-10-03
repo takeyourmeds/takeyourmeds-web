@@ -1,5 +1,5 @@
 """
-WSGI config for nhs_reminder project.
+WSGI config for takeyourmeds project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
