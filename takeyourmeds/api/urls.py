@@ -11,5 +11,5 @@ urlpatterns = patterns('takeyourmeds.api.views',
     url(r'^api/trigger/$', 'trigger_now',
         name='trigger-now'),
 
-    url(r'', include(router.urls)),
+    url(r'^api/$', include(router.urls)),
 )
