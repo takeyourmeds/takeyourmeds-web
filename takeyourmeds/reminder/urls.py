@@ -6,8 +6,3 @@ urlpatterns = patterns('takeyourmeds.reminder.views',
     url(r'^list/$', 'list_reminders',
         name='list-reminders'),
 )
-
-urlpatterns += patterns('takeyourmeds.reminder.api',
-    url(r'^trigger/$', 'trigger_now',
-        name='trigger_now'),
-)

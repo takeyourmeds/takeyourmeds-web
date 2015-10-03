@@ -10,6 +10,7 @@ INSTALLED_APPS = (
     'djcelery',
     'rest_framework',
 
+    'takeyourmeds.api',
     'takeyourmeds.reminder',
     'takeyourmeds.static',
     'takeyourmeds.telephony',
