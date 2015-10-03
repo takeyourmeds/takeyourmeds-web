@@ -91,8 +91,8 @@
                 <label for="audio_url">Which voice message do you want to send?</label>
                 <select id="audio_url" name="audio_url">
                     <option value selected></option>
-                    <option value="{{ settings.SITE_URL }}{% url static "mp3/hi_mum_medication_reminder.mp3" %}">Mum's medication reminder!</option>
-                    <option value="{{ settings.SITE_URL }}{% url static "mp3/its_fiona_mouthwash_reminder.mp3" %}">Dental Hygienist</option>
+                    <option value="{{ settings.SITE_URL }}{% static "mp3/hi_mum_medication_reminder.mp3" %}">Mum's medication reminder!</option>
+                    <option value="{{ settings.SITE_URL }}{% static "mp3/its_fiona_mouthwash_reminder.mp3" %}">Dental Hygienist</option>
                 </select>
             </div>
 
