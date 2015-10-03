@@ -1,6 +1,6 @@
 from takeyourmeds.utils.test import TestCase
 
-from .actions import make_call, send_sms
+from .utils import make_call, send_sms
 
 class TestActions(TestCase):
     def test_call(self):
