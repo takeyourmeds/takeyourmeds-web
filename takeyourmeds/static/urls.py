@@ -1,13 +1,12 @@
 from django.conf.urls import patterns, url
-from django.views.generic import TemplateView
 
 urlpatterns = patterns('takeyourmeds.static.views',
-    url('^$', TemplateView.as_view(template_name='static/index.html'),
+    url('^$', 'index',
         name='index'),
-    url('^about$', TemplateView.as_view(template_name='static/about.html'),
+    url('^about$', 'about',
         name='about'),
-    url('^terms-and-conditions$', TemplateView.as_view(template_name='static/terms-and-conditions.html'),
+    url('^terms-and-conditions$', 'terms_and_conditions',
         name='terms-and-conditions'),
-    url('^privacy-policy$', TemplateView.as_view(template_name='static/privacy-policy.html'),
+    url('^privacy-policy$', 'privacy_policy',
         name='privacy-policy'),
 )
