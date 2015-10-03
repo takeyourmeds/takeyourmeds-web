@@ -6,7 +6,7 @@ from django.db import models
 from croniter import croniter
 
 class Reminder(models.Model):
-    user = models.ForeignKey('auth.User')
+    user = models.ForeignKey('auth.User', related_name='reminders')
     message = models.CharField(blank=True, max_length=100)
     audiourl = models.CharField(blank=True, max_length=100)
     telnumber = models.CharField(max_length=200)

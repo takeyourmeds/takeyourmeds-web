@@ -8,7 +8,7 @@ class TestCron(TestCase):
         ten_min_ago = datetime.datetime.now(pytz.utc) - \
             datetime.timedelta(minutes=10)
 
-        reminder = self.user.reminder_set.create(
+        reminder = self.user.reminders.create(
             message="test",
             telnumber='123',
         )

@@ -7,7 +7,7 @@ def new_reminder(request):
 
 @login_required
 def list_reminders(request):
-    reminders = request.user.reminder_set.order_by('-pk')
+    reminders = request.user.reminders.order_by('-pk')
 
     return render(request, 'reminder/list_reminders.html', {
         'reminders': reminders,

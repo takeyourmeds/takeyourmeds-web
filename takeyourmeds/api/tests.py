@@ -54,6 +54,6 @@ class ReminderTests(APITestCase):
         self.assertEqual(len(res.data), 1)
 
     def test_trigger_now(self):
-        r1 = self.u.reminder_set.create()
+        r1 = self.u.reminders.create()
         url = reverse('api:trigger-now')
         self.client.post(url, {'id': 1}, format='json')
