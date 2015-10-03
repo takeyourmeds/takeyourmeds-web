@@ -18,6 +18,10 @@ def list_reminders(request):
 
 @login_required
 def delete(request, reminder_id):
+    """
+    FIXME: @require_POST
+    """
+
     reminder = get_object_or_404(request.user.reminders, pk=reminder_id)
     reminder.delete()
 
