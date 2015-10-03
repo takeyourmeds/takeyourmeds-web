@@ -15,4 +15,5 @@ INSTALLED_APPS = (
     'takeyourmeds.reminder',
     'takeyourmeds.static',
     'takeyourmeds.telephony',
+    'takeyourmeds.utils',
 )
