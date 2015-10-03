@@ -4,6 +4,9 @@ class SmokeTest(TestCase):
     def test_landing(self):
         self.assertGET(200, 'static:landing')
 
+    def test_landing_logged_in(self):
+        self.assertGET(302, 'static:landing', login=True)
+
     def test_about(self):
         self.assertGET(200, 'static:about')
 
