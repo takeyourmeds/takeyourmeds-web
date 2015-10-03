@@ -28,6 +28,9 @@ class TestCase(TestCase):
     def assertHTTP302(self, urlconf, *args, **kwargs):
         self.assertStatusCode(302, self.client.get, urlconf, *args, **kwargs)
 
+    def assertHTTP404(self, urlconf, *args, **kwargs):
+        self.assertStatusCode(404, self.client.get, urlconf, *args, **kwargs)
+
     def assertHTTP405(self, urlconf, *args, **kwargs):
         self.assertStatusCode(405, self.client.get, urlconf, *args, **kwargs)
 
