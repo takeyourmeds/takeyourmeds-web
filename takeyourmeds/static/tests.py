@@ -2,13 +2,13 @@ from takeyourmeds.utils.test import TestCase
 
 class SmokeTest(TestCase):
     def test_landing(self):
-        self.assertHTTP200('static:landing')
+        self.assertGET(200, 'static:landing')
 
     def test_about(self):
-        self.assertHTTP200('static:about')
+        self.assertGET(200, 'static:about')
 
     def test_terms_and_conditions(self):
-        self.assertHTTP200('static:terms')
+        self.assertGET(200, 'static:terms')
 
     def test_privacy_policy(self):
-        self.assertHTTP200('static:privacy')
+        self.assertGET(200, 'static:privacy')

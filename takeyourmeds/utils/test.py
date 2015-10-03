@@ -23,21 +23,16 @@ class TestCase(TestCase):
             )
         )
 
-    def assertHTTP200(self, urlconf, *args, **kwargs):
-        self.assertStatusCode(200, self.client.get, urlconf, *args, **kwargs)
+    def assertGET(self, status_code, urlconf, *args, **kwargs):
+        self.assertStatusCode(
+            status_code,
+            self.client.get,
+            urlconf,
+            *args,
+            **kwargs
+        )
 
-    def assertHTTP302(self, urlconf, *args, **kwargs):
-        self.assertStatusCode(302, self.client.get, urlconf, *args, **kwargs)
-
-    def assertHTTP404(self, urlconf, *args, **kwargs):
-        self.assertStatusCode(404, self.client.get, urlconf, *args, **kwargs)
-
-    def assertHTTP405(self, urlconf, *args, **kwargs):
-        self.assertStatusCode(405, self.client.get, urlconf, *args, **kwargs)
-
-    def assertPOST(self, data, *args, **kwargs):
-        status_code = kwargs.pop('status_code', 302)
-
+    def assertPOST(self, status_code, data, *args, **kwargs):
         return self.assertStatusCode(
             status_code, lambda x: self.client.post(x, data), *args, **kwargs
         )
