@@ -63,7 +63,15 @@
             </p>
         </div>
 
+        {% empty %}
+        <p class="align-center">
+          You have no reminders.
+        </p>
         {% endfor %}
+
+        <p>
+          <a href="{% url "reminders:create" %}" class="submit">Set up a new reminder</a>
+        </p>
 
     </div>
 
