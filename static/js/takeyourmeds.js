@@ -126,12 +126,3 @@ $(function() {
     $(el).text(prettyCron.toString(cronstring))
   })
 });
-
-$(function() {
-  if (document.location.search == "?flash=1") {
-    $('.reminder').find('.info-right').first().stop()
-    .css('background-color', '#FCEF33').animate({
-      'background-color': '#F3F1EB'
-    }, 1500);
-  }
-});
