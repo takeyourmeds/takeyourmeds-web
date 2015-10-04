@@ -58,9 +58,11 @@ class TriggerTest(TestCase):
     def test_trigger_now(self):
         instance = self.user.reminders.create()
 
-        self.assertPOSTRedirects(
+        response = self.assertPOST(
+            302,
             {},
             'reminders:trigger', instance.pk,
             login=True,
-            target='reminders:index',
         )
+
+        self.assertRedirectsTo(response, 'reminders:index')
