@@ -18,57 +18,57 @@ $(document).ready(function(){
         }
     });
 
-	var reminder_form = $('#reminder-setup');
+  var reminder_form = $('#reminder-setup');
 
-	var schedule = {
-		1: ["8:00"],
-		2: ["8:00", "17:00"],
-		3: ["8:00", "12:00", "17:00"],
-		4: ["8:00", "11:00", "14:00", "17:00"]
-	}
+  var schedule = {
+    1: ["8:00"],
+    2: ["8:00", "17:00"],
+    3: ["8:00", "12:00", "17:00"],
+    4: ["8:00", "11:00", "14:00", "17:00"]
+  }
 
 
-	// Capture form submit and send ajax
-	// request with data
+  // Capture form submit and send ajax
+  // request with data
 
-	reminder_form.submit(function(e) {
+  reminder_form.submit(function(e) {
 
-		e.preventDefault();
+    e.preventDefault();
 
-		var data = reminder_form.serializeArray();
+    var data = reminder_form.serializeArray();
 
-		var telnumber = "";
-		var message = "";
-		var cronstring = "";
-		var reminder_times = [];
-		var audiourl = "";
-		var dataobject = {};
+    var telnumber = "";
+    var message = "";
+    var cronstring = "";
+    var reminder_times = [];
+    var audiourl = "";
+    var dataobject = {};
 
-		data.forEach(function(formField) {
-			if (formField.name === "phone_number") {
-				telnumber = formField.value;
-			};
-			if (formField.name === "message") {
-				message = formField.value;
-			};
-			if (formField.name === "audio_url") {
-				audiourl = formField.value;
-			};
-			if (formField.name.lastIndexOf("time", 0) === 0) {
-				var hourDigits = formField.value.split(":")[0];
-				var minDigits = formField.value.split(":")[1].substr(0,2);
+    data.forEach(function(formField) {
+      if (formField.name === "phone_number") {
+        telnumber = formField.value;
+      };
+      if (formField.name === "message") {
+        message = formField.value;
+      };
+      if (formField.name === "audio_url") {
+        audiourl = formField.value;
+      };
+      if (formField.name.lastIndexOf("time", 0) === 0) {
+        var hourDigits = formField.value.split(":")[0];
+        var minDigits = formField.value.split(":")[1].substr(0,2);
       var cronstring = minDigits + " " + hourDigits + " * * *";
       reminder_times.push(cronstring);
-			};
-		});
+      };
+    });
 
-		dataobject.telnumber = telnumber;
-		dataobject.message = message;
-		dataobject.reminder_times = reminder_times;
-		dataobject.audiourl = audiourl;
+    dataobject.telnumber = telnumber;
+    dataobject.message = message;
+    dataobject.reminder_times = reminder_times;
+    dataobject.audiourl = audiourl;
 
-		var jsonresult = JSON.stringify(dataobject);
-		console.log(jsonresult);
+    var jsonresult = JSON.stringify(dataobject);
+    console.log(jsonresult);
 
     $.ajax(post_url, {
       data : jsonresult,
@@ -87,60 +87,60 @@ $(document).ready(function(){
     })
 
 
-	});
+  });
 
-	// Configure medication schedule based on frequency
+  // Configure medication schedule based on frequency
 
-	var frequency_selector = reminder_form.find('#frequency');
+  var frequency_selector = reminder_form.find('#frequency');
 
-	var reminder_schedule_container = reminder_form.find('#reminder-schedule');
+  var reminder_schedule_container = reminder_form.find('#reminder-schedule');
 
-	var reminder_schedule_list = reminder_schedule_container.find('ol');
+  var reminder_schedule_list = reminder_schedule_container.find('ol');
 
-	frequency_selector.change(function() {
+  frequency_selector.change(function() {
 
-		var times = schedule[frequency_selector.val()];
+    var times = schedule[frequency_selector.val()];
 
-		var template = $('#reminder_template').clone();
+    var template = $('#reminder_template').clone();
 
-		reminder_schedule_list.empty()
+    reminder_schedule_list.empty()
 
-		times.forEach(function(t, n){
+    times.forEach(function(t, n){
 
-			var time = template.clone().appendTo(reminder_schedule_list);
+      var time = template.clone().appendTo(reminder_schedule_list);
 
-			var time_value = time.find("select");
+      var time_value = time.find("select");
 
-			time_value.val(t);
-			time_value.attr('name', 'time_' + String(n));
-			time_value.attr('id', 'time_' + String(n));
+      time_value.val(t);
+      time_value.attr('name', 'time_' + String(n));
+      time_value.attr('id', 'time_' + String(n));
 
-		});
+    });
 
-		reminder_schedule_container.show()
+    reminder_schedule_container.show()
 
-	});
+  });
 
 
-	// Show the right message details option
+  // Show the right message details option
 
-	$('.radio-selector').each(function() {
+  $('.radio-selector').each(function() {
 
-		var el = $(this);
+    var el = $(this);
 
-		el.click(function() {
+    el.click(function() {
 
-			$('.message-type').each(function() {
-				$(this).hide();
-			});
+      $('.message-type').each(function() {
+        $(this).hide();
+      });
 
-			var element = $('#'+this.dataset.element);
+      var element = $('#'+this.dataset.element);
 
-			element.show();
+      element.show();
 
-		});
+    });
 
-	});
+  });
 
 });
 
