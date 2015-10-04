@@ -23,8 +23,10 @@ class TestCase(TestCase):
             )
         )
 
+        return response
+
     def assertGET(self, status_code, urlconf, *args, **kwargs):
-        self.assertStatusCode(
+        return self.assertStatusCode(
             status_code,
             self.client.get,
             urlconf,
