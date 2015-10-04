@@ -84,3 +84,6 @@ CACHES = {
         'KEY_PREFIX': 'takeyourmeds',
     }
 }
+
+SESSION_COOKIE_AGE = 86400 * 365 * 10
+SESSION_COOKIE_HTTPONLY = True
