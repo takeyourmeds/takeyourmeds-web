@@ -64,7 +64,6 @@ $(function() {
     dataobject.audiourl = audiourl;
 
     var jsonresult = JSON.stringify(dataobject);
-    console.log(jsonresult);
 
     $.ajax(post_url, {
       data : jsonresult,
