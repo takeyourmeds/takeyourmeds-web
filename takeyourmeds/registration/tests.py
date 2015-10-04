@@ -12,11 +12,15 @@ class RegistrationTest(TestCase):
     def test_POST(self):
         num_users = User.objects.count()
 
-        self.assertPOST(302, {
+        response = self.assertPOST(302, {
             'username': 'test',
             'password': 'password',
             'email': 'test@example.org',
         }, 'registration:view')
+
+        self.assertRedirectsTo(
+            response, 'static:landing', target_status_code=302,
+        )
 
         self.assertEqual(User.objects.count(), num_users + 1)
 
@@ -25,11 +29,20 @@ class RegistrationTest(TestCase):
         Cannot register if you are logged in.
         """
         num_users = User.objects.count()
-        self.assertPOST(302, {}, 'registration:view', login=True)
+
+        response = self.assertPOST(302, {}, 'registration:view', login=True)
+        self.assertRedirectsTo(
+            response, 'static:landing', target_status_code=302,
+        )
+
         self.assertEqual(User.objects.count(), num_users)
 
     def test_GET_logged_in(self):
         """
         Redirect away if viewing the register page when logged in.
         """
-        self.assertGET(302, 'registration:view', login=True)
+        response = self.assertGET(302, 'registration:view', login=True)
+
+        self.assertRedirectsTo(
+            response, 'static:landing', target_status_code=302,
+        )

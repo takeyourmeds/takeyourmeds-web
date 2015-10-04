@@ -17,7 +17,10 @@ class DeleteTests(TestCase):
     def test_POST(self):
         instance = self.user.reminders.create()
         self.assert_(self.user.reminders.exists())
-        self.assertPOST(302, {}, 'reminders:delete', instance.pk, login=True)
+        response = self.assertPOST(
+            302, {}, 'reminders:delete', instance.pk, login=True
+        )
+        self.assertRedirectsTo(response, 'reminders:index')
         self.failIf(self.user.reminders.exists())
 
     def test_forbidden(self):
