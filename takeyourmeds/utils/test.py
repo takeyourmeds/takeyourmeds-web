@@ -39,6 +39,22 @@ class TestCase(TestCase):
             status_code, lambda x: self.client.post(x, data), *args, **kwargs
         )
 
+    def assertPOSTRedirects(self, data, *args, **kwargs):
+        status_code = kwargs.pop('status_code', 302)
+        expected_url = reverse(
+            kwargs.pop('target'),
+            args=kwargs.pop('target_args', ()),
+            kwargs=kwargs.pop('target_kwargs', {})
+        )
+
+        response = self.assertStatusCode(
+            status_code, lambda x: self.client.post(x, data), *args, **kwargs
+        )
+
+        self.assertRedirects(response, expected_url, status_code)
+
+        return response
+
     def create_user(self, username):
         return User.objects.create_user(
             username,
