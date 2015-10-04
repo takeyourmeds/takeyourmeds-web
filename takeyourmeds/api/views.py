@@ -1,6 +1,4 @@
 from rest_framework import serializers, viewsets
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 
 from takeyourmeds.reminders.models import Reminder
@@ -36,12 +34,3 @@ class ReminderViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return self.request.user.reminders.all()
-
-@api_view(('POST',))
-def trigger_now(request):
-    # FIXME: Move parameter to urlconf
-    pk = request.data.get('id')
-    reminder = Reminder.objects.get(pk=pk)
-    reminder.dispatch_task()
-
-    return Response({'message': "Triggered"})

@@ -54,3 +54,8 @@ class TestCron(TestCase):
             cronstring="* * * * *",
             last_run=ten_min_ago,
         )
+
+class TriggerTest(TestCase):
+    def test_trigger_now(self):
+        instance = self.user.reminders.create()
+        self.assertPOST(302, {}, 'reminders:trigger', instance.pk, login=True)

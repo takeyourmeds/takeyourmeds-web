@@ -24,3 +24,13 @@ def delete(request, reminder_id):
     messages.success(request, "Your reminder has been deleted.")
 
     return redirect('reminders:index')
+
+@require_POST
+@login_required
+def trigger(request, reminder_id):
+    instance = get_object_or_404(request.user.reminders, pk=reminder_id)
+    instance.dispatch_task()
+
+    messages.success(request, "Your reminder has been triggered.")
+
+    return redirect('reminders:index')

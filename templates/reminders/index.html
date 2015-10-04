@@ -2,21 +2,6 @@
 
 {% block bodyclass %}reminder-list{% endblock %}
 
-{% block script %}
-  {{ block.super }}
-  <script>
-  $('body').on('click', '.trigger', function(event) {
-    var target=$(event.target);
-    var id = target.data('reminder-id');
-    $.post('{% url "api:trigger-now" %}', {
-      'id': id,
-    });
-    target.text('Sent');
-    target.attr('disabled', 'disabled');
-  })
-  </script>
-{% endblock %}
-
 {% block content %}
 <div id="content">
   <header class="content_header">
@@ -32,7 +17,10 @@
       <div class="info-left box-sizing-border">
 
         <h3><span class="meta">Send to</span> {{ reminder.telnumber }} </h3>
-        <a class="trigger submit" data-reminder-id={{ reminder.id }}>Test</a>
+        <form method="POST" action="{% url "reminders:trigger" reminder.pk %}" style="display: inline;">
+          {% csrf_token %}
+          <button type="submit">Test</button>
+        </form>
 
         <form method="POST" action="{% url "reminders:delete" reminder.pk %}" style="display: inline;">
           {% csrf_token %}
