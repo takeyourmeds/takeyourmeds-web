@@ -6,74 +6,74 @@
   {{ block.super }}
   <script>
   $('body').on('click', '.trigger', function(event) {
-      var target=$(event.target);
-      var id = target.data('reminder-id');
-      $.post('{% url "api:trigger-now" %}', {
-          'id': id,
-      });
-      target.text('Sent');
-      target.attr('disabled', 'disabled');
+    var target=$(event.target);
+    var id = target.data('reminder-id');
+    $.post('{% url "api:trigger-now" %}', {
+      'id': id,
+    });
+    target.text('Sent');
+    target.attr('disabled', 'disabled');
   })
   </script>
 {% endblock %}
 
 {% block content %}
 <div id="content">
-    <header class="content_header">
-        <h1>My reminders</h1>
-    </header>
+  <header class="content_header">
+    <h1>My reminders</h1>
+  </header>
 
-    <div class="container">
+  <div class="container">
 
-        {% for reminder in reminders %}
+    {% for reminder in reminders %}
 
-        <div class="reminder clearfix">
+    <div class="reminder clearfix">
 
-            <div class="info-left box-sizing-border">
+      <div class="info-left box-sizing-border">
 
-                <h3><span class="meta">Send to</span> {{ reminder.telnumber }} </h3>
-                <a class="trigger submit" data-reminder-id={{ reminder.id }}>Test</a>
+        <h3><span class="meta">Send to</span> {{ reminder.telnumber }} </h3>
+        <a class="trigger submit" data-reminder-id={{ reminder.id }}>Test</a>
 
-                <form method="POST" action="{% url "reminder.delete" reminder.pk %}">
-                  {% csrf_token %}
-                  <button type="submit" class="delete">Delete</button>
-                </form>
-            </div>
+        <form method="POST" action="{% url "reminder.delete" reminder.pk %}">
+          {% csrf_token %}
+          <button type="submit" class="delete">Delete</button>
+        </form>
+      </div>
 
-            <div class="info-right box-sizing-border">
-                <span class="meta">Message</span>
-                {% if reminder.message %}
-                    <p>{{ reminder.message }}</p>
-                {% else %}
-                    <audio src="{{ reminder.audiourl }}" controls>
-                        Unfortunately your browser does not support the <code>audio</code> element.
-                    </audio>
-                {% endif %}
-
-                <p>
-                    <span class="meta">Timings</span>
-                    {% for time in reminder.times.all %}
-                    <span class="cron">{{ time.cronstring }}</span>{% if not forloop.last %},{% endif %}
-                    {% endfor %}
-                </p>
-
-            </div>
-
-
-            </p>
-        </div>
-
-        {% empty %}
-        <p class="align-center">
-          You have no reminders.
-        </p>
-        {% endfor %}
+      <div class="info-right box-sizing-border">
+        <span class="meta">Message</span>
+        {% if reminder.message %}
+          <p>{{ reminder.message }}</p>
+        {% else %}
+          <audio src="{{ reminder.audiourl }}" controls>
+            Unfortunately your browser does not support the <code>audio</code> element.
+          </audio>
+        {% endif %}
 
         <p>
-          <a href="{% url "reminders:create" %}" class="submit">Set up a new reminder</a>
+          <span class="meta">Timings</span>
+          {% for time in reminder.times.all %}
+          <span class="cron">{{ time.cronstring }}</span>{% if not forloop.last %},{% endif %}
+          {% endfor %}
         </p>
 
+      </div>
+
+
+      </p>
     </div>
+
+    {% empty %}
+    <p class="align-center">
+      You have no reminders.
+    </p>
+    {% endfor %}
+
+    <p>
+      <a href="{% url "reminders:create" %}" class="submit">Set up a new reminder</a>
+    </p>
+
+  </div>
 
 </div>
 
