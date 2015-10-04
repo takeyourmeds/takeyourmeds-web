@@ -57,4 +57,10 @@ class TestCron(TestCase):
 class TriggerTest(TestCase):
     def test_trigger_now(self):
         instance = self.user.reminders.create()
-        self.assertPOST(302, {}, 'reminders:trigger', instance.pk, login=True)
+
+        self.assertPOSTRedirects(
+            {},
+            'reminders:trigger', instance.pk,
+            login=True,
+            target='reminders:index',
+        )
