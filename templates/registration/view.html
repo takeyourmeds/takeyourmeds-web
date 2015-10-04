@@ -23,7 +23,7 @@
       <h1>Register</h1>
 
       <p>
-        Already have an account? Then please <a href="{{ login_url }}">sign in</a>.
+        Already have an account? Then please <a href="{% url "account:login" %}">sign in</a>.
       </p>
 
       <form class="signup" id="signup_form" method="POST" action="" class="form">
