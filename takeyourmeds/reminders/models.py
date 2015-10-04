@@ -15,7 +15,7 @@ class Reminder(models.Model):
         from .tasks import send_reminder_task
         send_reminder_task.delay(self.pk)
 
-class ReminderTime(models.Model):
+class Time(models.Model):
     reminder = models.ForeignKey('Reminder', related_name='times')
     cronstring = models.CharField(blank=True, max_length=100)
     last_run = models.DateTimeField(auto_now_add=True)
