@@ -70,7 +70,7 @@ $(function() {
       contentType : 'application/json',
       type : 'POST',
       success: function() {
-        document.location = "/reminder/list?flash=1";
+        document.location = reminder_form.data('success-url');
         // // Show success message on success
         // var content_container = $('#content .container');
         // content_container.empty();
