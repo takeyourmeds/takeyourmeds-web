@@ -18,7 +18,7 @@ class Reminder(models.Model):
 class Time(models.Model):
     reminder = models.ForeignKey('Reminder', related_name='times')
     cronstring = models.CharField(blank=True, max_length=100)
-    last_run = models.DateTimeField(auto_now_add=True)
+    last_run = models.DateTimeField(default=datetime.datetime.utcnow)
 
     def should_run(self):
         times = croniter(self.cronstring, self.last_run)
