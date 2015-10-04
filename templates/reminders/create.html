@@ -11,8 +11,13 @@
 
   <div class="container">
 
-    <form action="" method="post" id="reminder-setup" name="reminder-setup" data-success-url="{% url "reminders:index" %}">
-
+    <form
+      action=""
+      method="POST"
+      id="reminder-setup"
+      name="reminder-setup"
+      data-success-url="{% url "reminders:index" %}"
+    >
       <label for="frequency">How many times a day should we send reminders?</label>
 
       <select id="frequency" name="frequency">
