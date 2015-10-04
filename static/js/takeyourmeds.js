@@ -1,5 +1,4 @@
-$(document).ready(function(){
-
+$(function() {
     // fix for django csrf
     var csrftoken = $.cookie('csrftoken');
 
@@ -14,7 +13,9 @@ $(document).ready(function(){
             }
         }
     });
+});
 
+$(function() {
   var reminder_form = $('#reminder-setup');
 
   var schedule = {
@@ -24,12 +25,10 @@ $(document).ready(function(){
     4: ["8:00", "11:00", "14:00", "17:00"]
   }
 
-
   // Capture form submit and send ajax
   // request with data
 
   reminder_form.submit(function(e) {
-
     e.preventDefault();
 
     var data = reminder_form.serializeArray();
@@ -79,78 +78,61 @@ $(document).ready(function(){
         // var success_template = $('.success-message');
         // success_template.appendTo(content_container);
         // success_template.show();
-    }
-
-    })
-
-
+      }
+    });
   });
 
   // Configure medication schedule based on frequency
 
   var frequency_selector = reminder_form.find('#frequency');
-
   var reminder_schedule_container = reminder_form.find('#reminder-schedule');
-
   var reminder_schedule_list = reminder_schedule_container.find('ol');
 
   frequency_selector.change(function() {
-
     var times = schedule[frequency_selector.val()];
-
     var template = $('#reminder_template').clone();
 
     reminder_schedule_list.empty()
 
     times.forEach(function(t, n){
-
       var time = template.clone().appendTo(reminder_schedule_list);
-
       var time_value = time.find("select");
 
       time_value.val(t);
       time_value.attr('name', 'time_' + String(n));
       time_value.attr('id', 'time_' + String(n));
-
     });
 
     reminder_schedule_container.show()
-
   });
 
 
   // Show the right message details option
 
   $('.radio-selector').each(function() {
-
     var el = $(this);
-
     el.click(function() {
-
       $('.message-type').each(function() {
         $(this).hide();
       });
-
       var element = $('#'+this.dataset.element);
-
       element.show();
-
     });
-
   });
-
 });
 
+$(function() {
+  $('.cron').each(function(i, el) {
+    var cronstring = $(el).text();
+    $(el).text(prettyCron.toString(cronstring))
+  })
+});
 
-$('.cron').each(function(i, el) {
-  var cronstring = $(el).text();
-  $(el).text(prettyCron.toString(cronstring))
-})
-
-
-if (document.location.search == "?flash=1") {
-  $('.reminder').find('.info-right').first().stop()
-  .css('background-color', '#FCEF33').animate({
-    'background-color': '#F3F1EB'
-  }, 1500);
-}
+$(function() {
+  if (document.location.search == "?flash=1") {
+    $('.reminder').find('.info-right').first().stop()
+    .css('background-color', '#FCEF33').animate({
+      'background-color': '#F3F1EB'
+    }, 1500);
+  }
+});
