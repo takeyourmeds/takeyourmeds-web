@@ -65,7 +65,7 @@ $(function() {
 
     var jsonresult = JSON.stringify(dataobject);
 
-    $.ajax(post_url, {
+    $.ajax(reminder_form.data('url'), {
       data : jsonresult,
       contentType : 'application/json',
       type : 'POST',

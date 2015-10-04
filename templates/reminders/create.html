@@ -16,6 +16,7 @@
       method="POST"
       id="reminder-setup"
       name="reminder-setup"
+      data-url="{% url "api:reminder-list" %}"
       data-success-url="{% url "reminders:index" %}"
     >
       <label for="frequency">How many times a day should we send reminders?</label>
