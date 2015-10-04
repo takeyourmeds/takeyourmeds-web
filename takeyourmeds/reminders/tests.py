@@ -1,4 +1,3 @@
-import pytz
 import datetime
 
 from takeyourmeds.utils.test import TestCase
@@ -42,7 +41,7 @@ class DeleteTests(TestCase):
 
 class TestCron(TestCase):
     def test_cron(self):
-        ten_min_ago = datetime.datetime.now(pytz.utc) - \
+        ten_min_ago = datetime.datetime.utcnow() - \
             datetime.timedelta(minutes=10)
 
         reminder = self.user.reminders.create(

@@ -1,4 +1,3 @@
-import pytz
 import datetime
 
 from django.db import models
@@ -24,9 +23,9 @@ class Time(models.Model):
         times = croniter(self.cronstring, self.last_run)
 
         return times.get_next(datetime.datetime) < \
-            datetime.datetime.now(pytz.utc)
+            datetime.datetime.utcnow()
 
     def run(self):
         self.reminder.dispatch_task()
-        self.last_run = datetime.datetime.now(pytz.utc)
+        self.last_run = datetime.datetime.utcnow()
         self.save()
