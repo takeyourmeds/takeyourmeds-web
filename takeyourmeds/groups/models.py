@@ -4,7 +4,7 @@ from django.db import models
 from django.utils.crypto import get_random_string
 
 class Group(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
 
     slug = models.CharField(
         unique=True,
