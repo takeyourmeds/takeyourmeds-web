@@ -1,0 +1,19 @@
+Source: takeyourmeds-web
+Section: python
+Priority: extra
+Maintainer: Chris lamb <chris@chris-lamb.co.uk>
+Build-Depends: debhelper (>= 9), dh-virtualenv, python
+Standards-Version: 3.9.5
+
+Package: takeyourmeds-web
+Architecture: any
+Pre-Depends: python2.7 | python2.6, ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${python:Depends}, ${shlibs:Depends}
+Description: takeyourmeds-web
+ takeyourmeds-web
+
+Package: takeyourmeds-celery
+Architecture: any
+Depends: ${misc:Depends}, takeyourmeds-web (= ${binary:Version})
+Description: takeyourmeds-celery
+ takeyourmeds-celery
