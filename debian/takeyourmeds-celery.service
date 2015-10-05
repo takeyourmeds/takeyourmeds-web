@@ -1,13 +1,10 @@
 [Unit]
-Description=takeyourmeds celery
+Description=takeyourmeds-celery
 After=network.target
-
-[Install]
-WantedBy=multi-user.target
 
 [Service]
 Type=forking
-ExecStart=/usr/share/python/takeyourmeds-web/bin/celeryd
+ExecStart=/usr/share/python/takeyourmeds-web/bin/manage.py celery worker
 Restart=always
-User=nobody
-Group=nobody
+User=www-data
+Group=www-data
