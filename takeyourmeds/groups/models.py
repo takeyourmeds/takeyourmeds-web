@@ -12,11 +12,6 @@ class Group(models.Model):
         max_length=6,
     )
 
-    created_by = models.ForeignKey(
-        'auth.User',
-        related_name='groups_created_by'
-    )
-
     created = models.DateTimeField(default=datetime.datetime.utcnow)
 
     class Meta:
