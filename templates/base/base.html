@@ -59,6 +59,9 @@
         Please read our
         <a href="{% url "static:terms" %}">Terms and Conditions</a> and
         <a href="{% url "static:privacy" %}">Privacy Policy</a>.
+        {% if request.user.is_superuser %}
+          <a href="{% url "static:admin" %}">Administration</a>.
+        {% endif %}
       </p>
     </div>
   </footer>
