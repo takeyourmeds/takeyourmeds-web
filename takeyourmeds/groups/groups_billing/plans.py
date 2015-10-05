@@ -12,6 +12,6 @@ class Plan(object):
         self.slug = slug
         self.display = display
 
-        PLANS[slug] = self
+        PLANS[value] = self
 
 FREE = Plan(1, 'free', "Free plan")

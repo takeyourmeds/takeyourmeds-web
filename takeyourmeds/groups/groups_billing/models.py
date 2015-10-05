@@ -11,3 +11,6 @@ class Billing(AutoOneToOneModel(Group)):
         choices=sorted((x.value, x.display) for x in PLANS.values()),
         default=FREE.value,
     )
+
+    def get_plan_object(self):
+        return PLANS[self.plan]

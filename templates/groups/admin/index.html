@@ -12,6 +12,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Plan</th>
     </tr>
   </thead>
   <tbody>
@@ -19,6 +20,9 @@
     <tr>
       <td>
         {{ group.name }}
+      </td>
+      <td>
+        {{ group.billing.get_plan_object.display }}
       </td>
       <td>
         <a href="{% url "groups:admin:view" group.pk %}" class="btn btn-primary">
