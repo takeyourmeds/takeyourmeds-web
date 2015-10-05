@@ -16,3 +16,16 @@ class SmokeTest(TestCase):
 
     def test_privacy_policy(self):
         self.assertGET(200, 'static:privacy')
+
+class AdminTest(TestCase):
+    def test_admin_logged_out(self):
+        self.assertGET(302, 'static:admin')
+
+    def test_admin_regular_user(self):
+        self.assertGET(302, 'static:admin', login=True)
+
+    def test_admin_superuser(self):
+        self.user.is_superuser = True
+        self.user.save()
+
+        self.assertGET(200, 'static:admin', login=True)

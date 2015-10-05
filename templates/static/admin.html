@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+
+{% block title %}Admin &mdash; {{ block.super }}{% endblock %}
+
+{% block container %}
+
+<div class="page-header">
+  <h1>TakeYourMeds administration</h1>
+</div>
+
+<ul>
+  <li>
+    <a href="{% url "groups:admin:index" %}">Groups</a>
+  </li>
+</ul>
+
+{% endblock %}

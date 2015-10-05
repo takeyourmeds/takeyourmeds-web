@@ -9,4 +9,7 @@ urlpatterns = patterns('takeyourmeds.static.views',
         name='terms'),
     url('^privacy-policy$', 'privacy',
         name='privacy'),
+
+    url('^admin$', 'admin',
+        name='admin'),
 )
