@@ -89,3 +89,5 @@ SESSION_COOKIE_AGE = 86400 * 365 * 10
 SESSION_COOKIE_HTTPONLY = True
 
 STRIPE_ENABLED = True
+STRIPE_SECRET_KEY = 'overriden-in-production'
+STRIPE_PUBLISHABLE_KEY = 'overriden-in-production'
