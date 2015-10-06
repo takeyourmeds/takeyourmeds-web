@@ -12,4 +12,3 @@ def get_default_group():
     return Group.objects.get_or_create(
         name="Legacy/catch-all group",
     )[0]
-
