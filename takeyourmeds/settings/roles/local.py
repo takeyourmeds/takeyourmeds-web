@@ -24,3 +24,5 @@ CACHES = {
 }
 
 BROKER_URL = 'memory://'
+
+STRIPE_ENABLED = False
