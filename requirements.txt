@@ -6,4 +6,5 @@ django-celery==3.1.16
 djangorestframework==3.1.2
 redis==2.10.3
 requests==2.7.0
+stripe==FIXME
 twilio==4.6.0
