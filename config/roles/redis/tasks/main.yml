@@ -1,0 +1,10 @@
+---
+- name: pkg
+  apt:
+    pkg=redis-server
+
+- name: running
+  service:
+    name=redis-server
+    state=started
+    enabled=yes

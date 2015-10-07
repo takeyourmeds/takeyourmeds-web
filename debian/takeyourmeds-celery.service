@@ -3,8 +3,10 @@ Description=takeyourmeds-celery
 After=network.target
 
 [Service]
-Type=forking
-ExecStart=/usr/share/python/takeyourmeds-web/bin/manage.py celery worker
-Restart=always
 User=www-data
 Group=www-data
+Restart=always
+
+ExecStart=/usr/share/python/takeyourmeds-web/bin/manage.py celery worker
+
+PrivateTmp=true

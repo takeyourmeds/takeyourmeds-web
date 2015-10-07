@@ -1,0 +1,9 @@
+---
+- name: hostname
+  hostname:
+    name={{ inventory_hostname }}
+
+- name: /etc/hosts
+  template:
+    src=hosts
+    dest=/etc/hosts

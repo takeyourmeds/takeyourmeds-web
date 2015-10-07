@@ -1,0 +1,5 @@
+[live]
+live.takeyourmeds.co.uk role=live
+
+[stage]
+stage.takeyourmeds.co.uk role=stage

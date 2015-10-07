@@ -1,0 +1,14 @@
+---
+- apt:
+    pkg=ufw
+
+- ufw:
+    state=enabled
+    policy=reject
+
+- action: ufw
+    app={{ item }}
+    rule=allow
+  with_items:
+    - OpenSSH
+    - WWW

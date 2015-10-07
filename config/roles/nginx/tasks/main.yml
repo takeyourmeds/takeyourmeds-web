@@ -1,0 +1,18 @@
+---
+- name: pkg
+  apt:
+    pkg=nginx
+
+- name: config
+  template:
+    src=nginx.conf
+    dest=/etc/nginx/nginx.conf
+    mode=644
+  notify:
+    restart nginx
+
+- name: running
+  service:
+    name=nginx
+    state=started
+    enabled=yes

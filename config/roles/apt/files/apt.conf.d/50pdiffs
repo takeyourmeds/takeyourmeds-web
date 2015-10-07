@@ -1,0 +1,4 @@
+Acquire {
+	Retries "0";
+	Pdiffs "false";
+};

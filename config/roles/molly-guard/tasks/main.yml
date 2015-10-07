@@ -1,0 +1,10 @@
+---
+- name: pkg
+  apt:
+    pkg=molly-guard
+
+- name: config
+  template:
+    src=rc
+    dest=/etc/molly-guard/rc
+    mode=0644

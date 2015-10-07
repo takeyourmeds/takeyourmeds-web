@@ -2,7 +2,11 @@ Source: takeyourmeds-web
 Section: python
 Priority: extra
 Maintainer: Chris lamb <chris@chris-lamb.co.uk>
-Build-Depends: debhelper (>= 9), dh-virtualenv, python
+Build-Depends: debhelper (>= 9),
+               dh-virtualenv,
+               libpq-dev,
+               libpython-dev,
+               python
 Standards-Version: 3.9.5
 
 Package: takeyourmeds-web
@@ -14,6 +18,12 @@ Description: takeyourmeds-web
 
 Package: takeyourmeds-celery
 Architecture: any
-Depends: ${misc:Depends}, takeyourmeds-web (= ${binary:Version})
+Depends: takeyourmeds-web (= ${binary:Version}), ${misc:Depends}
 Description: takeyourmeds-celery
  takeyourmeds-celery
+
+Package: takeyourmeds-gunicorn
+Architecture: any
+Depends: takeyourmeds-web (= ${binary:Version}), ${misc:Depends}
+Description: takeyourmeds-gunicorn
+ takeyourmeds-gunicorn

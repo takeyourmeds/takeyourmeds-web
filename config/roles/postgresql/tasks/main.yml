@@ -1,0 +1,30 @@
+---
+- name: pkg
+  apt:
+    pkg=postgresql-{{ postgresql_version }}
+
+- name: postgresql.conf
+  template:
+    src=postgresql.conf
+    dest=/etc/postgresql/{{ postgresql_version }}/main/postgresql.conf
+    mode=644
+    owner=postgres
+    group=postgres
+  notify:
+    restart postgresql
+
+- name: pg_hba.conf
+  template:
+    src=pg_hba.conf
+    dest=/etc/postgresql/{{ postgresql_version }}/main/pg_hba.conf
+    mode=640
+    owner=postgres
+    group=postgres
+  notify:
+    restart postgresql
+
+- name: running
+  service:
+    name=postgresql
+    state=started
+    enabled=yes

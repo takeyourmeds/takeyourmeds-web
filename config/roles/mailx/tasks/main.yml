@@ -1,0 +1,9 @@
+---
+- name: pkg
+  apt:
+    pkg=bsd-mailx
+
+- name: mailx
+  alternatives:
+    name=mailx
+    path=/usr/bin/bsd-mailx

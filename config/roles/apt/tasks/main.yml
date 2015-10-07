@@ -1,0 +1,21 @@
+---
+- name: apt.conf.d
+  action: copy
+    src=apt.conf.d
+    dest=/etc/apt
+    mode=0644
+  notify:
+    apt-get update
+
+- name: sources.list
+  template:
+    src=sources.list
+    dest=/etc/apt/sources.list
+  notify:
+    apt-get update
+
+- name: /etc/cron.d/apt-get-clean
+  template:
+    src=apt-get-clean
+    dest=/etc/cron.d/apt-get-clean
+    mode=0644
