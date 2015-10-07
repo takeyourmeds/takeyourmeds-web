@@ -29,3 +29,11 @@ class Billing(AutoOneToOneModel(Group)):
             self.plan = BY_SLUG[x.plan.id].value
 
         self.save(update_fields=('plan',))
+
+    def create_stripe_customer(self, **kwargs):
+        assert not self.stripe_customer_ident, "A stripe_customer_ident is " \
+            "already set for this Billing instance."
+
+        self.stripe_customer_ident = stripe.Customer.create(**kwargs)
+        self.save(update_fields=('stripe_customer_ident',))
+        self.sync_from_stripe()

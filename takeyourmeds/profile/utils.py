@@ -1,4 +1,5 @@
 from takeyourmeds.groups.models import Group
+from takeyourmeds.groups.groups_billing.plans import BY_SLUG
 
 def get_default_group():
     """
@@ -9,6 +10,11 @@ def get_default_group():
     fixtures" for the live site.
     """
 
-    return Group.objects.get_or_create(
+    group, created = Group.objects.get_or_create(
         name="Legacy/catch-all group",
-    )[0]
+    )
+
+    if created:
+        group.billing.create_stripe_customer(plan=BY_SLUG['free'].slug)
+
+    return group
