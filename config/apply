@@ -2,7 +2,7 @@
 
 set -eu
 
-
+# Bootstrap
 for X in ansible
 do
 	if ! dpkg --status "${X}" >/dev/null 2>&1
