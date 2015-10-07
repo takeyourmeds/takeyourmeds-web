@@ -19,3 +19,12 @@
     src=apt-get-clean
     dest=/etc/cron.d/apt-get-clean
     mode=0644
+
+- name: base packages
+  action: apt
+    pkg={{ item }}
+    state=installed
+    update_cache=yes
+    cache_valid_time=3600
+  with_items:
+    - ca-certificates
