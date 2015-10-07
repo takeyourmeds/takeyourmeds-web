@@ -6,18 +6,18 @@ from django_auto_one_to_one import AutoOneToOneModel
 
 from ..models import Group
 
-from .plans import PLANS
+from .plans import BY_SLUG, BY_VALUE
 
 class Billing(AutoOneToOneModel(Group)):
     stripe_customer_ident = models.CharField(unique=True, max_length=255)
 
     plan = models.IntegerField(
-        choices=sorted((x.value, x.display) for x in PLANS.values()),
-        default=PLANS['free'].value,
+        choices=sorted((x.value, x.display) for x in BY_SLUG.values()),
+        default=BY_SLUG['free'].value,
     )
 
     def get_plan_object(self):
-        return PLANS[self.plan]
+        return BY_VALUE[self.plan]
 
     def get_stripe_customer(self):
         return stripe.Customer.retrieve(self.stripe_customer_ident)
