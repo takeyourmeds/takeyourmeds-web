@@ -8,12 +8,16 @@ add_to_builtins('django.contrib.staticfiles.templatetags.staticfiles')
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 if not settings.STRIPE_ENABLED:
+    def instance(**attrs):
+        return type('_instance', (object,), attrs)
+
     class Subscription(object):
-        data = {}
+        def __init__(self, id):
+            self.plan = instance(id=id)
 
     class Subscriptions(object):
         def all(self, *args, **kwargs):
-            return Subscription()
+            return instance(data=[Subscription('free')])
 
     class Customer(object):
         def __init__(self, id):

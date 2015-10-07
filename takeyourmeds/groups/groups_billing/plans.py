@@ -4,8 +4,7 @@ This file must be kept up-to-date with Stripe, especially the slugs:
   https://manage.stripe.com/plans
 """
 
-BY_SLUG = {}
-BY_VALUE = {}
+PLANS = {}
 
 class Plan(object):
     def __init__(self, value, slug, display):
@@ -13,7 +12,6 @@ class Plan(object):
         self.slug = slug
         self.display = display
 
-        BY_SLUG[slug] = self
-        BY_VALUE[value] = self
+        PLANS[slug] = self
 
 FREE = Plan(1, 'free', "Free plan")

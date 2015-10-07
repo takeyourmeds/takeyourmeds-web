@@ -13,7 +13,7 @@ def index(request):
         form = GroupForm(request.POST)
 
         if form.is_valid():
-            form.save(request.user)
+            form.save()
             messages.success(request, "Group was created.")
 
             return redirect(request.path)

@@ -3,7 +3,14 @@ import datetime
 from django.db import models
 from django.utils.crypto import get_random_string
 
+from .managers import GroupManager
+
 class Group(models.Model):
+    """
+    Instances must be created using ``Group.objects.create_group`` to ensure
+    Stripe is configured correctly.
+    """
+
     name = models.CharField(max_length=255, unique=True)
 
     slug = models.CharField(
@@ -13,6 +20,8 @@ class Group(models.Model):
     )
 
     created = models.DateTimeField(default=datetime.datetime.utcnow)
+
+    objects = GroupManager()
 
     class Meta:
         ordering = ('-created',)
