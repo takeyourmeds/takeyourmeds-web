@@ -22,7 +22,7 @@ class Billing(AutoOneToOneModel(Group)):
     def get_stripe_customer(self):
         return stripe.Customer.retrieve(self.stripe_customer_ident)
 
-    def sync(self):
+    def sync_from_stripe(self):
         customer = self.get_stripe_customer()
 
         for x in customer.subscriptions.all(count=1).data:
