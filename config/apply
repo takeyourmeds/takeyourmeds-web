@@ -1,3 +1,26 @@
 #!/bin/sh
 
-exec ansible-playbook -i hosts takeyourmeds-web.yml "${@}"
+set -eu
+
+
+for X in ansible
+do
+	if ! dpkg --status "${X}" >/dev/null 2>&1
+	then
+		apt-get install --no-install-recommends ${X}
+	fi
+done
+
+INVENTORY="$(mktemp)"
+
+echo "[local]\n$(hostname --fqdn)" > ${INVENTORY}
+
+cd "$(dirname "${0}")"
+
+exec ansible-playbook \
+	takeyourmeds-web.yml \
+	--diff \
+	--verbose \
+	--inventory=${INVENTORY} \
+	--connection=local \
+	"${@}"
