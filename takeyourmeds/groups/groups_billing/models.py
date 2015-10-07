@@ -26,6 +26,6 @@ class Billing(AutoOneToOneModel(Group)):
         customer = self.get_stripe_customer()
 
         for x in customer.subscriptions.all(count=1).data:
-            self.plan = PlANS[x.plan.id].value
+            self.plan = BY_SLUG[x.plan.id].value
 
         self.save(update_fields=('plan',))
