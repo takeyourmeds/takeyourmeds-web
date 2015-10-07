@@ -6,14 +6,14 @@ from django_auto_one_to_one import AutoOneToOneModel
 
 from ..models import Group
 
-from .plans import PLANS, FREE
+from .plans import PLANS
 
 class Billing(AutoOneToOneModel(Group)):
     stripe_customer_ident = models.CharField(unique=True, max_length=255)
 
     plan = models.IntegerField(
         choices=sorted((x.value, x.display) for x in PLANS.values()),
-        default=FREE.value,
+        default=PLANS['free'].value,
     )
 
     def get_plan_object(self):
