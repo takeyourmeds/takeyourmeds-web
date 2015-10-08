@@ -1,11 +1,18 @@
 import os
 
+from os.path import dirname, abspath
+
 from apps import *
 from third_party import *
 from setup_warnings import *
 
-DEBUG = False
 BASE_DIR = '/usr/share/python/takeyourmeds-web'
+
+# Fallback to relative location
+if not __file__.startswith(BASE_DIR):
+    BASE_DIR = dirname(dirname(dirname(dirname(abspath(__file__)))))
+
+DEBUG = False
 ALLOWED_HOSTS = ('*',)
 
 SECRET_KEY = 'overriden-in-production'
