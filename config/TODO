@@ -1,20 +1,4 @@
-# Don't rely on deployhq to actually do the copying of files; get code ourselves
-
-# backups
-
-- name: Ensure build directory is empty
-  shell:
-    rm -rf {{ build_dir }} && mkdir -p {{ build_dir }}
-
-- name: Get code
-- get_url:
-    url=https://github.com/takeyourmeds/takeyourmeds-web/archive/{{ branch }}.tar.gz
-    dest={{ build_dir }}/src.tar.gz
-  
-- name: Extract
-  unarchive:
-    src={{ build_dir }}/src.tar.gz
-    dest={{ build_dir }}/takeyourmeds-web
+# Backups
 
 - name: install dependencies to build package
   apt:
@@ -23,35 +7,6 @@
     - equivs
     - devscripts
     - build-essential
-
-- name: install build-dependencies for package
-  shell:
-    DEBIAN_FRONTEND=noninteractive mk-build-deps --install --remove --tool 'apt-get --no-install-recommends --yes' .
-  args:
-    chdir: {{ build_dir }}/takeyourmeds-web
-
-- name: build .debs
-  raw:
-    dpkg-buildpackage -uc -us -b
-  args:
-    chdir: {{ build_dir }}/takeyourmeds-web
-
-- name: stop nginx
-  service:
-    name=nginx
-    state=stopped
-
-- name: stop queues gracefully (remove package??)
-  service:
-    name=takeyourmeds-celery
-    state=stopped
-
-- name: install debs
-  action: shell
-    dpkg -i {{ build_dir }}/{{ item }}*.deb
-  with_items:
-    - takeyourmeds-web
-    - takeyourmeds-celery
 
 - name: ensure basic postgres config
   action: raw
@@ -63,13 +18,3 @@
 - name: run migrations
   raw:
     sudo -u www-data {{ base_dir }}/bin/manage.py migrate --verbosity=2
-
-- name: start queues
-  service:
-    name=takeyourmeds-celery
-    state=started
-
-- name: start nginx
-  service:
-    name=nginx
-    state=started
