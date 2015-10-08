@@ -2,25 +2,15 @@
 
 set -eu
 
-# Bootstrap
-for X in ansible
-do
-	if ! dpkg --status "${X}" >/dev/null 2>&1
-	then
-		apt-get install --no-install-recommends ${X}
-	fi
-done
-
-INVENTORY="$(mktemp)"
-
-echo "[local]\n$(hostname --fqdn)" > ${INVENTORY}
-
 cd "$(dirname "${0}")"
+
+DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends ansible
 
 exec ansible-playbook \
 	takeyourmeds-web.yml \
 	--diff \
 	--verbose \
-	--inventory=${INVENTORY} \
+	--inventory=hosts \
 	--connection=local \
+	--limit="$(hostname --fqdn)" \
 	"${@}"
