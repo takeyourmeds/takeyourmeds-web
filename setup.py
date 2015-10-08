@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import sys
 
 from setuptools import setup, find_packages
 
@@ -10,6 +11,11 @@ DATA = (
     'static',
     'templates',
 )
+
+if sys.argv[1:2] == ['test']:
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', '%s.settings' % NAME)
+    from django.core.management import execute_from_command_line
+    sys.exit(execute_from_command_line(sys.argv))
 
 def find_data(dirs):
     result = []
@@ -21,7 +27,6 @@ def find_data(dirs):
 setup(
     name=NAME,
     scripts=('%s/manage.py' % NAME,),
-    test_suite='takeyourmeds.utils.setuptools.TestSuite',
     packages=find_packages(),
     package_data={NAME: find_data(DATA)},
 )
