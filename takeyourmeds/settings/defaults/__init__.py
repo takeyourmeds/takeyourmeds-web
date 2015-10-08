@@ -5,7 +5,7 @@ from third_party import *
 from setup_warnings import *
 
 DEBUG = False
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+BASE_DIR = '/usr/share/python/takeyourmeds-web'
 ALLOWED_HOSTS = ('*',)
 
 SECRET_KEY = 'overriden-in-production'
