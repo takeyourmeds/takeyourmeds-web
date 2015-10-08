@@ -1,3 +1,6 @@
 ---
 base_dir: /usr/share/python/takeyourmeds-web
 build_dir: /tmp/buildd
+
+debian_mirror: http://httpredir.debian.org
+debian_release: jessie
