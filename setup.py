@@ -21,6 +21,10 @@ def find_data(dirs):
 setup(
     name=NAME,
     scripts=('%s/manage.py' % NAME,),
+    test_suite='setuptest.setuptest.SetupTestSuite',
     packages=find_packages(),
     package_data={NAME: find_data(DATA)},
+    tests_require=(
+        'django-setuptest',
+    ),
 )
