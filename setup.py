@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 import os
-import setuptools
+
+from setuptools import setup, find_packages
 
 NAME = 'takeyourmeds'
 
@@ -17,9 +18,9 @@ def find_data(dirs):
             result.append(os.path.join(y, '*'))
     return result
 
-setuptools.setup(
+setup(
     name=NAME,
     scripts=('%s/manage.py' % NAME,),
-    packages=(NAME,),
+    packages=find_packages(),
     package_data={NAME: find_data(DATA)},
 )
