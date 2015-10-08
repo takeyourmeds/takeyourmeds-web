@@ -52,8 +52,8 @@
     - takeyourmeds-gunicorn
 
 - name: Install packages
-  action: shell
-    dpkg -i {{ build_dir }}/{{ item }}_*.deb
+  action: apt
+     deb={{ build_dir }}/{{ item }}_*.deb
   with_items:
     - takeyourmeds-web
     - takeyourmeds-celery
