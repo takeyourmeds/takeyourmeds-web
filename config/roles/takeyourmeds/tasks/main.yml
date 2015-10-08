@@ -52,8 +52,8 @@
     - takeyourmeds-gunicorn
 
 - name: Install package
-  apt:
-     deb={{ build_dir }}/takeyourmeds-web_*.deb
+  shell:
+    dpkg -i {{ build_dir }}/takeyourmeds-web_*.deb
 
 - name: Start services again
   action: service
