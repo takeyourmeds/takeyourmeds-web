@@ -29,6 +29,12 @@
   command:
     tar xfz {{ build_dir }}/src.tar.gz --strip-components=1 --directory={{ build_dir }}/src
 
+- name: Set role
+  changed_when: False
+  template:
+    src=role.py
+    dest={{ build_dir }}/src/takeyourmeds/settings/role.py
+
 - name: Install the specific packages required to build our Debian packages
   changed_when: False
   command:
