@@ -15,32 +15,32 @@
 - name: Create build directory
   file:
     state=directory
-    path={{ build_dir }}/src
+    path={{ build_dir }}/{{ package_name }}
 
 - name: Download code
   command:
-    wget -O {{ build_dir }}/src.tar.gz {{ source }}/archive/{{ branch }}.tar.gz
+    wget -O {{ build_dir }}/{{ package_name }}.tar.gz {{ source }}/archive/{{ branch }}.tar.gz
 
 - name: Extract
   command:
-    tar xfz {{ build_dir }}/src.tar.gz --strip-components=1 --directory={{ build_dir }}/src
+    tar xfz {{ build_dir }}/{{ package_name }}.tar.gz --strip-components=1 --directory={{ build_dir }}/{{ package_name }}
 
 - name: Set role
   template:
     src=role.py
-    dest={{ build_dir }}/src/takeyourmeds/settings/role.py
+    dest={{ build_dir }}/{{ package_name }}/takeyourmeds/settings/role.py
 
 - name: Install the specific packages required to build our Debian packages
   command:
     mk-build-deps --install --remove --tool "apt-get --no-install-recommends --target-release={{ debian_release }}-backports --yes" debian/control
   args:
-    chdir: "{{ build_dir }}/src"
+    chdir: "{{ build_dir }}/{{ package_name }}"
 
 - name: Build package
   command:
     dpkg-buildpackage -uc -us -b
   args:
-    chdir: "{{ build_dir }}/src"
+    chdir: "{{ build_dir }}/{{ package_name }}"
 
 - name: Stop services to avoid race conditions
   action: service
@@ -48,18 +48,18 @@
     state=stopped
   with_items:
     - nginx
-    - takeyourmeds-celery
-    - takeyourmeds-gunicorn
+    - takeyourmeds-web-celery
+    - takeyourmeds-web-gunicorn
 
 - name: Install package
   shell:
-    dpkg -i {{ build_dir }}/takeyourmeds-web_*.deb
+    dpkg -i {{ build_dir }}/{{ package_name }}_*.deb
 
 - name: Start services again
   action: service
     name={{ item }}
     state=started
   with_items:
-    - takeyourmeds-gunicorn
-    - takeyourmeds-celery
+    - takeyourmeds-web-gunicorn
+    - takeyourmeds-web-celery
     - nginx
