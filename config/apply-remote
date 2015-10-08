@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -eu
+
+TARGET="${1}"
+
+shift 1
+
+cd "$(dirname "${0}")"
+
+exec ansible-playbook \
+	playbook.yml \
+	--diff \
+	--verbose \
+	--ask-pass \
+	--user=root \
+	--inventory=hosts \
+	--limit="${TARGET}" \
+	"${@}"

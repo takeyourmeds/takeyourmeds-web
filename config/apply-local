@@ -7,7 +7,7 @@ cd "$(dirname "${0}")"
 DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends ansible
 
 exec ansible-playbook \
-	takeyourmeds-web.yml \
+	playbook.yml \
 	--diff \
 	--verbose \
 	--inventory=hosts \
