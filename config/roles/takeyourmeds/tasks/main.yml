@@ -50,3 +50,4 @@
   with_items:
     - takeyourmeds-web
     - takeyourmeds-celery
+    - takeyourmeds-gunicorn
