@@ -11,7 +11,7 @@ Standards-Version: 3.9.5
 
 Package: takeyourmeds-web
 Architecture: any
-Pre-Depends: python2.7 | python2.6, ${misc:Pre-Depends}
+Pre-Depends: python2.7, ${misc:Pre-Depends}
 Depends: ${misc:Depends}, ${python:Depends}, ${shlibs:Depends}
 Description: takeyourmeds-web
  takeyourmeds-web
