@@ -46,7 +46,7 @@
 - name: Install packages
   changed_when: False
   action: shell
-    dpkg -i {{ build_dir }}/{{ item }}*.deb
+    dpkg -i {{ build_dir }}/{{ item }}_*.deb
   with_items:
     - takeyourmeds-web
     - takeyourmeds-celery
