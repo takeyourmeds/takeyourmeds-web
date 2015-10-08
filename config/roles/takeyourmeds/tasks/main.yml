@@ -43,6 +43,15 @@
   args:
     chdir: "{{ build_dir }}/src"
 
+- name: Stop services to avoid race conditions
+  action: service
+    name={{ item }}
+    state=stopped
+  with_items:
+    - nginx
+    - takeyourmeds-celery
+    - takeyourmeds-gunicorn
+
 - name: Install packages
   changed_when: False
   action: shell
@@ -51,3 +60,12 @@
     - takeyourmeds-web
     - takeyourmeds-celery
     - takeyourmeds-gunicorn
+
+- name: Start services again
+  action: service
+    name={{ item }}
+    state=started
+  with_items:
+    - takeyourmeds-gunicorn
+    - takeyourmeds-celery
+    - nginx
