@@ -42,7 +42,7 @@
   args:
     chdir: "{{ build_dir }}/src"
 
-- name: Build packages
+- name: Build package
   command:
     dpkg-buildpackage -uc -us -b
   args:
@@ -57,13 +57,9 @@
     - takeyourmeds-celery
     - takeyourmeds-gunicorn
 
-- name: Install packages
-  action: apt
-     deb={{ build_dir }}/{{ item }}_*.deb
-  with_items:
-    - takeyourmeds-web
-    - takeyourmeds-celery
-    - takeyourmeds-gunicorn
+- name: Install package
+  apt:
+     deb={{ build_dir }}/takeyourmeds-web_*.deb
 
 - name: Start services again
   action: service

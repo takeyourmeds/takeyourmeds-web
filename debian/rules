@@ -3,8 +3,9 @@
 %:
 	dh $@ --with=python-virtualenv,systemd
 
-override_dh_virtualenv:
-	dh_virtualenv -ptakeyourmeds-web
-
 override_dh_systemd_start:
 	dh_systemd_start --no-start
+
+override_dh_systemd_enable:
+	dh_systemd_enable --name takeyourmeds-web-celery
+	dh_systemd_enable --name takeyourmeds-web-gunicorn

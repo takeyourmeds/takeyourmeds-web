@@ -16,15 +16,3 @@ Pre-Depends: python2.7, ${misc:Pre-Depends}
 Depends: ${misc:Depends}, ${python:Depends}, ${shlibs:Depends}
 Description: takeyourmeds-web
  takeyourmeds-web
-
-Package: takeyourmeds-celery
-Architecture: any
-Depends: takeyourmeds-web (= ${binary:Version}), ${misc:Depends}
-Description: takeyourmeds-celery
- takeyourmeds-celery
-
-Package: takeyourmeds-gunicorn
-Architecture: any
-Depends: takeyourmeds-web (= ${binary:Version}), ${misc:Depends}
-Description: takeyourmeds-gunicorn
- takeyourmeds-gunicorn
