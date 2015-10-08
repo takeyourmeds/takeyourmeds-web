@@ -8,42 +8,35 @@
     - build-essential
 
 - name: Remove any existing build directory
-  changed_when: False
   file:
     state=absent
     path={{ build_dir }}
 
 - name: Create build directory
-  changed_when: False
   file:
     state=directory
     path={{ build_dir }}/src
 
 - name: Download code
-  changed_when: False
   command:
     wget -O {{ build_dir }}/src.tar.gz {{ source }}/archive/{{ branch }}.tar.gz
 
 - name: Extract
-  changed_when: False
   command:
     tar xfz {{ build_dir }}/src.tar.gz --strip-components=1 --directory={{ build_dir }}/src
 
 - name: Set role
-  changed_when: False
   template:
     src=role.py
     dest={{ build_dir }}/src/takeyourmeds/settings/role.py
 
 - name: Install the specific packages required to build our Debian packages
-  changed_when: False
   command:
     mk-build-deps --install --remove --tool "apt-get --no-install-recommends --target-release={{ debian_release }}-backports --yes" debian/control
   args:
     chdir: "{{ build_dir }}/src"
 
 - name: Build packages
-  changed_when: False
   command:
     dpkg-buildpackage -uc -us -b
   args:
@@ -59,7 +52,6 @@
     - takeyourmeds-gunicorn
 
 - name: Install packages
-  changed_when: False
   action: shell
     dpkg -i {{ build_dir }}/{{ item }}_*.deb
   with_items:
