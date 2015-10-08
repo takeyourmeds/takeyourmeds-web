@@ -56,8 +56,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'takeyourmeds.wsgi.application'
-
 LOGIN_URL = '/login' # 'account:login'
 LOGIN_REDIRECT_URL = '/' # 'static:landing'
 
