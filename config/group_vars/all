@@ -1,4 +1,5 @@
 ---
+source: https://github.com/takeyourmeds/takeyourmeds-web
 base_dir: /usr/share/python/takeyourmeds-web
 build_dir: /tmp/buildd
 

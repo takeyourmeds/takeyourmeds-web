@@ -1,5 +1,5 @@
 ---
-- name: all
+- name: setup
   hosts: all
   roles:
     - apt
@@ -13,4 +13,7 @@
     - postgresql
     - redis
 
+- name: deploy
+  hosts: all
+  roles:
     - takeyourmeds
