@@ -55,6 +55,27 @@
   shell:
     dpkg -i {{ build_dir }}/{{ package_name }}_*.deb
 
+- name: Setup PostgreSQL user
+  sudo: yes
+  sudo_user: postgres
+  postgresql_user:
+    name=takeyourmeds
+    password=takeyourmeds
+
+- name: Setup PostgreSQL database
+  sudo: yes
+  sudo_user: postgres
+  postgresql_db:
+    name=takeyourmeds
+    owner=takeyourmeds
+    encoding=UTF-8
+
+- name: Run migrations
+  sudo: yes
+  sudo_user: www-data
+  command:
+    "{{ base_dir }}/bin/manage.py migrate --verbosity=2"
+
 - name: Start services again
   action: service
     name={{ item }}

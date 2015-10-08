@@ -4,7 +4,7 @@ set -eu
 
 cd "$(dirname "${0}")"
 
-DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends ansible
+DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends ansible sudo python-psycopg2
 
 exec ansible-playbook \
 	playbook.yml \
