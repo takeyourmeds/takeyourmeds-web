@@ -44,6 +44,7 @@
     chdir: "{{ build_dir }}/src"
 
 - name: Install packages
+  changed_when: False
   action: shell
     dpkg -i {{ build_dir }}/{{ item }}*.deb
   with_items:
