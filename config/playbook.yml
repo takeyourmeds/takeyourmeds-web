@@ -10,6 +10,7 @@
     - molly-guard
     - firewall
 
+    - memcached
     - postgresql
     - redis
     - nginx

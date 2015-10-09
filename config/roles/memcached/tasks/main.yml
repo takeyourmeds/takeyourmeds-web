@@ -1,0 +1,18 @@
+---
+- name: pkg
+  apt:
+    pkg=memcached
+
+- name: config
+  template:
+    src=memcached.conf
+    dest=/etc/memcached.conf
+    mode=644
+  notify:
+    restart memcached
+
+- name: running
+  service:
+    name=memcached
+    state=started
+    enabled=yes
