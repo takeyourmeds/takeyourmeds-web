@@ -5,10 +5,9 @@ After=network.target
 [Service]
 User=www-data
 Group=www-data
-PIDFile=/run/takeyourmeds-gunicorn/pid
 Restart=always
 
-ExecStart=/usr/share/python/takeyourmeds-web/bin/gunicorn --pid /run/takeyourmeds-gunicorn/pid --workers=8 --log-level=info --preload takeyourmeds.wsgi
+ExecStart=/usr/share/python/takeyourmeds-web/bin/gunicorn --workers=8 --log-level=info --preload takeyourmeds.wsgi
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
 
