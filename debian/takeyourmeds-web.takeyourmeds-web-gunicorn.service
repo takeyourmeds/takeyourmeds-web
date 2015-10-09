@@ -1,5 +1,5 @@
 [Unit]
-Description=takeyourmeds-gunicorn
+Description=takeyourmeds-web-gunicorn
 After=network.target
 
 [Service]

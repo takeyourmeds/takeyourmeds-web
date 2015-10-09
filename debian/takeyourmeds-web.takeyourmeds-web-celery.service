@@ -1,5 +1,5 @@
 [Unit]
-Description=takeyourmeds-celery
+Description=takeyourmeds-web-celery
 After=network.target
 
 [Service]
