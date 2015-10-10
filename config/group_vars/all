@@ -8,4 +8,6 @@ package_name: takeyourmeds-web
 debian_mirror: http://httpredir.debian.org
 debian_release: jessie
 
+role: live
+branch: master
 canonical_domain_name: www.takeyourmeds.co.uk
