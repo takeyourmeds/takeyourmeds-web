@@ -1,5 +1,7 @@
 # 'TakeYourMeds'
 
+[![Build Status](https://api.travis-ci.org/takeyourmeds/takeyourmeds-web.svg?branch=master)](https://travis-ci.org/takeyourmeds/takeyourmeds-web)
+
 A low-tech phone reminder application which has come about from the joining of 2 projects pitched at NHS Hackday 10 in 2015 at King's College London
 
 Fiona Stacey, a Dental Hygienist from the North East, pitched an idea about using a low-tech means to remind radiotherapy head and neck cancer patients to use mouthwash regularly.
