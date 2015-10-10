@@ -30,6 +30,11 @@
     src=role.py
     dest={{ build_dir }}/{{ package_name }}/takeyourmeds/settings/role.py
 
+- name: Set secret settings
+  template:
+    src=custom.py
+    dest={{ build_dir }}/{{ package_name }}/takeyourmeds/settings/custom.py
+
 - name: Install the specific packages required to build our Debian packages
   command:
     mk-build-deps --install --remove --tool "apt-get --no-install-recommends --target-release={{ debian_release }}-backports --yes" debian/control
