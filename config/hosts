@@ -1,5 +1,5 @@
 [live]
-live.takeyourmeds.co.uk role=live branch=master
+live.takeyourmeds.co.uk
 
 [stage]
-stage.takeyourmeds.co.uk role=stage branch=master
+stage.takeyourmeds.co.uk
