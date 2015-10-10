@@ -13,4 +13,5 @@ exec ansible-playbook \
 	--inventory=hosts \
 	--connection=local \
 	--limit="$(hostname --fqdn)" \
+	--vault-password-file=/root/vault-password-file \
 	"${@}"
