@@ -3,7 +3,6 @@ import os
 from os.path import dirname, abspath
 
 from apps import *
-from third_party import *
 from setup_warnings import *
 
 BASE_DIR = '/usr/share/python/takeyourmeds-web'
@@ -100,3 +99,7 @@ SESSION_COOKIE_HTTPONLY = True
 STRIPE_ENABLED = True
 STRIPE_SECRET_KEY = 'overriden-in-production'
 STRIPE_PUBLISHABLE_KEY = 'overriden-in-production'
+
+TWILIO_FROM = 'overriden-in-production'
+TWILIO_AUTH_TOKEN = 'overriden-in-production'
+TWILIO_ACCOUNT_SID = 'overriden-in-production'
