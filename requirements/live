@@ -1,4 +1,4 @@
--r .requirements.txt/local
+-r requirements/local
 
 gunicorn==19.3.0
 psycopg2==2.6
