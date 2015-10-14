@@ -100,7 +100,7 @@ STRIPE_ENABLED = True
 STRIPE_SECRET_KEY = 'overriden-in-production'
 STRIPE_PUBLISHABLE_KEY = 'overriden-in-production'
 
-TWILIO_ENABLED - True
+TWILIO_ENABLED = True
 TWILIO_FROM = 'overriden-in-production'
 TWILIO_AUTH_TOKEN = 'overriden-in-production'
 TWILIO_ACCOUNT_SID = 'overriden-in-production'
