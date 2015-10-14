@@ -1,77 +1,58 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <meta charset="UTF-8">
-  <meta name="robots" content="noindex, nofollow">
-  <title>{% block head_title %}Take Your Meds - Phone reminders to help you and yours remember to take your medication{% endblock %}</title>
+{% extends "base/generic_base.html" %}
 
-  <link href='//fonts.googleapis.com/css?family=Merriweather:300,400,700' rel='stylesheet' type='text/css' />
-  <link href="{% static "css/normalize.css" %}" rel="stylesheet" media="screen" />
-  <link href="{% static "css/main.css" %}" rel="stylesheet" media="screen" />
-</head>
+{% block body %}
 
-<body class="{% block bodyclass %}{% endblock %}">
-  <header class="site_header">
-    <div class="container">
-      <a href="{% url "static:landing" %}">
-        <h2>Take Your Meds</h2>
-      </a>
+<header class="site_header">
+  <div class="container">
+    <a href="{% url "static:landing" %}">
+      <h2>Take Your Meds</h2>
+    </a>
 
-      <ul class="site_nav">
-        <li><a href="{% url "static:about" %}">About</a></li>
-        <li><a href="{% url "reminders:create" %}">New Reminder</a></li>
-        <li><a href="{% url "reminders:index" %}">My Reminders</a></li>
-        {% if request.user.is_authenticated %}
-        <li><a href="{% url "account:logout" %}">Logout</a></li>
-        {% else %}
-        <li><a href="{% url "registration:view" %}">Register</a></li>
-        <li><a href="{% url "account:login" %}">Login</a></li>
-        {% endif %}
-      </ul>
-    </div>
-  </header>
-
-  {% if messages %}
-  <ul class="messages">
-      {% for message in messages %}
-      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-      {% endfor %}
-  </ul>
-  {% endif %}
-
-  {% block content %}
-  <div id="content">
-    <div class="container">
-      {% block container %}{% endblock %}
-    </div>
+    <ul class="site_nav">
+      <li><a href="{% url "static:about" %}">About</a></li>
+      <li><a href="{% url "reminders:create" %}">New Reminder</a></li>
+      <li><a href="{% url "reminders:index" %}">My Reminders</a></li>
+      {% if request.user.is_authenticated %}
+      <li><a href="{% url "account:logout" %}">Logout</a></li>
+      {% else %}
+      <li><a href="{% url "registration:view" %}">Register</a></li>
+      <li><a href="{% url "account:login" %}">Login</a></li>
+      {% endif %}
+    </ul>
   </div>
-  {% endblock %}
+</header>
 
-  <footer>
-    <div class="container">
-      <p>
-        Copyright &copy; {% now "Y" %} Take Your Meds, Ltd.<br>
-        Registered company number 9686492 in England and Wales.<br>
-      </p>
-      <p>
-        Please read our
-        <a href="{% url "static:terms" %}">Terms and Conditions</a> and
-        <a href="{% url "static:privacy" %}">Privacy Policy</a>.
-        {% if request.user.is_superuser %}
-          <a href="{% url "static:admin" %}">Administration</a>.
-        {% endif %}
-      </p>
-    </div>
-  </footer>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 
-  {% block script %}
-    <script type="text/javascript" src="{% static "js/jquery-2.1.4.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/prettycron.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/jquery-color-2.1.2.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/jquery.cookie.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/takeyourmeds.js" %}"></script>
-  {% endblock %}
-</body>
-</html>
+{% block content %}
+<div id="content">
+  <div class="container">
+    {% block container %}{% endblock %}
+  </div>
+</div>
+{% endblock %}
+
+<footer>
+  <div class="container">
+    <p>
+      Copyright &copy; {% now "Y" %} Take Your Meds, Ltd.<br>
+      Registered company number 9686492 in England and Wales.<br>
+    </p>
+    <p>
+      Please read our
+      <a href="{% url "static:terms" %}">Terms and Conditions</a> and
+      <a href="{% url "static:privacy" %}">Privacy Policy</a>.
+      {% if request.user.is_superuser %}
+        <a href="{% url "static:admin" %}">Administration</a>.
+      {% endif %}
+    </p>
+  </div>
+</footer>
+
+{% endblock %}
