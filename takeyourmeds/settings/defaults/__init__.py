@@ -80,6 +80,7 @@ djcelery.setup_loader()
 BROKER_URL = 'redis://localhost:6379/0'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'support@takeyourmeds.co.uk'
 
 SITE_URL = 'http://www.takeyourmeds.co.uk'
 
