@@ -3,7 +3,7 @@
 {% block body %}
 
 <div class="boxed-wrapper">
-  <div class="top-bar-light">            
+  <div class="top-bar-light">
     <div class="container">
       <div class="row">
         <div class="col-sm-5 hidden-xs">
@@ -11,7 +11,7 @@
           </div>
         </div>
         <div class="col-sm-7 text-right">
-          <ul class="list-inline top-dark-right">                      
+          <ul class="list-inline top-dark-right">
             <li class="hidden-sm hidden-xs"><i class="fa fa-envelope"></i> {{ settings.DEFAULT_FROM_EMAIL }}</li>
             {% if request.user.is_authenticated %}
             <li><a href="{% url "account:logout" %}"><i class="fa fa-lock"></i> Login</a></li>
@@ -102,6 +102,7 @@
             </li>
           </ul>
         </li>
+
         <!--menu home li end here-->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle " data-toggle="dropdown">Portfolio <i class="fa fa-angle-down"></i></a>
@@ -332,676 +333,93 @@
           </ul>
         </li> <!--menu Features li end here-->
         <!--mega menu end-->  
-
-        <!--            <li class="dropdown">
-                      <a href="#" class=" dropdown-toggle" data-toggle="dropdown"><i class="fa fa-lock"></i> Sign In</a>
-                      <div class="dropdown-menu dropdown-menu-right dropdown-login-box animated fadeInUp">
-                        <form role="form">
-                          <h4>Signin</h4>
-        
-                          <div class="form-group">
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                              <input type="text" class="form-control" placeholder="Username">
-                            </div>
-                            <br>
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                              <input type="password" class="form-control" placeholder="Password">
-                            </div>
-                            <div class="checkbox pull-left">
-                              <label>
-                                <input type="checkbox"> Remember me
-                              </label>
-                            </div>
-                            <a class="btn btn-theme-bg pull-right">Login</a>
-                                                <button type="submit" class="btn btn-theme pull-right">Login</button>         
-                            <div class="clearfix"></div>
-                            <hr>
-                            <p>Don't have an account! <a href="#">Register Now</a></p>
-                          </div>
-                        </form>
-                      </div>
-                    </li> menu login li end here-->
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--container-->
 </div><!--navbar-default-->
 
-    <!--rev slider start-->
-
-    <div class="tp-banner-container">
-      <div class="tp-banner-boxed">
-        <ul>
-       <!-- SLIDE -->
-        <li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 1">
-          <!-- MAIN IMAGE -->
-          <img src="{% static "img/bg-4.jpg" %}"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-          <div class="caption sfb bold uppercase-title text-center"
-             data-x="center"
-             data-y="158" 
-             data-speed="900"
-             data-start="800"
-             data-easing="Sine.easeOut">Hello! This is Assan</div>
-          <div class="caption sfb lowercase-caption text-center" 
-             data-x="center"
-             data-y="218"
-             data-speed="900"
-             data-start="1500"
-             data-easing="Sine.easeOut">A responsive site template with a clean and profession design 
-            <br />that will be a great solution for your business, portfolio, Shop or any other purpose.</div>
-          <div class="caption rev-buttons tp-resizeme sfb" 
-             data-x="center" 
-             data-y="313"
-             data-speed="900"
-             data-start="2200" 
-             data-easing="Sine.easeOut">
-            <a href="#" class="btn btn-theme-bg btn-lg">Purchase Now</a>
-          </div>
-        </li>
-        <!-- SLIDE -->
-        <li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 2">
-          <!-- MAIN IMAGE -->
-          <img src="{% static "img/slider-2.jpg" %}"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-        
-          <div class="tp-caption lft"
-             data-x="578"
-             data-y="120" 
-             data-speed="900"
-             data-start="2100"
-             data-easing="Sine.easeOut">
-            <img src="{% static "img/mockup-all.png" %}" alt="" />
-          </div>
-                 
-          <div class="tp-caption sft modern_big_bluebg rev-title-v1"
-             data-x="35" data-y="200"
-             data-speed="500"
-             data-start="800"
-             data-easing="Sine.easeOut">
-            Powerful Template
-          </div>
-          <div class="tp-caption sfr modern_big_bluebg rev-title-v1"
-             data-x="35"
-             data-y="265"
-             data-speed="500"
-             data-start="1300"
-             data-easing="Sine.easeOut">
-            Unlimited layouts
-          </div>
-          <div class="caption sfb rev-buttons tp-resizeme"
-             data-x="35"
-             data-y="330"
-             data-speed="500"
-             data-start="1800"
-             data-easing="Sine.easeOut">
-            <a href="#" class="btn btn-theme-bg btn-lg">Purchase Now</a>
-          </div>
-        </li>
-        <!-- SLIDE -->
-        <li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 3">
-          <!-- MAIN IMAGE -->
-          <img src="{% static "img/slider-5.jpg" %}"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-          <div class="tp-caption lft"
-             data-x="35" 
-             data-y="140"
-             data-speed="900"
-             data-start="800" 
-             data-easing="Sine.easeOut">
-            <img src="{% static "img/macbook.png" %}" alt="" />
-          </div>
-          <div class="tp-caption lfr"
-             data-x="375"
-             data-y="180"
-             data-speed="900" 
-             data-start="1500"
-             data-easing="Sine.easeOut">
-            <img src="{% static "img/ipad.png" %}" alt="" />
-          </div>
-          <div class="tp-caption lfl" 
-             data-x="348"
-             data-y="249"
-             data-speed="900"
-             data-start="1800"
-             data-easing="Sine.easeOut">
-            <img src="{% static "img/iphone.png" %}" alt="" />
-          </div>
-          <div class="tp-caption sfr modern_big_redbg" 
-             data-x="750"
-             data-y="185"
-             data-speed="400"
-             data-start="2500"
-             data-easing="Sine.easeOut">
-            100% Responsive
-          </div>
-          <div class="tp-caption sfr modern_big_redbg"
-             data-x="750" 
-             data-y="237"
-             data-speed="400"
-             data-start="2900"
-             data-easing="Sine.easeOut">
-            80+ layouts
-          </div>
-          <div class="tp-caption sfr modern_big_redbg"
-             data-x="750" data-y="289"
-             data-speed="400"
-             data-start="3300" 
-             data-easing="Sine.easeOut">
-            Revolution Slider
-          </div>
-          <div class="caption sfr rev-buttons tp-resizeme " 
-             data-x="750"
-             data-y="341" 
-             data-speed="400" 
-             data-start="3700" 
-             data-easing="Sine.easeOut">
-            <a href="#" class="btn btn-lg border-white">See all features</a>
-          </div>
-
-
-        </li>
-        </ul>
+<div class="breadcrumb-wrap">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <h4>{% block breadcrumbs_title %}FIXME{% endblock %}</h4>
       </div>
-    </div><!--full width banner-->
-
-
-
-
-
-
-      <!--end-->
-
-<div class="intro-text-1">
-      <div class="container">
-          <div class="row">
-              <div class="col-sm-8">
-                  <h4 class="animated slideInDown">Assan is Powerful Multipurpose template</h4>
-                  <p>
-                      Clean & powerful Easy to use multipurpose business HTML5 template.
-                  </p>                   
-              </div>
-              <div class="col-sm-4">
-                  <a href="#" class="btn border-white btn-lg">Purchase now</a>
-              </div>
-          </div>
+      <div class="col-sm-6 hidden-xs text-right">
+        <ol class="breadcrumb">
+          {% block breadcrumbs %}
+          <li><a href="{% url "static:landing" %}">Home</a></li>
+          {% endblock %}
+        </ol>
       </div>
-  </div> <!--intro text end-->
+    </div>
+  </div>
+</div>
+
+<div class="divide80"></div>
+
+{% block container %}
+<div class="container">
+  {% block content %}{% endblock %}
+</div>
+{% endblock %}
+
+<footer id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <div class="footer-btm">
+          <span>
+            &copy; {% now "Y" %} Take Your Meds, Ltd. All rights reserved.
+            <br>
+            Take Your Meds, Ltd is a limited company registered in
+            England and Wales with registration 9686492.
+            <br>
+            <a href="{% url "static:terms" %}">Terms and Conditions</a> &bull;
+            <a href="{% url "static:privacy" %}">Privacy Policy</a>
+          </span>
+       </div>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+{% endblock %}
+
+{% block body_old %}
+
+<header class="site_header">
+  <div class="container">
+    <a href="{% url "static:landing" %}">
+      <h2>Take Your Meds</h2>
+    </a>
+
+    <ul class="site_nav">
+      <li><a href="{% url "static:about" %}">About</a></li>
+      <li><a href="{% url "reminders:create" %}">New Reminder</a></li>
+      <li><a href="{% url "reminders:index" %}">My Reminders</a></li>
+      {% if request.user.is_authenticated %}
+      <li><a href="{% url "account:logout" %}">Logout</a></li>
+      {% else %}
+      <li><a href="{% url "registration:view" %}">Register</a></li>
+      <li><a href="{% url "account:login" %}">Login</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</header>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 
 
-      <section class="services-wrap">
-          <div class="container">
-              <div class="row">
-                  <div class="col-md-12">
-                      <div class="center-heading">
-                          <h2>What We Offer</h2>
-                          <span class="center-line"></span>
-                      </div>
-                  </div>                   
-              </div><!--center heading row-->
-              <div class="row">
-                  <div class="col-md-4 col-sm-6 margin20">
-                      <div class="services-box wow animated fadeInUp" data-wow-duration="700ms" data-wow-delay="100ms">
-                          <div class="services-box-icon">
-                              <i class="fa fa-pencil"></i>
-                          </div><!--services icon-->
-                          <div class="services-box-info">
-                              <h4>Web &AMP; Graphics Design</h4>
-                              <p>
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing metus. elit. Quisque rutrum pellentesque imperdiet.
-                              </p>
-                          </div>
-                      </div><!--services box-->
-                  </div><!--services col-->
-                  <div class="col-md-4 col-sm-6 margin20">
-                      <div class="services-box wow animated fadeInUp" data-wow-duration="700ms" data-wow-delay="200ms">
-                          <div class="services-box-icon">
-                              <i class="fa fa-globe"></i>
-                          </div><!--services icon-->
-                          <div class="services-box-info">
-                              <h4>Web Development</h4>
-                              <p>
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing metus. elit. Quisque rutrum pellentesque imperdiet.
-                              </p>
-                          </div>
-                      </div><!--services box-->
-                  </div><!--services col-->
-                  <div class="col-md-4 col-sm-6 margin20">
-                      <div class="services-box wow animated fadeInUp" data-wow-duration="700ms" data-wow-delay="300ms">
-                          <div class="services-box-icon">
-                              <i class="fa fa-users"></i>
-                          </div><!--services icon-->
-                          <div class="services-box-info">
-                              <h4>Customer Support</h4>
-                              <p>
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing metus. elit. Quisque rutrum pellentesque imperdiet.
-                              </p>
-                          </div>
-                      </div><!--services box-->
-                  </div><!--services col-->
+<footer id="footer">
+  footer
 
-                  <div class="col-md-4 col-sm-6 margin20">
-                      <div class="services-box wow animated fadeInUp" data-wow-duration="700ms" data-wow-delay="400ms">
-                          <div class="services-box-icon">
-                              <i class="fa fa-crop"></i>
-                          </div><!--services icon-->
-                          <div class="services-box-info">
-                              <h4>Pixel perfect design</h4>
-                              <p>
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing metus. elit. Quisque rutrum pellentesque imperdiet.
-                              </p>
-                          </div>
-                      </div><!--services box-->
-                  </div><!--services col-->
-                  <div class="col-md-4 col-sm-6 margin20">
-                      <div class="services-box wow animated fadeInUp" data-wow-duration="700ms" data-wow-delay="500ms">
-                          <div class="services-box-icon">
-                              <i class="fa fa-twitter"></i>
-                          </div><!--services icon-->
-                          <div class="services-box-info">
-                              <h4>bootstrap 3.3.5</h4>
-                              <p>
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing metus. elit. Quisque rutrum pellentesque imperdiet.
-                              </p>
-                          </div>
-                      </div><!--services box-->
-                  </div><!--services col-->
-                  <div class="col-md-4 col-sm-6 margin20">
-                      <div class="services-box wow animated fadeInUp" data-wow-duration="700ms" data-wow-delay="600ms">
-                          <div class="services-box-icon">
-                              <i class="fa fa-flag"></i>
-                          </div><!--services icon-->
-                          <div class="services-box-info">
-                              <h4>Font Awesome icons</h4>
-                              <p>
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing metus. elit. Quisque rutrum pellentesque imperdiet.
-
-                              </p>
-
-                          </div>
-                      </div><!--services box-->
-                  </div><!--services col-->
-              </div><!--services row-->
-          </div>
-      </section><!--section services-->
-      <div class="divide40"></div>
-      <section class="portfolio">
-          <div class="container">
-              <div class="row">
-                  <div class="col-md-12">
-                      <div class="center-heading">
-                          <h2>Recent work</h2>
-                          <span class="center-line"></span>
-                      </div>
-                  </div>                   
-              </div><!--center heading row-->
-              <div class="row">
-                  <div class="col-md-12">
-                      <div id="work-carousel" class="owl-carousel owl-spaced">
-                          <div>
-
-                              <div class="item-img-wrap ">
-                                  <img src="{% static "img/img-1.jpg" %}" class="img-responsive" alt="workimg">
-                                  <div class="item-img-overlay">
-                                      <a href="img/img-1.jpg" class="show-image">
-                                          <span></span>
-                                      </a>
-                                  </div>
-                              </div> <!--item img wrap-->
-                              <div class="work-desc">
-                                  <h3><a href="portfolio-single.html">woo Commerce</a></h3>
-                                  <span>Magento</span>
-                              </div><!--work desc-->
-                          </div><!--owl item-->
-                          <div> 
-                              <div class="item-img-wrap ">
-                                  <img src="{% static "img/img-2.jpg" %}" class="img-responsive" alt="workimg">
-                                  <div class="item-img-overlay">
-                                      <a href="img/img-2.jpg" class="show-image">
-                                          <span></span>
-                                      </a>
-                                  </div>
-                              </div> 
-                              <div class="work-desc">
-                                  <h3><a href="portfolio-single.html">Web Develop</a></h3>
-                                  <span>Php / Wordpress</span>
-                              </div><!--work desc-->
-                          </div><!--owl item-->
-                          <div> 
-                              <div class="item-img-wrap ">
-                                  <img src="{% static "img/img-3.jpg" %}" class="img-responsive" alt="workimg">
-                                  <div class="item-img-overlay">
-                                      <a href="img/img-3.jpg" class="show-image">
-                                          <span></span>
-                                      </a>
-                                  </div>
-                              </div> 
-                              <div class="work-desc">
-                                  <h3><a href="portfolio-single.html">Web Design</a></h3>
-                                  <span>HTML5 / CSS3</span>
-                              </div><!--work desc-->
-                          </div><!--owl item-->
-                          <div> 
-                              <div class="item-img-wrap ">
-                                  <img src="{% static "img/img-4.jpg" %}" class="img-responsive" alt="workimg">
-                                  <div class="item-img-overlay">
-                                      <a href="img/img-4.jpg" class="show-image">
-                                          <span></span>
-                                      </a>
-                                  </div>
-                              </div> 
-                              <div class="work-desc">
-                                  <h3><a href="portfolio-single.html">Graphics Design</a></h3>
-                                  <span>Corel Drow</span>
-                              </div><!--work desc-->
-                          </div><!--owl item-->
-                          <div> 
-                              <div class="item-img-wrap ">
-                                  <img src="{% static "img/img-5.jpg" %}" class="img-responsive" alt="workimg">
-                                  <div class="item-img-overlay">
-                                      <a href="img/img-5.jpg" class="show-image">
-                                          <span></span>
-                                      </a>
-                                  </div>
-                              </div> 
-                              <div class="work-desc">
-                                  <h3><a href="portfolio-single.html">Psd Design</a></h3>
-                                  <span>Photoshop</span>
-                              </div><!--work desc-->
-                          </div><!--owl item-->
-                          <div> 
-                              <div class="item-img-wrap ">
-                                  <img src="{% static "img/img-6.jpg" %}" class="img-responsive" alt="workimg">
-                                  <div class="item-img-overlay">
-                                      <a href="img/img-6.jpg" class="show-image">
-                                          <span></span>
-                                      </a>
-                                  </div>
-                              </div> 
-                              <div class="work-desc">
-                                  <h3><a href="portfolio-single.html">Logo Design</a></h3>
-                                  <span>Illustrate</span>
-                              </div><!--work desc-->
-                          </div><!--owl item-->
-                      </div>
-                  </div>
-              </div><!--row-->
-              <div class="divide30"></div>
-              <div class="row">
-                  <div class="col-md-12 text-center">
-                      <a href="#" class="btn border-theme btn-lg wow animated fadeInUp"><i class="fa fa-bars"></i> Load More Projects</a>
-                  </div>
-              </div>
-          </div><!--container-->
-      </section><!--recent work section -->
-      <div class="divide80"></div>
-      <div class="container">
-          <div class="row">
-              <div class="col-sm-5">
-                  <h3 class="heading">About Company</h3>
-                  <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque neque eget diam posuere porta. Quisque ut nulla at nunc vehicula lacinia. Proin adipiscing porta tellus, ut feugiat nibh adipiscing sit amet. In eu justo a felis faucibus ornare vel id metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In eu libero ligula.
-                  </p>
-              </div>
-              <div class="col-sm-7">
-                  <div class="skills-wrapper wow animated bounceIn animated" data-wow-delay="0.2s">
-                      <h3 class="heading-progress">Web Design <span class="pull-right">88%</span></h3>
-                      <div class="progress">
-                          <div class="progress-bar" style="width: 88%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="88" role="progressbar">
-                          </div>
-                      </div>
-                      <h3 class="heading-progress">Web Development <span class="pull-right">78%</span></h3>
-                      <div class="progress">
-                          <div class="progress-bar" style="width: 78%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="78" role="progressbar">
-                          </div>
-                      </div>
-                      <h3 class="heading-progress">Marketing <span class="pull-right">82%</span></h3>
-                      <div class="progress">
-                          <div class="progress-bar" style="width: 82%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="82" role="progressbar">
-                          </div>
-                      </div>                    
-                  </div><!--skills-->
-              </div>
-          </div>
-      </div><!--about and progress section end-->
-      <div class="divide80"></div>
-      <section class="testimonials parallax" data-stellar-background-ratio="0.5">
-          <div class="container">
-              <div class="row">
-                  <div class="col-md-12">
-                      <div class="center-heading">
-                          <h2>clients Says</h2>
-                          <span class="center-line"></span>
-                      </div>
-                  </div>                   
-              </div><!--center heading row-->
-              <div class="row">
-                  <div class="col-md-8 col-md-offset-2 text-center">
-                      <div id="testi-carousel" class="owl-carousel owl-spaced">
-                          <div>
-                              <img src="{% static "img/customer-1.jpg" %}" class="img-responsive customer-img" alt="">
-                              <h4>
-                                  <i class="fa fa-quote-left"></i> Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
-                              </h4>
-                              <p>-David</p>
-                          </div><!--testimonials item like paragraph-->
-                          <div>
-                              <img src="{% static "img/customer-2.jpg" %}" class="img-responsive customer-img" alt="">
-                              <h4>
-                                  <i class="fa fa-quote-left"></i>  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque neque eget diam posuere porta. Quisque ut nulla at nunc vehicula lacinia.
-                              </h4>
-                              <p>-James</p>
-                          </div><!--testimonials item like paragraph-->
-                          <div>
-                              <img src="{% static "img/customer-3.jpg" %}" class="img-responsive customer-img" alt="">
-                              <h4>
-                                  <i class="fa fa-quote-left"></i>  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque neque eget diam posuere porta. Quisque ut nulla at nunc vehicula lacinia.
-                              </h4>
-                              <p>-Jesica</p>
-                          </div><!--testimonials item like paragraph-->
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </section><!--testimonials-->
-      <section id="services-bg-wrap">
-          <div class="container">
-              <div class="row">
-                  <div class="col-md-4 hidden-sm wow animated fadeInLeft">
-                      <img src="{% static "img/mockup-ipad.png" %}" class="img-responsive" alt="mockup">
-                  </div>
-                  <div class="col-md-8  col-xs-12 service-3-meta">
-                      <h1 class="wow animated fadeInDownfadeInRight">Core features of <span class="colored-text">assan</span></h1>
-                      <div class="services-box margin30 wow animated fadeInRight">
-                          <div class="services-box-icon">
-                              <i class="fa fa-tablet"></i>
-                          </div><!--services icon-->
-                          <div class="services-box-info">
-                              <h4>Fully Responsive</h4>
-                              <p>
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing metus. elit. Quisque rutrum pellentesque imperdiet.
-                              </p>
-                          </div>
-                      </div><!--service box-->
-                      <div class="services-box margin30 wow animated fadeInRight">
-                          <div class="services-box-icon">
-                              <i class="fa fa-twitter"></i>
-                          </div><!--services icon-->
-                          <div class="services-box-info">
-                              <h4>bootstrap 3.3.5</h4>
-                              <p>
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing metus. elit. Quisque rutrum pellentesque imperdiet.
-                              </p>
-                          </div>
-                      </div><!--service box-->
-
-                      <div class="services-box margin30 wow animated fadeInRight">
-                          <div class="services-box-icon">
-                              <i class="fa fa-code"></i>
-                          </div><!--services icon-->
-                          <div class="services-box-info">
-                              <h4>80+ valid HTML5 Pages and much more...</h4>
-                              <p>
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing metus. elit. Quisque rutrum pellentesque imperdiet.
-                              </p>
-                          </div>
-                          <div class="divide30"></div>
-                          <p><a href="#" class="btn btn-theme-dark btn-lg">Purchase Now</a></p>
-                      </div><!--service box-->
-                  </div>
-              </div>
-          </div> 
-      </section><!--services with the showcase mockups-->
-      <section id="clients-carousel">
-          <div class="container">
-              <div class="row">
-                  <div class="col-md-12">
-                      <div class="center-heading">
-                          <h2>Trusted worldwide</h2>
-                          <span class="center-line"></span>
-                          <p class="lead">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing metus. elit. Quisque rutrum pellentesque imperdiet.
-                          </p>
-                      </div>
-                  </div>                   
-              </div><!--center heading row-->
-              <div id="clients-slider">       
-                  <div class="item"><a href="#"><img src="{% static "img/cl-1.png" %}" alt=""></a></div>
-                  <div class="item"><a href="#"><img src="{% static "img/cl-2.png" %}" alt=""></a></div>
-                  <div class="item"><a href="#"><img src="{% static "img/cl-3.png" %}" alt=""></a></div>
-                  <div class="item"><a href="#"><img src="{% static "img/cl-4.png" %}" alt=""></a></div>
-                  <div class="item"><a href="#"><img src="{% static "img/cl-5.png" %}" alt=""></a></div>
-              </div>
-          </div>
-      </section><!--clients carousel end-->
-      <section id="cta-1">
-          <div class="container">
-              <h1>Do you have a project or idea?</h1>
-              <a href="#" class="btn border-white btn-lg">Join us today</a>
-          </div>
-      </section>
-      <div class="divide80"></div>
-      <div class="container">
-
-          <div class="row">
-              <div class="col-md-7 margin40">
-                  <h3 class="heading">Latest News</h3>
-                  <div id="news-carousel" class="owl-carousel owl-spaced">
-                      <div>
-                          <a href="#">
-                              <div class="item-img-wrap">
-                                  <img src="{% static "img/img-8.jpg" %}" class="img-responsive" alt="workimg">
-                                  <div class="item-img-overlay">
-                                      <span></span>
-                                  </div>
-                              </div>                       
-                          </a><!--news link--> 
-                          <div class="news-desc">
-                              <span>Sports</span>
-                              <h4><a href="#">Lorem ipsum dollor Sit amet</a></h4>
-                              <span>By <a href="#">Author</a> on 24 july 2014</span> <span><a href="#">Read more...</a></span>
-                          </div><!--news desc-->
-                      </div> 
-                      <div>
-                          <a href="#">
-                              <div class="item-img-wrap">
-                                  <img src="{% static "img/img-7.jpg" %}" class="img-responsive" alt="workimg">
-                                  <div class="item-img-overlay">
-                                      <span></span>
-                                  </div>
-                              </div>                       
-                          </a><!--news link--> 
-                          <div class="news-desc">
-                              <span>Sports</span>
-                              <h4><a href="#">Lorem ipsum dollor Sit amet</a></h4>
-                              <span>By <a href="#">Author</a> on 24 july 2014</span> <span><a href="#">Read more...</a></span>
-                          </div><!--news desc-->
-                      </div> 
-                      <div>
-                          <a href="#">
-                              <div class="item-img-wrap">
-                                  <img src="{% static "img/img-6.jpg" %}" class="img-responsive" alt="workimg">
-                                  <div class="item-img-overlay">
-                                      <span></span>
-                                  </div>
-                              </div>                       
-                          </a><!--news link--> 
-                          <div class="news-desc">
-                              <span>Sports</span>
-                              <h4><a href="#">Lorem ipsum dollor Sit amet</a></h4>
-                              <span>By <a href="#">Author</a> on 24 july 2014</span> <span><a href="#">Read more...</a></span>
-                          </div><!--news desc-->
-                      </div> 
-                      <div>
-                          <a href="#">
-                              <div class="item-img-wrap">
-                                  <img src="{% static "img/img-5.jpg" %}" class="img-responsive" alt="workimg">
-                                  <div class="item-img-overlay">
-                                      <span></span>
-                                  </div>
-                              </div>                       
-                          </a><!--news link--> 
-                          <div class="news-desc">
-                              <span>Sports</span>
-                              <h4><a href="#">Lorem ipsum dollor Sit amet</a></h4>
-                              <span>By <a href="#">Author</a> on 24 july 2014</span> <span><a href="#">Read more...</a></span>
-                          </div><!--news desc-->
-                      </div> 
-                  </div>
-              </div><!--col 7 end use for latest news owl carousel slide-->
-              <div class="col-md-5 margin20">
-                  <h3 class="heading">Why Us?</h3>
-                  <!--bootstrap collapse-->
-                  <div class="panel-group" id="accordion">
-                      <div class="panel panel-default">
-                          <div class="panel-heading">
-                              <h4 class="panel-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                      <i class="fa fa-desktop"></i>    100% Responsive Design
-                                  </a>
-                              </h4>
-                          </div>
-                          <div id="collapseOne" class="panel-collapse collapse in">
-                              <div class="panel-body">
-                                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor.
-                              </div>
-                          </div>
-                      </div>
-                      <div class="panel panel-default">
-                          <div class="panel-heading">
-                              <h4 class="panel-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                      <i class="fa fa-crop"></i>    Pixel Perfect Design 
-                                  </a>
-                              </h4>
-                          </div>
-                          <div id="collapseTwo" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
-                              </div>
-                          </div>
-                      </div>
-                      <div class="panel panel-default">
-                          <div class="panel-heading">
-                              <h4 class="panel-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                      <i class="fa fa-cogs"></i>    Full Support
-                                  </a>
-                              </h4>
-                          </div>
-                          <div id="collapseThree" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <!--collapse end-->
-              </div>
-          </div>
-      </div><!--latest news and why us container end-->
-
-      <div class="divide60"></div>
-
-    <footer id="footer">
       <div class="container">
           <div class="row">
               <div class="col-md-3 col-sm-6 margin30">
@@ -1080,64 +498,8 @@
                   </p>
                 </div>                        
               </div>
-
           </div>
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <div class="footer-btm">
-                <span>
-                  &copy; {% now "Y" %} Take Your Meds, Ltd. All rights reserved.
-                  <br>
-                  Take Your Meds, Ltd is a limited company registered in
-                  England and Wales with registration 9686492.
-                </span>
-             </div>
-          </div>
-      </div>
-  </footer>
-</div>
 
-{% endblock %}
-
-{% block body_old %}
-
-<header class="site_header">
-  <div class="container">
-    <a href="{% url "static:landing" %}">
-      <h2>Take Your Meds</h2>
-    </a>
-
-    <ul class="site_nav">
-      <li><a href="{% url "static:about" %}">About</a></li>
-      <li><a href="{% url "reminders:create" %}">New Reminder</a></li>
-      <li><a href="{% url "reminders:index" %}">My Reminders</a></li>
-      {% if request.user.is_authenticated %}
-      <li><a href="{% url "account:logout" %}">Logout</a></li>
-      {% else %}
-      <li><a href="{% url "registration:view" %}">Register</a></li>
-      <li><a href="{% url "account:login" %}">Login</a></li>
-      {% endif %}
-    </ul>
-  </div>
-</header>
-
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-
-{% block content %}
-<div id="content">
-  <div class="container">
-    {% block container %}{% endblock %}
-  </div>
-</div>
-{% endblock %}
-
-<footer>
   <div class="container">
     <p>
       Copyright &copy; {% now "Y" %} Take Your Meds, Ltd.<br>
@@ -1152,6 +514,7 @@
       {% endif %}
     </p>
   </div>
+
 </footer>
 
 {% endblock %}
