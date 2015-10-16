@@ -13,6 +13,14 @@ def about(request):
     return render(request, 'static/about.html', {
     })
 
+def faq(request):
+    return render(request, 'static/faq.html', {
+    })
+
+def contact(request):
+    return render(request, 'static/contact.html', {
+    })
+
 def terms(request):
     return render(request, 'static/terms.html', {
     })

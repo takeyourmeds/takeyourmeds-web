@@ -11,6 +11,12 @@ class SmokeTest(TestCase):
     def test_about(self):
         self.assertGET(200, 'static:about')
 
+    def test_faq(self):
+        self.assertGET(200, 'static:faq')
+
+    def test_contact(self):
+        self.assertGET(200, 'static:contact')
+
     def test_terms_and_conditions(self):
         self.assertGET(200, 'static:terms')
 

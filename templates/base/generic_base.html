@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>{% block head_title %}Take Your Meds - Phone reminders to help you and yours remember to take your medication{% endblock %}</title>
+  <title>{% block title %}Take Your Meds: Phone reminders to help you and yours remember to take your medication{% endblock %}</title>
 
   <link href="{% static "css/bootstrap.css" %}" rel="stylesheet" />
   <link href="{% static "css/assan.css" %}" rel="stylesheet" media="screen" />
@@ -16,11 +16,12 @@
 
   <link href="{% static "css/takeyourmeds.css" %}" rel="stylesheet" media="screen" />
 </head>
-<body id="boxed" class="{% block bodyclass %}{% endblock %}">
-  {% block body %} {% endblock %}
+<body>
+  {% block body %}{% endblock %}
 
   {% block script %}
     <script type="text/javascript" src="{% static "js/jquery-2.1.4.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/bootstrap.js" %}"></script>
 
     <script type="text/javascript" src="{% static "js/jquery-color-2.1.2.min.js" %}"></script>
     <script type="text/javascript" src="{% static "js/jquery.cookie.js" %}"></script>

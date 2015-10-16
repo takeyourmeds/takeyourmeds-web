@@ -1,6 +1,8 @@
 {% extends "base/base.html" %}
 
-{% block head_title %}Login{% endblock %}
+{% block title %}Login &mdash; {{ block.super }}{% endblock %}
+
+{% block navbar_active_login %}active{% endblock %}
 
 {% block container %}
 

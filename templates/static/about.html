@@ -1,12 +1,14 @@
 {% extends "base/base.html" %}
 
-{% block bodyclass %}about{% endblock %}
+{% block title %}About Us &mdash; {{ block.super }}{% endblock %}
 
 {% block breadcrumbs_title %}About Us{% endblock %}
 {% block breadcrumbs %}
   {{ block.super }}
-  <li>about us</li>
+  <li>About Us</li>
 {% endblock %}
+
+{% block navbar_active_about %}active{% endblock %}
 
 {% block content %}
 
@@ -40,7 +42,7 @@
   <div class="divide60"></div>
 
   <div class="row">
-    <div class="col-md-12 margin20">
+    <div class="col-md-8 margin20">
       <h3 class="heading">Rationale</h3>
       <blockquote>
         <p>
@@ -50,8 +52,14 @@
         </p>
         <cite>— WHO, 2013</cite>
       </blockquote>
-      <br>
+    </div>
+    <div class="col-md-4">
+      <img src="{% static "img/showcase-2.jpg" %}" class="img-responsive" alt="">
+    </div>
+  </div>
 
+  <div class="row">
+    <div class="col-md-12 margin20">
       <p>
         Among patients with chronic illness, NICE estimate that 30%-50% do not
         take medication as prescribed. This is a particular problem for
@@ -92,156 +100,137 @@
         taken if the patient cannot be reached, can be set up to suit the
         individual.
       </p>
-      <p>
-        <strong>Take Your Meds</strong>: simple medication reminders over the
-        phone for you and yours.
-      </p>
-
-      <p>Click <a href="{% url "reminders:create" %}">here</a> to get started now.</p>
     </div>
   </div>
 
   <div class="divide60"></div>
 
-  <div class="container">
-    <h3>Rationale</h3>
-    <br>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="heading">Team and Project</h3>
 
-    <h3>Team and Project</h3>
-    <p>The <strong>Take Your Meds</strong> project was born at <a href="http://www.nhshackday.com/">NHS Hack Day</a> 10 in London in 2015, and has since continued to be developed by a small team.</p>
-    <p><strong>Take Your Meds Ltd</strong> was set up in July 2015 by Helen Jackson (<a href="https://twitter.com/DeckOfPandas">@DeckOfPandas</a>) and Marcus Baw (<a href="https://twitter.com/marcus_baw">@marcus_baw</a>).</p>
-    <p>The source code is fully Open Source, and is available on <a href="http://www.github.com/takeyourmeds">GitHub</a>; forks and contributions are very welcome, but please get in touch with us first so we can keep track of where we are.</p>
-    <p>Comments, questions and complaints to hello@takeyourmeds.co.uk, or ping <a href="http://www.twitter.com/DeckOfPandas">@DeckOfPandas</a> or <a href="http://www.twitter.com/DeckOfPandas">@marcus_baw</a> on Twitter.<p>
-    <br>    
+      <p>
+        The <strong>Take Your Meds</strong> project was born at <a
+        href="http://www.nhshackday.com/">NHS Hack Day</a> 10 in London in
+        2015, and has since continued to be developed by a small team.
+      </p>
+      <p>
+        <strong>Take Your Meds Ltd</strong> was set up in July 2015 by Helen
+        Jackson (<a href="https://twitter.com/DeckOfPandas">@DeckOfPandas</a>)
+        and Marcus Baw (<a href="https://twitter.com/marcus_baw">@marcus_baw</a>).
+      </p>
 
-    <h3>Credits</h3>
-    <p>Pill image created by <a href="https://thenounproject.com/misterabrams/">Josh Abrams</a>, from the <a href="http://thenounproject.com">Noun Project</a>.</p>  
-    <p>Clock image found on Flickr from <a href="https://www.flickr.com/photos/alancleaver/4293345631/in/photolist-7xow5x-8xzR9V-7xow5v-4Q3jCh-7bgqZD-8mCjMd-oMbqQc-65wcpH-7GEGFD-65RtFi-666Dfo-oeBHwh-5SqLF2-4s1zn3-8JQ3iD-8cfs7u-gRv4y-9x68cm-666Cib-nvBRCq-7jB16i-5Wsgbs-9BmtYf-73A2A6-7jB14B-5VgMJK-6cpjVG-7nAsLt-xSgTX-ox3SvS-6qp1Fq-4EeRCh-bqpA4N-hDKXDH-e1gXG-9b46PL-a4gnBr-7eAHML-hZXooF-DSGGK-deihjs-aFK6D2-gRv4A-6rSwJb-rUvRgc-97wZ8v-dhzhsu-99qQ3G-ayNs2L-6H2V56">Alan Cleaver</a>.</p>
+      <p>
+        The source code is fully Open Source, and is available on <a
+        href="http://www.github.com/takeyourmeds">GitHub</a>; forks and
+        contributions are very welcome, but please get in touch with us first
+        so we can keep track of where we are.
+      </p>
+
+      <p>
+        Comments, questions and complaints to hello@takeyourmeds.co.uk, or ping
+        <a href="http://www.twitter.com/DeckOfPandas">@DeckOfPandas</a> or <a
+        href="http://www.twitter.com/DeckOfPandas">@marcus_baw</a> on Twitter.
+      </p>
+    </div>
+
+    <div class="col-md-6 margin20">
+      <h3 class="heading">Credits</h3>
+
+      <p>
+        Pill image created by <a
+        href="https://thenounproject.com/misterabrams/">Josh Abrams</a>, from
+        the <a href="http://thenounproject.com">Noun Project</a>.
+      </p>
+
+      <p>
+        Clock image found on Flickr from <a
+        href="https://www.flickr.com/photos/alancleaver/4293345631/in/photolist-7xow5x-8xzR9V-7xow5v-4Q3jCh-7bgqZD-8mCjMd-oMbqQc-65wcpH-7GEGFD-65RtFi-666Dfo-oeBHwh-5SqLF2-4s1zn3-8JQ3iD-8cfs7u-gRv4y-9x68cm-666Cib-nvBRCq-7jB16i-5Wsgbs-9BmtYf-73A2A6-7jB14B-5VgMJK-6cpjVG-7nAsLt-xSgTX-ox3SvS-6qp1Fq-4EeRCh-bqpA4N-hDKXDH-e1gXG-9b46PL-a4gnBr-7eAHML-hZXooF-DSGGK-deihjs-aFK6D2-gRv4A-6rSwJb-rUvRgc-97wZ8v-dhzhsu-99qQ3G-ayNs2L-6H2V56">Alan
+        Cleaver</a>.
+      </p>
+    </div>
   </div>
 
-  <div class="row">
-                <div class="col-md-3 margin20">
-                    <div class="team-wrap">
-                        <img src="img/team-1.jpg" class="img-responsive" alt="">
-                        <h4>Jolly smith</h4>
-                        <span>Web Designer</span>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lorem quam, adipiscing condimentum tristique vel, eleifend sed turpis
-                        </p>
-                        <ul class="list-inline">
-                            <li>
-                                <a href="#" class="social-icon-sm si-border si-facebook">
-                                    <i class="fa fa-facebook"></i>
-                                    <i class="fa fa-facebook"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="social-icon-sm si-border si-twitter">
-                                    <i class="fa fa-twitter"></i>
-                                    <i class="fa fa-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="social-icon-sm si-border si-linkedin">
-                                    <i class="fa fa-linkedin"></i>
-                                    <i class="fa fa-linkedin"></i>
-                                </a>
-                            </li>
-                        </ul><!--social-->
-                    </div><!--team-wrap-->
-                </div><!--team col-->
-                <div class="col-md-3 margin20">
-                    <div class="team-wrap">
-                        <img src="img/team-2.jpg" class="img-responsive" alt="">
-                        <h4>Jolly smith</h4>
-                        <span>Web Designer</span>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lorem quam, adipiscing condimentum tristique vel, eleifend sed turpis
-                        </p>
-                           <ul class="list-inline">
-                            <li>
-                                <a href="#" class="social-icon-sm si-border si-facebook">
-                                    <i class="fa fa-facebook"></i>
-                                    <i class="fa fa-facebook"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="social-icon-sm si-border si-twitter">
-                                    <i class="fa fa-twitter"></i>
-                                    <i class="fa fa-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="social-icon-sm si-border si-linkedin">
-                                    <i class="fa fa-linkedin"></i>
-                                    <i class="fa fa-linkedin"></i>
-                                </a>
-                            </li>
-                        </ul><!--social-->
-                    </div><!--team-wrap-->
-                </div><!--team col-->
-                <div class="col-md-3 margin20">
-                    <div class="team-wrap">
-                        <img src="img/team-3.jpg" class="img-responsive" alt="">
-                        <h4>Jolly smith</h4>
-                        <span>Web Designer</span>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lorem quam, adipiscing condimentum tristique vel, eleifend sed turpis
-                        </p>
-                           <ul class="list-inline">
-                            <li>
-                                <a href="#" class="social-icon-sm si-border si-facebook">
-                                    <i class="fa fa-facebook"></i>
-                                    <i class="fa fa-facebook"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="social-icon-sm si-border si-twitter">
-                                    <i class="fa fa-twitter"></i>
-                                    <i class="fa fa-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="social-icon-sm si-border si-linkedin">
-                                    <i class="fa fa-linkedin"></i>
-                                    <i class="fa fa-linkedin"></i>
-                                </a>
-                            </li>
-                        </ul><!--social-->
-                    </div><!--team-wrap-->
-                </div><!--team col-->
-                <div class="col-md-3 margin20">
-                    <div class="team-wrap">
-                        <img src="img/team-4.jpg" class="img-responsive" alt="">
-                        <h4>Jolly smith</h4>
-                        <span>Web Designer</span>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lorem quam, adipiscing condimentum tristique vel, eleifend sed turpis
-                        </p>
-                           <ul class="list-inline">
-                            <li>
-                                <a href="#" class="social-icon-sm si-border si-facebook">
-                                    <i class="fa fa-facebook"></i>
-                                    <i class="fa fa-facebook"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="social-icon-sm si-border si-twitter">
-                                    <i class="fa fa-twitter"></i>
-                                    <i class="fa fa-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="social-icon-sm si-border si-linkedin">
-                                    <i class="fa fa-linkedin"></i>
-                                    <i class="fa fa-linkedin"></i>
-                                </a>
-                            </li>
-                        </ul><!--social-->
-                    </div><!--team-wrap-->
-                </div><!--team col-->
-            </div>
+  <div class="divide60"></div>
 
+  <div class="row">
+    <div class="col-md-3 margin20">
+      <div class="team-wrap">
+        <img src="{% static "img/team/1.jpg" %}" class="img-responsive" alt="">
+        <h4>Jolly Smith</h4>
+        <span>Web Designer</span>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+          lorem quam, adipiscing condimentum tristique vel, eleifend sed turpis
+        </p>
+        <ul class="list-inline">
+          <li>
+            <a href="https://twitter.com/foo" class="social-icon-sm si-border si-twitter">
+              <i class="fa fa-twitter"></i>
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-3 margin20">
+      <div class="team-wrap">
+        <img src="{% static "img/team/1.jpg" %}" class="img-responsive" alt="">
+        <h4>Jolly Smith</h4>
+        <span>Web Designer</span>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+          lorem quam, adipiscing condimentum tristique vel, eleifend sed turpis
+        </p>
+        <ul class="list-inline">
+          <li>
+            <a href="https://twitter.com/foo" class="social-icon-sm si-border si-twitter">
+              <i class="fa fa-twitter"></i>
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-3 margin20">
+      <div class="team-wrap">
+        <img src="{% static "img/team/1.jpg" %}" class="img-responsive" alt="">
+        <h4>Jolly Smith</h4>
+        <span>Web Designer</span>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+          lorem quam, adipiscing condimentum tristique vel, eleifend sed turpis
+        </p>
+        <ul class="list-inline">
+          <li>
+            <a href="https://twitter.com/foo" class="social-icon-sm si-border si-twitter">
+              <i class="fa fa-twitter"></i>
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-3 margin20">
+      <div class="team-wrap">
+        <img src="{% static "img/team/1.jpg" %}" class="img-responsive" alt="">
+        <h4>Jolly Smith</h4>
+        <span>Web Designer</span>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+          lorem quam, adipiscing condimentum tristique vel, eleifend sed turpis
+        </p>
+        <ul class="list-inline">
+          <li>
+            <a href="https://twitter.com/foo" class="social-icon-sm si-border si-twitter">
+              <i class="fa fa-twitter"></i>
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock%}

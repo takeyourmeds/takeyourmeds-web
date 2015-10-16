@@ -1,6 +1,14 @@
 {% extends "base/base.html" %}
 
-{% block head_title %}Register{% endblock %}
+{% block title %}Register &mdash; {{ block.super }}{% endblock %}
+
+{% block breadcrumbs_title %}Register{% endblock %}
+{% block breadcrumbs %}
+  {{ block.super }}
+  <li>Register</li>
+{% endblock %}
+
+{% block navbar_active_register %}active{% endblock %}
 
 {% block container %}
 
