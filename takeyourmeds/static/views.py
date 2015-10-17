@@ -1,6 +1,9 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 
 from takeyourmeds.utils.decorators import superuser_required
+
+from .forms import ContactForm
 
 def landing(request):
     if request.user.is_authenticated():
@@ -18,7 +21,18 @@ def faq(request):
     })
 
 def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your message has been sen.")
+            return redirect(request.path)
+    else:
+        form = ContactForm()
+
     return render(request, 'static/contact.html', {
+        'form': form,
     })
 
 def terms(request):
