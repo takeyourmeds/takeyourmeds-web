@@ -35,13 +35,17 @@
 
 {% block container %}
 
-<div id="map-canvas"></div>
+{% if not form.errors %}
+  <div id="map-canvas"></div>
+{% endif %}
 
 <div class="divide60"></div>
 
 <div class="container">
   <div class="row">
     <div class="col-md-10 col-sm-offset-1 margin30">
+
+      {% if not form.errors %}
       <div class="row">
         <div class="col-md-12">
           <div class="center-heading">
@@ -84,6 +88,8 @@
       <p class="margin30">
         We are waiting to here from you!
       </p>
+
+      {% endif %}
 
       <form action="" method="POST" id="sky-form" class="sky-form sky-form-columns">
         {% csrf_token %}
