@@ -86,6 +86,16 @@
       </p>
 
       <form action="" method="POST" id="sky-form" class="sky-form sky-form-columns">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+        <div class="has-error">
+          {% for x in form.non_field_errors %}
+          <p class="help-block">{{ x }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+
         <fieldset>
           <div class="row">
             <section class="col col-6">
