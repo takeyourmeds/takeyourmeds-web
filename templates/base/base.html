@@ -2,62 +2,59 @@
 
 {% block body %}
 
-  <div class="top-bar-light">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-5 hidden-xs">
-          <div class="top-bar-socials">
-          </div>
-        </div>
-        <div class="col-sm-7 text-right">
-          <ul class="list-inline top-dark-right">
-            <li class="hidden-sm hidden-xs"><i class="fa fa-envelope"></i> {{ settings.DEFAULT_FROM_EMAIL }}</li>
-            {% if request.user.is_authenticated %}
-            <li><a href="{% url "account:logout" %}"><i class="fa fa-lock"></i> Login</a></li>
-            {% else %}
-            <li><a href="{% url "registration:view" %}"><i class="fa fa-user"></i> Sign Up</a></li>
-            <li><a href="{% url "account:login" %}"><i class="fa fa-lock"></i> Login</a></li>
-            {% endif %}
-          </ul>
-          <div class="search">
-            <form role="form">
-              <input type="text" class="form-control" autocomplete="off" placeholder="Write something and press enter">
-              <span class="search-close"><i class="fa fa-times"></i></span>
-            </form>
-          </div>
+<div class="top-bar-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-7 col-sm-offset-5 text-right">
+        <ul class="list-inline top-dark-right">
+          <li class="hidden-sm hidden-xs"><i class="fa fa-envelope"></i> {{ settings.DEFAULT_FROM_EMAIL }}</li>
+          {% if request.user.is_authenticated %}
+          <li><a href="{% url "account:logout" %}"><i class="fa fa-lock"></i> Login</a></li>
+          {% else %}
+          <li><a href="{% url "registration:view" %}"><i class="fa fa-user"></i> Sign Up</a></li>
+          <li><a href="{% url "account:login" %}"><i class="fa fa-lock"></i> Login</a></li>
+          {% endif %}
+        </ul>
+        <div class="search">
+          <form role="form">
+            <input type="text" class="form-control" autocomplete="off" placeholder="Write something and press enter">
+            <span class="search-close"><i class="fa fa-times"></i></span>
+          </form>
         </div>
       </div>
     </div>
+  </div>
 
-<div class="navbar navbar-default navbar-static-top yamm sticky" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="{% url "static:landing" %}">
-        {% comment  %}
-        <img src="{% static "img/logo.png" %}" alt="ASSAN">
-        {% endcomment %}
-        TakeYourMeds
-      </a>
-    </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li class="{% block navbar_active_about %}{% endblock %}"><a href="{% url "static:about" %}">About</a></li>
-        <li class="{% block navbar_active_faq %}{% endblock %}"><a href="{% url "static:faq" %}">FAQs</a></li>
-        <li class="{% block navbar_active_contact %}{% endblock %}"><a href="{% url "static:contact" %}">Contact</a></li>
+  <div class="navbar navbar-default navbar-static-top yamm sticky" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{% url "static:landing" %}">
+          {% comment  %}
+          <img src="{% static "img/logo.png" %}" alt="ASSAN">
+          {% endcomment %}
+          TakeYourMeds
+        </a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="{% block navbar_active_about %}{% endblock %}"><a href="{% url "static:about" %}">About</a></li>
+          <li class="{% block navbar_active_faq %}{% endblock %}"><a href="{% url "static:faq" %}">FAQs</a></li>
+          <li class="{% block navbar_active_contact %}{% endblock %}"><a href="{% url "static:contact" %}">Contact</a></li>
 
-        {% if request.user.is_authenticated %}
-          <li><a href="{% url "account:logout" %}">Logout</a></li>
-        {% else %}
-          <li class="{% block navbar_active_register %}{% endblock %}"><a href="{% url "registration:view" %}">Register</a></li>
-          <li class="{% block navbar_active_login %}{% endblock %}"><a href="{% url "account:login" %}">Login</a></li>
-        {% endif %}
-      </ul>
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url "account:logout" %}">Logout</a></li>
+          {% else %}
+            <li class="{% block navbar_active_register %}{% endblock %}"><a href="{% url "registration:view" %}">Register</a></li>
+            <li class="{% block navbar_active_login %}{% endblock %}"><a href="{% url "account:login" %}">Login</a></li>
+          {% endif %}
+        </ul>
+      </div>
     </div>
   </div>
 </div>
@@ -79,9 +76,9 @@
   </div>
 </div>
 
+{% block container %}
 <div class="divide80"></div>
 
-{% block container %}
 <div class="container">
   {% block content %}{% endblock %}
 </div>
