@@ -5,3 +5,9 @@
 .footer-btm {
   margin-top: 0;
 }
+
+.state-error .help-block {
+  color: #ee9393;
+  font-weight: bold;
+  line-height: 15px;
+}
