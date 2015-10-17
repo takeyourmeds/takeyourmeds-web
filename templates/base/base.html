@@ -53,11 +53,14 @@
   </div>
 </div>
 
-<div class="{% block breadcrumb_classes %}breadcrumb-wrap{% endblock %}">
+<div class="{% block breadcrumbs_classes %}breadcrumb-wrap{% endblock %}">
   <div class="container">
     <div class="row">
       <div class="col-sm-6">
-        <h4>{% block breadcrumbs_title %}FIXME{% endblock %}</h4>
+        {% block breadcrumbs_title %}
+        <h4>FIXME</h4>
+        <p>FIXME</p>
+        {% endblock %}</h4>
       </div>
       <div class="col-sm-6 hidden-xs text-right">
         <ol class="breadcrumb">
