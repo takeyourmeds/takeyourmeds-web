@@ -43,9 +43,9 @@ $(document).ready(function () {
     });
 });
 
+/*
 //owl carousel for work
 $(document).ready(function () {
-
     $("#work-carousel").owlCarousel({
         // Most important owl features
         items: 4,
@@ -59,7 +59,6 @@ $(document).ready(function () {
         startDragging: true,
         autoPlay: 6000
     });
-
 });
 
 
@@ -119,9 +118,14 @@ $(document).ready(function () {
     });
 
 });
+
+*/
+
+
 /* ==============================================
  Counter Up
  =============================================== */
+/*
 jQuery(document).ready(function ($) {
     $('.counter').counterUp({
         delay: 10,
@@ -129,21 +133,27 @@ jQuery(document).ready(function ($) {
     });
 });
 
+*/
 
 
 
 
 
+/*
 
 //MAGNIFIC POPUP
 $(document).ready(function () {
 $('.show-image').magnificPopup({type: 'image'});
-});
+})/;
+
+*/
+
 
 /* ==============================================
  flex slider
  =============================================== */
 
+/*
 $(document).ready(function () {
 $('.main-flex-slider,.testi-slide').flexslider({
     slideshowSpeed: 5000,
@@ -161,6 +171,7 @@ $("#clients-slider").owlCarousel({
     itemsDesktopSmall: [991, 2]
 });
 });
+*/
 
 
 /*========tooltip and popovers====*/
@@ -175,11 +186,13 @@ $("[data-toggle=tooltip]").tooltip();
 /* ==============================================
  mb.YTPlayer
  =============================================== */
+ /*
 $(document).ready(function () {
 jQuery(function () {
     jQuery(".player").mb_YTPlayer();
 });
 });
+*/
 
 
 //transparent header
