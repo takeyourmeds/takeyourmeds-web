@@ -6,6 +6,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'djcelery',
+    'email_from_template',
     'rest_framework',
 
     'takeyourmeds.account',

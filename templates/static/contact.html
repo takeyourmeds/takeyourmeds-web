@@ -104,36 +104,78 @@
 
         <fieldset>
           <div class="row">
-            <section class="col col-6">
+            <section class="col col-6 {% if form.errors.name %}state-error{% endif %}">
               <label class="label">Name</label>
               <label class="input">
                 <i class="icon-append fa fa-user"></i>
-                <input type="text" name="name" id="name">
+                <input
+                  id="{{ form.name.id_for_label }}"
+                  type="text"
+                  class="form-control"
+                  name="{{ form.name.html_name }}"
+                  value="{{ form.name.value|default:"" }}"
+                  maxlength="{{ form.fields.name.max_length }}"
+                  {% if form.fields.name.required %}required{% endif %}
+                >
               </label>
+              {% for x in form.errors.field %}
+                <p class="help-block">{{ x }}</p>
+              {% endfor %}
             </section>
-            <section class="col col-6">
+            <section class="col col-6 {% if form.errors.email %}state-error{% endif %}"">
               <label class="label">E-mail</label>
               <label class="input">
                 <i class="icon-append fa fa-envelope-o"></i>
-                <input type="email" name="email" id="email">
+                <input
+                  id="{{ form.email.id_for_label }}"
+                  type="email"
+                  class="form-control"
+                  name="{{ form.email.html_name }}"
+                  value="{{ form.email.value|default:"" }}"
+                  maxlength="{{ form.fields.email.max_length }}"
+                  {% if form.fields.email.required %}required{% endif %}
+                >
               </label>
+              {% for x in form.errors.email %}
+                <p class="help-block">{{ x }}</p>
+              {% endfor %}
             </section>
           </div>
 
-          <section>
+          <section class="{% if form.errors.subject %}state-error{% endif %}">
             <label class="label">Subject</label>
             <label class="input">
               <i class="icon-append fa fa-tag"></i>
-              <input type="text" name="subject" id="subject">
+              <input
+                id="{{ form.subject.id_for_label }}"
+                type="text"
+                class="form-control"
+                name="{{ form.subject.html_name }}"
+                value="{{ form.subject.value|default:"" }}"
+                maxlength="{{ form.fields.subject.max_length }}"
+                {% if form.fields.subjec.required %}required{% endif %}
+              >
             </label>
+            {% for x in form.errors.subject %}
+              <p class="help-block">{{ x }}</p>
+            {% endfor %}
           </section>
 
-          <section>
+          <section class="{% if form.errors.message %}state-error{% endif %}">
             <label class="label">Message</label>
             <label class="textarea">
               <i class="icon-append fa fa-comment"></i>
-              <textarea rows="4" name="message" id="message"></textarea>
+              <textarea
+                id="{{ form.message.id_for_label }}"
+                rows="10"
+                class="form-control"
+                name="{{ form.message.html_name }}"
+                {% if form.fields.message.required %}required{% endif %}
+              >{{ form.message.value|default:"" }}</textarea>
             </label>
+            {% for x in form.errors.field %}
+              <p class="help-block">{{ x }}</p>
+            {% endfor %}
           </section>
         </fieldset>
 
