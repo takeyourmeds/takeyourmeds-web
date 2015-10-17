@@ -2,6 +2,16 @@
 
 {% block title %}Login &mdash; {{ block.super }}{% endblock %}
 
+{% block breadcrumbs_header %}
+  <h4>Login</h4>
+  <p>Login to your account</p>
+{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  <li>Login</li>
+{% endblock %}
+
 {% block navbar_active_login %}active{% endblock %}
 
 {% block container %}
