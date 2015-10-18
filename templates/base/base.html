@@ -9,7 +9,12 @@
         <ul class="list-inline top-dark-right">
           <li class="hidden-sm hidden-xs"><i class="fa fa-envelope"></i> {{ settings.DEFAULT_FROM_EMAIL }}</li>
           {% if request.user.is_authenticated %}
-          <li><a href="{% url "account:logout" %}"><i class="fa fa-lock"></i> Logout</a></li>
+          <li>
+            <form method="POST" action="{% url "account:logout" %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-link"><i class="fa fa-lock"></i> Logout</button>
+            </form>
+          </li>
           {% else %}
           <li><a href="{% url "registration:view" %}"><i class="fa fa-user"></i> Sign Up</a></li>
           <li><a href="{% url "account:login" %}"><i class="fa fa-lock"></i> Login</a></li>
@@ -42,7 +47,12 @@
           <li class="{% block navbar_active_contact %}{% endblock %}"><a href="{% url "static:contact" %}">Contact</a></li>
 
           {% if request.user.is_authenticated %}
-            <li><a href="{% url "account:logout" %}">Logout</a></li>
+            <li>
+              <form method="POST" action="{% url "account:logout" %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-link">Logout</button>
+              </form>
+            </li>
           {% else %}
             <li class="{% block navbar_active_register %}{% endblock %}"><a href="{% url "registration:view" %}">Register</a></li>
             <li class="{% block navbar_active_login %}{% endblock %}"><a href="{% url "account:login" %}">Login</a></li>

@@ -15,3 +15,25 @@
 h3.heading {
   text-transform: inherit;
 }
+
+.top-bar-light .btn-link {
+  color: inherit;
+  line-height: inherit;
+}
+
+.top-bar-light .btn-link:hover {
+  color: #32c5d2;
+  text-decoration: none;
+}
+
+.top-bar-light .list-inline .btn-link {
+  padding: 0;
+  font-size: inherit;
+  text-transform: inherit;
+}
+
+.top-bar-light .navbar .btn-link {
+  font-size: 15px;
+  padding-top: 12px;
+  padding-bottom: 15px;
+}
