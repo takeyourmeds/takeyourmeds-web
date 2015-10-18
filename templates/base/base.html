@@ -9,7 +9,7 @@
         <ul class="list-inline top-dark-right">
           <li class="hidden-sm hidden-xs"><i class="fa fa-envelope"></i> {{ settings.DEFAULT_FROM_EMAIL }}</li>
           {% if request.user.is_authenticated %}
-          <li><a href="{% url "account:logout" %}"><i class="fa fa-lock"></i> Login</a></li>
+          <li><a href="{% url "account:logout" %}"><i class="fa fa-lock"></i> Logout</a></li>
           {% else %}
           <li><a href="{% url "registration:view" %}"><i class="fa fa-user"></i> Sign Up</a></li>
           <li><a href="{% url "account:login" %}"><i class="fa fa-lock"></i> Login</a></li>
