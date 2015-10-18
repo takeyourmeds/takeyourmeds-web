@@ -2,8 +2,11 @@
 
 {% block title %}Register &mdash; {{ block.super }}{% endblock %}
 
+{% block breadcrumbs_classes %}{{ block.super }} breadcrumb-light{% endblock %}
+
 {% block breadcrumbs_header %}
   <h4>Register</h4>
+  <p>Create a new account on TakeYourMeds</p>
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -13,59 +16,107 @@
 
 {% block navbar_active_register %}active{% endblock %}
 
-{% block container %}
+{% block content %}
 
-{% if form.errors %}
-<div class="alert alert-danger">
-  <ul class="errorlist">
-    {% for key, value in form.errors.items %}
-    <li>{% if key != '__all__' %}{{ key }} {% endif %}{{ value }}</li>
-    {% endfor %}
-  </ul>
+{% if form.non_field_errors %}
+<div class="has-error">
+  {% for x in form.non_field_errors %}
+  <p class="help-block">{{ x }}</p>
+  {% endfor %}
 </div>
 {% endif %}
 
 <div class="row">
-  <br>
-  <br>
+  <div class="col-sm-6 margin30">
+    <h3 class="heading">
+      Welcome to TakeYourMeds
+    </h3>
+    <p>
+      {% lorem %}
+    </p>
 
-  <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
-    <div class="well">
-      <h1>Register</h1>
+    <div class="divide50"></div>
 
-      <p>
-        Already have an account? Then please <a href="{% url "account:login" %}">sign in</a>.
-      </p>
+    <h3 class="heading">Already have an account?</h3>
+    <p>
+      If you already have an account, then please
+      <a href="{% url "account:login" %}">sign in</a>.
+    </p>
+  </div>
 
-      <form class="signup" id="signup_form" method="POST" action="" class="form">
+  <div class="col-sm-6 sky-form-login-register v2">
+    <div class="margin40">
+
+      <form action="" method="POST" id="sky-form" class="sky-form">
         {% csrf_token %}
 
-        <input id="id_confirmation_key" maxlength="40" name="confirmation_key" type="hidden">
-        {% if redirect_field_value %}
-          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-        {% endif %}
+        <h3 class="text-center">Create a new account on TakeYourMeds</h3>
 
-        <div class="form-group">
-          <label for="id_username">Username:</label>
-          <input autofocus="autofocus" id="id_username" maxlength="30" name="username" placeholder="Username" type="text" value="{{ form.username.value|default:"" }}">
-       </div>
+        <fieldset>
+          <section class="{% if form.errors.username %}state-error{% endif %}">
+            <label class="input">
+              <i class="icon-append fa fa-user"></i>
+              <input
+                id="{{ form.username.id_for_label }}"
+                type="text"
+                class="form-control"
+                name="{{ form.username.html_name }}"
+                value="{{ form.username.value|default:"" }}"
+                maxlength="{{ form.fields.username.max_length }}"
+                placeholder="Username"
+                {% if form.fields.username.required %}required{% endif %}
+              >
+            </label>
+            {% for x in form.errors.username %}
+              <p class="help-block">{{ x }}</p>
+            {% endfor %}
+          </section>
 
-       <div class="form-group">
-         <label for="id_email">E-mail:</label>
-         <input id="id_email" name="email" placeholder="E-mail address" type="email"  class="form-control" value="{{ form.email.value|default:"" }}">
-       </div>
+          <section class="{% if form.errors.email %}state-error{% endif %}">
+            <label class="input">
+              <i class="icon-append fa fa-envelope-o"></i>
+              <input
+                id="{{ form.email.id_for_label }}"
+                type="email"
+                class="form-control"
+                name="{{ form.email.html_name }}"
+                value="{{ form.email.value|default:"" }}"
+                maxlength="{{ form.fields.email.max_length }}"
+                placeholder="Email address"
+                {% if form.fields.email.required %}required{% endif %}
+              >
+            </label>
+            {% for x in form.errors.username %}
+              <p class="help-block">{{ x }}</p>
+            {% endfor %}
+          </section>
 
-        <div class="form-group">
-          <label for="id_password1">Password:</label>
-          <input id="id_password1" name="password" placeholder="Password" type="password" class="form-control">
-        </div>
+          <section class="{% if form.errors.password %}state-error{% endif %}">
+            <label class="input">
+              <i class="icon-append fa fa-lock"></i>
+              <input
+                id="{{ form.password.id_for_label }}"
+                type="password"
+                class="form-control"
+                name="{{ form.password.html_name }}"
+                value="{{ form.password.value|default:"" }}"
+                maxlength="{{ form.fields.password.max_length }}"
+                placeholder="Password"
+                {% if form.fields.password.required %}required{% endif %}
+              >
+            </label>
+            {% for x in form.errors.password %}
+              <p class="help-block">{{ x }}</p>
+            {% endfor %}
+          </section>
+        </fieldset>
 
-        <button type="submit" class="btn btn-success btn-block">Sign Up »</button>
+        <footer>
+          <button type="submit" class="button">Create account</button>
+        </footer>
       </form>
     </div>
   </div>
-
-  <div class="clearfix"></div>
 </div>
 
 {% endblock %}
