@@ -1,21 +1,27 @@
 {% extends "base/base.html" %}
 
-{% block head_title %}Logout{% endblock %}
+{% block title %}Confirm logout &mdash; {{ block.super }}{% endblock %}
 
-{% block container %}
+{% block breadcrumbs_header %}
+  <h4>Confirm logout</h4>
+{% endblock %}
 
-  <h1 style="margin-top: 40px;">Logout</h1>
+{% block breadcrumbs %}
+  {{ block.super }}
+  <li>Logout</li>
+{% endblock %}
 
-  <p>
-    Are you sure you want to sign out?
-  </p>
+{% block content %}
 
-  <form method="POST" action="">
-    {% csrf_token %}
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-4">
+    <form method="POST" action="">
+      {% csrf_token %}
+      <button class="btn btn-lg btn-block" type="submit">Confirm logout</button>
+    </form>
+  </div>
+</div>
 
-    <button class="btn btn-primary" type="submit">
-      Logout
-    </button>
-  </form>
+<div class="divide60"></div>
 
 {% endblock %}
