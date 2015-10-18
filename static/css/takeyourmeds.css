@@ -11,3 +11,7 @@
   font-weight: bold;
   line-height: 15px;
 }
+
+h3.heading {
+  text-transform: inherit;
+}
