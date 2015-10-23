@@ -7,16 +7,17 @@
 
   <title>{% block title %}Take Your Meds: Phone reminders to help you and yours remember to take your medication{% endblock %}</title>
 
+  {% block css %}
   <link href="{% static "css/bootstrap.css" %}" rel="stylesheet" />
   <link href="{% static "css/assan.css" %}" rel="stylesheet" media="screen" />
 
   <link href="{% static "css/animate.css" %}" rel="stylesheet" media="screen" />
   <link href="{% static "css/font-awesome.css" %}" rel="stylesheet" media="screen" />
-  <link href="{% static "css/rev-style.css" %}" rel="stylesheet" media="screen" />
-  <link href="{% static "css/sky-forms.css" %}" rel="stylesheet" media="screen" />
   <link href="{% static "css/yamm.css" %}" rel="stylesheet" media="screen" />
 
   <link href="{% static "css/takeyourmeds.css" %}" rel="stylesheet" media="screen" />
+  {% endblock %}
+
 </head>
 <body id="{% block body_id %}{% endblock %}">
   {% block body %}{% endblock %}
