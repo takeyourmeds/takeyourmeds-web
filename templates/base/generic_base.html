@@ -17,7 +17,7 @@
 
   <link href="{% static "css/takeyourmeds.css" %}" rel="stylesheet" media="screen" />
 </head>
-<body>
+<body id="{% block body_id %}{% endblock %}">
   {% block body %}{% endblock %}
 
   {% block script %}
