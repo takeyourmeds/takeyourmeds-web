@@ -15,149 +15,150 @@
 </div>
 {% endblock %}
 
+{% block css %}
+{{ block.super }}
+<link href="{% static "rs-plugin/css/settings.css" %}" rel="stylesheet" type="text/css" media="screen"/>
+<link href="{% static "css/rev-style.css" %}" rel="stylesheet" type="text/css" media="screen"/>
+{% endblock %}
+
 {% block container %}
 
-    <!--rev slider start-->
 
-    <div class="tp-banner-container">
-      <div class="tp-banner-boxed">
-        <ul>
-       <!-- SLIDE -->
-        <li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 1">
-          <!-- MAIN IMAGE -->
-          <img src="{% static "img/bg-4.jpg" %}"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-          <div class="caption sfb bold uppercase-title text-center"
-             data-x="center"
-             data-y="158" 
-             data-speed="900"
-             data-start="800"
-             data-easing="Sine.easeOut">Hello! This is Assan</div>
-          <div class="caption sfb lowercase-caption text-center" 
-             data-x="center"
-             data-y="218"
-             data-speed="900"
-             data-start="1500"
-             data-easing="Sine.easeOut">A responsive site template with a clean and profession design 
-            <br />that will be a great solution for your business, portfolio, Shop or any other purpose.</div>
-          <div class="caption rev-buttons tp-resizeme sfb" 
-             data-x="center" 
-             data-y="313"
-             data-speed="900"
-             data-start="2200" 
-             data-easing="Sine.easeOut">
-            <a href="#" class="btn btn-theme-bg btn-lg">Purchase Now</a>
-          </div>
-        </li>
-        <!-- SLIDE -->
-        <li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 2">
-          <!-- MAIN IMAGE -->
-          <img src="{% static "img/slider-2.jpg" %}"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-        
-          <div class="tp-caption lft"
-             data-x="578"
-             data-y="120" 
-             data-speed="900"
-             data-start="2100"
-             data-easing="Sine.easeOut">
-            <img src="{% static "img/mockup-all.png" %}" alt="" />
-          </div>
-                 
-          <div class="tp-caption sft modern_big_bluebg rev-title-v1"
-             data-x="35" data-y="200"
-             data-speed="500"
-             data-start="800"
-             data-easing="Sine.easeOut">
-            Powerful Template
-          </div>
-          <div class="tp-caption sfr modern_big_bluebg rev-title-v1"
-             data-x="35"
-             data-y="265"
-             data-speed="500"
-             data-start="1300"
-             data-easing="Sine.easeOut">
-            Unlimited layouts
-          </div>
-          <div class="caption sfb rev-buttons tp-resizeme"
-             data-x="35"
-             data-y="330"
-             data-speed="500"
-             data-start="1800"
-             data-easing="Sine.easeOut">
-            <a href="#" class="btn btn-theme-bg btn-lg">Purchase Now</a>
-          </div>
-        </li>
-        <!-- SLIDE -->
-        <li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 3">
-          <!-- MAIN IMAGE -->
-          <img src="{% static "img/slider-5.jpg" %}"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-          <div class="tp-caption lft"
-             data-x="35" 
-             data-y="140"
-             data-speed="900"
-             data-start="800" 
-             data-easing="Sine.easeOut">
-            <img src="{% static "img/macbook.png" %}" alt="" />
-          </div>
-          <div class="tp-caption lfr"
-             data-x="375"
-             data-y="180"
-             data-speed="900" 
-             data-start="1500"
-             data-easing="Sine.easeOut">
-            <img src="{% static "img/ipad.png" %}" alt="" />
-          </div>
-          <div class="tp-caption lfl" 
-             data-x="348"
-             data-y="249"
-             data-speed="900"
-             data-start="1800"
-             data-easing="Sine.easeOut">
-            <img src="{% static "img/iphone.png" %}" alt="" />
-          </div>
-          <div class="tp-caption sfr modern_big_redbg" 
-             data-x="750"
-             data-y="185"
-             data-speed="400"
-             data-start="2500"
-             data-easing="Sine.easeOut">
-            100% Responsive
-          </div>
-          <div class="tp-caption sfr modern_big_redbg"
-             data-x="750" 
-             data-y="237"
-             data-speed="400"
-             data-start="2900"
-             data-easing="Sine.easeOut">
-            80+ layouts
-          </div>
-          <div class="tp-caption sfr modern_big_redbg"
-             data-x="750" data-y="289"
-             data-speed="400"
-             data-start="3300" 
-             data-easing="Sine.easeOut">
-            Revolution Slider
-          </div>
-          <div class="caption sfr rev-buttons tp-resizeme " 
-             data-x="750"
-             data-y="341" 
-             data-speed="400" 
-             data-start="3700" 
-             data-easing="Sine.easeOut">
-            <a href="#" class="btn btn-lg border-white">See all features</a>
-          </div>
-
-
-        </li>
-        </ul>
+{% comment %}
+<div class="tp-banner-container">
+  <div class="tp-banner-boxed">
+    <ul>
+   <!-- SLIDE -->
+    <li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 1">
+      <!-- MAIN IMAGE -->
+      <img src="{% static "img/bg-4.jpg" %}"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+      <div class="caption sfb bold uppercase-title text-center"
+         data-x="center"
+         data-y="158" 
+         data-speed="900"
+         data-start="800"
+         data-easing="Sine.easeOut">Hello! This is Assan</div>
+      <div class="caption sfb lowercase-caption text-center" 
+         data-x="center"
+         data-y="218"
+         data-speed="900"
+         data-start="1500"
+         data-easing="Sine.easeOut">A responsive site template with a clean and profession design 
+        <br />that will be a great solution for your business, portfolio, Shop or any other purpose.</div>
+      <div class="caption rev-buttons tp-resizeme sfb" 
+         data-x="center" 
+         data-y="313"
+         data-speed="900"
+         data-start="2200" 
+         data-easing="Sine.easeOut">
+        <a href="#" class="btn btn-theme-bg btn-lg">Purchase Now</a>
       </div>
-    </div><!--full width banner-->
+    </li>
+    <!-- SLIDE -->
+    <li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 2">
+      <!-- MAIN IMAGE -->
+      <img src="{% static "img/slider-2.jpg" %}"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+    
+      <div class="tp-caption lft"
+         data-x="578"
+         data-y="120" 
+         data-speed="900"
+         data-start="2100"
+         data-easing="Sine.easeOut">
+        <img src="{% static "img/mockup-all.png" %}" alt="" />
+      </div>
+             
+      <div class="tp-caption sft modern_big_bluebg rev-title-v1"
+         data-x="35" data-y="200"
+         data-speed="500"
+         data-start="800"
+         data-easing="Sine.easeOut">
+        Powerful Template
+      </div>
+      <div class="tp-caption sfr modern_big_bluebg rev-title-v1"
+         data-x="35"
+         data-y="265"
+         data-speed="500"
+         data-start="1300"
+         data-easing="Sine.easeOut">
+        Unlimited layouts
+      </div>
+      <div class="caption sfb rev-buttons tp-resizeme"
+         data-x="35"
+         data-y="330"
+         data-speed="500"
+         data-start="1800"
+         data-easing="Sine.easeOut">
+        <a href="#" class="btn btn-theme-bg btn-lg">Purchase Now</a>
+      </div>
+    </li>
+    <!-- SLIDE -->
+    <li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 3">
+      <!-- MAIN IMAGE -->
+      <img src="{% static "img/slider-5.jpg" %}"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+      <div class="tp-caption lft"
+         data-x="35" 
+         data-y="140"
+         data-speed="900"
+         data-start="800" 
+         data-easing="Sine.easeOut">
+        <img src="{% static "img/macbook.png" %}" alt="" />
+      </div>
+      <div class="tp-caption lfr"
+         data-x="375"
+         data-y="180"
+         data-speed="900" 
+         data-start="1500"
+         data-easing="Sine.easeOut">
+        <img src="{% static "img/ipad.png" %}" alt="" />
+      </div>
+      <div class="tp-caption lfl" 
+         data-x="348"
+         data-y="249"
+         data-speed="900"
+         data-start="1800"
+         data-easing="Sine.easeOut">
+        <img src="{% static "img/iphone.png" %}" alt="" />
+      </div>
+      <div class="tp-caption sfr modern_big_redbg" 
+         data-x="750"
+         data-y="185"
+         data-speed="400"
+         data-start="2500"
+         data-easing="Sine.easeOut">
+        100% Responsive
+      </div>
+      <div class="tp-caption sfr modern_big_redbg"
+         data-x="750" 
+         data-y="237"
+         data-speed="400"
+         data-start="2900"
+         data-easing="Sine.easeOut">
+        80+ layouts
+      </div>
+      <div class="tp-caption sfr modern_big_redbg"
+         data-x="750" data-y="289"
+         data-speed="400"
+         data-start="3300" 
+         data-easing="Sine.easeOut">
+        Revolution Slider
+      </div>
+      <div class="caption sfr rev-buttons tp-resizeme " 
+         data-x="750"
+         data-y="341" 
+         data-speed="400" 
+         data-start="3700" 
+         data-easing="Sine.easeOut">
+        <a href="#" class="btn btn-lg border-white">See all features</a>
+      </div>
 
 
+    </li>
+    </ul>
+  </div>
+</div><!--full width banner-->
+{% endcomment %}
 
-
-
-
-      <!--end-->
 
 <div class="intro-text-1">
       <div class="container">
