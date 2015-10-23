@@ -21,10 +21,15 @@
 <link href="{% static "css/rev-style.css" %}" rel="stylesheet" type="text/css" media="screen"/>
 {% endblock %}
 
+{% block script %}
+{{ block.super }}
+<script src="{% static "rs-plugin/js/jquery.themepunch.tools.min.js" %}" type="text/javascript"></script>
+<script src="{% static "rs-plugin/js/jquery.themepunch.revolution.min.js" %}" type="text/javascript"></script>
+<script src="{% static "js/revolution-custom.js" %}" type="text/javascript"></script>
+{% endblock %}
+
 {% block container %}
 
-
-{% comment %}
 <div class="tp-banner-container">
   <div class="tp-banner-boxed">
     <ul>
@@ -156,9 +161,7 @@
     </li>
     </ul>
   </div>
-</div><!--full width banner-->
-{% endcomment %}
-
+</div>
 
 <div class="intro-text-1">
       <div class="container">
@@ -273,122 +276,21 @@
           </div>
       </section><!--section services-->
       <div class="divide40"></div>
-      <section class="portfolio">
-          <div class="container">
-              <div class="row">
-                  <div class="col-md-12">
-                      <div class="center-heading">
-                          <h2>Recent work</h2>
-                          <span class="center-line"></span>
-                      </div>
-                  </div>                   
-              </div><!--center heading row-->
-              <div class="row">
-                  <div class="col-md-12">
-                      <div id="work-carousel" class="owl-carousel owl-spaced">
-                          <div>
 
-                              <div class="item-img-wrap ">
-                                  <img src="{% static "img/img-1.jpg" %}" class="img-responsive" alt="workimg">
-                                  <div class="item-img-overlay">
-                                      <a href="img/img-1.jpg" class="show-image">
-                                          <span></span>
-                                      </a>
-                                  </div>
-                              </div> <!--item img wrap-->
-                              <div class="work-desc">
-                                  <h3><a href="portfolio-single.html">woo Commerce</a></h3>
-                                  <span>Magento</span>
-                              </div><!--work desc-->
-                          </div><!--owl item-->
-                          <div> 
-                              <div class="item-img-wrap ">
-                                  <img src="{% static "img/img-2.jpg" %}" class="img-responsive" alt="workimg">
-                                  <div class="item-img-overlay">
-                                      <a href="img/img-2.jpg" class="show-image">
-                                          <span></span>
-                                      </a>
-                                  </div>
-                              </div> 
-                              <div class="work-desc">
-                                  <h3><a href="portfolio-single.html">Web Develop</a></h3>
-                                  <span>Php / Wordpress</span>
-                              </div><!--work desc-->
-                          </div><!--owl item-->
-                          <div> 
-                              <div class="item-img-wrap ">
-                                  <img src="{% static "img/img-3.jpg" %}" class="img-responsive" alt="workimg">
-                                  <div class="item-img-overlay">
-                                      <a href="img/img-3.jpg" class="show-image">
-                                          <span></span>
-                                      </a>
-                                  </div>
-                              </div> 
-                              <div class="work-desc">
-                                  <h3><a href="portfolio-single.html">Web Design</a></h3>
-                                  <span>HTML5 / CSS3</span>
-                              </div><!--work desc-->
-                          </div><!--owl item-->
-                          <div> 
-                              <div class="item-img-wrap ">
-                                  <img src="{% static "img/img-4.jpg" %}" class="img-responsive" alt="workimg">
-                                  <div class="item-img-overlay">
-                                      <a href="img/img-4.jpg" class="show-image">
-                                          <span></span>
-                                      </a>
-                                  </div>
-                              </div> 
-                              <div class="work-desc">
-                                  <h3><a href="portfolio-single.html">Graphics Design</a></h3>
-                                  <span>Corel Drow</span>
-                              </div><!--work desc-->
-                          </div><!--owl item-->
-                          <div> 
-                              <div class="item-img-wrap ">
-                                  <img src="{% static "img/img-5.jpg" %}" class="img-responsive" alt="workimg">
-                                  <div class="item-img-overlay">
-                                      <a href="img/img-5.jpg" class="show-image">
-                                          <span></span>
-                                      </a>
-                                  </div>
-                              </div> 
-                              <div class="work-desc">
-                                  <h3><a href="portfolio-single.html">Psd Design</a></h3>
-                                  <span>Photoshop</span>
-                              </div><!--work desc-->
-                          </div><!--owl item-->
-                          <div> 
-                              <div class="item-img-wrap ">
-                                  <img src="{% static "img/img-6.jpg" %}" class="img-responsive" alt="workimg">
-                                  <div class="item-img-overlay">
-                                      <a href="img/img-6.jpg" class="show-image">
-                                          <span></span>
-                                      </a>
-                                  </div>
-                              </div> 
-                              <div class="work-desc">
-                                  <h3><a href="portfolio-single.html">Logo Design</a></h3>
-                                  <span>Illustrate</span>
-                              </div><!--work desc-->
-                          </div><!--owl item-->
-                      </div>
-                  </div>
-              </div><!--row-->
-              <div class="divide30"></div>
-              <div class="row">
-                  <div class="col-md-12 text-center">
-                      <a href="#" class="btn border-theme btn-lg wow animated fadeInUp"><i class="fa fa-bars"></i> Load More Projects</a>
-                  </div>
-              </div>
-          </div><!--container-->
-      </section><!--recent work section -->
       <div class="divide80"></div>
+
       <div class="container">
           <div class="row">
               <div class="col-sm-5">
                   <h3 class="heading">About Company</h3>
                   <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque neque eget diam posuere porta. Quisque ut nulla at nunc vehicula lacinia. Proin adipiscing porta tellus, ut feugiat nibh adipiscing sit amet. In eu justo a felis faucibus ornare vel id metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In eu libero ligula.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Curabitur pellentesque neque eget diam posuere porta.
+                      Quisque ut nulla at nunc vehicula lacinia. Proin
+                      adipiscing porta tellus, ut feugiat nibh adipiscing sit
+                      amet. In eu justo a felis faucibus ornare vel id metus.
+                      Vestibulum ante ipsum primis in faucibus orci luctus et
+                      ultrices posuere cubilia Curae; In eu libero ligula.
                   </p>
               </div>
               <div class="col-sm-7">
@@ -500,156 +402,6 @@
               </div>
           </div> 
       </section><!--services with the showcase mockups-->
-      <section id="clients-carousel">
-          <div class="container">
-              <div class="row">
-                  <div class="col-md-12">
-                      <div class="center-heading">
-                          <h2>Trusted worldwide</h2>
-                          <span class="center-line"></span>
-                          <p class="lead">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing metus. elit. Quisque rutrum pellentesque imperdiet.
-                          </p>
-                      </div>
-                  </div>                   
-              </div><!--center heading row-->
-              <div id="clients-slider">       
-                  <div class="item"><a href="#"><img src="{% static "img/cl-1.png" %}" alt=""></a></div>
-                  <div class="item"><a href="#"><img src="{% static "img/cl-2.png" %}" alt=""></a></div>
-                  <div class="item"><a href="#"><img src="{% static "img/cl-3.png" %}" alt=""></a></div>
-                  <div class="item"><a href="#"><img src="{% static "img/cl-4.png" %}" alt=""></a></div>
-                  <div class="item"><a href="#"><img src="{% static "img/cl-5.png" %}" alt=""></a></div>
-              </div>
-          </div>
-      </section><!--clients carousel end-->
-      <section id="cta-1">
-          <div class="container">
-              <h1>Do you have a project or idea?</h1>
-              <a href="#" class="btn border-white btn-lg">Join us today</a>
-          </div>
-      </section>
-      <div class="divide80"></div>
-      <div class="container">
-
-          <div class="row">
-              <div class="col-md-7 margin40">
-                  <h3 class="heading">Latest News</h3>
-                  <div id="news-carousel" class="owl-carousel owl-spaced">
-                      <div>
-                          <a href="#">
-                              <div class="item-img-wrap">
-                                  <img src="{% static "img/img-8.jpg" %}" class="img-responsive" alt="workimg">
-                                  <div class="item-img-overlay">
-                                      <span></span>
-                                  </div>
-                              </div>                       
-                          </a><!--news link--> 
-                          <div class="news-desc">
-                              <span>Sports</span>
-                              <h4><a href="#">Lorem ipsum dollor Sit amet</a></h4>
-                              <span>By <a href="#">Author</a> on 24 july 2014</span> <span><a href="#">Read more...</a></span>
-                          </div><!--news desc-->
-                      </div> 
-                      <div>
-                          <a href="#">
-                              <div class="item-img-wrap">
-                                  <img src="{% static "img/img-7.jpg" %}" class="img-responsive" alt="workimg">
-                                  <div class="item-img-overlay">
-                                      <span></span>
-                                  </div>
-                              </div>                       
-                          </a><!--news link--> 
-                          <div class="news-desc">
-                              <span>Sports</span>
-                              <h4><a href="#">Lorem ipsum dollor Sit amet</a></h4>
-                              <span>By <a href="#">Author</a> on 24 july 2014</span> <span><a href="#">Read more...</a></span>
-                          </div><!--news desc-->
-                      </div> 
-                      <div>
-                          <a href="#">
-                              <div class="item-img-wrap">
-                                  <img src="{% static "img/img-6.jpg" %}" class="img-responsive" alt="workimg">
-                                  <div class="item-img-overlay">
-                                      <span></span>
-                                  </div>
-                              </div>                       
-                          </a><!--news link--> 
-                          <div class="news-desc">
-                              <span>Sports</span>
-                              <h4><a href="#">Lorem ipsum dollor Sit amet</a></h4>
-                              <span>By <a href="#">Author</a> on 24 july 2014</span> <span><a href="#">Read more...</a></span>
-                          </div><!--news desc-->
-                      </div> 
-                      <div>
-                          <a href="#">
-                              <div class="item-img-wrap">
-                                  <img src="{% static "img/img-5.jpg" %}" class="img-responsive" alt="workimg">
-                                  <div class="item-img-overlay">
-                                      <span></span>
-                                  </div>
-                              </div>                       
-                          </a><!--news link--> 
-                          <div class="news-desc">
-                              <span>Sports</span>
-                              <h4><a href="#">Lorem ipsum dollor Sit amet</a></h4>
-                              <span>By <a href="#">Author</a> on 24 july 2014</span> <span><a href="#">Read more...</a></span>
-                          </div><!--news desc-->
-                      </div> 
-                  </div>
-              </div><!--col 7 end use for latest news owl carousel slide-->
-              <div class="col-md-5 margin20">
-                  <h3 class="heading">Why Us?</h3>
-                  <!--bootstrap collapse-->
-                  <div class="panel-group" id="accordion">
-                      <div class="panel panel-default">
-                          <div class="panel-heading">
-                              <h4 class="panel-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                      <i class="fa fa-desktop"></i>    100% Responsive Design
-                                  </a>
-                              </h4>
-                          </div>
-                          <div id="collapseOne" class="panel-collapse collapse in">
-                              <div class="panel-body">
-                                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor.
-                              </div>
-                          </div>
-                      </div>
-                      <div class="panel panel-default">
-                          <div class="panel-heading">
-                              <h4 class="panel-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                      <i class="fa fa-crop"></i>    Pixel Perfect Design 
-                                  </a>
-                              </h4>
-                          </div>
-                          <div id="collapseTwo" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
-                              </div>
-                          </div>
-                      </div>
-                      <div class="panel panel-default">
-                          <div class="panel-heading">
-                              <h4 class="panel-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                      <i class="fa fa-cogs"></i>    Full Support
-                                  </a>
-                              </h4>
-                          </div>
-                          <div id="collapseThree" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <!--collapse end-->
-              </div>
-          </div>
-      </div><!--latest news and why us container end-->
-
-
 
 
 <div id="hero">
