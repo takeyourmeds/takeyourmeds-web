@@ -42,6 +42,7 @@
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
+          <li class="{% block navbar_active_home %}{% endblock %}"><a href="{% url "static:landing" %}">Home</a></li>
           <li class="{% block navbar_active_about %}{% endblock %}"><a href="{% url "static:about" %}">About</a></li>
           <li class="{% block navbar_active_faq %}{% endblock %}"><a href="{% url "static:faq" %}">FAQs</a></li>
           <li class="{% block navbar_active_contact %}{% endblock %}"><a href="{% url "static:contact" %}">Contact</a></li>
