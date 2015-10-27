@@ -91,7 +91,10 @@
 {% endif %}
 
 {% block container %}
-<div class="divide80"></div>
+
+{% block container_header %}
+  <div class="divide80"></div>
+{% endblock %}
 
 <div class="container">
   {% block content %}{% endblock %}
