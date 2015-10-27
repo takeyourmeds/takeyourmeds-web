@@ -1,3 +1,13 @@
+$.extend({
+  feature: function(body_class, callback) {
+    // calling $.feature('bclass', function () {}) means that the function will
+    // only get called when your body tag has the correct class.
+    if ($('body').hasClass(body_class)) {
+      $(callback);
+    }
+  }
+});
+
 $(function() {
     // fix for django csrf
     var csrftoken = $.cookie('csrftoken');
