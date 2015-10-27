@@ -1,71 +1,82 @@
 {% extends "base/base.html" %}
 
-{% block bodyclass %}reminder-list{% endblock %}
+{% block title %}{{ block.super }}{% endblock %}
+
+{% block breadcrumbs_header %}
+  <h4>My reminders</h4>
+{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  <li>My reminders</li>
+{% endblock %}
+
+{% block container_header %}
+  <div class="divide50"></div>
+{% endblock %}
 
 {% block content %}
-<div id="content">
-  <header class="content_header">
-    <h1>My reminders</h1>
-  </header>
 
-  <div class="container">
+<a
+  href="{% url "reminders:create" %}"
+  class="btn btn-theme-bg pull-right"
+>Create a new reminder</a>
 
-    {% for reminder in reminders %}
+<h3>
+  My reminders ({{ reminders.count }})
+</h3>
 
-    <div class="reminder clearfix">
+{% for reminder in reminders %}
 
-      <div class="info-left box-sizing-border">
+<div class="reminder clearfix">
 
-        <h3><span class="meta">Send to</span> {{ reminder.telnumber }} </h3>
-        <form method="POST" action="{% url "reminders:trigger" reminder.pk %}" style="display: inline;">
-          {% csrf_token %}
-          <button type="submit">Test</button>
-        </form>
+  <div class="info-left box-sizing-border">
 
-        <form method="POST" action="{% url "reminders:delete" reminder.pk %}" style="display: inline;">
-          {% csrf_token %}
-          <button type="submit">Delete</button>
-        </form>
-      </div>
+    <h3><span class="meta">Send to</span> {{ reminder.telnumber }} </h3>
+    <form method="POST" action="{% url "reminders:trigger" reminder.pk %}" style="display: inline;">
+      {% csrf_token %}
+      <button type="submit">Test</button>
+    </form>
 
-      <div class="info-right box-sizing-border">
-        <span class="meta">Message</span>
-        {% if reminder.message %}
-          <p>{{ reminder.message }}</p>
-        {% else %}
-          <audio src="{{ reminder.audiourl }}" controls>
-            Unfortunately your browser does not support the <code>audio</code> element.
-          </audio>
-        {% endif %}
+    <form method="POST" action="{% url "reminders:delete" reminder.pk %}" style="display: inline;">
+      {% csrf_token %}
+      <button type="submit">Delete</button>
+    </form>
+  </div>
 
-        <p>
-          <span class="meta">Timings</span>
-          {% for time in reminder.times.all %}
-          <span class="cron">{{ time.cronstring }}</span>{% if not forloop.last %},{% endif %}
-          {% endfor %}
-        </p>
-
-      </div>
-
-
-      </p>
-    </div>
-
-    {% empty %}
-    <p class="align-center">
-      You have no reminders.
-    </p>
-    {% endfor %}
+  <div class="info-right box-sizing-border">
+    <span class="meta">Message</span>
+    {% if reminder.message %}
+      <p>{{ reminder.message }}</p>
+    {% else %}
+      <audio src="{{ reminder.audiourl }}" controls>
+        Unfortunately your browser does not support the <code>audio</code> element.
+      </audio>
+    {% endif %}
 
     <p>
-      <a href="{% url "reminders:create" %}" class="submit">Set up a new reminder</a>
+      <span class="meta">Timings</span>
+      {% for time in reminder.times.all %}
+      <span class="cron">{{ time.cronstring }}</span>{% if not forloop.last %},{% endif %}
+      {% endfor %}
     </p>
 
   </div>
 
+
+  </p>
 </div>
 
+{% empty %}
 
-</div>
+<div class="divide30"></div>
+
+<p class="text-center">
+  You have no reminders.
+</p>
+
+{% endfor %}
+
+<div class="divide30"></div>
 
 {% endblock %}
