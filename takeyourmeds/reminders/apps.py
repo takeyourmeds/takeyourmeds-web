@@ -5,11 +5,11 @@ class RemindersConfig(AppConfig):
 
     voice_reminders = (
         (
-            'hi_mum_medication_reminder.mp3',
+            'mp3/hi_mum_medication_reminder.mp3',
             "Mum's medication reminder!",
         ),
         (
-            'its_fiona_mouthwash_reminder.mp3',
+            'mp3/its_fiona_mouthwash_reminder.mp3',
             "Dental Hygienist",
         ),
     )
