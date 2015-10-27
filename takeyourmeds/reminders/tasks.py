@@ -12,6 +12,7 @@ logger = get_task_logger(__name__)
 @shared_task()
 def send_reminder_task(reminder_id):
     reminder = Reminder.objects.get(pk=reminder_id)
+
     if reminder.message:
         send_sms(reminder.telnumber, reminder.message)
     elif reminder.audiourl:
