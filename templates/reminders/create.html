@@ -109,6 +109,46 @@
     {% endfor %}
   </div>
 
+  <div class="form-group {% if form.errors.message %}has-error{% endif %}">
+    <label for="{{ form.message.id_for_label }}">
+      What message would you like to send?
+    </label>
+    <textarea
+      id="{{ form.message.id_for_label }}"
+      rows="2"
+      name="{{ form.message.html_name }}"
+      class="form-control"
+      maxlength="{{ form.fields.message.max_length }}"
+      {% if form.fields.message.required %}required{% endif %}
+    >{{ form.message.value|default:"" }}</textarea>
+
+    {% for x in form.errors.message %}
+      <p class="help-block">{{ x }}</p>
+    {% endfor %}
+  </div>
+
+  <div class="form-group {% if form.errors.audiourl %}has-error{% endif %}">
+    <label for="{{ form.audiourl.id_for_label }}">
+      Which voice message would you like to send?
+    </label>
+    <select
+      id="{{ form.field.id_for_label }}"
+      class="form-control"
+      name="{{ form.field.html_name }}"
+    >
+      {% for x, y in form.fields.field.choices %}
+      <option
+        value="{{ x }}"
+        {% if form.field.value == x %}selected{% endif %}
+      >{{ y }}</option>
+      {% endfor %}
+    </select>
+
+    {% for x in form.errors.audiourl %}
+      <p class="help-block">{{ x }}</p>
+    {% endfor %}
+  </div>
+
   <div class="divide30"></div>
 
   <div class="form-group">
