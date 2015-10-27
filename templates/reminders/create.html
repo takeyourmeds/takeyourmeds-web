@@ -1,110 +1,203 @@
 {% extends "base/base.html" %}
 
+{% block title %}Create new reminder &mdash; {{ block.super }}{% endblock %}
+
+{% block breadcrumbs_header %}
+  <h4>Create new reminder</h4>
+{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  <li><a href="{% url "dashboard:view" %}">My reminders</a></li>
+  <li>Create new reminder</li>
+{% endblock %}
+
+{% block container_header %}
+  <div class="divide50"></div>
+{% endblock %}
+
 {% block content %}
-<div id="content">
-  <header class="content_header">
 
-    <h1>Set up a new medication reminder</h1>
-    <p>Fill out the form below to set up a new telephone reminder for you or someone you care for</p>
+<h3>
+  Create a new reminder
+</h3>
 
-  </header>
+<p>
+  Fill out the form below to set up a new telephone reminder for you or someone
+  you care for.
+</p>
 
-  <div class="container">
+<div class="divide30"></div>
 
-    <form
-      action=""
-      method="POST"
-      id="reminder-setup"
-      name="reminder-setup"
-      data-url="{% url "api:reminder-list" %}"
-      data-success-url="{% url "dashboard:view" %}"
+{% if form.non_field_errors %}
+<div class="has-error">
+  {% for x in form.non_field_errors %}
+  <p class="help-block">{{ x }}</p>
+  {% endfor %}
+</div>
+{% endif %}
+
+<form
+  method="POST"
+  class="form-horizontal"
+  action=""
+>
+  {% csrf_token %}
+
+  <div class="form-group {% if form.errors.frequency %}has-error{% endif %}">
+    <label for="{{ form.frequency.id_for_label }}">
+      How many times a day should we send reminders?
+    </label>
+
+    <select
+      id="{{ form.frequency.id_for_label }}"
+      class="form-control"
+      name="{{ form.frequency.html_name }}"
+      {% if form.fields.frequency.required %}required{% endif %}
     >
-      <label for="frequency">How many times a day should we send reminders?</label>
+      {% for x, y in form.fields.frequency.choices %}
+      <option
+        value="{{ x }}"
+        {% if form.frequency.value == x %}selected{% endif %}
+      >{{ y }}</option>
+      {% endfor %}
+    </select>
 
-      <select id="frequency" name="frequency">
-        <option value="0" selected> Please select</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
-
-      <div id="reminder-schedule" class="box-sizing-border">
-
-        <p class="label">The reminders will be sent at the following times (feel free to change them):</p>
-
-        <ol>
-          <li id="reminder_template" class="reminder-time">
-            <select name="time_1">
-              <option value="5:00">5:00</option>
-              <option value="6:00">6:00</option>
-              <option value="7:00">7:00</option>
-              <option value="8:00">8:00</option>
-              <option value="9:00">9:00</option>
-              <option value="10:00">10:00</option>
-              <option value="11:00">11:00</option>
-              <option value="12:00">12:00</option>
-              <option value="13:00">13:00</option>
-              <option value="14:00">14:00</option>
-              <option value="15:00">15:00</option>
-              <option value="16:00">16:00</option>
-              <option value="17:00">17:00</option>
-              <option value="18:00">18:00</option>
-              <option value="19:00">19:00</option>
-              <option value="20:00">20:00</option>
-              <option value="21:00">21:00</option>
-              <option value="22:00">22:00</option>
-              <option value="23:00">23:00</option>
-              <option value="0:00">0:00</option>
-            </select>
-          </li>
-        </ol>
-
-      </div>
-
-      <label for="phone_number">What phone number should we send them to?</label>
-      <input type="number" name="phone_number" id="phone_number" value="" class="box-sizing-border" required />
-
-      <div id="message-selector">
-
-        <p class="label">What type of message do you want to send?</p>
-
-        <label for="message-type-text" class="box-sizing-border">
-          <input type="radio" name="message_type" id="message-type-text" data-element="text-definition" value="text" class="radio-selector" />
-          Text
-        </label>
-
-        <label for="message-type-voice" class="box-sizing-border">
-          <input type="radio" name="message_type" id="message-type-voice" data-element="audio-selection" value="voice" class="radio-selector" />
-          Voice
-        </label>
-
-      </div>
-
-      <div id="text-definition" class="message-type">
-        <label for="message">What's your message?</label>
-        <textarea name="message" id="message" value="" class="box-sizing-border"></textarea>
-      </div>
-
-      <div id="audio-selection" class="message-type">
-        <label for="audio_url">Which voice message do you want to send?</label>
-        <select id="audio_url" name="audio_url">
-          <option value selected></option>
-          <option value="{{ settings.SITE_URL }}{% static "mp3/hi_mum_medication_reminder.mp3" %}">Mum's medication reminder!</option>
-          <option value="{{ settings.SITE_URL }}{% static "mp3/its_fiona_mouthwash_reminder.mp3" %}">Dental Hygienist</option>
-        </select>
-      </div>
-
-      <input value="Create this reminder" name="submit" type="submit" class="submit" />
-
-    </form>
-
+    {% for x in form.errors.frequency %}
+      <p class="help-block">{{ x }}</p>
+    {% endfor %}
   </div>
 
-</div>
+  <div class="form-group {% if form.errors.telnumber %}has-error{% endif %}">
+    <label for="{{ form.telnumber.id_for_label }}">
+      What phone number should we send them to?
+    </label>
+    <input
+      id="{{ form.telnumber.id_for_label }}"
+      class="form-control"
+      name="{{ form.telnumber.html_name }}"
+      value="{{ form.telnumber.value|default:"" }}"
+      maxlength="{{ form.fields.telnumber.max_length }}"
+      placeholder="Enter a UK telephone number (eg. 07123456789)"
+      {% if form.fields.telnumber.required %}required{% endif %}
+    >
+    {% for x in form.errors.telnumber %}
+      <p class="help-block">{{ x }}</p>
+    {% endfor %}
+  </div>
 
-<div class="success-message">
-  <p><strong>Thanks!</strong> Your reminders have been successfully set up.</p>
+  <div class="form-group {% if form.errors.message_type %}has-error{% endif %}">
+    <label for="{{ form.message_type.id_for_label }}">
+      What kind of message would you like to send?
+    </label>
+    <div class="">
+    {% for x, y in form.fields.message_type.choices %}
+      <label class="radio-inline">
+        <input
+          id="{{ form.message_type.id_for_label }}_{{ forloop.counter0 }}" value="{{ x }}"
+          type="radio"
+          name="{{ form.message_type.html_name }}"
+          {% if form.message_type.value == x %}checked{% endif %}
+        >
+        {{ y }}
+      </label>
+    {% endfor %}
+    </div>
+
+    {% for x in form.errors.message_type %}
+      <p class="help-block">{{ x }}</p>
+    {% endfor %}
+  </div>
+
+  <div class="divide30"></div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-theme-bg">
+        Create this reminder
+      </button>
+    </div>
+  </div>
+</form>
+
+  <form
+    action=""
+    method="POST"
+    id="reminder-setup"
+    name="reminder-setup"
+    data-url="{% url "api:reminder-list" %}"
+    data-success-url="{% url "dashboard:view" %}"
+  >
+
+    <div id="reminder-schedule" class="box-sizing-border">
+
+      <p class="label">The reminders will be sent at the following times (feel free to change them):</p>
+
+      <ol>
+        <li id="reminder_template" class="reminder-time">
+          <select name="time_1">
+            <option value="5:00">5:00</option>
+            <option value="6:00">6:00</option>
+            <option value="7:00">7:00</option>
+            <option value="8:00">8:00</option>
+            <option value="9:00">9:00</option>
+            <option value="10:00">10:00</option>
+            <option value="11:00">11:00</option>
+            <option value="12:00">12:00</option>
+            <option value="13:00">13:00</option>
+            <option value="14:00">14:00</option>
+            <option value="15:00">15:00</option>
+            <option value="16:00">16:00</option>
+            <option value="17:00">17:00</option>
+            <option value="18:00">18:00</option>
+            <option value="19:00">19:00</option>
+            <option value="20:00">20:00</option>
+            <option value="21:00">21:00</option>
+            <option value="22:00">22:00</option>
+            <option value="23:00">23:00</option>
+            <option value="0:00">0:00</option>
+          </select>
+        </li>
+      </ol>
+
+    </div>
+
+    <label for="phone_number">What phone number should we send them to?</label>
+    <input type="number" name="phone_number" id="phone_number" value="" class="box-sizing-border" required />
+
+    <div id="message-selector">
+
+      <p class="label">What type of message do you want to send?</p>
+
+      <label for="message-type-text" class="box-sizing-border">
+        <input type="radio" name="message_type" id="message-type-text" data-element="text-definition" value="text" class="radio-selector" />
+        Text
+      </label>
+
+      <label for="message-type-voice" class="box-sizing-border">
+        <input type="radio" name="message_type" id="message-type-voice" data-element="audio-selection" value="voice" class="radio-selector" />
+        Voice
+      </label>
+
+    </div>
+
+    <div id="text-definition" class="message-type">
+      <label for="message">What's your message?</label>
+      <textarea name="message" id="message" value="" class="box-sizing-border"></textarea>
+    </div>
+
+    <div id="audio-selection" class="message-type">
+      <label for="audio_url">Which voice message do you want to send?</label>
+      <select id="audio_url" name="audio_url">
+        <option value selected></option>
+        <option value="{{ settings.SITE_URL }}{% static "mp3/hi_mum_medication_reminder.mp3" %}">Mum's medication reminder!</option>
+        <option value="{{ settings.SITE_URL }}{% static "mp3/its_fiona_mouthwash_reminder.mp3" %}">Dental Hygienist</option>
+      </select>
+    </div>
+
+    <input value="Create this reminder" name="submit" type="submit" class="submit" />
+
+  </form>
 </div>
 
 {% endblock %}
