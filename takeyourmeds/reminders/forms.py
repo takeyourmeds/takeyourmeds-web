@@ -24,6 +24,11 @@ class CreateForm(forms.ModelForm):
             'telnumber',
         )
 
+    def __init__(self, *args, **kwargs):
+        super(CreateForm, self).__init__(*args, **kwargs)
+
+        self.initial['message_type'] = self.fields['message_type'].choices[0][0]
+
     def clean_telnumber(self):
         val = self.cleaned_data['telnumber']
 
