@@ -12,7 +12,6 @@ class CreateForm(forms.ModelForm):
             ('voice', u"Voice"),
             ('text', u"Text"),
         ],
-        default='voice',
     )
 
     class Meta:
