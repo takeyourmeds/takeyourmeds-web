@@ -1,3 +1,9 @@
+.navbar-brand img {
+  width: 192px;
+  margin-top: -3px;
+  margin-left: 12px;
+}
+
 #footer {
   padding-top: 0;
 }
