@@ -131,15 +131,16 @@
     <label for="{{ form.audiourl.id_for_label }}">
       Which voice message would you like to send?
     </label>
+
     <select
-      id="{{ form.field.id_for_label }}"
+      id="{{ form.audiourl.id_for_label }}"
       class="form-control"
-      name="{{ form.field.html_name }}"
+      name="{{ form.audiourl.html_name }}"
     >
-      {% for x, y in form.fields.field.choices %}
+      {% for x, y in form.fields.audiourl.choices %}
       <option
         value="{{ x }}"
-        {% if form.field.value == x %}selected{% endif %}
+        {% if form.audiourl.value == x %}selected{% endif %}
       >{{ y }}</option>
       {% endfor %}
     </select>
