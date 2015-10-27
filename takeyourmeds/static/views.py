@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, render_to_response, redirect
 
 from takeyourmeds.utils.decorators import superuser_required
 
@@ -42,6 +42,14 @@ def terms(request):
 def privacy(request):
     return render(request, 'static/privacy.html', {
     })
+
+def http500(request):
+    # Django does not render this page with a RequestContext
+    return render_to_response('500.html')
+
+def http404(request):
+    # Django *does* render this page with a RequestContext.
+    return render(request, '404.html')
 
 @superuser_required
 def admin(request):

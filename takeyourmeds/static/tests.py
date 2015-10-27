@@ -23,6 +23,13 @@ class SmokeTest(TestCase):
     def test_privacy_policy(self):
         self.assertGET(200, 'static:privacy')
 
+class HTTPTest(TestCase):
+    def test_404(self):
+        self.assertGET(200, 'static:http-404')
+
+    def test_500(self):
+        self.assertGET(200, 'static:http-500')
+
 class AdminTest(TestCase):
     def test_admin_logged_out(self):
         self.assertGET(302, 'static:admin')
