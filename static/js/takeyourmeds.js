@@ -25,7 +25,7 @@ $(function() {
     });
 });
 
-$(function() {
+$.feature('f_reminders_create', function() {
   var reminder_form = $('#reminder-setup');
 
   var schedule = {
@@ -130,7 +130,7 @@ $(function() {
   });
 });
 
-$(function() {
+$.feature('f_reminders_create', function() {
   $('.cron').each(function(i, el) {
     var cronstring = $(el).text();
     $(el).text(prettyCron.toString(cronstring))

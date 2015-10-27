@@ -1,5 +1,7 @@
 {% extends "base/base.html" %}
 
+{% block body_classes %}{{ block.super }} f_reminders_create{% endblock %}
+
 {% block title %}Create new reminder &mdash; {{ block.super }}{% endblock %}
 
 {% block breadcrumbs_header %}
