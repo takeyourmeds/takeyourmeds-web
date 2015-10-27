@@ -2,6 +2,7 @@ import re
 
 from django import forms
 
+from .apps import RemindersConfig
 from .models import Reminder
 
 re_telnumber = re.compile(r'^\d{9,14}$')
@@ -28,16 +29,9 @@ class CreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CreateForm, self).__init__(*args, **kwargs)
 
-        self.initial['message_type'] = self.fields['message_type'].choices[0][0]
+        self.fields['audiourl'].choices = RemindersConfig.voice_reminders
 
-        self.fields['audiourl'].choices = [
-            ('a', 'b'),
-            ('c', 'd'),
-        ]
-        """
-        <option value="{{ settings.SITE_URL }}{% static "mp3/hi_mum_medication_reminder.mp3" %}">Mum's medication reminder!</option>
-        <option value="{{ settings.SITE_URL }}{% static "mp3/its_fiona_mouthwash_reminder.mp3" %}">Dental Hygienist</option>
-        """
+        self.initial['message_type'] = self.fields['message_type'].choices[0][0]
 
     def clean_telnumber(self):
         val = self.cleaned_data['telnumber']
