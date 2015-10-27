@@ -4,14 +4,6 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 
 @login_required
-def index(request):
-    reminders = request.user.reminders.order_by('-pk')
-
-    return render(request, 'reminders/index.html', {
-        'reminders': reminders,
-    })
-
-@login_required
 def create(request):
     return render(request, 'reminders/create.html')
 
@@ -23,7 +15,7 @@ def delete(request, reminder_id):
 
     messages.success(request, "Your reminder has been deleted.")
 
-    return redirect('reminders:index')
+    return redirect('dashboard:view')
 
 @require_POST
 @login_required
@@ -33,4 +25,4 @@ def trigger(request, reminder_id):
 
     messages.success(request, "Your reminder has been triggered.")
 
-    return redirect('reminders:index')
+    return redirect('dashboard:view')

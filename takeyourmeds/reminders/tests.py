@@ -3,9 +3,6 @@ import datetime
 from takeyourmeds.utils.test import TestCase
 
 class SmokeTest(TestCase):
-    def test_index(self):
-        self.assertGET(200, 'reminders:index', login=True)
-
     def test_create(self):
         self.assertGET(200, 'reminders:create', login=True)
 
@@ -20,7 +17,7 @@ class DeleteTests(TestCase):
         response = self.assertPOST(
             302, {}, 'reminders:delete', instance.pk, login=True
         )
-        self.assertRedirectsTo(response, 'reminders:index')
+        self.assertRedirectsTo(response, 'dashboard:view')
         self.failIf(self.user.reminders.exists())
 
     def test_forbidden(self):
@@ -68,4 +65,4 @@ class TriggerTest(TestCase):
             login=True,
         )
 
-        self.assertRedirectsTo(response, 'reminders:index')
+        self.assertRedirectsTo(response, 'dashboard:view')

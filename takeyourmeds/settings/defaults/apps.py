@@ -11,6 +11,7 @@ INSTALLED_APPS = (
 
     'takeyourmeds.account',
     'takeyourmeds.api',
+    'takeyourmeds.dashboard',
     'takeyourmeds.groups',
     'takeyourmeds.groups.groups_admin',
     'takeyourmeds.groups.groups_billing',

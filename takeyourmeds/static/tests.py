@@ -6,7 +6,7 @@ class SmokeTest(TestCase):
 
     def test_landing_logged_in(self):
         response = self.assertGET(302, 'static:landing', login=True)
-        self.assertRedirectsTo(response, 'reminders:index')
+        self.assertRedirectsTo(response, 'dashboard:view')
 
     def test_about(self):
         self.assertGET(200, 'static:about')

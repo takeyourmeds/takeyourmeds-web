@@ -7,7 +7,7 @@ from .forms import ContactForm
 
 def landing(request):
     if request.user.is_authenticated():
-        return redirect('reminders:index')
+        return redirect('dashboard:view')
 
     return render(request, 'static/landing.html', {
     })
