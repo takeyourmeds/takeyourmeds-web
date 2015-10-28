@@ -7,10 +7,8 @@ INSTALLED_APPS = (
 
     'djcelery',
     'email_from_template',
-    'rest_framework',
 
     'takeyourmeds.account',
-    'takeyourmeds.api',
     'takeyourmeds.dashboard',
     'takeyourmeds.groups',
     'takeyourmeds.groups.groups_admin',
