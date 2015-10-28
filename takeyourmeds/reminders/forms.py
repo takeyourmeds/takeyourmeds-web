@@ -19,12 +19,10 @@ class CreateForm(forms.ModelForm):
         choices=[(x, x) for x in range(1, NUM_REMINDERS + 1)],
     )
 
-    message_type = forms.ChoiceField(
-        choices=[
-            ('voice', u"Voice"),
-            ('text', u"Text"),
-        ],
-    )
+    message_type = forms.ChoiceField(choices=[
+        ('voice', u"Voice"),
+        ('text', u"Text"),
+    ])
 
     class Meta:
         model = Reminder
