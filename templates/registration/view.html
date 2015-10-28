@@ -53,25 +53,6 @@
         <h3 class="text-center">Create a new account on TakeYourMeds</h3>
 
         <fieldset>
-          <section class="{% if form.errors.username %}state-error{% endif %}">
-            <label class="input">
-              <i class="icon-append fa fa-user"></i>
-              <input
-                id="{{ form.username.id_for_label }}"
-                type="text"
-                class="form-control"
-                name="{{ form.username.html_name }}"
-                value="{{ form.username.value|default:"" }}"
-                maxlength="{{ form.fields.username.max_length }}"
-                placeholder="Username"
-                {% if form.fields.username.required %}required{% endif %}
-              >
-            </label>
-            {% for x in form.errors.username %}
-              <p class="help-block">{{ x }}</p>
-            {% endfor %}
-          </section>
-
           <section class="{% if form.errors.email %}state-error{% endif %}">
             <label class="input">
               <i class="icon-append fa fa-envelope-o"></i>

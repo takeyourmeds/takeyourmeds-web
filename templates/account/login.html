@@ -35,23 +35,23 @@
         <h3 class="text-center">Log in to your account</h3>
 
         <fieldset>
-          <section class="{% if form.errors.username %}state-error{% endif %}">
+          <section class="{% if form.errors.email %}state-error{% endif %}">
             <div class="row">
-              <label class="label col col-4">Username</label>
+              <label class="label col col-4">Email</label>
               <div class="col col-8">
                 <label class="input">
-                  <i class="icon-append fa fa-user"></i>
+                  <i class="icon-append fa fa-email"></i>
                   <input
-                    id="{{ form.username.id_for_label }}"
-                    type="text"
+                    id="{{ form.email.id_for_label }}"
+                    type="email"
                     class="form-control"
-                    name="{{ form.username.html_name }}"
-                    value="{{ form.username.value|default:"" }}"
-                    maxlength="{{ form.fields.username.max_length }}"
-                    {% if form.fields.username.required %}required{% endif %}
+                    name="{{ form.email.html_name }}"
+                    value="{{ form.email.value|default:"" }}"
+                    maxlength="{{ form.fields.email.max_length }}"
+                    {% if form.fields.email.required %}required{% endif %}
                   >
                 </label>
-                {% for x in form.errors.username %}
+                {% for x in form.errors.email %}
                   <p class="help-block">{{ x }}</p>
                 {% endfor %}
               </div>

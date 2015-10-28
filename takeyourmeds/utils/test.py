@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
-from django.contrib.auth.models import User
+
+from takeyourmeds.account.models import User
 
 class TestCase(TestCase):
     def setUp(self):
@@ -9,7 +10,7 @@ class TestCase(TestCase):
     def assertStatusCode(self, status_code, fn, urlconf, *args, **kwargs):
         if kwargs.pop('login', False):
             user = kwargs.pop('user', self.user)
-            self.client.login(username=user.username, password='password')
+            self.client.login(email=user.email, password='password')
 
         response = fn(reverse(urlconf, args=args, kwargs=kwargs))
 
@@ -50,12 +51,8 @@ class TestCase(TestCase):
             target_status_code,
         )
 
-    def create_user(self, username):
-        return User.objects.create_user(
-            username,
-            '%s@example.org' % username,
-            'password',
-        )
+    def create_user(self, email):
+        return User.objects.create_user(email, 'password')
 
 class SuperuserTestCase(TestCase):
     def setUp(self):

@@ -13,9 +13,8 @@ class RegistrationTest(TestCase):
         num_users = User.objects.count()
 
         response = self.assertPOST(302, {
-            'username': 'test',
-            'password': 'password',
             'email': 'test@example.org',
+            'password': 'password',
         }, 'registration:view')
 
         self.assertRedirectsTo(
