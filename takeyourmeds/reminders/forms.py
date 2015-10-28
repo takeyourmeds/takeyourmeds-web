@@ -7,9 +7,11 @@ from .models import Reminder
 
 re_telnumber = re.compile(r'^\d{9,14}$')
 
+NUM_REMINDERS = 4
+
 class CreateForm(forms.ModelForm):
     frequency = forms.ChoiceField(
-        choices=[(x, x) for x in range(1, 4 + 1)],
+        choices=[(x, x) for x in range(1, NUM_REMINDERS + 1)],
     )
 
     message_type = forms.ChoiceField(
