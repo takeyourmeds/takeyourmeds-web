@@ -11,10 +11,6 @@ NUM_REMINDERS = 4
 HOUR_MIN, HOUR_MAX = 5, 24
 
 class CreateForm(forms.ModelForm):
-    """
-    ['%02d:00' % x for x in range(HOUR_MIN, HOUR_MAX + 1)]
-    """
-
     frequency = forms.ChoiceField(
         choices=[(x, x) for x in range(1, NUM_REMINDERS + 1)],
     )
@@ -35,9 +31,18 @@ class CreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CreateForm, self).__init__(*args, **kwargs)
 
+        times = ['%02d:00' % (x % 24) for x in range(HOUR_MIN, HOUR_MAX + 1)]
+
+        for x in range(NUM_REMINDERS):
+            self.fields['times_%d' % x] = forms.ChoiceField(
+                choices=[(y, y) for y in times],
+            )
+
         self.fields['audiourl'].choices = RemindersConfig.voice_reminders
 
         self.initial['message_type'] = self.fields['message_type'].choices[0][0]
+
+        print self
 
     def clean(self):
         if self.cleaned_data['message_type'] == 'text':
