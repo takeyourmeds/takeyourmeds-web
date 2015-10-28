@@ -84,6 +84,8 @@ DEFAULT_FROM_EMAIL = 'support@takeyourmeds.co.uk'
 
 SITE_URL = 'http://www.takeyourmeds.co.uk'
 
+AUTH_USER_MODEL = 'account.User'
+
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 CACHES = {
