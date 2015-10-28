@@ -42,8 +42,6 @@ class CreateForm(forms.ModelForm):
 
         self.initial['message_type'] = self.fields['message_type'].choices[0][0]
 
-        print self
-
     def clean(self):
         if self.cleaned_data['message_type'] == 'text':
             val = self.cleaned_data.get('message', '').strip()
