@@ -111,7 +111,7 @@
     {% endfor %}
   </div>
 
-  <div class="form-group {% if form.errors.message %}has-error{% endif %}">
+  <div class="form-group {% if form.errors.message %}has-error{% endif %} hide" data-message_type="text">
     <label for="{{ form.message.id_for_label }}">
       What message would you like to send?
     </label>
@@ -129,7 +129,7 @@
     {% endfor %}
   </div>
 
-  <div class="form-group {% if form.errors.audiourl %}has-error{% endif %}">
+  <div class="form-group {% if form.errors.audiourl %}has-error{% endif %} hide" data-message_type="voice">
     <label for="{{ form.audiourl.id_for_label }}">
       Which voice message would you like to send?
     </label>

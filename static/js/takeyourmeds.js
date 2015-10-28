@@ -26,6 +26,21 @@ $(function() {
 });
 
 $.feature('f_reminders_create', function() {
+  var update = function() {
+    var val = $('input[name=message_type]:checked').val();
+
+    $('[data-message_type]').each(function() {
+      $(this).toggleClass('hide', $(this).data('message_type') !== val);
+    });
+  };
+
+  $('input[name=message_type]').on('change', update);
+
+  // Pageload
+  update();
+});
+
+$.feature('f_reminders_create', function() {
   var reminder_form = $('#reminder-setup');
 
   var schedule = {
