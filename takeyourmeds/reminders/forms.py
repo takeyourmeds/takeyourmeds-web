@@ -22,6 +22,7 @@ class CreateForm(forms.ModelForm):
     class Meta:
         model = Reminder
         fields = (
+            'message',
             'audiourl',
             'telnumber',
         )
@@ -32,6 +33,16 @@ class CreateForm(forms.ModelForm):
         self.fields['audiourl'].choices = RemindersConfig.voice_reminders
 
         self.initial['message_type'] = self.fields['message_type'].choices[0][0]
+
+    def clean(self):
+        if self.cleaned_data['message_type'] == 'text':
+            val = self.cleaned_data.get('message', '').strip()
+            self.cleaned_data['message'] = val
+
+            if not val:
+                self.add_error('message', "Please enter a message.")
+
+        return self.cleaned_data
 
     def clean_telnumber(self):
         val = self.cleaned_data['telnumber']
