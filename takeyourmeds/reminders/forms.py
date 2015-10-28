@@ -60,6 +60,13 @@ class CreateForm(forms.ModelForm):
     def save(self, user):
         instance = super(CreateForm, self).save(commit=False)
         instance.user = user
+
+        # Clear the "other" message type
+        if self.cleaned_data['message_type'] == 'text':
+            instance.audiourl = ''
+        else:
+            instance.message = ''
+
         instance.save()
 
         return instance
