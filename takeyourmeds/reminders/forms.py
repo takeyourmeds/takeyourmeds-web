@@ -8,8 +8,13 @@ from .models import Reminder
 re_telnumber = re.compile(r'^\d{9,14}$')
 
 NUM_REMINDERS = 4
+HOUR_MIN, HOUR_MAX = 5, 24
 
 class CreateForm(forms.ModelForm):
+    """
+    ['%02d:00' % x for x in range(HOUR_MIN, HOUR_MAX + 1)]
+    """
+
     frequency = forms.ChoiceField(
         choices=[(x, x) for x in range(1, NUM_REMINDERS + 1)],
     )
