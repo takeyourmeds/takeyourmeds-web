@@ -12,6 +12,9 @@ class Reminder(models.Model):
 
     created = models.DateTimeField(default=datetime.datetime.utcnow)
 
+    class Meta:
+        ordering = ('created',)
+
     def dispatch_task(self):
         from .tasks import send_reminder_task
         send_reminder_task.delay(self.pk)
