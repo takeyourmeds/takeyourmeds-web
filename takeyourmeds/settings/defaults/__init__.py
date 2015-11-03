@@ -24,10 +24,9 @@ DATABASES = {
         'PASSWORD': 'takeyourmeds',
         'HOST': '127.0.0.1',
         'PORT': '5432',
+        'ATOMIC_REQUESTS': True,
     },
 }
-
-ATOMIC_REQUESTS = True
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
