@@ -9,7 +9,7 @@ def login(request):
         return redirect(settings.LOGIN_REDIRECT_URL)
 
     if request.method == 'POST':
-        form = LoginForm(request, request.POST)
+        form = LoginForm(request.POST)
 
         if form.is_valid():
             auth.login(request, form.cleaned_data['user'])

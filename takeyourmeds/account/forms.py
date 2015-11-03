@@ -5,9 +5,8 @@ class LoginForm(forms.Form):
     email = forms.EmailField()
     password = forms.CharField()
 
-    def __init__(self, request=None, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         self.user = None
-        self.request = request
 
         super(LoginForm, self).__init__(*args, **kwargs)
 
