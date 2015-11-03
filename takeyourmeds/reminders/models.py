@@ -8,6 +8,8 @@ class Reminder(models.Model):
     audio_url = models.CharField(blank=True, max_length=100)
     telnumber = models.CharField(max_length=200)
 
+    created = models.DateTimeField(default=datetime.datetime.utcnow)
+
     def dispatch_task(self):
         from .tasks import send_reminder_task
         send_reminder_task.delay(self.pk)
