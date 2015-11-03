@@ -26,6 +26,23 @@ $(function() {
 });
 
 $.feature('f_reminders_create', function() {
+  var elem = $('select[name=frequency]');
+
+  var update = function() {
+    var val = parseInt(elem.val(), 10);
+
+    $('[data-time_field]').each(function() {
+      var x = parseInt($(this).data('time_field'), 10);
+
+      $(this).toggleClass('hide', val < x);
+    });
+  };
+
+  elem.on('change', update);
+  update();
+});
+
+$.feature('f_reminders_create', function() {
   var update = function() {
     var val = $('input[name=message_type]:checked').val();
 

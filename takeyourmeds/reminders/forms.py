@@ -31,12 +31,17 @@ class CreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CreateForm, self).__init__(*args, **kwargs)
 
-        times = ['%02d:00' % (x % 24) for x in range(HOUR_MIN, HOUR_MAX + 1)]
+        time_choices = [(y, y) for y in [
+            '%02d:00' % (x % 24) for x in range(HOUR_MIN, HOUR_MAX + 1)
+        ]]
+        self.time_fields = []
 
         for x in range(NUM_REMINDERS):
-            self.fields['times_%d' % x] = forms.ChoiceField(
-                choices=[(y, y) for y in times],
-            )
+            name = 'times_%d' % x
+
+            self.time_fields.append(name)
+            self.fields[name] = forms.ChoiceField(choices=time_choices)
+            self.initial[name] = '10:00'
 
         self.fields['audiourl'].choices = RemindersConfig.voice_reminders
 

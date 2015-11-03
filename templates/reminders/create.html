@@ -70,6 +70,30 @@
     {% endfor %}
   </div>
 
+  {% for x in form.time_fields %}
+  <div class="form-group {% if form.errors.times_0 %}has-error{% endif %}" data-time_field="{{ forloop.counter }}">
+    <label for="{{ form.times_0.id_for_label }}">
+      Time #{{ forloop.counter }}
+    </label>
+    <select
+      id="{{ form.times_0.id_for_label }}"
+      class="form-control"
+      name="{{ form.times_0.html_name }}"
+    >
+      {% for x, y in form.fields.times_0.choices %}
+      <option
+        value="{{ x }}"
+        {% if form.times_0.value == x %}selected{% endif %}
+      >{{ y }}</option>
+      {% endfor %}
+    </select>
+
+    {% for x in form.errors.times_0 %}
+      <p class="help-block">{{ x }}</p>
+    {% endfor %}
+  </div>
+  {% endfor %}
+
   <div class="form-group {% if form.errors.telnumber %}has-error{% endif %}">
     <label for="{{ form.telnumber.id_for_label }}">
       What phone number should we send them to?
