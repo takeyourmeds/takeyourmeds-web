@@ -6,7 +6,7 @@ from takeyourmeds.account.models import User
 
 from .utils import get_default_group
 
-class UserData(AutoOneToOneModel(User)):
+class UserData(AutoOneToOneModel(User, related_name='profile')):
     group = models.ForeignKey(
         'groups.Group',
         related_name='users',
