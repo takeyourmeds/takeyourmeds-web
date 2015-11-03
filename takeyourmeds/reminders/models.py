@@ -2,8 +2,6 @@ import datetime
 
 from django.db import models
 
-from croniter import croniter
-
 class Reminder(models.Model):
     user = models.ForeignKey('account.User', related_name='reminders')
     message = models.CharField(blank=True, max_length=100)
@@ -15,15 +13,32 @@ class Reminder(models.Model):
         send_reminder_task.delay(self.pk)
 
 class Time(models.Model):
+    """
+    NB. All instances are cleared on edit so metadata does not persist
+    """
+
     reminder = models.ForeignKey('Reminder', related_name='times')
-    cronstring = models.CharField(blank=True, max_length=100)
+
+    time = models.CharField(max_length=5)
     last_run = models.DateTimeField(default=datetime.datetime.utcnow)
 
-    def should_run(self):
-        times = croniter(self.cronstring, self.last_run)
+    created = models.DateTimeField(default=datetime.datetime.utcnow)
 
-        return times.get_next(datetime.datetime) < \
-            datetime.datetime.utcnow()
+    class Meta:
+        ordering = ('time',)
+        unique_together = (
+            ('reminder', 'time'),
+        )
+
+    def __unicode__(self):
+        return u"#%d: %s: %s" % (
+            self.pk,
+            self.reminder,
+            self.time,
+        )
+
+    def should_run(self):
+        assert False, "FIXME"
 
     def run(self):
         self.reminder.dispatch_task()
