@@ -39,9 +39,9 @@ class CreateForm(forms.ModelForm):
         for x in range(NUM_REMINDERS):
             name = 'times_%d' % x
 
-            self.time_fields.append(name)
             self.fields[name] = forms.ChoiceField(choices=time_choices)
             self.initial[name] = '10:00'
+            self.time_fields.append(self.fields[name])
 
         self.fields['audiourl'].choices = RemindersConfig.voice_reminders
 
