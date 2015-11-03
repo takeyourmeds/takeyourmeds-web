@@ -60,7 +60,7 @@
       {% for x, y in form.fields.frequency.choices %}
       <option
         value="{{ x }}"
-        {% if form.frequency.value == x %}selected{% endif %}
+        {% if form.frequency.value|slugify == x|slugify %}selected{% endif %}
       >{{ y }}</option>
       {% endfor %}
     </select>
