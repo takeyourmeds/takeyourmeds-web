@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.shortcuts import redirect, render
 
 from .forms import LoginForm
@@ -15,6 +15,9 @@ def login(request):
             auth.login(request, form.cleaned_data['user'])
 
             return redirect(request.path)
+
+        for x in form.non_field_errors():
+            messages.error(request, x)
 
     else:
         form = LoginForm()
