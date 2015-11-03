@@ -71,16 +71,16 @@
   </div>
 
   {% for field in form.time_fields %}
-  <div class="form-group {% if form.errors.times_0 %}has-error{% endif %}" data-time_field="{{ forloop.counter }}">
+  <div class="form-group {% if field.errors %}has-error{% endif %}" data-time_field="{{ forloop.counter }}">
     <label for="{{ field.id_for_label }}">
-      Time #{{ forloop.counter }} {{ errors }}
+      Time #{{ forloop.counter }}
     </label>
     <select
       id="{{ field.id_for_label }}"
       class="form-control"
       name="{{ field.html_name }}"
     >
-      {% for x, y in field.choices %}
+      {% for x, y in field.field.choices %}
       <option
         value="{{ x }}"
         {% if field.value == x %}selected{% endif %}
