@@ -145,7 +145,6 @@
       name="{{ form.message.html_name }}"
       class="form-control"
       maxlength="{{ form.fields.message.max_length }}"
-      {% if form.fields.message.required %}required{% endif %}
     >{{ form.message.value|default:"" }}</textarea>
 
     {% for x in form.errors.message %}

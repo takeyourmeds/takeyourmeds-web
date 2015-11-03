@@ -5,7 +5,7 @@ from django.db import models
 class Reminder(models.Model):
     user = models.ForeignKey('account.User', related_name='reminders')
 
-    message = models.CharField(max_length=100)
+    message = models.CharField(max_length=100, blank=True)
     audio_url = models.CharField(max_length=100)
 
     phone_number = models.CharField(max_length=200)
