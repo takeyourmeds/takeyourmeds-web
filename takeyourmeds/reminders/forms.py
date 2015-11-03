@@ -48,6 +48,7 @@ class CreateForm(forms.ModelForm):
 
     def save(self, user):
         instance = super(CreateForm, self).save(commit=False)
+
         instance.user = user
 
         # Clear the "other" message type
