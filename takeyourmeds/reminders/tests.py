@@ -50,7 +50,7 @@ class TestCron(TestCase):
         )
 
         reminder.times.create(
-            cronstring="* * * * *",
+            time='10:00',
             last_run=ten_min_ago,
         )
 
