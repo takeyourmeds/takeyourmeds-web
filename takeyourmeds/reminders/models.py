@@ -5,7 +5,7 @@ from django.db import models
 class Reminder(models.Model):
     user = models.ForeignKey('account.User', related_name='reminders')
     message = models.CharField(blank=True, max_length=100)
-    audiourl = models.CharField(blank=True, max_length=100)
+    audio_url = models.CharField(blank=True, max_length=100)
     telnumber = models.CharField(max_length=200)
 
     def dispatch_task(self):

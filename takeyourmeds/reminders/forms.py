@@ -28,7 +28,7 @@ class CreateForm(forms.ModelForm):
         model = Reminder
         fields = (
             'message',
-            'audiourl',
+            'audio_url',
             'telnumber',
         )
 
@@ -43,7 +43,7 @@ class CreateForm(forms.ModelForm):
             self.initial[name] = '10:00'
             self.time_fields.append(self[name])
 
-        self.fields['audiourl'].choices = RemindersConfig.voice_reminders
+        self.fields['audio_url'].choices = RemindersConfig.voice_reminders
 
         self.initial['message_type'] = self.fields['message_type'].choices[0][0]
 
@@ -54,7 +54,7 @@ class CreateForm(forms.ModelForm):
 
         # Clear the "other" message type
         if self.cleaned_data['message_type'] == 'text':
-            instance.audiourl = ''
+            instance.audio_url = ''
         else:
             instance.message = ''
 

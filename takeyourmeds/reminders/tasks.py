@@ -17,10 +17,10 @@ def send_reminder_task(reminder_id):
 
     if reminder.message:
         send_sms(reminder.telnumber, reminder.message)
-    elif reminder.audiourl:
+    elif reminder.audio_url:
         make_call(
             reminder.telnumber,
-            staticfiles_storage.url(reminder.audiourl),
+            staticfiles_storage.url(reminder.audio_url),
         )
     else:
         logger.warn("Reminder %s has neither message nor url", reminder.pk)

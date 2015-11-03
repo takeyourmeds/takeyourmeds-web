@@ -153,25 +153,25 @@
     {% endfor %}
   </div>
 
-  <div class="form-group {% if form.errors.audiourl %}has-error{% endif %} hide" data-message_type="voice">
-    <label for="{{ form.audiourl.id_for_label }}">
+  <div class="form-group {% if form.errors.audio_url %}has-error{% endif %} hide" data-message_type="voice">
+    <label for="{{ form.audio_url.id_for_label }}">
       Which voice message would you like to send?
     </label>
 
     <select
-      id="{{ form.audiourl.id_for_label }}"
+      id="{{ form.audio_url.id_for_label }}"
       class="form-control"
-      name="{{ form.audiourl.html_name }}"
+      name="{{ form.audio_url.html_name }}"
     >
-      {% for x, y in form.fields.audiourl.choices %}
+      {% for x, y in form.fields.audio_url.choices %}
       <option
         value="{{ x }}"
-        {% if form.audiourl.value == x %}selected{% endif %}
+        {% if form.audio_url.value == x %}selected{% endif %}
       >{{ y }}</option>
       {% endfor %}
     </select>
 
-    {% for x in form.errors.audiourl %}
+    {% for x in form.errors.audio_url %}
       <p class="help-block">{{ x }}</p>
     {% endfor %}
   </div>
