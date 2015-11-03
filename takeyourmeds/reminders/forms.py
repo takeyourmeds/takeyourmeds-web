@@ -5,14 +5,14 @@ from django import forms
 from .apps import RemindersConfig
 from .models import Reminder
 
-re_telnumber = re.compile(r'^\d{9,14}$')
-
 NUM_REMINDERS = 4
 HOUR_MIN, HOUR_MAX = 5, 24
 
 TIME_CHOICES = [(y, y) for y in [
     '%02d:00' % (x % 24) for x in range(HOUR_MIN, HOUR_MAX + 1)
 ]]
+
+re_telnumber = re.compile(r'^\d{9,14}$')
 
 class CreateForm(forms.ModelForm):
     frequency = forms.ChoiceField(
