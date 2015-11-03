@@ -12,8 +12,7 @@ def login(request):
         form = LoginForm(request, request.POST)
 
         if form.is_valid():
-            user = form.get_user()
-            auth.login(request, user)
+            auth.login(request, form.cleaned_data['user'])
 
             return redirect(request.path)
 
