@@ -56,12 +56,6 @@ class CreateForm(forms.ModelForm):
         else:
             instance.message = ''
 
-        instance.save()
-
-        # First, delete all times...
-        instance.times.all().delete()
-
-        # ... then create new ones
         for x in self.get_times():
             instance.times.create(time=x.value())
 

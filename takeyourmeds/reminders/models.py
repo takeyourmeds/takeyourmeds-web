@@ -13,10 +13,6 @@ class Reminder(models.Model):
         send_reminder_task.delay(self.pk)
 
 class Time(models.Model):
-    """
-    NB. All instances are cleared on edit so metadata does not persist
-    """
-
     reminder = models.ForeignKey('Reminder', related_name='times')
 
     time = models.CharField(max_length=5)
