@@ -49,7 +49,7 @@
     {% if reminder.message %}
       <p>{{ reminder.message }}</p>
     {% else %}
-      <audio src="{{ reminder.audio_url }}" controls>
+      <audio src="{% static reminder.audio_url %}" controls>
         Unfortunately your browser does not support the <code>audio</code> element.
       </audio>
     {% endif %}
