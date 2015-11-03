@@ -85,7 +85,7 @@
 {% if messages %}
 <div class="divide30 hidden-xs"></div>
 {% for message in messages %}
-<div class="container alert alert-{{ message.tags }}">
+<div class="container alert alert-{% if message.tags == "error" %}danger {% else %}{{ message.tags }}{% endif %}">
   <button type="button" class="close" data-dismiss="alert">×</button>
   {{ message }}
 </div>
