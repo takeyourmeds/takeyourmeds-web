@@ -1,1 +1,14 @@
-requirements/local
+celery==3.1.18
+croniter==0.3.5
+Django==1.8.5
+django-auto-one-to-one==1
+django-celery==3.1.16
+django-setuptest==0.2
+djangorestframework==3.1.2
+requests==2.7.0
+stripe==1.27.1
+twilio==4.6.0
+gunicorn==19.3.0
+psycopg2==2.6
+python-memcached==1.57
+redis==2.10.3

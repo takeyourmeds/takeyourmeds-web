@@ -3,12 +3,6 @@
 %:
 	dh $@ --with=python-virtualenv,systemd
 
-override_dh_virtualenv:
-	# Symlink in requirements.txt until
-	# <https://github.com/spotify/dh-virtualenv/pull/118> is merged.
-	ln -sf requirements/live requirements.txt
-	dh_virtualenv
-
 override_dh_systemd_start:
 	dh_systemd_start --no-start
 
