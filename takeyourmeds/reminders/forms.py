@@ -46,7 +46,36 @@ class CreateForm(forms.ModelForm):
 
         self.initial['message_type'] = self.fields['message_type'].choices[0][0]
 
+    def save(self, user):
+        instance = super(CreateForm, self).save(commit=False)
+        instance.user = user
+
+        # Clear the "other" message type
+        if self.cleaned_data['message_type'] == 'text':
+            instance.audiourl = ''
+        else:
+            instance.message = ''
+
+        instance.save()
+
+        # First, delete all times...
+        instance.times.all().delete()
+
+        # ... then create new ones
+        for x in self.get_times():
+            instance.times.create(time=x.value())
+
+        return instance
+
     def clean(self):
+        # Check for duplicate times
+        seen = set()
+        for x in self.get_times():
+            val = x.value()
+            if val in seen:
+                self.add_error(x.name, "You have already selected this time.")
+            seen.add(val)
+
         if self.cleaned_data['message_type'] == 'text':
             val = self.cleaned_data.get('message', '').strip()
             self.cleaned_data['message'] = val
@@ -69,16 +98,7 @@ class CreateForm(forms.ModelForm):
 
         return val
 
-    def save(self, user):
-        instance = super(CreateForm, self).save(commit=False)
-        instance.user = user
+    def get_times(self):
+        num_times = int(self.cleaned_data['frequency'])
 
-        # Clear the "other" message type
-        if self.cleaned_data['message_type'] == 'text':
-            instance.audiourl = ''
-        else:
-            instance.message = ''
-
-        instance.save()
-
-        return instance
+        return self.time_fields[:num_times]
