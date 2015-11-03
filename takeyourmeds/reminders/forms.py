@@ -10,6 +10,10 @@ re_telnumber = re.compile(r'^\d{9,14}$')
 NUM_REMINDERS = 4
 HOUR_MIN, HOUR_MAX = 5, 24
 
+TIME_CHOICES = [(y, y) for y in [
+    '%02d:00' % (x % 24) for x in range(HOUR_MIN, HOUR_MAX + 1)
+]]
+
 class CreateForm(forms.ModelForm):
     frequency = forms.ChoiceField(
         choices=[(x, x) for x in range(1, NUM_REMINDERS + 1)],
@@ -32,13 +36,10 @@ class CreateForm(forms.ModelForm):
         super(CreateForm, self).__init__(*args, **kwargs)
 
         # Dynamically generate enough time selector fields
-        time_choices = [(y, y) for y in [
-            '%02d:00' % (x % 24) for x in range(HOUR_MIN, HOUR_MAX + 1)
-        ]]
         self.time_fields = []
         for x in range(NUM_REMINDERS):
             name = 'times_%d' % x
-            self.fields[name] = forms.ChoiceField(choices=time_choices)
+            self.fields[name] = forms.ChoiceField(choices=TIME_CHOICES)
             self.initial[name] = '10:00'
             self.time_fields.append(self[name])
 
