@@ -16,10 +16,10 @@ def send_reminder_task(reminder_id):
     reminder = Reminder.objects.get(pk=reminder_id)
 
     if reminder.message:
-        send_sms(reminder.telnumber, reminder.message)
+        send_sms(reminder.phone_number, reminder.message)
     elif reminder.audio_url:
         make_call(
-            reminder.telnumber,
+            reminder.phone_number,
             staticfiles_storage.url(reminder.audio_url),
         )
     else:

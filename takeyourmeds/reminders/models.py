@@ -5,10 +5,10 @@ from django.db import models
 class Reminder(models.Model):
     user = models.ForeignKey('account.User', related_name='reminders')
 
-    telnumber = models.CharField(max_length=200)
-
     message = models.CharField(blank=True, max_length=100)
     audio_url = models.CharField(blank=True, max_length=100)
+
+    phone_number = models.CharField(max_length=200)
 
     created = models.DateTimeField(default=datetime.datetime.utcnow)
 

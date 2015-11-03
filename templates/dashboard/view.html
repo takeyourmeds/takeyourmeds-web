@@ -32,7 +32,7 @@
 
   <div class="info-left box-sizing-border">
 
-    <h3><span class="meta">Send to</span> {{ reminder.telnumber }} </h3>
+    <h3><span class="meta">Send to</span> {{ reminder.phone_number }} </h3>
     <form method="POST" action="{% url "reminders:trigger" reminder.pk %}" style="display: inline;">
       {% csrf_token %}
       <button type="submit">Test</button>

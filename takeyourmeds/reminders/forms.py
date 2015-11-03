@@ -12,7 +12,7 @@ TIME_CHOICES = [(y, y) for y in [
     '%02d:00' % (x % 24) for x in range(HOUR_MIN, HOUR_MAX + 1)
 ]]
 
-re_telnumber = re.compile(r'^\d{9,14}$')
+re_phone_number = re.compile(r'^\d{9,14}$')
 
 class CreateForm(forms.ModelForm):
     frequency = forms.ChoiceField(
@@ -29,7 +29,7 @@ class CreateForm(forms.ModelForm):
         fields = (
             'message',
             'audio_url',
-            'telnumber',
+            'phone_number',
         )
 
     def __init__(self, *args, **kwargs):
@@ -81,13 +81,13 @@ class CreateForm(forms.ModelForm):
 
         return self.cleaned_data
 
-    def clean_telnumber(self):
-        val = self.cleaned_data['telnumber']
+    def clean_phone_number(self):
+        val = self.cleaned_data['phone_number']
 
         # Strip all whitespace
         val = ''.join(val.split())
 
-        if re_telnumber.match(val) is None:
+        if re_phone_number.match(val) is None:
             raise forms.ValidationError(
                 "This does not appear to be a valid UK phone number.",
             )

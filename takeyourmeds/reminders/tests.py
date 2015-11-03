@@ -46,7 +46,7 @@ class TestCron(TestCase):
 
         reminder = self.user.reminders.create(
             message="test",
-            telnumber='123',
+            phone_number='123',
         )
 
         reminder.times.create(

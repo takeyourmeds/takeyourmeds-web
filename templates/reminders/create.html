@@ -94,20 +94,20 @@
   </div>
   {% endfor %}
 
-  <div class="form-group {% if form.errors.telnumber %}has-error{% endif %}">
-    <label for="{{ form.telnumber.id_for_label }}">
+  <div class="form-group {% if form.errors.phone_number %}has-error{% endif %}">
+    <label for="{{ form.phone_number.id_for_label }}">
       What phone number should we send them to?
     </label>
     <input
-      id="{{ form.telnumber.id_for_label }}"
+      id="{{ form.phone_number.id_for_label }}"
       class="form-control"
-      name="{{ form.telnumber.html_name }}"
-      value="{{ form.telnumber.value|default:"" }}"
-      maxlength="{{ form.fields.telnumber.max_length }}"
+      name="{{ form.phone_number.html_name }}"
+      value="{{ form.phone_number.value|default:"" }}"
+      maxlength="{{ form.fields.phone_number.max_length }}"
       placeholder="Enter a UK telephone number (eg. 07123456789)"
-      {% if form.fields.telnumber.required %}required{% endif %}
+      {% if form.fields.phone_number.required %}required{% endif %}
     >
-    {% for x in form.errors.telnumber %}
+    {% for x in form.errors.phone_number %}
       <p class="help-block">{{ x }}</p>
     {% endfor %}
   </div>
