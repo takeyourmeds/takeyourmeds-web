@@ -3,79 +3,111 @@
 {% block title %}{{ block.super }}{% endblock %}
 
 {% block breadcrumbs_header %}
-  <h4>My reminders</h4>
+  <h4>Dashboard</h4>
 {% endblock %}
 
 {% block breadcrumbs %}
   {{ block.super }}
-  <li>My reminders</li>
+  <li>Dashboard</li>
 {% endblock %}
 
 {% block container_header %}
-  <div class="divide50"></div>
+  <div class="divide30"></div>
 {% endblock %}
 
 {% block content %}
 
-<a
-  href="{% url "reminders:create" %}"
-  class="btn btn-theme-bg pull-right"
->Create a new reminder</a>
-
-<h3>
-  My reminders ({{ reminders.count }})
-</h3>
-
-{% for reminder in reminders %}
-
-<div class="reminder clearfix">
-
-  <div class="info-left box-sizing-border">
-
-    <h3><span class="meta">Send to</span> {{ reminder.phone_number }} </h3>
-    <form method="POST" action="{% url "reminders:trigger" reminder.pk %}" style="display: inline;">
-      {% csrf_token %}
-      <button type="submit">Test</button>
-    </form>
-
-    <form method="POST" action="{% url "reminders:delete" reminder.pk %}" style="display: inline;">
-      {% csrf_token %}
-      <button type="submit">Delete</button>
-    </form>
+<div class="row">
+  <div class="col-sm-3">
+    <div class="results-sidebar-box">
+      <h4>Related search</h4>
+      <ul class="list-unstyled">
+        <li><a href="#">Bootstrap template</a></li>
+        <li><a href="#">Admin template</a></li>
+        <li><a href="#">Responsive template</a></li>
+      </ul>
+      <hr>
+    </div>
   </div>
+  <div class="col-sm-9">
+    <a
+      href="{% url "reminders:create" %}"
+      class="btn btn-theme-bg pull-right"
+    ><i class="fa fa-plus"></i> Create a new reminder</a>
 
-  <div class="info-right box-sizing-border">
-    <span class="meta">Message</span>
-    {% if reminder.message %}
-      <p>{{ reminder.message }}</p>
-    {% else %}
-      <audio src="{% static reminder.audio_url %}" controls>
-        Unfortunately your browser does not support the <code>audio</code> element.
-      </audio>
-    {% endif %}
+    <h3>
+      My reminders ({{ reminders.count }})
+    </h3>
 
-    <p>
-      <span class="meta">Timings</span>
-      {% for time in reminder.times.all %}
-      <span class="cron">{{ time.time }}</span>{% if not forloop.last %},{% endif %}
+    <div class="divide10"></div>
+
+    <div class="panel-group">
+      {% for reminder in reminders %}
+
+      <div class="panel panel-default clearfix">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a>
+                Web Designer <br>
+                <em>(2-4 years of experience)</em>
+              </a>
+            </h4>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true">
+              <div class="panel-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  <div class="divide30"></div>
+                  <p><a href="#" class="btn btn-theme-bg">Apply Now</a></p>
+
+                  <form method="POST" action="{% url "reminders:trigger" reminder.pk %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-theme-lg">Test</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+
+      <div class="reminder clearfix">
+        <div class="info-left box-sizing-border">
+
+          <h3><span class="meta">Send to</span> {{ reminder.phone_number }} </h3>
+
+          <form method="POST" action="{% url "reminders:delete" reminder.pk %}" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+          </form>
+        </div>
+
+        <div class="info-right box-sizing-border">
+          <span class="meta">Message</span>
+          {% if reminder.message %}
+            <p>{{ reminder.message }}</p>
+          {% else %}
+            <audio src="{% static reminder.audio_url %}" controls>
+              Unfortunately your browser does not support the <code>audio</code> element.
+            </audio>
+          {% endif %}
+
+          <p>
+            <span class="meta">Timings</span>
+            {% for time in reminder.times.all %}
+            <span class="cron">{{ time.time }}</span>{% if not forloop.last %},{% endif %}
+            {% endfor %}
+          </p>
+
+        </div>
+        </p>
+      </div>
+
+      {% empty %}
+      <div class="divide30"></div>
+      <p class="text-center">
+        You have no reminders.
+      </p>
       {% endfor %}
-    </p>
-
+    </div>
   </div>
-
-
-  </p>
 </div>
-
-{% empty %}
-
-<div class="divide30"></div>
-
-<p class="text-center">
-  You have no reminders.
-</p>
-
-{% endfor %}
 
 <div class="divide30"></div>
 
