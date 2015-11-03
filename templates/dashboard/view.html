@@ -18,13 +18,11 @@
 {% block content %}
 
 <div class="row">
-  <div class="col-sm-3">
+  <div class="col-sm-3 hidden-xs">
     <div class="results-sidebar-box">
-      <h4>Related search</h4>
       <ul class="list-unstyled">
-        <li><a href="#">Bootstrap template</a></li>
-        <li><a href="#">Admin template</a></li>
-        <li><a href="#">Responsive template</a></li>
+        <li><a href="{% url "reminders:create" %}">Create reminder</a></li>
+        <li><a href="{% url "account:logout" %}">Logout</a></li>
       </ul>
       <hr>
     </div>
@@ -36,7 +34,7 @@
     ><i class="fa fa-plus"></i> Create a new reminder</a>
 
     <h3>
-      My reminders ({{ reminders.count }})
+      My reminders <span class="text-muted">({{ reminders.count }})</span>
     </h3>
 
     <div class="divide10"></div>
@@ -44,59 +42,66 @@
     <div class="panel-group">
       {% for reminder in reminders %}
 
+      <br>
+
       <div class="panel panel-default clearfix">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a>
-                Web Designer <br>
-                <em>(2-4 years of experience)</em>
-              </a>
-            </h4>
-          </div>
-          <div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true">
-              <div class="panel-body">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                  <div class="divide30"></div>
-                  <p><a href="#" class="btn btn-theme-bg">Apply Now</a></p>
-
-                  <form method="POST" action="{% url "reminders:trigger" reminder.pk %}" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-theme-lg">Test</button>
-                  </form>
-              </div>
-          </div>
-      </div>
-
-      <div class="reminder clearfix">
-        <div class="info-left box-sizing-border">
-
-          <h3><span class="meta">Send to</span> {{ reminder.phone_number }} </h3>
-
-          <form method="POST" action="{% url "reminders:delete" reminder.pk %}" style="display: inline;">
-            {% csrf_token %}
-            <button type="submit">Delete</button>
-          </form>
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a>
+              {% if reminder.message %}
+              SMS reminder
+              {% else %}
+              Voice reminder
+              {% endif %}
+            </a>
+          </h4>
         </div>
+        <div class="panel-collapse collapse in">
 
-        <div class="info-right box-sizing-border">
-          <span class="meta">Message</span>
-          {% if reminder.message %}
-            <p>{{ reminder.message }}</p>
-          {% else %}
-            <audio src="{% static reminder.audio_url %}" controls>
-              Unfortunately your browser does not support the <code>audio</code> element.
-            </audio>
-          {% endif %}
+          <div class="panel-body">
+            <p>
+              Every day at &hellip;
 
-          <p>
-            <span class="meta">Timings</span>
-            {% for time in reminder.times.all %}
-            <span class="cron">{{ time.time }}</span>{% if not forloop.last %},{% endif %}
-            {% endfor %}
-          </p>
+              <ul class="list-inline">
+                {% for time in reminder.times.all %}
+                <li>{{ time.time }}</li>
+                {% endfor %}
+              </ul>
 
+              {% if reminder.message %}
+                <p>
+                  &hellip; we will send the following text message to
+                  &nbsp;<i class="fa fa-mobile-phone"></i> {{ reminder.phone_number }}:
+                </p>
+
+                <blockquote>
+                  {{ reminder.message }}
+                </blockquote>
+              {% else %}
+                <p>
+                  &hellip; we will call
+                  &nbsp;<i class="fa fa-mobile-phone"></i> {{ reminder.phone_number }}
+                  and play the following message:
+                </p>
+
+                <p>
+                  <audio src="{% static reminder.audio_url %}" controls>
+                    Unfortunately your browser does not support the <code>audio</code> element.
+                  </audio>
+                </p>
+              {% endif %}
+
+            <form method="POST" action="{% url "reminders:trigger" reminder.pk %}" style="display: inline;">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-theme-bg">Test reminder</button>
+            </form>
+
+            <form method="POST" action="{% url "reminders:delete" reminder.pk %}" style="display: inline;">
+              {% csrf_token %}
+              <button type="submit" class="btn">Delete</button>
+            </form>
+          </div>
         </div>
-        </p>
       </div>
 
       {% empty %}
