@@ -43,3 +43,7 @@ h3.heading {
   padding-top: 12px;
   padding-bottom: 15px;
 }
+
+.panel-group .panel-heading a {
+  text-transform: inherit;
+}
