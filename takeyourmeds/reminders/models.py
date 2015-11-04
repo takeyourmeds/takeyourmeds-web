@@ -39,6 +39,3 @@ class Time(models.Model):
             self.reminder,
             self.time,
         )
-
-    def should_run(self):
-        return True
