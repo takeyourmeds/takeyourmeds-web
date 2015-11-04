@@ -51,7 +51,7 @@
   action: service
     name={{ item }}
     state=stopped
-    ignore_errors=yes
+    ignore_errors=yes # Permit initial installation
   with_items:
     - nginx
     - takeyourmeds-celery
