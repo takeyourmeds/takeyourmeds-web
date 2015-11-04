@@ -15,7 +15,9 @@ class GroupManager(models.Manager):
         group = self.create(*args, **kwargs)
 
         # Configure Stripe
-        group.billing.stripe_customer_ident = stripe.Customer.create(**stripe_kwargs)
+        customer = stripe.Customer.create(**stripe_kwargs)
+
+        group.billing.stripe_customer_ident = customer.id
         group.billing.save(update_fields=('stripe_customer_ident',))
         group.billing.sync()
 
