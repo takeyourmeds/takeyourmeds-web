@@ -9,5 +9,6 @@ stripe==1.27.1
 twilio==4.9.0
 gunicorn==19.3.0
 psycopg2==2.6.1
+pytz==2015.7
 python-memcached==1.57
 redis==2.10.5
