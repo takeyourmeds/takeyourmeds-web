@@ -6,10 +6,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'djcelery',
-    'rest_framework',
+    'email_from_template',
 
     'takeyourmeds.account',
-    'takeyourmeds.api',
+    'takeyourmeds.dashboard',
     'takeyourmeds.groups',
     'takeyourmeds.groups.groups_admin',
     'takeyourmeds.groups.groups_billing',

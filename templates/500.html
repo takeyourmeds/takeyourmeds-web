@@ -1,0 +1,20 @@
+{% extends "base/base.html" %}
+
+{% block title %}500 Internal Server Error &mdash; {{ block.super }}{% endblock %}
+
+{% block body_classes %}error-bg{% endblock %}
+
+{% block body %}
+
+<div class="container error-404">
+  <div class="row">
+    <div class="col-sm-6">
+      <h1>500</h1>
+      <h3>
+        There was an error processing your request.
+      </h3>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

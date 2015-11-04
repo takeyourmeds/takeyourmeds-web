@@ -5,7 +5,7 @@ from os.path import dirname, abspath
 from apps import *
 from setup_warnings import *
 
-BASE_DIR = '/usr/share/python/takeyourmeds-web'
+BASE_DIR = '/usr/share/python/takeyourmeds'
 
 # Fallback to relative location
 if not __file__.startswith(BASE_DIR):
@@ -24,10 +24,9 @@ DATABASES = {
         'PASSWORD': 'takeyourmeds',
         'HOST': '127.0.0.1',
         'PORT': '5432',
+        'ATOMIC_REQUESTS': True,
     },
 }
-
-ATOMIC_REQUESTS = True
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -80,8 +79,11 @@ djcelery.setup_loader()
 BROKER_URL = 'redis://localhost:6379/0'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'support@takeyourmeds.co.uk'
 
 SITE_URL = 'http://www.takeyourmeds.co.uk'
+
+AUTH_USER_MODEL = 'account.User'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 

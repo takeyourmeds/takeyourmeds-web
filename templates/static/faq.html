@@ -1,0 +1,85 @@
+{% extends "base/base.html" %}
+
+{% block title %}Frequently Asked Questions &mdash; {{ block.super }}{% endblock %}
+
+{% block breadcrumbs_header %}
+  <h4>Frequently Asked Questions</h4>
+{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  <li>FAQs</li>
+{% endblock %}
+
+{% block navbar_active_faq %}active{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="center-heading">
+      <h2>Got any questions?</h2>
+      <span class="center-line"></span>
+      <p class="lead">
+        {% lorem %}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="divide30"></div>
+
+<div class="row">
+  <div class="col-md-7">
+    <div class="panel-group" id="faq-entry">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#faq-entry" href="#faq-entry-1">
+            {% lorem 10 w %}?
+            </a>
+          </h4>
+        </div>
+        <div id="faq-entry-1" class="panel-collapse collapse in">
+          <div class="panel-body">
+          {% lorem %}
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#faq-entry" href="#faq-entry-2">
+            {% lorem 10 w %}?
+            </a>
+          </h4>
+        </div>
+        <div id="faq-entry-2" class="panel-collapse collapse">
+          <div class="panel-body">
+          {% lorem %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-md-offset-1">
+    <div class="sidebar-box margin40">
+      <h4>{% lorem 3 w %}</h4>
+      <p>
+        {% lorem 12 w %}.
+      </p>
+    </div>
+    <div class="sidebar-box margin40">
+      <h4>{% lorem 3 w %}</h4>
+      <p>
+        {% lorem 12 w %}.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="divide30"></div>
+
+{% endblock%}

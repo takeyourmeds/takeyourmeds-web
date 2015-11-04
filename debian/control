@@ -1,4 +1,4 @@
-Source: takeyourmeds-web
+Source: takeyourmeds
 Section: python
 Priority: extra
 Maintainer: Chris lamb <chris@chris-lamb.co.uk>
@@ -10,9 +10,9 @@ Build-Depends: debhelper (>= 9),
                python
 Standards-Version: 3.9.5
 
-Package: takeyourmeds-web
+Package: takeyourmeds
 Architecture: any
 Pre-Depends: python2.7, ${misc:Pre-Depends}
 Depends: ${misc:Depends}, ${python:Depends}, ${shlibs:Depends}
-Description: takeyourmeds-web
- takeyourmeds-web
+Description: takeyourmeds
+ takeyourmeds

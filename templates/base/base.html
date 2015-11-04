@@ -1,77 +1,127 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <meta charset="UTF-8">
-  <meta name="robots" content="noindex, nofollow">
-  <title>{% block head_title %}Take Your Meds - Phone reminders to help you and yours remember to take your medication{% endblock %}</title>
+{% extends "base/generic_base.html" %}
 
-  <link href='//fonts.googleapis.com/css?family=Merriweather:300,400,700' rel='stylesheet' type='text/css' />
-  <link href="{% static "css/normalize.css" %}" rel="stylesheet" media="screen" />
-  <link href="{% static "css/main.css" %}" rel="stylesheet" media="screen" />
-</head>
+{% block body %}
 
-<body class="{% block bodyclass %}{% endblock %}">
-  <header class="site_header">
-    <div class="container">
-      <a href="{% url "static:landing" %}">
-        <h2>Take Your Meds</h2>
-      </a>
-
-      <ul class="site_nav">
-        <li><a href="{% url "static:about" %}">About</a></li>
-        <li><a href="{% url "reminders:create" %}">New Reminder</a></li>
-        <li><a href="{% url "reminders:index" %}">My Reminders</a></li>
-        {% if request.user.is_authenticated %}
-        <li><a href="{% url "account:logout" %}">Logout</a></li>
-        {% else %}
-        <li><a href="{% url "registration:view" %}">Register</a></li>
-        <li><a href="{% url "account:login" %}">Login</a></li>
-        {% endif %}
-      </ul>
-    </div>
-  </header>
-
-  {% if messages %}
-  <ul class="messages">
-      {% for message in messages %}
-      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-      {% endfor %}
-  </ul>
-  {% endif %}
-
-  {% block content %}
-  <div id="content">
-    <div class="container">
-      {% block container %}{% endblock %}
+<div class="top-bar-light">
+  <div class="container hidden-xs">
+    <div class="row ">
+      <div class="col-sm-7 col-sm-offset-5 text-right">
+        <ul class="list-inline top-dark-right">
+          <li class="hidden-sm hidden-xs"><i class="fa fa-envelope"></i> {{ settings.DEFAULT_FROM_EMAIL }}</li>
+          {% if request.user.is_authenticated %}
+          <li>
+            <form method="POST" action="{% url "account:logout" %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-link"><i class="fa fa-lock"></i> Logout</button>
+            </form>
+          </li>
+          {% else %}
+          <li><a href="{% url "registration:view" %}"><i class="fa fa-user"></i> Sign Up</a></li>
+          <li><a href="{% url "account:login" %}"><i class="fa fa-lock"></i> Login</a></li>
+          {% endif %}
+        </ul>
+      </div>
     </div>
   </div>
-  {% endblock %}
 
-  <footer>
+  <div class="navbar navbar-default navbar-static-top yamm sticky" role="navigation">
     <div class="container">
-      <p>
-        Copyright &copy; {% now "Y" %} Take Your Meds, Ltd.<br>
-        Registered company number 9686492 in England and Wales.<br>
-      </p>
-      <p>
-        Please read our
-        <a href="{% url "static:terms" %}">Terms and Conditions</a> and
-        <a href="{% url "static:privacy" %}">Privacy Policy</a>.
-        {% if request.user.is_superuser %}
-          <a href="{% url "static:admin" %}">Administration</a>.
-        {% endif %}
-      </p>
-    </div>
-  </footer>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{% url "static:landing" %}">
+          <img src="{% static "img/logo.png" %}" alt="TakeYourMeds">
+        </a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="{% block navbar_active_home %}{% endblock %}"><a href="{% url "static:landing" %}">Home</a></li>
+          <li class="{% block navbar_active_about %}{% endblock %}"><a href="{% url "static:about" %}">About</a></li>
+          <li class="{% block navbar_active_faq %}{% endblock %}"><a href="{% url "static:faq" %}">FAQs</a></li>
+          <li class="{% block navbar_active_contact %}{% endblock %}"><a href="{% url "static:contact" %}">Contact</a></li>
 
-  {% block script %}
-    <script type="text/javascript" src="{% static "js/jquery-2.1.4.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/prettycron.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/jquery-color-2.1.2.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/jquery.cookie.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/takeyourmeds.js" %}"></script>
-  {% endblock %}
-</body>
-</html>
+          {% if request.user.is_authenticated %}
+            <li>
+              <form method="POST" action="{% url "account:logout" %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-link">Logout</button>
+              </form>
+            </li>
+          {% else %}
+            <li class="{% block navbar_active_register %}{% endblock %}"><a href="{% url "registration:view" %}">Register</a></li>
+            <li class="{% block navbar_active_login %}{% endblock %}"><a href="{% url "account:login" %}">Login</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% block breadcrumbs_wrapper %}
+<div class="{% block breadcrumbs_classes %}breadcrumb-wrap{% endblock %}">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        {% block breadcrumbs_header %}
+        <h4>FIXME</h4>
+        {% endblock %}</h4>
+      </div>
+      <div class="col-sm-6 hidden-xs text-right">
+        <ol class="breadcrumb">
+          {% block breadcrumbs %}
+          <li><a href="{% url "static:landing" %}">Home</a></li>
+          {% endblock %}
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% if messages %}
+<div class="divide30 hidden-xs"></div>
+{% for message in messages %}
+<div class="container alert alert-{% if message.tags == "error" %}danger {% else %}{{ message.tags }}{% endif %}">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+
+{% block container %}
+
+{% block container_header %}
+  <div class="divide80"></div>
+{% endblock %}
+
+<div class="container">
+  {% block content %}{% endblock %}
+</div>
+{% endblock %}
+
+<footer id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <div class="footer-btm">
+          <span>
+            &copy; {% now "Y" %} Take Your Meds, Ltd. All rights reserved.
+            <br>
+            Take Your Meds, Ltd is a limited company registered in
+            England and Wales with registration 9686492.
+            <br>
+            <a href="{% url "static:terms" %}">Terms and Conditions</a> &bull;
+            <a href="{% url "static:privacy" %}">Privacy Policy</a>
+          </span>
+       </div>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+{% endblock %}

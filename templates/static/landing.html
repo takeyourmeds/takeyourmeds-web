@@ -1,42 +1,151 @@
 {% extends "base/base.html" %}
 
-{% block bodyclass %}home{% endblock %}
+{% block title %}{{ block.super }}{% endblock %}
 
-{% block content %}
-<div id="hero">
+{% block body_id %}boxed{% endblock %}
+{% block body_classes %}boxed-wrapper{% endblock %}
 
-  <div class="container box-sizing-border clearfix">
-    <h1>Simple medication reminders <br />over the phone for you and yours</h1>
-    <a href="{% url "reminders:create" %}" class="submit">Set up a reminder now</a>
+{% block navbar_active_home %}active{% endblock %}
+
+{% block breadcrumbs_wrapper %}{% endblock %}
+
+{% block body %}
+<div class="boxed-wrapper">
+  {{ block.super }}
+</div>
+{% endblock %}
+
+{% block css %}
+{{ block.super }}
+<link href="{% static "rs-plugin/css/settings.css" %}" rel="stylesheet" type="text/css" media="screen"/>
+<link href="{% static "css/rev-style.css" %}" rel="stylesheet" type="text/css" media="screen"/>
+{% endblock %}
+
+{% block script %}
+{{ block.super }}
+<script src="{% static "rs-plugin/js/jquery.themepunch.tools.min.js" %}" type="text/javascript"></script>
+<script src="{% static "rs-plugin/js/jquery.themepunch.revolution.min.js" %}" type="text/javascript"></script>
+<script src="{% static "js/revolution-custom.js" %}" type="text/javascript"></script>
+{% endblock %}
+
+{% block container %}
+
+<div class="tp-banner-container">
+  <div class="tp-banner-boxed">
+    <ul>
+      <li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 1">
+        <img
+          src="{% static "img/bg-4.jpg" %}"
+          alt="darkblurbg"
+          data-bgfit="cover"
+          data-bgposition="left top"
+          data-bgrepeat="no-repeat"
+        >
+        <div
+          class="caption sfb bold uppercase-title text-center"
+          data-x="center"
+          data-y="158"
+          data-speed="900"
+          data-start="800"
+          data-easing="Sine.easeOut"
+        >
+          Simple medication reminders
+        </div>
+
+        <div
+          class="caption sfb lowercase-caption text-center"
+          data-x="center"
+          data-y="218"
+          data-speed="900"
+          data-start="1500"
+          data-easing="Sine.easeOut"
+        >
+          A telephone service to help you remember to take your medication.
+          <br>
+          It's easy to set up, and you can start receiving your reminder
+          phonecalls today.
+        </div>
+        <div
+          class="caption rev-buttons tp-resizeme sfb"
+          data-x="center"
+          data-y="313"
+          data-speed="900"
+          data-start="2200"
+          data-easing="Sine.easeOut"
+        >
+          <a href="{% url "reminders:create" %}" class="btn btn-theme-bg btn-lg">Setup a reminder now</a>
+        </div>
+      </li>
+    </ul>
   </div>
-
 </div>
 
-<div id="introduction">
+<section class="services-wrap">
   <div class="container">
-    <p><strong>Take Your Meds</strong> is a telephone service to help you remember to take your medication. It's easy to set up, and you can start receiving your reminder phonecalls today.</p>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="center-heading">
+          <h2>What We Offer</h2>
+          <span class="center-line"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 col-sm-6 margin20">
+        <div class="services-box wow animated fadeInUp" data-wow-duration="700ms" data-wow-delay="100ms">
+          <div class="services-box-icon">
+            <i class="fa fa-edit"></i>
+          </div><!--services icon-->
+          <div class="services-box-info">
+            <h4>Customisable schedule</h4>
+            <p>
+              Tell us what you need to be reminded about and when and
+              <strong>let us do the work for you</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-6 margin20">
+        <div class="services-box wow animated fadeInUp" data-wow-duration="700ms" data-wow-delay="200ms">
+          <div class="services-box-icon">
+            <i class="fa fa-pencil"></i>
+          </div>
+          <div class="services-box-info">
+            <h4>Record your own message</h4>
+            <p>
+              Or have a family member do it for you. Or if you prefer, you can
+              use one of our <strong>built-in messages</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-6 margin20">
+        <div class="services-box wow animated fadeInUp" data-wow-duration="700ms" data-wow-delay="300ms">
+          <div class="services-box-icon">
+            <i class="fa fa-clock-o"></i>
+          </div>
+          <div class="services-box-info">
+            <h4>Flexible schedule</h4>
+            <p>
+              Whether you need 1 or 100 reminders a day, we have <strong>the
+              right low-cost option</strong> for you.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
-<div id="content">
-  <div class="container clearfix">
+<div class="divide40"></div>
 
-    <div class="selling-point left">
-      <h3>Customisable schedule</h3>
-      <p>Tell us what you need to be reminded about and when and <strong>let us do the work for you</strong>.</p>
-    </div>
+<p class="text-center">
+  <a href="{% url "reminders:create" %}" class="btn btn-theme-bg btn-lg">Setup a reminder now</a>
+</p>
 
-    <div class="selling-point right">
-      <h3>Record your own message</h3>
-      <p>Or have a family member do it for you. Or if you prefer, you can use one of our <strong>built-in messages</strong>.</p>
-    </div>
-
-    <div class="selling-point left">
-      <h3>Flexible pricing</h3>
-      <p>Whether you need 1 or 100 reminders a day, we have <strong>the right low-cost option</strong> for you</p>
-    </div>
-
-  </div>
-</div>
+<div class="divide40"></div>
 
 {% endblock%}

@@ -1,44 +1,86 @@
 {% extends "base/base.html" %}
 
-{% block head_title %}Login{% endblock %}
+{% block title %}Login &mdash; {{ block.super }}{% endblock %}
 
-{% block container %}
+{% block breadcrumbs_classes %}{{ block.super }} breadcrumb-light{% endblock %}
 
-{% if form.non_field_errors %}
-<div class="has-error">
-  {% for x in form.non_field_errors %}
-  <p class="help-block">{{ x }}</p>
-  {% endfor %}
-</div>
-{% endif %}
+{% block breadcrumbs_header %}
+  <h4>Login</h4>
+  <p>Login to your account</p>
+{% endblock %}
 
-{{ form.errors }}
+{% block breadcrumbs %}
+  {{ block.super }}
+  <li>Login</li>
+{% endblock %}
+
+{% block navbar_active_login %}active{% endblock %}
+
+{% block content %}
 
 <div class="row">
-  <br/><br/>
-  <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
-  <div class="well">
-    <h1>Login</h1>
+  <div class="col-sm-6 col-sm-offset-3 sky-form-login-register">
+    <div class="margin40">
+      <form method="POST" action="" id="sky-form" class="sky-form">
+        {% csrf_token %}
 
-    <form id="loginForm" method="POST" action="" novalidate="novalidate">
-      {% csrf_token %}
-       {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-      {% endif %}
-      <div class="form-group">
-        <label for="login" class="control-label">Username</label>
-        <input type="text" class="form-control" id="login" name="username" value="{{ form.login.value|default:"" }}" required="" title="Please enter you username" placeholder="Username">
-        <span class="help-block"></span>
-      </div>
-      <div class="form-group">
-        <label for="password" class="control-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password" value="" required="" title="Please enter your password" placeholder="Password">
-        <span class="help-block"></span>
-      </div>
-      <button type="submit" class="btn btn-success btn-block">Login</button>
-    </form>
+        <h3 class="text-center">Log in to your account</h3>
+
+        <fieldset>
+          <section class="{% if form.errors.email %}state-error{% endif %}">
+            <div class="row">
+              <label class="label col col-4">Email</label>
+              <div class="col col-8">
+                <label class="input">
+                  <i class="icon-append fa fa-email"></i>
+                  <input
+                    id="{{ form.email.id_for_label }}"
+                    type="email"
+                    class="form-control"
+                    name="{{ form.email.html_name }}"
+                    value="{{ form.email.value|default:"" }}"
+                    maxlength="{{ form.fields.email.max_length }}"
+                    {% if form.fields.email.required %}required{% endif %}
+                  >
+                </label>
+                {% for x in form.errors.email %}
+                  <p class="help-block">{{ x }}</p>
+                {% endfor %}
+              </div>
+            </div>
+          </section>
+
+          <section class="{% if form.errors.password %}state-error{% endif %}">
+            <div class="row">
+              <label class="label col col-4">Password</label>
+              <div class="col col-8">
+                <label class="input">
+                  <i class="icon-append fa fa-lock"></i>
+                  <input
+                    id="{{ form.password.id_for_label }}"
+                    type="password"
+                    class="form-control"
+                    name="{{ form.password.html_name }}"
+                    value="{{ form.password.value|default:"" }}"
+                    maxlength="{{ form.fields.password.max_length }}"
+                    {% if form.fields.password.required %}required{% endif %}
+                  >
+                </label>
+                {% for x in form.errors.password %}
+                  <p class="help-block">{{ x }}</p>
+                {% endfor %}
+              </div>
+            </div>
+          </section>
+        </fieldset>
+
+        <footer class="text-right">
+          <a href="{% url "registration:view" %}" class="btn btn-link">I don't have an account</a>
+          <button type="submit" class="btn btn-theme-bg btn-lg">Log in</button>
+        </footer>
+      </form>
+    </div>
   </div>
- </div>
 </div>
 
 {% endblock %}

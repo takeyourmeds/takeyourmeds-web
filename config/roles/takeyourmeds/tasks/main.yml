@@ -53,8 +53,8 @@
     state=stopped
   with_items:
     - nginx
-    - takeyourmeds-web-celery
-    - takeyourmeds-web-gunicorn
+    - takeyourmeds-celery
+    - takeyourmeds-gunicorn
 
 - name: Install package
   shell:
@@ -86,6 +86,6 @@
     name={{ item }}
     state=started
   with_items:
-    - takeyourmeds-web-gunicorn
-    - takeyourmeds-web-celery
+    - takeyourmeds-gunicorn
+    - takeyourmeds-celery
     - nginx

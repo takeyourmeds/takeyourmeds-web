@@ -1,0 +1,195 @@
+{% extends "base/base.html" %}
+
+{% block title %}Contact &mdash; {{ block.super }}{% endblock %}
+
+{% block breadcrumbs_header %}
+  <h4>Contact</h4>
+{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  <li>Contact</li>
+{% endblock %}
+
+{% block navbar_active_contact %}active{% endblock %}
+
+{% block script %}
+{{ block.super }}
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+<script type="text/javascript">
+  google.maps.event.addDomListener(window, 'load', function() {
+    var latlng = new google.maps.LatLng(51.44376389627302, 0.00042383448455);
+
+    var map = new google.maps.Map(document.getElementById('map-canvas'), {
+        zoom: 9
+      , center: latlng
+      , mapTypeId: google.maps.MapTypeId.ROADMAP
+      , disableDefaultUI: true
+    });
+
+    new google.maps.Marker({
+        position: latlng
+      , map: map
+    });
+  });
+</script>
+{% endblock %}
+
+{% block container %}
+
+{% if not form.errors %}
+  <div id="map-canvas"></div>
+{% endif %}
+
+<div class="divide60"></div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-sm-offset-1 margin30">
+
+      {% if not form.errors %}
+      <div class="row">
+        <div class="col-md-12">
+          <div class="center-heading">
+            <h2>Contact us</h2>
+            <span class="center-line"></span>
+            <p>
+              {% lorem %}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row margin40">
+        <div class="col-md-4 margin30">
+          <div class="contact-option-circle">
+            <i class="fa fa-home"></i>
+            <p>
+               152 Minard Road<br>
+               London, SE6 1NJ
+            </p>
+          </div>
+        </div>
+         <div class="col-md-4 margin30">
+          <div class="contact-option-circle">
+            <i class="fa fa-phone"></i>
+            <p>
+              FIXME
+            </p>
+          </div>
+        </div>
+         <div class="col-md-4 margin30">
+          <div class="contact-option-circle">
+            <i class="fa fa-envelope"></i>
+            <p>
+              {{ settings.DEFAULT_FROM_EMAIL }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <p class="margin30">
+        We are waiting to here from you!
+      </p>
+
+      {% endif %}
+
+      <form action="" method="POST" id="sky-form" class="sky-form sky-form-columns">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+        <div class="has-error">
+          {% for x in form.non_field_errors %}
+          <p class="help-block">{{ x }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <fieldset>
+          <div class="row">
+            <section class="col col-6 {% if form.errors.name %}state-error{% endif %}">
+              <label class="label">Name</label>
+              <label class="input">
+                <i class="icon-append fa fa-user"></i>
+                <input
+                  id="{{ form.name.id_for_label }}"
+                  type="text"
+                  class="form-control"
+                  name="{{ form.name.html_name }}"
+                  value="{{ form.name.value|default:"" }}"
+                  maxlength="{{ form.fields.name.max_length }}"
+                  {% if form.fields.name.required %}required{% endif %}
+                >
+              </label>
+              {% for x in form.errors.field %}
+                <p class="help-block">{{ x }}</p>
+              {% endfor %}
+            </section>
+            <section class="col col-6 {% if form.errors.email %}state-error{% endif %}"">
+              <label class="label">E-mail</label>
+              <label class="input">
+                <i class="icon-append fa fa-envelope-o"></i>
+                <input
+                  id="{{ form.email.id_for_label }}"
+                  type="email"
+                  class="form-control"
+                  name="{{ form.email.html_name }}"
+                  value="{{ form.email.value|default:"" }}"
+                  maxlength="{{ form.fields.email.max_length }}"
+                  {% if form.fields.email.required %}required{% endif %}
+                >
+              </label>
+              {% for x in form.errors.email %}
+                <p class="help-block">{{ x }}</p>
+              {% endfor %}
+            </section>
+          </div>
+
+          <section class="{% if form.errors.subject %}state-error{% endif %}">
+            <label class="label">Subject</label>
+            <label class="input">
+              <i class="icon-append fa fa-tag"></i>
+              <input
+                id="{{ form.subject.id_for_label }}"
+                type="text"
+                class="form-control"
+                name="{{ form.subject.html_name }}"
+                value="{{ form.subject.value|default:"" }}"
+                maxlength="{{ form.fields.subject.max_length }}"
+                {% if form.fields.subjec.required %}required{% endif %}
+              >
+            </label>
+            {% for x in form.errors.subject %}
+              <p class="help-block">{{ x }}</p>
+            {% endfor %}
+          </section>
+
+          <section class="{% if form.errors.message %}state-error{% endif %}">
+            <label class="label">Message</label>
+            <label class="textarea">
+              <i class="icon-append fa fa-comment"></i>
+              <textarea
+                id="{{ form.message.id_for_label }}"
+                rows="10"
+                class="form-control"
+                name="{{ form.message.html_name }}"
+                {% if form.fields.message.required %}required{% endif %}
+              >{{ form.message.value|default:"" }}</textarea>
+            </label>
+            {% for x in form.errors.field %}
+              <p class="help-block">{{ x }}</p>
+            {% endfor %}
+          </section>
+        </fieldset>
+
+        <footer>
+          <button type="submit" class="btn btn-theme-bg btn-lg">Send message</button>
+        </footer>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="divide60"></div>
+
+{% endblock%}

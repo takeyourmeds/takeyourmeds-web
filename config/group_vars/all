@@ -1,9 +1,9 @@
 ---
 source: https://github.com/takeyourmeds/takeyourmeds-web
-base_dir: /usr/share/python/takeyourmeds-web
+base_dir: /usr/share/python/takeyourmeds
 
 build_dir: /tmp/buildd
-package_name: takeyourmeds-web
+package_name: takeyourmeds
 
 debian_mirror: http://httpredir.debian.org
 debian_release: jessie

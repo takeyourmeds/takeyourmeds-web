@@ -1,25 +1,16 @@
 from django import forms
-from django.contrib.auth.models import User
 
 from takeyourmeds.account.utils import validate_password
 
-class RegistrationForm(forms.ModelForm):
-    username = forms.RegexField(
-        regex=r'^[\w+-]+$',
-        max_length=30,
-        error_messages={
-            'invalid': "This value may contain only letters, numbers and "
-                "./+/-/_ characters.",
-        },
-    )
+from takeyourmeds.account.models import User
 
+class RegistrationForm(forms.ModelForm):
     password = forms.CharField()
 
     class Meta:
         model = User
         fields = (
             'email',
-            'username',
         )
 
     def save(self):
@@ -29,14 +20,6 @@ class RegistrationForm(forms.ModelForm):
         user.save()
 
         return user
-
-    def clean_username(self):
-        username = self.cleaned_data['username'].strip()
-
-        if User.objects.filter(username=username).exists():
-            raise forms.ValidationError("That username is already taken.")
-
-        return username
 
     def clean_password(self):
         return validate_password(self.cleaned_data.get('password'))
