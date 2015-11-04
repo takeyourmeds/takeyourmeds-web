@@ -5,3 +5,7 @@ DATABASES = {'default': {
     'NAME': ':memory:',
     'ATOMIC_REQUESTS': True,
 }}
+
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.CryptPasswordHasher',
+)
