@@ -1,0 +1,1 @@
+/home/lamby/git/work/takeyourmeds/takeyourmeds-web/static/rs-plugin/js/jquery.themepunch.revolution.js
