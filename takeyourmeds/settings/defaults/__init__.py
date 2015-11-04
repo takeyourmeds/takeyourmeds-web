@@ -1,10 +1,13 @@
 import os
+import djcelery
 import datetime
 
 from os.path import dirname, abspath
 
 from apps import *
 from setup_warnings import *
+
+djcelery.setup_loader()
 
 BASE_DIR = '/usr/share/python/takeyourmeds'
 
@@ -77,8 +80,6 @@ LANGUAGE_CODE = 'en-gb'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
-import djcelery
-djcelery.setup_loader()
 
 BROKER_URL = 'redis://localhost:6379/0'
 
