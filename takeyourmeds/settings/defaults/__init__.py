@@ -85,7 +85,7 @@ BROKER_URL = 'redis://localhost:6379/0'
 CELERYBEAT_SCHEDULE = {
     'schedule-reminders': {
         'task': 'takeyourmeds.reminders.tasks.schedule_reminders',
-        'schedule': datetime.timedelta(seconds=60),
+        'schedule': datetime.timedelta(minutes=1),
     },
 }
 
