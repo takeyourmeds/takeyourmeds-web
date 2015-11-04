@@ -7,12 +7,18 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 
 from takeyourmeds.telephony.utils import send_sms, make_call
 
-from .models import Reminder
+from .models import Reminder, Time
 
 logger = get_task_logger(__name__)
 
 @shared_task()
-def send_reminder_task(reminder_id):
+def schedule_reminders():
+    for x in Time.objects.all():
+        if x.should_run():
+            x.trigger()
+
+@shared_task()
+def trigger_reminder(reminder_id):
     reminder = Reminder.objects.get(pk=reminder_id)
 
     if reminder.message:

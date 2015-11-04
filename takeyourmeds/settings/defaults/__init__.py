@@ -1,4 +1,5 @@
 import os
+import datetime
 
 from os.path import dirname, abspath
 
@@ -80,6 +81,13 @@ import djcelery
 djcelery.setup_loader()
 
 BROKER_URL = 'redis://localhost:6379/0'
+
+CELERYBEAT_SCHEDULE = {
+    'schedule-reminders': {
+        'task': 'reminders.schedule_reminders',
+        'schedule': datetime.timedelta(seconds=60),
+    },
+}
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = 'support@takeyourmeds.co.uk'

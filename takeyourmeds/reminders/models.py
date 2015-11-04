@@ -15,9 +15,9 @@ class Reminder(models.Model):
     class Meta:
         ordering = ('created',)
 
-    def dispatch_task(self):
-        from .tasks import send_reminder_task
-        send_reminder_task.delay(self.pk)
+    def trigger(self):
+        from .tasks import trigger_reminder
+        trigger_reminder.delay(self.pk)
 
 class Time(models.Model):
     reminder = models.ForeignKey('Reminder', related_name='times')
@@ -42,8 +42,3 @@ class Time(models.Model):
 
     def should_run(self):
         assert False, "FIXME"
-
-    def run(self):
-        self.reminder.dispatch_task()
-        self.last_run = datetime.datetime.utcnow()
-        self.save()

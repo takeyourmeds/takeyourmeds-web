@@ -40,7 +40,7 @@ def delete(request, reminder_id):
 @login_required
 def trigger(request, reminder_id):
     instance = get_object_or_404(request.user.reminders, pk=reminder_id)
-    instance.dispatch_task()
+    instance.trigger()
 
     messages.info(request, "Your reminder has been triggered.")
 
