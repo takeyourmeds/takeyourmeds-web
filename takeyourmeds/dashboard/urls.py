@@ -1,6 +1,8 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
-urlpatterns = patterns('takeyourmeds.dashboard.views',
-    url(r'^dashboard$', 'view',
+from . import views
+
+urlpatterns = (
+    url(r'^dashboard$', views.view,
         name='view'),
 )

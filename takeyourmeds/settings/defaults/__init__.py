@@ -57,6 +57,9 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'takeyourmeds.utils.context_processors.settings_context',
             ],
+            'builtins': [
+                'django.contrib.staticfiles.templatetags.staticfiles',
+            ],
         },
     },
 ]

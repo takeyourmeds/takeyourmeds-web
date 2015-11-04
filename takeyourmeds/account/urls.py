@@ -1,8 +1,10 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
-urlpatterns = patterns('takeyourmeds.account.views',
-    url(r'^login$', 'login',
+from . import views
+
+urlpatterns = (
+    url(r'^login$', views.login,
         name='login'),
-    url(r'^logout$', 'logout',
+    url(r'^logout$', views.logout,
         name='logout'),
 )

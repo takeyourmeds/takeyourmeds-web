@@ -1,10 +1,12 @@
-from django.conf.urls import url, patterns
+from django.conf.urls import url
 
-urlpatterns = patterns('takeyourmeds.reminders.views',
-    url(r'^reminders/new$', 'create',
+from . import views
+
+urlpatterns = (
+    url(r'^reminders/new$', views.create,
         name='create'),
-    url(r'^reminders/reminder/(?P<reminder_id>\d+)/delete$', 'delete',
+    url(r'^reminders/reminder/(?P<reminder_id>\d+)/delete$', views.delete,
         name='delete'),
-    url(r'^reminders/reminder/(?P<reminder_id>\d+)/trigger$', 'trigger',
+    url(r'^reminders/reminder/(?P<reminder_id>\d+)/trigger$', views.trigger,
         name='trigger'),
 )
