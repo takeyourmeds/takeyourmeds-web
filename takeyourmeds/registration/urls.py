@@ -1,6 +1,8 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
-urlpatterns = patterns('takeyourmeds.registration.views',
-    url(r'^register$', 'view',
+from . import views
+
+urlpatterns = (
+    url(r'^register$', views.view,
         name='view'),
 )

@@ -1,5 +1,5 @@
-from django.conf.urls import patterns, include
+from django.conf.urls import url, include
 
-urlpatterns = patterns('takeyourmeds.groups.views',
-    (r'', include('takeyourmeds.groups.groups_admin.urls', namespace='admin')),
+urlpatterns = (
+    url(r'', include('takeyourmeds.groups.groups_admin.urls', namespace='admin')),
 )

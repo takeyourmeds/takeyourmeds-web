@@ -53,8 +53,9 @@
     state=stopped
   with_items:
     - nginx
-    - takeyourmeds-web-celery
-    - takeyourmeds-web-gunicorn
+    - takeyourmeds-celery
+    - takeyourmeds-gunicorn
+  ignore_errors: yes # Permit initial installation
 
 - name: Install package
   shell:
@@ -79,13 +80,13 @@
   sudo: yes
   sudo_user: www-data
   command:
-    "{{ base_dir }}/bin/manage.py migrate --verbosity=2 --noinput"
+    "{{ base_dir }}/bin/manage.py migrate --verbosity=2 --noinput --run-syncdb"
 
 - name: Start services again
   action: service
     name={{ item }}
     state=started
   with_items:
-    - takeyourmeds-web-gunicorn
-    - takeyourmeds-web-celery
+    - takeyourmeds-gunicorn
+    - takeyourmeds-celery
     - nginx

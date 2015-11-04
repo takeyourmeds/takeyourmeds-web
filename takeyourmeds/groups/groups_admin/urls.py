@@ -1,8 +1,10 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
-urlpatterns = patterns('takeyourmeds.groups.groups_admin.views',
-    url(r'^admin/groups$', 'index',
+from . import views
+
+urlpatterns = (
+    url(r'^admin/groups$', views.index,
         name='index'),
-    url(r'^admin/groups/(?P<group_id>\d+)$', 'view',
+    url(r'^admin/groups/(?P<group_id>\d+)$', views.view,
         name='view'),
 )

@@ -1,15 +1,27 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
-urlpatterns = patterns('takeyourmeds.static.views',
-    url('^$', 'landing',
+from . import views
+
+urlpatterns = (
+    url('^$', views.landing,
         name='landing'),
-    url('^about$', 'about',
+
+    url('^about$', views.about,
         name='about'),
-    url('^terms-and-conditions$', 'terms',
+    url('^faq$', views.faq,
+        name='faq'),
+    url('^contact$', views.contact,
+        name='contact'),
+
+    url('^terms-and-conditions$', views.terms,
         name='terms'),
-    url('^privacy-policy$', 'privacy',
+    url('^privacy-policy$', views.privacy,
         name='privacy'),
 
-    url('^admin$', 'admin',
+    url('^404$', views.http404,
+        name='http-404'),
+    url('^500$', views.http500,
+        name='http-500'),
+    url('^admin$', views.admin,
         name='admin'),
 )

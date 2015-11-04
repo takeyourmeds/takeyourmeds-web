@@ -1,6 +1,8 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 from takeyourmeds.utils.test import TestCase
+
+User = get_user_model()
 
 class RegistrationTest(TestCase):
     def test_GET(self):
@@ -13,9 +15,8 @@ class RegistrationTest(TestCase):
         num_users = User.objects.count()
 
         response = self.assertPOST(302, {
-            'username': 'test',
-            'password': 'password',
             'email': 'test@example.org',
+            'password': 'password',
         }, 'registration:view')
 
         self.assertRedirectsTo(

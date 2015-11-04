@@ -1,12 +1,12 @@
 import os
+import datetime
 
 from os.path import dirname, abspath
 
 from apps import *
-from third_party import *
 from setup_warnings import *
 
-BASE_DIR = '/usr/share/python/takeyourmeds-web'
+BASE_DIR = '/usr/share/python/takeyourmeds'
 
 # Fallback to relative location
 if not __file__.startswith(BASE_DIR):
@@ -25,10 +25,9 @@ DATABASES = {
         'PASSWORD': 'takeyourmeds',
         'HOST': '127.0.0.1',
         'PORT': '5432',
+        'ATOMIC_REQUESTS': True,
     },
 }
-
-ATOMIC_REQUESTS = True
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -59,6 +58,9 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'takeyourmeds.utils.context_processors.settings_context',
             ],
+            'builtins': [
+                'django.contrib.staticfiles.templatetags.staticfiles',
+            ],
         },
     },
 ]
@@ -80,9 +82,23 @@ djcelery.setup_loader()
 
 BROKER_URL = 'redis://localhost:6379/0'
 
+CELERYBEAT_SCHEDULE = {
+    'schedule-reminders': {
+        'task': 'takeyourmeds.reminders.tasks.schedule_reminders',
+        'schedule': datetime.timedelta(minutes=1),
+    },
+}
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'support@takeyourmeds.co.uk'
 
 SITE_URL = 'http://www.takeyourmeds.co.uk'
+
+AUTH_USER_MODEL = 'account.User'
+
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+)
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
@@ -100,3 +116,8 @@ SESSION_COOKIE_HTTPONLY = True
 STRIPE_ENABLED = True
 STRIPE_SECRET_KEY = 'overriden-in-production'
 STRIPE_PUBLISHABLE_KEY = 'overriden-in-production'
+
+TWILIO_ENABLED = True
+TWILIO_FROM = 'overriden-in-production'
+TWILIO_AUTH_TOKEN = 'overriden-in-production'
+TWILIO_ACCOUNT_SID = 'overriden-in-production'

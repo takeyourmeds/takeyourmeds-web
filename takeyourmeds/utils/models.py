@@ -1,9 +1,6 @@
 import stripe
 
 from django.conf import settings
-from django.template.base import add_to_builtins
-
-add_to_builtins('django.contrib.staticfiles.templatetags.staticfiles')
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 

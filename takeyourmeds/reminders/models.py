@@ -2,30 +2,43 @@ import datetime
 
 from django.db import models
 
-from croniter import croniter
-
 class Reminder(models.Model):
-    user = models.ForeignKey('auth.User', related_name='reminders')
-    message = models.CharField(blank=True, max_length=100)
-    audiourl = models.CharField(blank=True, max_length=100)
-    telnumber = models.CharField(max_length=200)
+    user = models.ForeignKey('account.User', related_name='reminders')
 
-    def dispatch_task(self):
-        from .tasks import send_reminder_task
-        send_reminder_task.delay(self.pk)
+    message = models.CharField(max_length=100, blank=True)
+    audio_url = models.CharField(max_length=100)
+
+    phone_number = models.CharField(max_length=200)
+
+    created = models.DateTimeField(default=datetime.datetime.utcnow)
+
+    class Meta:
+        ordering = ('created',)
+
+    def trigger(self):
+        from .tasks import trigger_reminder
+        trigger_reminder.delay(self.pk)
 
 class Time(models.Model):
     reminder = models.ForeignKey('Reminder', related_name='times')
-    cronstring = models.CharField(blank=True, max_length=100)
+
+    time = models.CharField(max_length=5)
     last_run = models.DateTimeField(default=datetime.datetime.utcnow)
 
+    created = models.DateTimeField(default=datetime.datetime.utcnow)
+
+    class Meta:
+        ordering = ('time',)
+        unique_together = (
+            ('reminder', 'time'),
+        )
+
+    def __unicode__(self):
+        return u"#%d: %s: %s" % (
+            self.pk,
+            self.reminder,
+            self.time,
+        )
+
     def should_run(self):
-        times = croniter(self.cronstring, self.last_run)
-
-        return times.get_next(datetime.datetime) < \
-            datetime.datetime.utcnow()
-
-    def run(self):
-        self.reminder.dispatch_task()
-        self.last_run = datetime.datetime.utcnow()
-        self.save()
+        return True

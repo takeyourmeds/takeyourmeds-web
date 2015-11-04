@@ -1,0 +1,15 @@
+[Unit]
+Description=takeyourmeds-celery
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+Restart=always
+
+PermissionsStartOnly=true
+ExecStartPre=-/usr/bin/install -o www-data -g www-data -d /var/lib/takeyourmeds-celery
+
+ExecStart=/usr/share/python/takeyourmeds/bin/manage.py celery worker --beat --schedule=/var/lib/takeyourmeds-celery/schedule
+
+PrivateTmp=true
