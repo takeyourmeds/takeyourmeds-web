@@ -80,6 +80,7 @@ LANGUAGE_CODE = 'en-gb'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'media'),)
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 BROKER_URL = 'redis://localhost:6379/0'
 
