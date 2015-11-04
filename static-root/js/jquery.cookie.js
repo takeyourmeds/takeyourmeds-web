@@ -1,1 +1,0 @@
-/home/lamby/git/work/takeyourmeds/takeyourmeds-web/static/js/jquery.cookie.js
