@@ -88,6 +88,10 @@ SITE_URL = 'http://www.takeyourmeds.co.uk'
 
 AUTH_USER_MODEL = 'account.User'
 
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+)
+
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 CACHES = {
