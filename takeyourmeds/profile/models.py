@@ -10,5 +10,12 @@ class UserData(AutoOneToOneModel(User, related_name='profile')):
     group = models.ForeignKey(
         'groups.Group',
         related_name='users',
-        default=get_default_group,
     )
+
+    def save(self, *args, **kwargs):
+        # Cannot use default= as  check framework evaluates these before the
+        # database is guaranteed to be consistent.
+        if self.group_id is None:
+            self.group = get_default_group()
+
+        super(UserData, self).save(*args, **kwargs)
