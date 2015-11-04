@@ -78,7 +78,7 @@ USE_L10N = False
 LANGUAGE_CODE = 'en-gb'
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'media'),)
 
 BROKER_URL = 'redis://localhost:6379/0'

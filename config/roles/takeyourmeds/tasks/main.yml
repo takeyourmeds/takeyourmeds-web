@@ -82,6 +82,10 @@
   command:
     "{{ base_dir }}/bin/manage.py migrate --verbosity=2 --noinput --run-syncdb"
 
+- name: collectstatic
+  command:
+    "{{ base_dir }}/bin/manage.py collectstatic --verbosity=2 --noinput --clear --link"
+
 - name: Start services again
   action: service
     name={{ item }}

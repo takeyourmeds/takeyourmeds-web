@@ -1,3 +1,4 @@
 *.pyc
 *.sqlite*
 /takeyourmeds/settings/custom.py
+/static/
