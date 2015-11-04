@@ -42,6 +42,6 @@ def trigger(request, reminder_id):
     instance = get_object_or_404(request.user.reminders, pk=reminder_id)
     instance.trigger()
 
-    messages.info(request, "Your reminder has been triggered.")
+    messages.info(request, "A test for your reminder has been triggered.")
 
     return redirect('dashboard:view')
