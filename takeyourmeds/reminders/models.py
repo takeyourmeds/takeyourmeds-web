@@ -41,4 +41,4 @@ class Time(models.Model):
         )
 
     def should_run(self):
-        assert False, "FIXME"
+        return True
