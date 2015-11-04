@@ -13,7 +13,7 @@ class UserData(AutoOneToOneModel(User, related_name='profile')):
     )
 
     def save(self, *args, **kwargs):
-        # Cannot use default= as  check framework evaluates these before the
+        # Cannot use default= as  the check framework evaluates them before the
         # database is guaranteed to be consistent.
         if self.group_id is None:
             self.group = get_default_group()
