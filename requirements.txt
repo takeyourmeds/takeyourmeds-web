@@ -4,7 +4,6 @@ Django==1.9b1
 django-auto-one-to-one==2.0.2
 django-celery==3.1.16
 django-email-from-template==2.0.0
-django-setuptest==0.2
 requests==2.8.1
 stripe==1.27.1
 twilio==4.9.0

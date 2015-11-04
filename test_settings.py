@@ -1,1 +1,0 @@
-from takeyourmeds.settings import *
