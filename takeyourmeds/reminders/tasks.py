@@ -5,6 +5,7 @@ from celery.utils.log import get_task_logger
 
 from django.contrib.staticfiles.storage import staticfiles_storage
 
+from takeyourmeds.utils.dt import local_time
 from takeyourmeds.telephony.utils import send_sms, make_call
 
 from .models import Reminder, Time
@@ -13,9 +14,8 @@ logger = get_task_logger(__name__)
 
 @shared_task()
 def schedule_reminders():
-    for x in Time.objects.all():
-        if x.should_run():
-            x.reminder.trigger()
+    for x in Time.objects.filter(time='%02d:00' % local_time().hour):
+        trigger_reminder.delay(x.reminder_id)
 
 @shared_task()
 def trigger_reminder(reminder_id):

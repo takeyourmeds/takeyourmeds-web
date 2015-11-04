@@ -1,10 +1,13 @@
 import os
-import datetime
+import djcelery
 
 from os.path import dirname, abspath
+from celery.schedules import crontab
 
 from apps import *
 from setup_warnings import *
+
+djcelery.setup_loader()
 
 BASE_DIR = '/usr/share/python/takeyourmeds'
 
@@ -77,15 +80,14 @@ LANGUAGE_CODE = 'en-gb'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
-import djcelery
-djcelery.setup_loader()
 
 BROKER_URL = 'redis://localhost:6379/0'
 
 CELERYBEAT_SCHEDULE = {
     'schedule-reminders': {
         'task': 'takeyourmeds.reminders.tasks.schedule_reminders',
-        'schedule': datetime.timedelta(minutes=1),
+        'schedule': crontab(minute=0),
+        'relative': False,
     },
 }
 

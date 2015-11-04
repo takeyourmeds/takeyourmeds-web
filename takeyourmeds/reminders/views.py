@@ -4,6 +4,7 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 
 from .forms import CreateForm
+from .tasks import trigger_reminder
 
 @login_required
 def create(request):
@@ -40,8 +41,9 @@ def delete(request, reminder_id):
 @login_required
 def trigger(request, reminder_id):
     instance = get_object_or_404(request.user.reminders, pk=reminder_id)
-    instance.trigger()
 
-    messages.info(request, "Your reminder has been triggered.")
+    trigger_reminder.delay(instance.pk)
+
+    messages.info(request, "A test for your reminder has been triggered.")
 
     return redirect('dashboard:view')
