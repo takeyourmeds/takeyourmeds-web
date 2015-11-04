@@ -51,11 +51,11 @@
   action: service
     name={{ item }}
     state=stopped
-    ignore_errors=yes # Permit initial installation
   with_items:
     - nginx
     - takeyourmeds-celery
     - takeyourmeds-gunicorn
+  ignore_errors: yes # Permit initial installation
 
 - name: Install package
   shell:
