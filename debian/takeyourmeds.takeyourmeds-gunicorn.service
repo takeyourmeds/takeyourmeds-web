@@ -1,5 +1,5 @@
 [Unit]
-Description=takeyourmeds-web-gunicorn
+Description=takeyourmeds-gunicorn
 After=network.target
 
 [Service]
@@ -7,7 +7,7 @@ User=www-data
 Group=www-data
 Restart=always
 
-ExecStart=/usr/share/python/takeyourmeds-web/bin/gunicorn --workers=8 --log-level=info --preload takeyourmeds.wsgi
+ExecStart=/usr/share/python/takeyourmeds/bin/gunicorn --workers=8 --log-level=info --preload takeyourmeds.wsgi
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
 

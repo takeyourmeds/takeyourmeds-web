@@ -5,7 +5,7 @@ from os.path import dirname, abspath
 from apps import *
 from setup_warnings import *
 
-BASE_DIR = '/usr/share/python/takeyourmeds-web'
+BASE_DIR = '/usr/share/python/takeyourmeds'
 
 # Fallback to relative location
 if not __file__.startswith(BASE_DIR):

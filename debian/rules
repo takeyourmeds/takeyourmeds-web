@@ -13,5 +13,5 @@ override_dh_systemd_start:
 	dh_systemd_start --no-start
 
 override_dh_systemd_enable:
-	dh_systemd_enable --name takeyourmeds-web-celery
-	dh_systemd_enable --name takeyourmeds-web-gunicorn
+	dh_systemd_enable --name takeyourmeds-celery
+	dh_systemd_enable --name takeyourmeds-gunicorn
