@@ -1,8 +1,8 @@
 import os
 import djcelery
-import datetime
 
 from os.path import dirname, abspath
+from celery.schedules import crontab
 
 from apps import *
 from setup_warnings import *
@@ -86,7 +86,8 @@ BROKER_URL = 'redis://localhost:6379/0'
 CELERYBEAT_SCHEDULE = {
     'schedule-reminders': {
         'task': 'takeyourmeds.reminders.tasks.schedule_reminders',
-        'schedule': datetime.timedelta(minutes=1),
+        'schedule': crontab(minute=0),
+        'relative': False,
     },
 }
 
