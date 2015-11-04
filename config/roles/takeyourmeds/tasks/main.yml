@@ -51,6 +51,7 @@
   action: service
     name={{ item }}
     state=stopped
+    ignore_errors=yes
   with_items:
     - nginx
     - takeyourmeds-celery
