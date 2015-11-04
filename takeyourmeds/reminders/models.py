@@ -15,10 +15,6 @@ class Reminder(models.Model):
     class Meta:
         ordering = ('created',)
 
-    def trigger(self):
-        from .tasks import trigger_reminder
-        trigger_reminder.delay(self.pk)
-
 class Time(models.Model):
     reminder = models.ForeignKey('Reminder', related_name='times')
 
