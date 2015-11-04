@@ -15,7 +15,7 @@ logger = get_task_logger(__name__)
 @shared_task()
 def schedule_reminders():
     for x in Time.objects.filter(time='%02d:00' % local_time().hour):
-        x.reminder.trigger()
+        trigger_reminder.delay(x.reminder_id)
 
 @shared_task()
 def trigger_reminder(reminder_id):
