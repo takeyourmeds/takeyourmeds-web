@@ -23,10 +23,13 @@ def trigger_reminder(reminder_id):
 
     if reminder.message:
         send_sms(reminder.phone_number, reminder.message)
-    elif reminder.audio_url:
+        return
+
+    if reminder.audio_url:
         make_call(
             reminder.phone_number,
             staticfiles_storage.url(reminder.audio_url),
         )
-    else:
-        logger.warn("Reminder %s has neither message nor url", reminder.pk)
+        return
+
+    logger.error("Unhandled reminder %d", reminder.pk)
