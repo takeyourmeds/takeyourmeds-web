@@ -7,6 +7,10 @@ User=www-data
 Group=www-data
 Restart=always
 
-ExecStart=/usr/share/python/takeyourmeds/bin/manage.py celery worker
+PermissionsStartOnly=true
+ExecStartPre=-/usr/bin/mkdir /var/lib/takeyourmeds-celery
+ExecStartPre=/usr/bin/chown -R www-data:www-data /var/lib/takeyourmeds-celery
+
+ExecStart=/usr/share/python/takeyourmeds/bin/manage.py celery worker --beat --schedule=/var/lib/takeyourmeds-celery/schedule
 
 PrivateTmp=true
