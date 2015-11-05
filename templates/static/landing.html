@@ -35,7 +35,7 @@
     <ul>
       <li data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 1">
         <img
-          src="{% static "img/bg-4.jpg" %}"
+          src="{% static "img/planning-my-week-1326816.jpg" %}"
           alt="darkblurbg"
           data-bgfit="cover"
           data-bgposition="left top"
@@ -117,7 +117,7 @@
           <div class="services-box-info">
             <h4>Record your own message</h4>
             <p>
-             Add your own reminder message, or you could ask a family member to record one for you.
+             Add your own reminder message, or you could ask a family member to record one for you. You can also write a custom text message if that's what you'd prefer.
             </p>
           </div>
         </div>
@@ -147,5 +147,63 @@
 </p>
 
 <div class="divide40"></div>
+
+<div class="wide-img-showcase">
+
+            <div class="row margin-0 wide-img-showcase-row">
+                <div class="col-sm-6 no-padding  medical-06 ">
+                    <div class="no-padding-inner ">
+                        <div>&nbsp;</div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-sm-offset-6 no-padding gray">
+                    <div class="no-padding-inner gray">
+                        <h3 class="wow animated fadeInDownfadeInRight">Why use <span class="colored-text">Take Your Meds</span>?</h3>
+                        <div class="services-box margin30 wow animated fadeInRight">
+                            <div class="services-box-icon">
+                                <i class="fa fa-tablet"></i>
+                            </div><!--services icon-->
+                            <div class="services-box-info">
+                                <h4>Taking medication is hard</h4>
+                                <p>
+                                    Even remembering to take one pill in the morning can be difficult, but add in another pill three times a day and another one at bedtime and things soon get very complicated.
+                                </p>
+                            </div>
+                        </div><!--service box-->
+                        <div class="services-box margin30 wow animated fadeInRight">
+                            <div class="services-box-icon">
+                                <i class="fa fa-twitter"></i>
+                            </div><!--services icon-->
+                            <div class="services-box-info">
+                                <h4>Not all medications are tablets</h4>
+                                <p>
+                                    If you need to use a particular mouthwash, apply a cream, replace a patch or use anything that isn't a tablet then classic pill-helper boxes can't help.
+                                </p>
+                            </div>
+                        </div><!--service box-->
+
+                        <div class="services-box margin30 wow animated fadeInRight">
+                            <div class="services-box-icon">
+                                <i class="fa fa-code"></i>
+                            </div><!--services icon-->
+                            <div class="services-box-info">
+                                <h4>Not everyone uses a smartphone</h4>
+                                <p>
+                                    All you need in order to use Take Your Meds is a phone number, whether a landline or a mobile. You can receive phonecalls or text messages as you prefer.
+                                </p>
+                            </div>
+                            <div class="divide30"></div>
+                            <p class="text-center">
+                              <a href="{% url "reminders:create" %}" class="btn btn-theme-bg btn-lg">Set up a reminder now</a>
+                            </p>
+                        </div><!--service box-->
+
+                    </div>
+                </div>
+            </div>
+        </div><!--wide image showcase end-->
+
+<div class="divide40"></div>
+
 
 {% endblock%}
