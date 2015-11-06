@@ -1,8 +1,11 @@
 import os
+import copy
 import djcelery
 
 from os.path import dirname, abspath
 from celery.schedules import crontab
+
+from django.utils.log import DEFAULT_LOGGING
 
 from apps import *
 from setup_warnings import *
@@ -112,6 +115,10 @@ CACHES = {
         'KEY_PREFIX': 'takeyourmeds',
     }
 }
+
+# Always log to the console, even in production (ie. gunicorn)
+LOGGING = copy.deepcopy(DEFAULT_LOGGING)
+LOGGING['handlers']['console']['filters'] = []
 
 SESSION_COOKIE_AGE = 86400 * 365 * 10
 SESSION_COOKIE_HTTPONLY = True
