@@ -1114,9 +1114,14 @@ TOP BARS
 .footer-btm {
   margin-top: 30px;
   padding: 20px;
-  background-color: #0c0c0c;
+  background-color: #0c0c0c;  
+  color: #555;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
+}
+
+.footer-btm a{
+  color: #555;
 }
 
 .news-form .form-control {
