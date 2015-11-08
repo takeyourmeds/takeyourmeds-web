@@ -1063,8 +1063,8 @@ TOP BARS
   border-bottom: 1px solid #bbb;
 }
 
-.footer-col p {
-  color: #aeaeae;
+.footer-col p, a{
+  color: #777;
   font-size: 13px;
 }
 
@@ -1115,13 +1115,8 @@ TOP BARS
   margin-top: 30px;
   padding: 20px;
   background-color: #0c0c0c;  
-  color: #555;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
-}
-
-.footer-btm a{
-  color: #555;
 }
 
 .news-form .form-control {
