@@ -1044,7 +1044,7 @@ TOP BARS
 /**footet dark**/
 #footer {
   background: #111;
-  font-size: 0.9em;
+  font-size: 1.1em;
   padding: 80px 0 0;
   position: relative;
   clear: both;
@@ -1114,9 +1114,14 @@ TOP BARS
 .footer-btm {
   margin-top: 30px;
   padding: 20px;
-  background-color: #0c0c0c;
+  background-color: #0c0c0c;  
+  color: #555;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
+}
+
+.footer-btm a{
+  color: #555;
 }
 
 .news-form .form-control {
