@@ -1,0 +1,32 @@
+---
+ - name: APT
+   apt:
+     pkg=exim4-daemon-light
+
+ - name: /etc/aliases
+   lineinfile:
+     'dest=/etc/aliases regexp="^root:.*" "line=root: {{ root_email }}"'
+   notify:
+     newaliases
+
+ - name: mailname
+   template:
+     src=mailname
+     dest=/etc/mailname
+     mode=0644
+   notify:
+     update-exim4.conf
+
+ - name: update
+   template:
+     src=update-exim4.conf.conf
+     dest=/etc/exim4/update-exim4.conf.conf
+     mode=0644
+   notify:
+     update-exim4.conf
+
+ - name: running
+   service:
+     name=exim4
+     state=started
+     enabled=yes
