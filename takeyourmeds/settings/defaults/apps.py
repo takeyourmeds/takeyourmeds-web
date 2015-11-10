@@ -9,6 +9,7 @@ INSTALLED_APPS = (
     'email_from_template',
 
     'takeyourmeds.account',
+    'takeyourmeds.account.forgot_password',
     'takeyourmeds.dashboard',
     'takeyourmeds.groups',
     'takeyourmeds.groups.groups_admin',
