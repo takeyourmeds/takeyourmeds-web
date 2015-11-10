@@ -18,7 +18,7 @@ def hardcoded_urls(app_configs, **kwargs):
                         html = f.read()
 
                     for m in re_url.finditer(html):
-                        yield checks.Error("%s contains hardcoded URL %s" % (
+                        yield checks.Error("%s contains hardcoded URL %r" % (
                             fullpath,
                             m.group('url'),
                         ), id='takeyourmeds.utils.E001')
