@@ -4,7 +4,7 @@ import os
 from django.core import checks
 from django.conf import settings
 
-re_url = re.compile(r'\shref="(?P<url>/[^"]*)"')
+re_url = re.compile(r'\shref="(?P<url>(?!https?:|mailto:|{|#)[^"]*)"')
 
 @checks.register()
 def hardcoded_urls(app_configs, **kwargs):
