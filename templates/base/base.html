@@ -7,7 +7,7 @@
     <div class="row ">
       <div class="col-sm-7 col-sm-offset-5 text-right">
         <ul class="list-inline top-dark-right">
-          <li class="hidden-sm hidden-xs"><i class="fa fa-envelope"></i> {{ settings.DEFAULT_FROM_EMAIL }}</li>
+          <li class="hidden-sm hidden-xs"><a href="mailto:{{ settings.DEFAULT_FROM_EMAIL }}"<i class="fa fa-envelope"></i> {{ settings.DEFAULT_FROM_EMAIL }}</a></li>
           {% if request.user.is_authenticated %}
           <li>
             <form method="POST" action="{% url "account:logout" %}">
@@ -128,7 +128,7 @@
                             <h3>Contact</h3>
                             <ul class="list-unstyled contact">
                                 <li><p><strong><i class="fa fa-map-marker"></i> Address:</strong>London, SE6 1NJ, England</p></li> 
-                                <li><p><strong><i class="fa fa-envelope"></i> Email:</strong> <a href="#">hello@takeyourmeds.co.uk</a></p></li>
+                                <li><p><strong><i class="fa fa-envelope"></i> Email:</strong> <a href="mailto:{{ settings.DEFAULT_FROM_EMAIL }}">{{ settings.DEFAULT_FROM_EMAIL }}</a></p></li>
                                 <li> <p><strong><i class="fa fa-github"></i> GitHub:</strong><a href="https://github.com/takeyourmeds/takeyourmeds-web">takeyourmeds</a></p></li>
                                 <li> <p><strong><i class="fa fa-keyboard-o"></i> Freenode IRC:</strong><a href="https://webchat.freenode.net/#takeyourmeds">#takeyourmeds</a></p></li>
                             </ul>
