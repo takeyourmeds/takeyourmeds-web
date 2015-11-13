@@ -1044,7 +1044,7 @@ TOP BARS
 /**footet dark**/
 #footer {
   background: #111;
-  font-size: 1.1em;
+  font-size: 0.9em;
   padding: 80px 0 0;
   position: relative;
   clear: both;
@@ -1063,10 +1063,10 @@ TOP BARS
   border-bottom: 1px solid #bbb;
 }
 
-.footer-col p, a{
-  color: #777;
-  font-size: 13px;
-}
+-.footer-col p {
+-  color: #aeaeae;
+   font-size: 13px;
+ }
 
 .contact p {
   margin-bottom: 10px;
@@ -2024,12 +2024,7 @@ table.shopping-cart-table tr th, table.shopping-cart-table tr td {
   height: 100%;
 }
 
-.no-padding.medical-06 {
-  background: url(../img/medical-06-1455841.jpg) scroll center no-repeat;
-  background-size: cover;
-  position: absolute;
-  height: 100%;
-}
+
 
 @media (max-width: 767px) {
   .no-padding.img {
