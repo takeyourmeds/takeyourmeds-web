@@ -6,10 +6,15 @@
 
 #footer {
   padding-top: 0;
+  font-size: 1em;
 }
 
 .footer-btm {
   margin-top: 0;
+}
+
+.footer-col p, a {
+  color: #666;
 }
 
 .state-error .help-block {
@@ -46,4 +51,11 @@ h3.heading {
 
 .panel-group .panel-heading a {
   text-transform: inherit;
+}
+
+.no-padding.medical-06 {
+  background: url(../img/medical-06-1455841.jpg) scroll center no-repeat;
+  background-size: cover;
+  position: absolute;
+  height: 100%;
 }
