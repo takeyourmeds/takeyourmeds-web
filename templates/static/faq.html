@@ -21,7 +21,7 @@
       <h2>Got any questions?</h2>
       <span class="center-line"></span>
       <p class="lead">
-        Have a look through our Frequently Asked Questions below, or <a href="{% url "static:contact" %}">contact us</a> if you have one we haven't already answered.
+        Have a look through our Frequently Asked Questions below, or <a href="{% url "static:contact" %}">contact us</a> if you need more information.
       </p>
     </div>
   </div>
@@ -37,13 +37,13 @@
         <div class="panel-heading">
           <h4 class="panel-title">
             <a data-toggle="collapse" data-parent="#faq-entry" href="#faq-entry-1">
-            {% lorem 10 w %}?
+            What is Take Your Meds?
             </a>
           </h4>
         </div>
         <div id="faq-entry-1" class="panel-collapse collapse in">
           <div class="panel-body">
-          {% lorem %}
+            <p>Take Your Meds is a telephone reminder service to help you remember to take your medication. You can arrange receive reminder calls or text messages to any UK phone number, whether a landline or a mobile.</p>
           </div>
         </div>
       </div>
@@ -52,29 +52,100 @@
         <div class="panel-heading">
           <h4 class="panel-title">
             <a data-toggle="collapse" data-parent="#faq-entry" href="#faq-entry-2">
-            {% lorem 10 w %}?
+            Who is Take Your Meds for?
             </a>
           </h4>
         </div>
         <div id="faq-entry-2" class="panel-collapse collapse">
           <div class="panel-body">
-          {% lorem %}
+            <p>Take Your Meds is for anyone who would like help remembering to take their medication, or for the family or friends of someone who takes medication.</p>
+            <p>We particularly want to help people who don't use a smartphone.</p>
           </div>
         </div>
       </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#faq-entry" href="#faq-entry-3">
+            How does it work?
+            </a>
+          </h4>
+        </div>
+        <div id="faq-entry-3" class="panel-collapse collapse">
+          <div class="panel-body">
+            <p>You can arrange reminders for yourself, or on behalf of someone you care about, or even both.</p>
+            <p>First, <a href="{% url "registration:view"%}">register for an account</a> with Take Your Meds, then tell us what phone number to contact, when you would like to receive your reminders, and whether you'd prefer a call or a text message. You can record a new voice message to send, or use one of our built-in messages. That's it!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#faq-entry" href="#faq-entry-4">
+            How much does it cost?
+            </a>
+          </h4>
+        </div>
+        <div id="faq-entry-4" class="panel-collapse collapse">
+          <div class="panel-body">
+            <p>For now, Take Your Meds is totally free to use, so why not get started with your reminders today!</p>
+            <p>We hope never to have to charge end-users for the service, and aim to cover our costs another way.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#faq-entry" href="#faq-entry-5">
+            I'm worried about spam. Will you use my phone number or my details in any other way?
+            </a>
+          </h4>
+        </div>
+        <div id="faq-entry-5" class="panel-collapse collapse">
+          <div class="panel-body">
+            <p>Short answer: no. See our <a href="{% url "static:terms" %}">Terms and Conditions</a> and <a href="{% url "static:privacy" %}">Privacy Policy</a> for the longer story.</p>
+            <p>We will never contact you unless you ask us to. If you sign up with your email address we will assume you are happy to receive occasional updates from us, but you can unsubscribe from these if you want to.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#faq-entry" href="#faq-entry-6">
+            I've received messages from Take Your Meds but I never signed up. What's going on?
+            </a>
+          </h4>
+        </div>
+        <div id="faq-entry-6" class="panel-collapse collapse">
+          <div class="panel-body">
+            <p>Email us at <a href="mailto:{{ settings.DEFAULT_FROM_EMAIL }}">{{ settings.DEFAULT_FROM_EMAIL }}</a> and we'll help you out straight away.</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
   <div class="col-md-3 col-md-offset-1">
     <div class="sidebar-box margin40">
-      <h4>{% lorem 3 w %}</h4>
+      <h4>Getting started</h4>
       <p>
-        {% lorem 12 w %}.
+        Head over to our <a href="{% url "registration:view" %}">registration page</a> and start receiving your reminders in minutes.
       </p>
     </div>
     <div class="sidebar-box margin40">
-      <h4>{% lorem 3 w %}</h4>
+      <h4>Log in</h4>
       <p>
-        {% lorem 12 w %}.
+        If you've already registered with us, <a href="{% url "account:login" %}">log in</a> to see your current reminders or add new ones.
+      </p>
+    </div>
+    <div class="sidebar-box margin40">
+      <h4>Help!</h4>
+      <p>
+        Head to our <a href="{% url "static:contact" %}">contact us</a> page if there's anything else we can do for you.
       </p>
     </div>
   </div>
