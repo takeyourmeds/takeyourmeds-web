@@ -19,7 +19,7 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 <script type="text/javascript">
   google.maps.event.addDomListener(window, 'load', function() {
-    var latlng = new google.maps.LatLng(51.44376389627302, 0.00042383448455);
+    var latlng = new google.maps.LatLng(51.4384872, -0.0008023);
 
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
         zoom: 9
@@ -53,19 +53,38 @@
         <div class="col-md-12">
           <div class="center-heading">
             <h2>Contact us</h2>
-            <span class="center-line"></span>
-            <p>
-              {% lorem %}
-            </p>
           </div>
-        </div>
+
+<div class="row">
+  <div class="col-sm-6 margin30">
+    <h3 class="heading">
+      Email, write or phone
+    </h3>
+    <p>
+       Do get in touch with any comments or questions, or just to say hello.
+    </p>
+  </div>
+  <div class="col-sm-6 margin30">
+    <h3 class="heading">
+      Follow us on Twitter
+    </h3>
+       <p>
+          <li>Take Your Meds: <a href="http://www.twitter.com/takeyourmedsapp">@takeyourmedsapp</a>
+          <li>Helen: <a href="http://www.twitter.com/DeckOfPandas">@DeckOfPandas</a>
+          <li>Marcus: <a href="http://www.twitter.com/marcus_baw">@marcus_baw</a>
+       </p>
+    </p>
+  </div>
+</div>
+
+
+
       </div>
       <div class="row margin40">
         <div class="col-md-4 margin30">
           <div class="contact-option-circle">
             <i class="fa fa-home"></i>
             <p>
-               152 Minard Road<br>
                London, SE6 1NJ
             </p>
           </div>
@@ -74,7 +93,7 @@
           <div class="contact-option-circle">
             <i class="fa fa-phone"></i>
             <p>
-              FIXME
+              ...coming soon
             </p>
           </div>
         </div>
@@ -87,10 +106,6 @@
           </div>
         </div>
       </div>
-
-      <p class="margin30">
-        We are waiting to here from you!
-      </p>
 
       {% endif %}
 
