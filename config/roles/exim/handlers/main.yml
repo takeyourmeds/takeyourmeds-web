@@ -1,0 +1,15 @@
+---
+- name: update-exim4.conf
+  command:
+    update-exim4.conf
+  notify:
+    restart exim
+
+- name: restart exim
+  service:
+    name=exim4
+    state=restarted
+
+- name: newaliases
+  command:
+    newaliases
