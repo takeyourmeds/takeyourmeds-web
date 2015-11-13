@@ -96,7 +96,7 @@ CELERYBEAT_SCHEDULE = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = 'support@takeyourmeds.co.uk'
+DEFAULT_FROM_EMAIL = 'hello@takeyourmeds.co.uk'
 
 SITE_URL = 'http://www.takeyourmeds.co.uk'
 
