@@ -14,6 +14,8 @@ class Entry(models.Model):
         choices=[(x.name, x.value) for x in StateEnum],
     )
 
+    traceback = models.TextField()
+
     created = models.DateTimeField(default=datetime.datetime.utcnow)
 
     class Meta:
