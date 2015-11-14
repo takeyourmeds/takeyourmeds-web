@@ -7,6 +7,7 @@ INSTALLED_APPS = (
 
     'djcelery',
     'email_from_template',
+    'template_tests',
 
     'takeyourmeds.account',
     'takeyourmeds.account.forgot_password',
