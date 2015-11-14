@@ -1,10 +1,12 @@
 from __future__ import absolute_import
 
+import urlparse
 import traceback
 
 from celery import shared_task
 from celery.utils.log import get_task_logger
 
+from django.conf import settings
 from django.contrib.staticfiles.storage import staticfiles_storage
 
 from takeyourmeds.utils.dt import local_time
@@ -46,9 +48,12 @@ def _trigger_reminder(reminder):
         return send_sms(reminder.phone_number, reminder.message)
 
     if reminder.audio_url:
-        return make_call(
-            reminder.phone_number,
+        # Ensure we have an absolute URL
+        absolute_audio_url = urlparse.urljoin(
+            settings.SITE_URL,
             staticfiles_storage.url(reminder.audio_url),
         )
+
+        return make_call(reminder.phone_number, absolute_audio_url)
 
     raise NotImplementedError("Unhandled reminder action")
