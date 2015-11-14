@@ -27,5 +27,6 @@ CACHES = {
 }
 
 BROKER_URL = 'memory://'
+CELERY_ALWAYS_EAGER = True
 
 STRIPE_ENABLED = False
