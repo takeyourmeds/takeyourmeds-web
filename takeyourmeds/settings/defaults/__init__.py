@@ -98,7 +98,7 @@ CELERYBEAT_SCHEDULE = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-DEFAULT_FROM_EMAIL_NAME = ""
+DEFAULT_FROM_EMAIL_NAME = "Take Your Meds"
 DEFAULT_FROM_EMAIL_MAILTO = 'hello@takeyourmeds.co.uk'
 
 DEFAULT_FROM_EMAIL = email.utils.formataddr((
