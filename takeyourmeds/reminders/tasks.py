@@ -11,21 +11,22 @@ from takeyourmeds.utils.dt import local_time
 from takeyourmeds.telephony.utils import send_sms, make_call
 
 from .models import Reminder, Time
-from .reminders_instances.enums import StateEnum
+from .reminders_instances.enums import StateEnum, SourceEnum
 
 logger = get_task_logger(__name__)
 
 @shared_task()
 def schedule_reminders():
     for x in Time.objects.filter(time='%02d:00' % local_time().hour):
-        trigger_reminder.delay(x.reminder_id)
+        trigger_reminder.delay(x.reminder_id, SourceEnum.schedule.value)
 
 @shared_task()
-def trigger_reminder(reminder_id):
+def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
     reminder = Reminder.objects.get(pk=reminder_id)
 
     entry = reminder.instances.create(
         state=StateEnum.in_progress,
+        source=source,
     )
 
     try:

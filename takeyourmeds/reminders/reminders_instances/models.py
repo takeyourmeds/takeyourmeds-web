@@ -2,7 +2,7 @@ import datetime
 
 from django.db import models
 
-from .enums import StateEnum
+from .enums import StateEnum, SourceEnum
 
 class Instance(models.Model):
     """
@@ -16,6 +16,10 @@ class Instance(models.Model):
 
     state = models.IntegerField(
         choices=[(x.name, x.value) for x in StateEnum],
+    )
+
+    source = models.IntegerField(
+        choices=[(x.name, x.value) for x in SourceEnum],
     )
 
     traceback = models.TextField()
