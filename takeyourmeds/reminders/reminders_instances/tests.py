@@ -15,7 +15,7 @@ class SmokeTest(TestCase):
 
         entry = instance.instances.get()
 
-        self.assertEqual(entry.state, StateEnum.success)
+        self.assertEqual(entry.get_state_enum(), StateEnum.success)
         self.assertEqual(entry.traceback, "")
         self.assertNotEqual(entry.twilio_sid, "")
 
@@ -28,5 +28,5 @@ class SmokeTest(TestCase):
 
         entry = instance.instances.get()
 
-        self.assertEqual(entry.state, StateEnum.error)
+        self.assertEqual(entry.get_state_enum(), StateEnum.error)
         self.assertNotEqual(entry.traceback, "")
