@@ -5,6 +5,10 @@ from django.db import models
 from .enums import StateEnum
 
 class Instance(models.Model):
+    """
+    A specific instance of a reminder.
+    """
+
     reminder = models.ForeignKey(
         'reminders.Reminder',
         related_name='instances',
