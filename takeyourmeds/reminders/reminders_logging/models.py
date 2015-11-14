@@ -2,10 +2,16 @@ import datetime
 
 from django.db import models
 
+from .enums import StateEnum
+
 class Entry(models.Model):
     reminder = models.ForeignKey(
         'reminders.Reminder',
         related_name='log_entries',
+    )
+
+    state = models.IntegerField(
+        choices=[(x.name, x.value) for x in StateEnum],
     )
 
     created = models.DateTimeField(default=datetime.datetime.utcnow)

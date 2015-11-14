@@ -5,6 +5,7 @@ django-auto-one-to-one==2.0.2
 django-celery==3.1.16
 django-email-from-template==2.0.0
 django-template-tests==1.0.0
+enum34==1.0.4
 requests==2.8.1
 stripe==1.27.1
 twilio==4.9.0
