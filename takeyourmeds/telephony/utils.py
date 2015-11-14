@@ -29,7 +29,7 @@ def make_call(to_number, audio_url):
         <Response>
             <Play loop="1">{}</Play>
         </Response>
-    """.format(audio_url))
+    """.format(audio_url).strip())
 
     call = get_client().calls.create(
         to=to_number,
