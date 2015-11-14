@@ -1,5 +1,6 @@
 import os
 import copy
+import email
 import djcelery
 
 from os.path import dirname, abspath
@@ -96,7 +97,14 @@ CELERYBEAT_SCHEDULE = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = 'hello@takeyourmeds.co.uk'
+
+DEFAULT_FROM_EMAIL_NAME = ""
+DEFAULT_FROM_EMAIL_MAILTO = 'hello@takeyourmeds.co.uk'
+
+DEFAULT_FROM_EMAIL = email.utils.formataddr((
+    DEFAULT_FROM_EMAIL_NAME,
+    DEFAULT_FROM_EMAIL_MAILTO,
+))
 
 SITE_URL = 'http://www.takeyourmeds.co.uk'
 
