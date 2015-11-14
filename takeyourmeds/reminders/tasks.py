@@ -30,9 +30,9 @@ def trigger_reminder(reminder_id):
 
     try:
         if reminder.message:
-            send_sms(reminder.phone_number, reminder.message)
+            sid = send_sms(reminder.phone_number, reminder.message)
         elif reminder.audio_url:
-            make_call(
+            sid = make_call(
                 reminder.phone_number,
                 staticfiles_storage.url(reminder.audio_url),
             )
@@ -40,6 +40,7 @@ def trigger_reminder(reminder_id):
             raise NotImplementedError("Unhandled reminder action")
 
         entry.state = StateEnum.success
+        entry.twilio_sid = sid
     except Exception, exc:
         entry.state = StateEnum.error
         entry.traceback = traceback.format_exc()

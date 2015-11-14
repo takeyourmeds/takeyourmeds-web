@@ -15,6 +15,7 @@ class Entry(models.Model):
     )
 
     traceback = models.TextField()
+    twilio_sid = models.CharField(max_length=34)
 
     created = models.DateTimeField(default=datetime.datetime.utcnow)
 

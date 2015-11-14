@@ -17,6 +17,7 @@ class SmokeTest(TestCase):
 
         self.assertEqual(entry.state, StateEnum.success)
         self.assertEqual(entry.traceback, "")
+        self.assertNotEqual(entry.twilio_sid, "")
 
     def test_failure(self):
         instance = self.user.reminders.create()
