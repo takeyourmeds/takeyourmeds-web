@@ -31,7 +31,7 @@ def trigger_reminder(reminder_id):
     try:
         entry.state = StateEnum.success
         entry.twilio_sid = _trigger_reminder(reminder)
-    except Exception, exc:
+    except Exception:
         entry.state = StateEnum.error
         entry.traceback = traceback.format_exc()
         raise
