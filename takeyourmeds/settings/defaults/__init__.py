@@ -1,8 +1,12 @@
 import os
+import copy
+import email
 import djcelery
 
 from os.path import dirname, abspath
 from celery.schedules import crontab
+
+from django.utils.log import DEFAULT_LOGGING
 
 from apps import *
 from setup_warnings import *
@@ -78,8 +82,9 @@ USE_L10N = False
 LANGUAGE_CODE = 'en-gb'
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'media'),)
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 BROKER_URL = 'redis://localhost:6379/0'
 
@@ -92,7 +97,14 @@ CELERYBEAT_SCHEDULE = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = 'support@takeyourmeds.co.uk'
+
+DEFAULT_FROM_EMAIL_NAME = "Take Your Meds"
+DEFAULT_FROM_EMAIL_MAILTO = 'hello@takeyourmeds.co.uk'
+
+DEFAULT_FROM_EMAIL = email.utils.formataddr((
+    DEFAULT_FROM_EMAIL_NAME,
+    DEFAULT_FROM_EMAIL_MAILTO,
+))
 
 SITE_URL = 'http://www.takeyourmeds.co.uk'
 
@@ -111,6 +123,10 @@ CACHES = {
         'KEY_PREFIX': 'takeyourmeds',
     }
 }
+
+# Always log to the console, even in production (ie. gunicorn)
+LOGGING = copy.deepcopy(DEFAULT_LOGGING)
+LOGGING['handlers']['console']['filters'] = []
 
 SESSION_COOKIE_AGE = 86400 * 365 * 10
 SESSION_COOKIE_HTTPONLY = True

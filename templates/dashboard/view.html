@@ -91,15 +91,15 @@
                 </p>
               {% endif %}
 
-            <a href="#trigger-modal-{{ reminders.pk }}" class="btn btn-theme-bg" data-toggle="modal">
+            <a href="#trigger-modal-{{ reminder.pk }}" class="btn btn-theme-bg" data-toggle="modal">
               Test reminder
             </a>
 
-            <a href="#delete-modal-{{ reminders.pk }}" class="btn btn-danger" data-toggle="modal">
+            <a href="#delete-modal-{{ reminder.pk }}" class="btn btn-danger" data-toggle="modal">
               Delete
             </a>
 
-            <div class="modal fade" id="trigger-modal-{{ reminders.pk }}" tabindex="-1">
+            <div class="modal fade" id="trigger-modal-{{ reminder.pk }}" tabindex="-1">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">

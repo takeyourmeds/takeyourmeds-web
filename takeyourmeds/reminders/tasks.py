@@ -1,5 +1,7 @@
 from __future__ import absolute_import
 
+import traceback
+
 from celery import shared_task
 from celery.utils.log import get_task_logger
 
@@ -9,6 +11,7 @@ from takeyourmeds.utils.dt import local_time
 from takeyourmeds.telephony.utils import send_sms, make_call
 
 from .models import Reminder, Time
+from .reminders_instances.enums import StateEnum
 
 logger = get_task_logger(__name__)
 
@@ -21,15 +24,28 @@ def schedule_reminders():
 def trigger_reminder(reminder_id):
     reminder = Reminder.objects.get(pk=reminder_id)
 
+    entry = reminder.instances.create(
+        state=StateEnum.in_progress,
+    )
+
+    try:
+        entry.state = StateEnum.success
+        entry.twilio_sid = _trigger_reminder(reminder)
+    except Exception:
+        entry.state = StateEnum.error
+        entry.traceback = traceback.format_exc()
+        raise
+    finally:
+        entry.save()
+
+def _trigger_reminder(reminder):
     if reminder.message:
-        send_sms(reminder.phone_number, reminder.message)
-        return
+        return send_sms(reminder.phone_number, reminder.message)
 
     if reminder.audio_url:
-        make_call(
+        return make_call(
             reminder.phone_number,
             staticfiles_storage.url(reminder.audio_url),
         )
-        return
 
-    logger.error("Unhandled reminder %d", reminder.pk)
+    raise NotImplementedError("Unhandled reminder action")

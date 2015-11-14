@@ -1,17 +1,16 @@
 {% extends "base/base.html" %}
 
-{% block title %}Login &mdash; {{ block.super }}{% endblock %}
+{% block title %}Forgot password &mdash; {{ block.super }}{% endblock %}
 
 {% block breadcrumbs_classes %}{{ block.super }} breadcrumb-light{% endblock %}
 
 {% block breadcrumbs_header %}
-  <h4>Login</h4>
-  <p>Login to your account</p>
+  <h4>Forgotten your password?</h4>
 {% endblock %}
 
 {% block breadcrumbs %}
   {{ block.super }}
-  <li>Login</li>
+  <li>Forgot password</li>
 {% endblock %}
 
 {% block navbar_active_login %}active{% endblock %}
@@ -24,7 +23,7 @@
       <form method="POST" action="" id="sky-form" class="sky-form">
         {% csrf_token %}
 
-        <h3 class="text-center">Log in to your account</h3>
+        <h3 class="text-center">Forgotten your password?</h3>
 
         <fieldset>
           <section class="{% if form.errors.email %}state-error{% endif %}">
@@ -50,34 +49,8 @@
             </div>
           </section>
 
-          <section class="{% if form.errors.password %}state-error{% endif %}">
-            <div class="row">
-              <label class="label col col-4">Password</label>
-              <div class="col col-8">
-                <label class="input">
-                  <i class="icon-append fa fa-lock"></i>
-                  <input
-                    id="{{ form.password.id_for_label }}"
-                    type="password"
-                    class="form-control"
-                    name="{{ form.password.html_name }}"
-                    value="{{ form.password.value|default:"" }}"
-                    maxlength="{{ form.fields.password.max_length }}"
-                    {% if form.fields.password.required %}required{% endif %}
-                  >
-                </label>
-                {% for x in form.errors.password %}
-                  <p class="help-block">{{ x }}</p>
-                {% endfor %}
-              </div>
-            </div>
-          </section>
-        </fieldset>
-
-        <footer class="text-right">
-          <a href="{% url "registration:view" %}" class="btn btn-link">I don't have an account</a>
-          <a href="{% url "account:forgot-password:view" %}" class="btn btn-link">Forgot password</a>
-          <button type="submit" class="btn btn-theme-bg btn-lg">Log in</button>
+        <footer class="text-center">
+          <button type="submit" class="btn btn-theme-bg btn-lg">Reset password</button>
         </footer>
       </form>
     </div>

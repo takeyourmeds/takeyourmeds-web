@@ -25,5 +25,5 @@ setup(
     scripts=('takeyourmeds/manage.py',),
     packages=find_packages(),
     zip_safe=False,
-    data_files=find_data_files(('static', 'templates')),
+    data_files=find_data_files(('media', 'templates')),
 )

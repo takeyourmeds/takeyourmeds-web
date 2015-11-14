@@ -1044,7 +1044,7 @@ TOP BARS
 /**footet dark**/
 #footer {
   background: #111;
-  font-size: 0.9em;
+  font-size: 1.1em;
   padding: 80px 0 0;
   position: relative;
   clear: both;
@@ -1063,8 +1063,8 @@ TOP BARS
   border-bottom: 1px solid #bbb;
 }
 
-.footer-col p {
-  color: #aeaeae;
+.footer-col p, a{
+  color: #777;
   font-size: 13px;
 }
 
@@ -1114,7 +1114,7 @@ TOP BARS
 .footer-btm {
   margin-top: 30px;
   padding: 20px;
-  background-color: #0c0c0c;
+  background-color: #0c0c0c;  
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
 }
@@ -2019,6 +2019,13 @@ table.shopping-cart-table tr th, table.shopping-cart-table tr td {
 
 .no-padding.img-2 {
   background: url(../img/showcase-2.jpg) scroll center no-repeat;
+  background-size: cover;
+  position: absolute;
+  height: 100%;
+}
+
+.no-padding.medical-06 {
+  background: url(../img/medical-06-1455841.jpg) scroll center no-repeat;
   background-size: cover;
   position: absolute;
   height: 100%;
