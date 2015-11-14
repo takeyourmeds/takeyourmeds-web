@@ -1,6 +1,6 @@
 import enum
 
 class StateEnum(enum.IntEnum):
-    started     = 0
+    in_progress = 0
     success     = 10
-    failed      = 20
+    error       = 20
