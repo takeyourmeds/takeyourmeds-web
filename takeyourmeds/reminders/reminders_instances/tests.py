@@ -6,27 +6,22 @@ from .enums import StateEnum
 
 class SmokeTest(TestCase):
     def test_success(self):
-        instance = self.user.reminders.create(
-            message='test',
-        )
-        self.assertEqual(instance.instances.count(), 0)
+        reminder = self.user.reminders.create(message='test')
+        self.assertEqual(reminder.instances.count(), 0)
+        trigger_reminder.delay(reminder.pk)
 
-        trigger_reminder.delay(instance.pk)
+        instance = reminder.instances.get()
 
-        entry = instance.instances.get()
-
-        self.assertEqual(entry.get_state_enum(), StateEnum.success)
-        self.assertEqual(entry.traceback, "")
-        self.assertNotEqual(entry.twilio_sid, "")
+        self.assertEqual(instance.get_state_enum(), StateEnum.success)
+        self.assertEqual(instance.traceback, "")
+        self.assertNotEqual(instance.twilio_sid, "")
 
     def test_failure(self):
-        instance = self.user.reminders.create()
+        reminder = self.user.reminders.create()
+        self.assertEqual(reminder.instances.count(), 0)
+        trigger_reminder.delay(reminder.pk)
 
-        self.assertEqual(instance.instances.count(), 0)
+        instance = reminder.instances.get()
 
-        trigger_reminder.delay(instance.pk)
-
-        entry = instance.instances.get()
-
-        self.assertEqual(entry.get_state_enum(), StateEnum.error)
-        self.assertNotEqual(entry.traceback, "")
+        self.assertEqual(instance.get_state_enum(), StateEnum.error)
+        self.assert_(instance.traceback)
