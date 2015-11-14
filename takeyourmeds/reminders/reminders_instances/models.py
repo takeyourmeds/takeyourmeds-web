@@ -4,10 +4,10 @@ from django.db import models
 
 from .enums import StateEnum
 
-class Entry(models.Model):
+class Instance(models.Model):
     reminder = models.ForeignKey(
         'reminders.Reminder',
-        related_name='log_entries',
+        related_name='instances',
     )
 
     state = models.IntegerField(

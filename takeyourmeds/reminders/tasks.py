@@ -11,7 +11,7 @@ from takeyourmeds.utils.dt import local_time
 from takeyourmeds.telephony.utils import send_sms, make_call
 
 from .models import Reminder, Time
-from .reminders_logging.enums import StateEnum
+from .reminders_instances.enums import StateEnum
 
 logger = get_task_logger(__name__)
 
@@ -24,7 +24,7 @@ def schedule_reminders():
 def trigger_reminder(reminder_id):
     reminder = Reminder.objects.get(pk=reminder_id)
 
-    entry = reminder.log_entries.create(
+    entry = reminder.instances.create(
         state=StateEnum.in_progress,
     )
 
