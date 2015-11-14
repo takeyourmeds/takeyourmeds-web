@@ -38,6 +38,8 @@ def trigger_reminder(reminder_id):
     finally:
         entry.save()
 
+    return repr(entry)
+
 def _trigger_reminder(reminder):
     if reminder.message:
         return send_sms(reminder.phone_number, reminder.message)
