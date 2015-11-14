@@ -6,7 +6,7 @@ from .enums import StateEnum
 
 class Instance(models.Model):
     """
-    A specific instance of a reminder.
+    A specific instance of a Reminder.
     """
 
     reminder = models.ForeignKey(
