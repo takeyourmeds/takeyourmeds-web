@@ -18,6 +18,7 @@ INSTALLED_APPS = (
     'takeyourmeds.profile',
     'takeyourmeds.registration',
     'takeyourmeds.reminders',
+    'takeyourmeds.reminders.reminders_logging',
     'takeyourmeds.static',
     'takeyourmeds.telephony',
     'takeyourmeds.utils',
