@@ -38,5 +38,6 @@ exec ansible-playbook \
 	config/playbook.yml \
 	--verbose \
 	--inventory=${TEMP}/hosts \
+	-e host_key_checking=False \
 	--vault-password-file=${TEMP}/ansible-vault-password \
 	"${@}"
