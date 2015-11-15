@@ -1,0 +1,42 @@
+#!/bin/sh
+
+set -eu
+
+cd "$(dirname "${0}")/../"
+
+TEMP="$(mktemp -d)"
+trap "rm -rf ${TEMP}" EXIT
+
+if [ "${ANSIBLE_VAULT_PASSWORD:-}" = "" ]
+then
+	echo "E: ANSIBLE_VAULT_PASSWORD not set"
+	exit 1
+fi
+
+case "${TRAVIS_BRANCH:-}" in
+	master)
+		ROLE="stage"
+		HOSTNAME="stage.takeyourmeds.co.uk"
+		;;
+	*)
+		echo "I: Not deploying for TRAVIS_BRANCH=${TRAVIS_BRANCH:-(empty)}"
+		exit 0
+esac
+
+echo "${ANSIBLE_VAULT_PASSWORD}" > ${TEMP}/ansible-vault-password
+
+cp config/id_rsa ${TEMP}
+ansible-vault decrypt --vault-password-file=${TEMP}/ansible-vault-password ${TEMP}/id_rsa
+chmod 600 "${TEMP}/id_rsa"
+
+cat > ${TEMP}/hosts <<EOF
+[${ROLE}]
+${HOSTNAME} ansible_ssh_user=root ansible_ssh_private_key_file=${TEMP}/id_rsa
+EOF
+
+exec ansible-playbook \
+	config/playbook.yml \
+	--verbose \
+	--inventory=${TEMP}/hosts \
+	--vault-password-file=${TEMP}/ansible-vault-password \
+	"${@}"
