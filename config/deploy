@@ -35,7 +35,7 @@ chmod 600 "${TEMP}/id_rsa"
 
 cat > ${TEMP}/hosts <<EOF
 [${ROLE}]
-${HOSTNAME} ansible_ssh_user=root ansible_ssh_private_key_file=${TEMP}/id_rsa
+${HOSTNAME} ansible_ssh_user=root ansible_ssh_private_key_file=${TEMP}/id_rsa commit=${TRAVIS_COMMIT}
 EOF
 
 export ANSIBLE_HOST_KEY_CHECKING=0

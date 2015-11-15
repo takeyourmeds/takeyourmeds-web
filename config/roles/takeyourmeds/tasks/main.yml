@@ -19,7 +19,7 @@
 
 - name: Download code
   command:
-    wget -O {{ build_dir }}/{{ package_name }}.tar.gz {{ source }}/archive/{{ branch }}.tar.gz
+    wget -O {{ build_dir }}/{{ package_name }}.tar.gz {{ source }}/archive/{{ commit }}.tar.gz
 
 - name: Extract
   command:
