@@ -1,12 +1,14 @@
 language: python
 python: "2.7"
 
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y ansible
+
 script:
   - "python setup.py test"
 
 after_script:
-  - sudo apt-get update -qq
-  - sudo apt-get install -yy ansible
   - config/deploy
 
 notifications:
