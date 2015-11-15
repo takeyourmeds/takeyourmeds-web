@@ -34,7 +34,7 @@ cat > ${TEMP}/hosts <<EOF
 ${HOSTNAME} ansible_ssh_user=root ansible_ssh_private_key_file=${TEMP}/id_rsa
 EOF
 
-export ANSIBLE_HOST_KEY_CHECKING="0"
+export ANSIBLE_HOST_KEY_CHECKING=0
 
 exec ansible-playbook \
 	config/playbook.yml \
