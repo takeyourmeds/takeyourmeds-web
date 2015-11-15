@@ -15,5 +15,7 @@ notifications:
     channels:
       - "irc.freenode.org#takeyourmeds"
     use_notice: true
+    on_success: change
+    on_failure: change
     template:
       - "%{repository}#%{build_number} (%{branch}): %{message}: %{compare_url} - %{build_url}"
