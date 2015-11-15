@@ -18,6 +18,10 @@ case "${TRAVIS_BRANCH:-}" in
 		ROLE="stage"
 		HOSTNAME="stage.takeyourmeds.co.uk"
 		;;
+	live)
+		ROLE="live"
+		HOSTNAME="live.takeyourmeds.co.uk"
+		;;
 	*)
 		echo "I: Not deploying for TRAVIS_BRANCH=${TRAVIS_BRANCH:-(empty)}"
 		exit 0
