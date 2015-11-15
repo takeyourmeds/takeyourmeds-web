@@ -16,4 +16,4 @@ notifications:
       - "irc.freenode.org#takeyourmeds"
     use_notice: true
     template:
-      - "%{repository}#%{build_number} (%{branch}): %{message} (Compare: %{compare_url}) %{build_url}"
+      - "%{repository}#%{build_number} (%{branch}): %{message}: %{compare_url} - %{build_url}"
