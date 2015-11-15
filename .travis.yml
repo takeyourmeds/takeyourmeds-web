@@ -14,5 +14,6 @@ notifications:
   irc:
     channels:
       - "irc.freenode.org#takeyourmeds"
-    skip_join: true
     use_notice: true
+    template:
+      - "%{repository}#%{build_number} (%{branch}): %{message} (Compare: %{compare_url}) %{build_url}"
