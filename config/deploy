@@ -34,10 +34,11 @@ cat > ${TEMP}/hosts <<EOF
 ${HOSTNAME} ansible_ssh_user=root ansible_ssh_private_key_file=${TEMP}/id_rsa
 EOF
 
+export ANSIBLE_HOST_KEY_CHECKING="0"
+
 exec ansible-playbook \
 	config/playbook.yml \
 	--verbose \
 	--inventory=${TEMP}/hosts \
-	-e host_key_checking=False \
 	--vault-password-file=${TEMP}/ansible-vault-password \
 	"${@}"
