@@ -1,19 +1,23 @@
 from takeyourmeds.utils.test import TestCase
 
+from .enums import TypeEnum
+
 class SmokeTest(TestCase):
     def test_create(self):
         self.assertGET(200, 'reminders:create', login=True)
 
 class DeleteTests(TestCase):
+    def setUp(self):
+        super(DeleteTests, self).setUp()
+
+        self.reminder = self.user.reminders.create(type=TypeEnum.message)
+
     def test_GET(self):
-        instance = self.user.reminders.create()
-        self.assertGET(405, 'reminders:delete', instance.pk, login=True)
+        self.assertGET(405, 'reminders:delete', self.reminder.pk, login=True)
 
     def test_POST(self):
-        instance = self.user.reminders.create()
-        self.assert_(self.user.reminders.exists())
         response = self.assertPOST(
-            302, {}, 'reminders:delete', instance.pk, login=True
+            302, {}, 'reminders:delete', self.reminder.pk, login=True
         )
         self.assertRedirectsTo(response, 'dashboard:view')
         self.failIf(self.user.reminders.exists())
@@ -24,13 +28,12 @@ class DeleteTests(TestCase):
         """
 
         other = self.create_user('other')
-        instance = self.user.reminders.create()
 
         self.assertPOST(
             404,
             {},
             'reminders:delete',
-            instance.pk,
+            self.reminder.pk,
             login=True,
             user=other,
         )
@@ -39,10 +42,7 @@ class DeleteTests(TestCase):
 
 class TriggerTest(TestCase):
     def test_trigger_now(self):
-        reminder = self.user.reminders.create(
-            message="test",
-            phone_number='123',
-        )
+        reminder = self.user.reminders.create(type=TypeEnum.message)
 
         response = self.assertPOST(
             302,
@@ -53,7 +53,4 @@ class TriggerTest(TestCase):
 
         self.assertRedirectsTo(response, 'dashboard:view')
 
-        instance = reminder.instances.get()
-        message = instance.messages.get()
-
-        self.assert_(message.twilio_sid)
+        self.assert_(reminder.instances.get().messages.get().twilio_sid)
