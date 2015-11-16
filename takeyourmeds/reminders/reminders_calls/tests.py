@@ -19,18 +19,34 @@ class TwimlCallbackTest(TestCase):
             source=SourceEnum.manual,
         ).calls.create()
 
-    def test_url(self):
-        url = self.call.get_twiml_callback_url()
-
-        self.assert_(url.startswith('http'))
-
-    def test_content(self):
+    def assertContains(self, expected):
         response = self.assertGET(
             200,
             'reminders:calls:twiml-callback',
             self.call.ident,
         )
 
-        self.assert_(response.content.startswith('<?xml'))
-        self.assert_(settings.SITE_URL in response.content)
-        self.assert_(self.reminder.audio_url in response.content)
+        self.assert_(expected in response.content)
+
+    def test_url(self):
+        url = self.call.get_twiml_callback_url()
+
+        self.assert_(url.startswith('http'))
+
+    def test_xml(self):
+        """
+        Is actually an XML document.
+        """
+        self.assertContains('<?xml')
+
+    def test_absolute_url(self):
+        """
+        Audio URL is absolute.
+        """
+        self.assertContains(settings.SITE_URL)
+
+    def test_audio_url(self):
+        """
+        XML contains our audio URL
+        """
+        self.assertContains(self.reminder.audio_url)
