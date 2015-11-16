@@ -56,12 +56,12 @@ class TestCron(TestCase):
 
 class TriggerTest(TestCase):
     def test_trigger_now(self):
-        instance = self.user.reminders.create()
+        reminder = self.user.reminders.create()
 
         response = self.assertPOST(
             302,
             {},
-            'reminders:trigger', instance.pk,
+            'reminders:trigger', reminder.pk,
             login=True,
         )
 
