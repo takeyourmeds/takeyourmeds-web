@@ -9,7 +9,7 @@ from django.conf import settings
 from django.contrib.staticfiles.storage import staticfiles_storage
 
 from takeyourmeds.utils.dt import local_time
-from takeyourmeds.telephony.utils import send_sms, make_call
+from takeyourmeds.telephony.utils import get_client, make_call
 
 from .enums import TypeEnum, SourceEnum
 from .models import Reminder, Time
@@ -46,9 +46,10 @@ def notify(notification):
     reminder = notification.instance.reminder
 
     if reminder.type == TypeEnum.message:
-        return send_sms(
-            reminder.phone_number,
-            reminder.message,
+        return get_client().messages.create(
+            to=reminder.phone_number,
+            body=reminder.message,
+            from_=settings.TWILIO_FROM,
             status_callback=notification.get_status_callback_url(),
         )
 

@@ -5,19 +5,6 @@ from django.utils.crypto import get_random_string
 
 from .models import TwilioMLCallback
 
-def send_sms(to_number, message_text, *args, **kwargs):
-    """
-    Send SMS message.
-    """
-
-    return get_client().messages.create(
-        to=to_number,
-        body=message_text,
-        from_=settings.TWILIO_FROM,
-        *args,
-        **kwargs
-    )
-
 def make_call(to_number, audio_url, *args, **kwargs):
     """
     Make a call to the specified number and play the MP3 specified in
