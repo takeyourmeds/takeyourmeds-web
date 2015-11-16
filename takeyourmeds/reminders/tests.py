@@ -53,4 +53,7 @@ class TriggerTest(TestCase):
 
         self.assertRedirectsTo(response, 'dashboard:view')
 
-        self.assert_(reminder.instances.get().messages.get().twilio_sid)
+        message = reminder.instances.get().messages.get()
+
+        self.assert_(message.twilio_sid)
+        self.assert_(message.twilio_response)

@@ -111,7 +111,7 @@ class AbstractNotification(models.Model):
     )
 
     twilio_sid = models.CharField(max_length=34)
-    twilio_data = models.TextField()
+    twilio_response = models.TextField()
 
     traceback = models.TextField()
 
