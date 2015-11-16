@@ -4,7 +4,6 @@ import urlparse
 import traceback
 
 from celery import shared_task
-from celery.utils.log import get_task_logger
 
 from django.conf import settings
 from django.contrib.staticfiles.storage import staticfiles_storage
@@ -14,8 +13,6 @@ from takeyourmeds.telephony.utils import send_sms, make_call
 
 from .enums import SourceEnum
 from .models import Reminder, Time
-
-logger = get_task_logger(__name__)
 
 @shared_task()
 def schedule_reminders():
