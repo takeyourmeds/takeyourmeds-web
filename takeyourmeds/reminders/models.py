@@ -102,7 +102,7 @@ class AbstractNotification(models.Model):
     instance = models.ForeignKey(Instance, related_name='%(class)ss')
 
     traceback = models.TextField()
-    twilio_sid = models.CharField(max_length=34)
+    twilio_sid = models.CharField(max_length=34, unique=True)
 
     created = models.DateTimeField(default=datetime.datetime.utcnow)
 
