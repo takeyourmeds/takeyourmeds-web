@@ -1,6 +1,9 @@
 import datetime
+import urlparse
 
 from django.db import models
+from django.conf import settings
+from django.utils.crypto import get_random_string
 
 from .enums import TypeEnum,SourceEnum
 
@@ -101,8 +104,14 @@ class AbstractNotification(models.Model):
 
     instance = models.ForeignKey(Instance, related_name='%(class)ss')
 
+    ident = models.CharField(
+        unique=True,
+        default=lambda: get_random_string(40),
+        max_length=40,
+    )
+
     traceback = models.TextField()
-    twilio_sid = models.CharField(max_length=34, unique=True)
+    twilio_sid = models.CharField(max_length=34)
 
     created = models.DateTimeField(default=datetime.datetime.utcnow)
 
@@ -117,3 +126,11 @@ class AbstractNotification(models.Model):
             self.instance_id,
             self.twilio_sid,
         )
+
+    @models.permalink
+    def get_absolute_url(self):
+        # FIXME
+        return 'reminders:%s:status-callback' % self.app, (self.ident,)
+
+    def get_callback_url(self):
+        return urlparse.urljoin(settings.SITE_URL, self.get_absolute_url())

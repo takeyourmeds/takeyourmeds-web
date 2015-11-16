@@ -22,6 +22,7 @@ def schedule_reminders():
 @shared_task()
 def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
     reminder = Reminder.objects.get(pk=reminder_id)
+
     instance = reminder.instances.create(source=source)
 
     notification = getattr(
@@ -30,7 +31,7 @@ def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
     ).create()
 
     try:
-        notification.twilio_sid = _trigger_reminder(reminder)
+        notification.twilio_sid = notify(notification)
     except:
         notification.traceback = traceback.format_exc()
         raise
@@ -39,9 +40,15 @@ def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
 
     return repr((reminder, instance, notification))
 
-def _trigger_reminder(reminder):
+def notify(notification):
+    reminder = notification.instance.reminder
+
     if reminder.type == TypeEnum.message:
-        return send_sms(reminder.phone_number, reminder.message)
+        return send_sms(
+            reminder.phone_number,
+            reminder.message,
+            callback_url=notification.get_callback_url(),
+        )
 
     if reminder.type == TypeEnum.call:
         # Ensure we have an absolute URL
@@ -50,6 +57,10 @@ def _trigger_reminder(reminder):
             staticfiles_storage.url(reminder.audio_url),
         )
 
-        return make_call(reminder.phone_number, absolute_audio_url)
+        return make_call(
+            reminder.phone_number,
+            absolute_audio_url,
+            callback_url=notification.get_callback_url(),
+        )
 
     raise NotImplementedError("Unhandled reminder type")
