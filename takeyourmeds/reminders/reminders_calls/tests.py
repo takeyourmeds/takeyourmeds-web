@@ -6,9 +6,9 @@ from ..enums import TypeEnum, SourceEnum
 
 from .enums import StateEnum
 
-class TwimlCallbackTest(TestCase):
+class CallTestCase(TestCase):
     def setUp(self):
-        super(TwimlCallbackTest, self).setUp()
+        super(CallTestCase, self).setUp()
 
         self.reminder = self.user.reminders.create(
             type=TypeEnum.call,
@@ -19,6 +19,7 @@ class TwimlCallbackTest(TestCase):
             source=SourceEnum.manual,
         ).calls.create()
 
+class TwimlCallbackTest(CallTestCase):
     def assertContains(self, expected):
         response = self.assertGET(
             200,
@@ -50,3 +51,15 @@ class TwimlCallbackTest(TestCase):
         XML contains our audio URL
         """
         self.assertContains(self.reminder.audio_url)
+
+class StatusCallbackTest(CallTestCase):
+    def assertState(self, val, expected):
+        self.assertPOST(200, {'CallStatus': val}, self.call)
+        self.call.refresh_from_db()
+        self.assertEqual(self.call.state, expected)
+
+    def test_busy(self):
+        self.assertState('busy', StateEnum.busy)
+
+    def test_unknown(self):
+        self.assertState('dummy-unknown-value', StateEnum.unknown)
