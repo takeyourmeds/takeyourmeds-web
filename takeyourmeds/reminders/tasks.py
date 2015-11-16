@@ -9,7 +9,7 @@ from django.conf import settings
 from django.contrib.staticfiles.storage import staticfiles_storage
 
 from takeyourmeds.utils.dt import local_time
-from takeyourmeds.telephony.utils import get_client
+from takeyourmeds.utils.twilio import get_twilio_client
 from takeyourmeds.telephony.models import TwilioMLCallback
 
 from .enums import TypeEnum, SourceEnum
@@ -47,7 +47,7 @@ def notify(notification):
     reminder = notification.instance.reminder
 
     if reminder.type == TypeEnum.message:
-        return get_client().messages.create(
+        return get_twilio_client().messages.create(
             to=reminder.phone_number,
             body=reminder.message,
             from_=settings.TWILIO_FROM,
@@ -68,7 +68,7 @@ def notify(notification):
             </Response>
         """.format(absolute_audio_url).strip())
 
-        return get_client().calls.create(
+        return get_twilio_client().calls.create(
             to=reminder.phone_number,
             from_=settings.TWILIO_FROM,
             url=callback.get_callback_url(),
