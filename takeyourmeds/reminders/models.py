@@ -112,7 +112,8 @@ class AbstractNotification(models.Model):
         get_latest_by = 'created'
 
     def __unicode__(self):
-        return u"#%d: %s" % (
+        return u"pk=%d instance_id=%d twilio_sid=%r" % (
             self.pk,
-            self.instance,
+            self.instance_id,
+            self.twilio_sid,
         )
