@@ -34,8 +34,10 @@ def make_call(to_number, audio_url):
     call = get_client().calls.create(
         to=to_number,
         from_=settings.TWILIO_FROM,
+
         url=callback.get_callback_url(),
         method='GET',
+
         fallback_method='GET',
         status_callback_method='GET',
         record='false',
