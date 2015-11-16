@@ -19,6 +19,9 @@ class Reminder(models.Model):
     class Meta:
         ordering = ('created',)
 
+    def get_type_enum(self):
+        return {x.value: x for x in TypeEnum}[self.type]
+
 class Time(models.Model):
     """
     A time-of-day that this reminder should run.
