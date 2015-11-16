@@ -61,4 +61,4 @@ def _trigger_reminder(reminder):
 
         return make_call(reminder.phone_number, absolute_audio_url)
 
-    raise NotImplementedError("Unhandled reminder action")
+    raise NotImplementedError("Unhandled reminder type")
