@@ -13,7 +13,12 @@ class TestCase(TestCase):
             user = kwargs.pop('user', self.user)
             self.client.login(email=user.email, password='password')
 
-        response = fn(reverse(urlconf, args=args, kwargs=kwargs))
+        if hasattr(urlconf, 'get_absolute_url'):
+            url = urlconf.get_absolute_url()
+        else:
+            url = reverse(urlconf, args=args, kwargs=kwargs)
+
+        response = fn(url)
 
         self.assertEqual(
             response.status_code,
