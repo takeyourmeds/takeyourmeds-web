@@ -14,7 +14,7 @@ class TwimlCallbackTest(TestCase):
             source=SourceEnum.manual,
         ).calls.create()
 
-    def test_urls(self):
+    def test_url(self):
         url = self.call.get_twiml_callback_url()
 
         self.assert_(url.startswith('http'))
