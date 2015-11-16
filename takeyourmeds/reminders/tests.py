@@ -56,7 +56,10 @@ class TestCron(TestCase):
 
 class TriggerTest(TestCase):
     def test_trigger_now(self):
-        reminder = self.user.reminders.create()
+        reminder = self.user.reminders.create(
+            message="test",
+            phone_number='123',
+        )
 
         response = self.assertPOST(
             302,
@@ -66,3 +69,8 @@ class TriggerTest(TestCase):
         )
 
         self.assertRedirectsTo(response, 'dashboard:view')
+
+        instance = reminder.instances.get()
+        message = instance.messages.get()
+
+        self.assert_(message.twilio_sid)
