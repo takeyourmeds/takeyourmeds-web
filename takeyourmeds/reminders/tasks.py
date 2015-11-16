@@ -50,7 +50,7 @@ def notify(notification):
         return send_sms(
             reminder.phone_number,
             reminder.message,
-            callback_url=notification.get_callback_url(),
+            status_callback=notification.get_status_callback_url(),
         )
 
     if reminder.type == TypeEnum.call:
@@ -63,7 +63,7 @@ def notify(notification):
         return make_call(
             reminder.phone_number,
             absolute_audio_url,
-            callback_url=notification.get_callback_url(),
+            status_callback=notification.get_status_callback_url(),
         )
 
     raise NotImplementedError("Unhandled reminder type")

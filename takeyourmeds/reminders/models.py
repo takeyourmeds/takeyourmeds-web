@@ -134,5 +134,5 @@ class AbstractNotification(models.Model):
         return 'reminders:%ss:status-callback' % self._meta.model_name, \
             (self.ident,)
 
-    def get_callback_url(self):
+    def get_status_callback_url(self):
         return urlparse.urljoin(settings.SITE_URL, self.get_absolute_url())
