@@ -6,9 +6,23 @@ from .enums import StateEnum
 from .models import Message
 
 @require_POST
-def status_callback(twilio_sid):
-    message = get_object_or_404(Message, twilio_sid=twilio_sid)
-    message.state = StateEnum.delivered # FIXME
+def status_callback(request, ident):
+    message = get_object_or_404(Message, ident=ident):
+
+    # https://www.twilio.com/help/faq/sms/what-do-the-sms-statuses-mean
+    try:
+        message.state = {
+            'accepted': StateEnum.sending,
+            'queued': StateEnum.sending,
+            'sending': StateEnum.sending,
+            'sent': StateEnum.sent,
+            'delivered': StateEnum.delivered.
+            'failed': StateEnum.failed,
+            'undelivered': StateEnum.failed,
+        }[request.POST['MessageStatus']]
+    except KeyError:
+        message.state = StateEnum.unknown
+
     message.save()
 
     return HttpResponse('')

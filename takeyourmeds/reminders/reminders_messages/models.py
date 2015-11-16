@@ -6,7 +6,7 @@ from .enums import StateEnum
 
 class Message(AbstractNotification):
     state = models.IntegerField(
-        default=StateEnum.in_progress.value,
+        default=StateEnum.sending.value,
         choices=[(x.value, x.name) for x in StateEnum],
     )
 
