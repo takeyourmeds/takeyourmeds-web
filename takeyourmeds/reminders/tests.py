@@ -1,5 +1,3 @@
-import datetime
-
 from takeyourmeds.utils.test import TestCase
 
 class SmokeTest(TestCase):
