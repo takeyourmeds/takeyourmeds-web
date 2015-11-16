@@ -19,6 +19,13 @@ class Reminder(models.Model):
     class Meta:
         ordering = ('created',)
 
+    def __unicode__(self):
+        return u"pk=%d type=%s phone_number=%r" % (
+            self.pk,
+            self.get_type_enum().name,
+            self.phone_number,
+        )
+
     def get_type_enum(self):
         return {x.value: x for x in TypeEnum}[self.type]
 
@@ -41,9 +48,9 @@ class Time(models.Model):
         )
 
     def __unicode__(self):
-        return u"#%d: %s: %s" % (
+        return u"pk=%s reminder_id=%d time=%r" % (
             self.pk,
-            self.reminder,
+            self.reminder_id,
             self.time,
         )
 
@@ -71,9 +78,9 @@ class Instance(models.Model):
         get_latest_by = 'created'
 
     def __unicode__(self):
-        return u"reminder_id=%d created=%s source=%s" % (
+        return u"pk=%d reminder_id=%d created=%s source=%s" % (
+            self.pk,
             self.reminder_id,
-            self.created,
             self.get_state_enum().name,
         )
 
