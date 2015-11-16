@@ -40,7 +40,6 @@ def make_call(to_number, audio_url):
 
         fallback_method='GET',
         status_callback_method='GET',
-        record='false',
     )
 
     return call.sid
