@@ -39,21 +39,6 @@ class DeleteTests(TestCase):
 
         self.assert_(self.user.reminders.exists())
 
-class TestCron(TestCase):
-    def test_cron(self):
-        ten_min_ago = datetime.datetime.utcnow() - \
-            datetime.timedelta(minutes=10)
-
-        reminder = self.user.reminders.create(
-            message="test",
-            phone_number='123',
-        )
-
-        reminder.times.create(
-            time='10:00',
-            last_run=ten_min_ago,
-        )
-
 class TriggerTest(TestCase):
     def test_trigger_now(self):
         reminder = self.user.reminders.create(
