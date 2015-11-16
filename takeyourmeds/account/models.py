@@ -10,3 +10,6 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'email'
 
     objects = UserManager()
+
+    def get_full_name(self):
+        return u"%s" % self.email
