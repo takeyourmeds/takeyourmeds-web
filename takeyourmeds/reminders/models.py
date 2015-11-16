@@ -78,7 +78,7 @@ class Instance(models.Model):
         get_latest_by = 'created'
 
     def __unicode__(self):
-        return u"pk=%d reminder_id=%d created=%s source=%s" % (
+        return u"pk=%d reminder_id=%d source=%s" % (
             self.pk,
             self.reminder_id,
             self.get_state_enum().name,
