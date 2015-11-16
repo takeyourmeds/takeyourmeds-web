@@ -4,9 +4,9 @@ from ..enums import TypeEnum, SourceEnum
 
 from .enums import StateEnum
 
-class CallbackTest(TestCase):
+class StatusCallbackTest(TestCase):
     def setUp(self):
-        super(CallbackTest, self).setUp()
+        super(StatusCallbackTest, self).setUp()
 
         self.message = self.user.reminders.create(
             type=TypeEnum.message,
