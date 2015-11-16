@@ -3,31 +3,6 @@ from twilio.rest import TwilioRestClient
 from django.conf import settings
 from django.utils.crypto import get_random_string
 
-from .models import TwilioMLCallback
-
-def make_call(to_number, audio_url, *args, **kwargs):
-    """
-    Make a call to the specified number and play the MP3 specified in
-    `audio_url`.
-    """
-
-    callback = TwilioMLCallback.objects.create(content="""
-        <?xml version="1.0" encoding="UTF-8"?>
-        <Response>
-            <Play loop="1">{}</Play>
-        </Response>
-    """.format(audio_url).strip())
-
-    return get_client().calls.create(
-        to=to_number,
-        from_=settings.TWILIO_FROM,
-
-        url=callback.get_callback_url(),
-        method='GET',
-        *args,
-        **kwargs
-    )
-
 def get_client():
     if not settings.TWILIO_ENABLED:
         class Attribute(object):
