@@ -5,7 +5,7 @@ from django.utils.crypto import get_random_string
 
 from .models import TwilioMLCallback
 
-def send_sms(to_number, message_text):
+def send_sms(to_number, message_text, *args, **kwargs):
     """
     Send SMS message.
     """
@@ -14,11 +14,13 @@ def send_sms(to_number, message_text):
         to=to_number,
         body=message_text,
         from_=settings.TWILIO_FROM,
+        *args,
+        **kwargs
     )
 
     return message.sid
 
-def make_call(to_number, audio_url):
+def make_call(to_number, audio_url, *args, **kwargs):
     """
     Make a call to the specified number and play the MP3 specified in
     `audio_url`.
@@ -37,6 +39,8 @@ def make_call(to_number, audio_url):
 
         url=callback.get_callback_url(),
         method='GET',
+        *args,
+        **kwargs
     )
 
     return call.sid
