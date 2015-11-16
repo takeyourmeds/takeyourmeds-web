@@ -85,10 +85,10 @@ class Instance(models.Model):
         )
 
     def __unicode__(self):
-        return u"#%d: %s: %s" % (
+        return u"pk=%d reminder_id=%d: source=%s" % (
             self.pk,
-            self.reminder,
-            self.time,
+            self.reminder_id,
+            self.get_source_enum().name,
         )
 
     def get_source_enum(self):
