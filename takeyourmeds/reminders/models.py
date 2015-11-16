@@ -129,8 +129,8 @@ class AbstractNotification(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        # FIXME
-        return 'reminders:%s:status-callback' % self.app, (self.ident,)
+        return 'reminders:%ss:status-callback' % self._meta.model_name, \
+            (self.ident,)
 
     def get_callback_url(self):
         return urlparse.urljoin(settings.SITE_URL, self.get_absolute_url())
