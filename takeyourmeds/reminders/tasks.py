@@ -12,36 +12,41 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from takeyourmeds.utils.dt import local_time
 from takeyourmeds.telephony.utils import send_sms, make_call
 
+from .enums import SourceEnum
 from .models import Reminder, Time
-from .reminders_instances.enums import StateEnum, SourceEnum
 
 logger = get_task_logger(__name__)
 
 @shared_task()
 def schedule_reminders():
     for x in Time.objects.filter(time='%02d:00' % local_time().hour):
-        trigger_reminder.delay(x.reminder_id, SourceEnum.schedule.value)
+        trigger_reminder.delay(x.reminder_id, SourceEnum.cron.value)
 
 @shared_task()
 def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
     reminder = Reminder.objects.get(pk=reminder_id)
+    instance = reminder.instances.create(source=source)
 
-    entry = reminder.instances.create(
-        state=StateEnum.in_progress,
-        source=source,
-    )
+    notification = _create_notification(reminder, instance)
 
     try:
-        entry.state = StateEnum.success
-        entry.twilio_sid = _trigger_reminder(reminder)
-    except Exception:
-        entry.state = StateEnum.error
-        entry.traceback = traceback.format_exc()
+        notification.twilio_sid = _trigger_reminder(reminder)
+    except:
+        notification.traceback = traceback.format_exc()
         raise
     finally:
-        entry.save()
+        notification.save()
 
-    return repr(entry)
+    return repr((reminder, instance, notification))
+
+def _create_notification(reminder, instance):
+    if reminder.message:
+        return instance.messages.create()
+
+    if reminder.audio_url:
+        return instance.calls.create()
+
+    raise NotImplementedError("Unhandled reminder type")
 
 def _trigger_reminder(reminder):
     if reminder.message:
