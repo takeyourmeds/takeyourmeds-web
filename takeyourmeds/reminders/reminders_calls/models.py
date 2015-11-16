@@ -10,7 +10,7 @@ from .enums import StateEnum
 
 class Call(AbstractNotification):
     state = models.IntegerField(
-        default=StateEnum.in_progress.value,
+        default=StateEnum.dialing.value,
         choices=[(x.value, x.name) for x in StateEnum],
     )
 

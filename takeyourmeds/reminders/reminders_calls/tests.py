@@ -58,8 +58,24 @@ class StatusCallbackTest(CallTestCase):
         self.call.refresh_from_db()
         self.assertEqual(self.call.state, expected)
 
+    def test_dialing(self):
+        self.assertState('queued', StateEnum.dialing)
+        self.assertState('initiated', StateEnum.dialing)
+        self.assertState('ringing', StateEnum.dialing)
+
+    def test_answered(self):
+        self.assertState('in-progress', StateEnum.answered)
+        self.assertState('completed', StateEnum.answered)
+
     def test_busy(self):
         self.assertState('busy', StateEnum.busy)
+
+    def test_no_answer(self):
+        self.assertState('no-answer', StateEnum.no_answer)
+
+    def test_failed(self):
+        self.assertState('failed', StateEnum.failed)
+        self.assertState('cancelled', StateEnum.failed)
 
     def test_unknown(self):
         self.assertState('dummy-unknown-value', StateEnum.unknown)

@@ -27,6 +27,8 @@ def twiml_callback(request, ident):
 @require_POST
 def status_callback(request, ident):
     """
+    https://www.twilio.com/help/faq/voice/what-do-the-call-statuses-mean
+
     Example POST data:
 
         SipResponseCode: 500
@@ -50,7 +52,15 @@ def status_callback(request, ident):
 
     try:
         call.state = {
+            'queued': StateEnum.dialing,
+            'initiated': StateEnum.dialing,
+            'ringing': StateEnum.dialing,
+            'in-progress': StateEnum.answered,
+            'completed': StateEnum.answered,
             'busy': StateEnum.busy,
+            'no-answer': StateEnum.no_answer,
+            'cancelled': StateEnum.failed,
+            'failed': StateEnum.failed,
         }[request.POST['CallStatus']]
     except KeyError:
         call.state = StateEnum.unknown
