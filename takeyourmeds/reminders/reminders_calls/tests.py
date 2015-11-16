@@ -15,4 +15,6 @@ class TwimlCallbackTest(TestCase):
         ).calls.create()
 
     def test_urls(self):
-        self.assert_(self.call.get_twiml_callback_url())
+        url = self.call.get_twiml_callback_url()
+
+        self.assert_(url.startswith('http'))
