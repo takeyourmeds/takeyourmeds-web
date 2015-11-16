@@ -2,13 +2,15 @@ import datetime
 
 from django.db import models
 
-from .enums import SourceEnum
+from .enums import TypeEnum,SourceEnum
 
 class Reminder(models.Model):
     user = models.ForeignKey('account.User', related_name='reminders')
 
+    type = models.IntegerField(choices=[(x.name, x.value) for x in TypeEnum])
+
     message = models.CharField(max_length=100, blank=True)
-    audio_url = models.CharField(max_length=100)
+    audio_url = models.CharField(max_length=100, blank=True)
 
     phone_number = models.CharField(max_length=200)
 
