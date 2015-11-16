@@ -11,7 +11,7 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from takeyourmeds.utils.dt import local_time
 from takeyourmeds.telephony.utils import send_sms, make_call
 
-from .enums import SourceEnum
+from .enums import TypeEnum, SourceEnum
 from .models import Reminder, Time
 
 @shared_task()
@@ -24,7 +24,10 @@ def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
     reminder = Reminder.objects.get(pk=reminder_id)
     instance = reminder.instances.create(source=source)
 
-    notification = _create_notification(reminder, instance)
+    notification = getattr(
+        instance,
+        '%ss' % reminder.get_type_enum().name,
+    ).create()
 
     try:
         notification.twilio_sid = _trigger_reminder(reminder)
@@ -36,20 +39,11 @@ def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
 
     return repr((reminder, instance, notification))
 
-def _create_notification(reminder, instance):
-    if reminder.message:
-        return instance.messages.create()
-
-    if reminder.audio_url:
-        return instance.calls.create()
-
-    raise NotImplementedError("Unhandled reminder type")
-
 def _trigger_reminder(reminder):
-    if reminder.message:
+    if reminder.type == TypeEnum.message:
         return send_sms(reminder.phone_number, reminder.message)
 
-    if reminder.audio_url:
+    if reminder.type == TypeEnum.call:
         # Ensure we have an absolute URL
         absolute_audio_url = urlparse.urljoin(
             settings.SITE_URL,
