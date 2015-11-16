@@ -31,7 +31,10 @@ def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
     ).create()
 
     try:
-        notification.twilio_sid = notify(notification)
+        resource = notify(notification)
+
+        notification.twilio_sid = resource.sid
+        notification.twilio_data = repr(resource.__dict__)
     except:
         notification.traceback = traceback.format_exc()
         raise

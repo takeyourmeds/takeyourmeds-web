@@ -10,15 +10,13 @@ def send_sms(to_number, message_text, *args, **kwargs):
     Send SMS message.
     """
 
-    message = get_client().messages.create(
+    return get_client().messages.create(
         to=to_number,
         body=message_text,
         from_=settings.TWILIO_FROM,
         *args,
         **kwargs
     )
-
-    return message.sid
 
 def make_call(to_number, audio_url, *args, **kwargs):
     """
@@ -33,7 +31,7 @@ def make_call(to_number, audio_url, *args, **kwargs):
         </Response>
     """.format(audio_url).strip())
 
-    call = get_client().calls.create(
+    return get_client().calls.create(
         to=to_number,
         from_=settings.TWILIO_FROM,
 
@@ -42,8 +40,6 @@ def make_call(to_number, audio_url, *args, **kwargs):
         *args,
         **kwargs
     )
-
-    return call.sid
 
 def get_client():
     if not settings.TWILIO_ENABLED:

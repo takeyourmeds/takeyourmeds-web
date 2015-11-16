@@ -110,8 +110,10 @@ class AbstractNotification(models.Model):
         max_length=40,
     )
 
-    traceback = models.TextField()
     twilio_sid = models.CharField(max_length=34)
+    twilio_data = models.TextField()
+
+    traceback = models.TextField()
 
     created = models.DateTimeField(default=datetime.datetime.utcnow)
 
