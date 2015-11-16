@@ -37,7 +37,6 @@ def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
         raise
     else:
         notification.twilio_sid = resource.sid
-        notification.twilio_response = repr(resource.__dict__)
     finally:
         notification.save()
 

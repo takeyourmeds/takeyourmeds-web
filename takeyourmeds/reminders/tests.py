@@ -56,4 +56,3 @@ class TriggerTest(TestCase):
         message = reminder.instances.get().messages.get()
 
         self.assert_(message.twilio_sid)
-        self.assert_(message.twilio_response)
