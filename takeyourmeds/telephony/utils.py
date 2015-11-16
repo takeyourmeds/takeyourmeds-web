@@ -37,9 +37,6 @@ def make_call(to_number, audio_url):
 
         url=callback.get_callback_url(),
         method='GET',
-
-        fallback_method='GET',
-        status_callback_method='GET',
     )
 
     return call.sid
