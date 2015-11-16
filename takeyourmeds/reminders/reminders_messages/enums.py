@@ -1,7 +1,7 @@
 import enum
 
 class StateEnum(enum.IntEnum):
-    in_progress = 10
+    sending     = 10
     sent        = 20
-    delivered   = 30
-    failed      = 40
+    failed      = 30
+    unknown     = 40

@@ -6,8 +6,8 @@ from .enums import StateEnum
 from .models import Call
 
 @require_POST
-def status_callback(twilio_sid):
-    call = get_object_or_404(Call, twilio_sid=twilio_sid)
+def status_callback(request, ident):
+    call = get_object_or_404(Call, ident=ident)
     call.state = StateEnum.answered # FIXME
     call.save()
 
