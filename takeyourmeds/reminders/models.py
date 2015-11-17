@@ -110,7 +110,13 @@ class AbstractNotification(models.Model):
         max_length=40,
     )
 
-    twilio_sid = models.CharField(max_length=34, unique=True)
+    # Nullable as failed requests would never see a SID
+    twilio_sid = models.CharField(
+        max_length=34,
+        null=True,
+        unique=True,
+        default=None,
+    )
 
     traceback = models.TextField()
 
