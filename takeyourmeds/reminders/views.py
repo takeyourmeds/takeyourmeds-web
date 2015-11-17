@@ -29,8 +29,8 @@ def create(request):
 
 @require_POST
 @login_required
-def delete(request, reminder_id):
-    instance = get_object_or_404(request.user.reminders, pk=reminder_id)
+def delete(request, slug):
+    instance = get_object_or_404(request.user.reminders, slug=slug)
     instance.delete()
 
     messages.success(request, "Your reminder has been deleted.")
@@ -39,8 +39,8 @@ def delete(request, reminder_id):
 
 @require_POST
 @login_required
-def trigger(request, reminder_id):
-    instance = get_object_or_404(request.user.reminders, pk=reminder_id)
+def trigger(request, slug):
+    instance = get_object_or_404(request.user.reminders, slug=slug)
 
     trigger_reminder.delay(instance.pk)
 
