@@ -32,6 +32,13 @@ class Reminder(models.Model):
     def get_type_enum(self):
         return {x.value: x for x in TypeEnum}[self.type]
 
+    def get_phone_number(self):
+        """
+        We store whatever number the user provided but massage it later.
+        """
+        return '+44%s' % self.phone_number if \
+            self.phone_number.startswith('0') else self.phone_number
+
 class Time(models.Model):
     """
     A time-of-day that this reminder should run.
