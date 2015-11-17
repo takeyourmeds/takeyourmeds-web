@@ -5,7 +5,8 @@ from __future__ import unicode_literals
 import datetime
 from django.db import migrations, models
 import django.db.models.deletion
-import takeyourmeds.reminders.utils
+import functools
+import django.utils.crypto
 
 
 class Migration(migrations.Migration):
@@ -21,7 +22,7 @@ class Migration(migrations.Migration):
             name='Call',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('ident', models.CharField(default=takeyourmeds.reminders.utils.get_ident_default, max_length=40, unique=True)),
+                ('ident', models.CharField(default=functools.partial(django.utils.crypto.get_random_string, *(40,), **{}), max_length=40, unique=True)),
                 ('twilio_sid', models.CharField(max_length=34, unique=True)),
                 ('traceback', models.TextField()),
                 ('created', models.DateTimeField(default=datetime.datetime.utcnow)),

@@ -1,11 +1,12 @@
 import datetime
 import urlparse
+import functools
 
 from django.db import models
 from django.conf import settings
+from django.utils.crypto import get_random_string
 
 from .enums import TypeEnum,SourceEnum
-from .utils import get_ident_default
 
 class Reminder(models.Model):
     user = models.ForeignKey('account.User', related_name='reminders')
@@ -16,6 +17,12 @@ class Reminder(models.Model):
     audio_url = models.CharField(max_length=100, blank=True)
 
     phone_number = models.CharField(max_length=200)
+
+    slug = models.CharField(
+        unique=True,
+        default=functools.partial(get_random_string, 12),
+        max_length=12,
+    )
 
     created = models.DateTimeField(default=datetime.datetime.utcnow)
 
@@ -28,6 +35,10 @@ class Reminder(models.Model):
             self.get_type_enum().name,
             self.phone_number,
         )
+
+    @models.permalink
+    def get_absolute_url(self):
+        return 'reminders:logs:view', (self.slug,)
 
     def get_type_enum(self):
         return {x.value: x for x in TypeEnum}[self.type]
@@ -113,7 +124,7 @@ class AbstractNotification(models.Model):
 
     ident = models.CharField(
         unique=True,
-        default=get_ident_default,
+        default=functools.partial(get_random_string, 40),
         max_length=40,
     )
 
@@ -135,10 +146,11 @@ class AbstractNotification(models.Model):
         get_latest_by = 'created'
 
     def __unicode__(self):
-        return u"pk=%d instance_id=%d twilio_sid=%r" % (
+        return u"pk=%d instance_id=%d twilio_sid=%r state=%s" % (
             self.pk,
             self.instance_id,
             self.twilio_sid,
+            self.get_state_enum().name,
         )
 
     @models.permalink
@@ -148,3 +160,6 @@ class AbstractNotification(models.Model):
 
     def get_status_callback_url(self):
         return urlparse.urljoin(settings.SITE_URL, self.get_absolute_url())
+
+    def get_state_enum(self):
+        raise NotImplementedError()

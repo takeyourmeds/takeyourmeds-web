@@ -1,9 +1,10 @@
 import enum
 
 class StateEnum(enum.IntEnum):
-    failed      =  0
-    dialing     = 10
-    answered    = 20
-    busy        = 30
-    no_answer   = 40
-    unknown     = 50
+    twilio_disabled = 10
+    failed          = 20
+    dialing         = 30
+    answered        = 40
+    busy            = 50
+    no_answer       = 60
+    unknown         = 70

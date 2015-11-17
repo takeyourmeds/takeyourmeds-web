@@ -13,11 +13,11 @@ class DeleteTests(TestCase):
         self.reminder = self.user.reminders.create(type=TypeEnum.message)
 
     def test_GET(self):
-        self.assertGET(405, 'reminders:delete', self.reminder.pk, login=True)
+        self.assertGET(405, 'reminders:delete', self.reminder.slug, login=True)
 
     def test_POST(self):
         response = self.assertPOST(
-            302, {}, 'reminders:delete', self.reminder.pk, login=True
+            302, {}, 'reminders:delete', self.reminder.slug, login=True
         )
         self.assertRedirectsTo(response, 'dashboard:view')
         self.failIf(self.user.reminders.exists())
@@ -33,7 +33,7 @@ class DeleteTests(TestCase):
             404,
             {},
             'reminders:delete',
-            self.reminder.pk,
+            self.reminder.slug,
             login=True,
             user=other,
         )
@@ -47,7 +47,7 @@ class TriggerTest(TestCase):
         response = self.assertPOST(
             302,
             {},
-            'reminders:trigger', reminder.pk,
+            'reminders:trigger', reminder.slug,
             login=True,
         )
 

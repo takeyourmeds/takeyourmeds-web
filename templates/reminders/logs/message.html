@@ -1,0 +1,56 @@
+{% extends "reminders/logs/base.html" %}
+
+{% block title %}SMS reminder logs &mdash; {{ block.super }}{% endblock %}
+
+{% block breadcrumbs_header %}
+  <h4>SMS reminder logs</h4>
+{% endblock %}
+
+{% block log_content %}
+
+{% for instance in reminder.instances.all %}
+<div class="panel panel-primary">
+  {% include "reminders/logs/include_panel_heading.html" %}
+
+  <table class="table table-striped">
+    <tbody>
+      {% for message in instance.messages.all %}
+      <tr>
+        <td>
+          SMS status:
+          {% switch message.get_state_enum.name %}
+          {% case "twilio_disabled" %}
+            Twilio disabled
+          {% endcase %}
+          {% case "failed" %}
+            Failed
+          {% endcase %}
+          {% case "sending" %}
+            Sending&hellip;
+          {% endcase %}
+          {% case "sent" %}
+            Sent
+          {% endcase %}
+          {% case "delivered" %}
+            Delivered
+          {% endcase %}
+          {% case "unknown" %}
+            Unknown
+          {% endcase %}
+          {% endswitch %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% empty %}
+
+<p class="text-center">
+  This reminder has not been triggered yet.
+</p>
+
+{% endfor %}
+
+{% endblock %}
