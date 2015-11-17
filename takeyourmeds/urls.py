@@ -13,6 +13,4 @@ urlpatterns = (
         namespace='reminders')),
     url(r'', include('takeyourmeds.static.urls',
         namespace='static')),
-    url(r'', include('takeyourmeds.telephony.urls',
-        namespace='telephony')),
 )

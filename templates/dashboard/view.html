@@ -48,7 +48,7 @@
         <div class="panel-heading">
           <h4 class="panel-title">
             <a>
-              {% if reminder.message %}
+              {% if reminder.get_type_enum.name == "message" %}
               SMS reminder
               {% else %}
               Voice reminder
@@ -68,7 +68,7 @@
                 {% endfor %}
               </ul>
 
-              {% if reminder.message %}
+              {% if reminder.get_type_enum.name == "message" %}
                 <p>
                   &hellip; we will send the following text message to
                   &nbsp;<i class="fa fa-mobile-phone"></i> {{ reminder.phone_number }}:

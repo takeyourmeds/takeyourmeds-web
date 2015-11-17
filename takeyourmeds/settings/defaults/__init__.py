@@ -136,6 +136,8 @@ STRIPE_SECRET_KEY = 'overriden-in-production'
 STRIPE_PUBLISHABLE_KEY = 'overriden-in-production'
 
 TWILIO_ENABLED = True
-TWILIO_FROM = 'TakeYourMed' # 11-character limit
 TWILIO_AUTH_TOKEN = 'overriden-in-production'
 TWILIO_ACCOUNT_SID = 'overriden-in-production'
+
+TWILIO_CALL_FROM = '+441143032046'
+TWILIO_MESSAGE_FROM = 'TakeYourMed' # 11-character limit

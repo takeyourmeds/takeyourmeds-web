@@ -1,8 +1,8 @@
 bcrypt==2.0.0
 celery==3.1.19
-Django==1.9b1
+Django==1.9rc1
 django-auto-one-to-one==2.0.2
-django-celery==3.1.16
+django-celery==3.1.17
 django-email-from-template==2.0.0
 django-template-tests==1.0.0
 enum34==1.0.4

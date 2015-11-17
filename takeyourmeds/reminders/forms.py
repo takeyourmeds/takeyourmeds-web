@@ -3,6 +3,7 @@ import re
 from django import forms
 
 from .apps import RemindersConfig
+from .enums import TypeEnum
 from .models import Reminder
 
 NUM_REMINDERS = 4
@@ -49,15 +50,9 @@ class CreateForm(forms.ModelForm):
 
     def save(self, user):
         instance = super(CreateForm, self).save(commit=False)
-
         instance.user = user
-
-        # Clear the "other" message type
-        if self.cleaned_data['message_type'] == 'text':
-            instance.audio_url = ''
-        else:
-            instance.message = ''
-
+        instance.type = TypeEnum.message if \
+            self.cleaned_data['message_type'] == 'text' else TypeEnum.call
         instance.save()
 
         for x in self.get_times():

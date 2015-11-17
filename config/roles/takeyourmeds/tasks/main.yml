@@ -19,7 +19,7 @@
 
 - name: Download code
   command:
-    wget -O {{ build_dir }}/{{ package_name }}.tar.gz {{ source }}/archive/{{ branch }}.tar.gz
+    wget -O {{ build_dir }}/{{ package_name }}.tar.gz {{ source }}/archive/{{ commit }}.tar.gz
 
 - name: Extract
   command:
@@ -80,7 +80,7 @@
   sudo: yes
   sudo_user: www-data
   command:
-    "{{ base_dir }}/bin/manage.py migrate --verbosity=2 --noinput --run-syncdb"
+    "{{ base_dir }}/bin/manage.py migrate --verbosity=2 --noinput"
 
 - name: collectstatic
   command:
