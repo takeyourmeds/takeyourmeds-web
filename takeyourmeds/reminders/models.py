@@ -18,6 +18,12 @@ class Reminder(models.Model):
 
     phone_number = models.CharField(max_length=200)
 
+    slug = models.CharField(
+        unique=True,
+        default=functools.partial(get_random_string, 12),
+        max_length=12,
+    )
+
     created = models.DateTimeField(default=datetime.datetime.utcnow)
 
     class Meta:
