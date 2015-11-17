@@ -91,7 +91,7 @@
                 </p>
               {% endif %}
 
-            <a href="{% url "reminders:logs:view" reminder.pk %}" class="btn btn-default">
+            <a href="{{ reminder.get_absolute_url }}" class="btn btn-default">
               View logs
             </a>
 

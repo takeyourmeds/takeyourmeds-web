@@ -36,6 +36,10 @@ class Reminder(models.Model):
             self.phone_number,
         )
 
+    @models.permalink
+    def get_absolute_url(self):
+        return 'reminders:logs:view', (self.slug,)
+
     def get_type_enum(self):
         return {x.value: x for x in TypeEnum}[self.type]
 
