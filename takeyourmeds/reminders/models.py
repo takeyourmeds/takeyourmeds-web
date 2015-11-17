@@ -135,10 +135,11 @@ class AbstractNotification(models.Model):
         get_latest_by = 'created'
 
     def __unicode__(self):
-        return u"pk=%d instance_id=%d twilio_sid=%r" % (
+        return u"pk=%d instance_id=%d twilio_sid=%r state=%s" % (
             self.pk,
             self.instance_id,
             self.twilio_sid,
+            self.get_state_enum().name,
         )
 
     @models.permalink
@@ -148,3 +149,6 @@ class AbstractNotification(models.Model):
 
     def get_status_callback_url(self):
         return urlparse.urljoin(settings.SITE_URL, self.get_absolute_url())
+
+    def get_state_enum(self):
+        raise NotImplementedError()
