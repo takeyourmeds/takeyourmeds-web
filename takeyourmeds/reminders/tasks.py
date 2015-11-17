@@ -31,6 +31,7 @@ def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
     try:
         resource = notify(notification)
     except:
+        notification.state = 0 # failed
         notification.traceback = traceback.format_exc()
         raise
     else:
