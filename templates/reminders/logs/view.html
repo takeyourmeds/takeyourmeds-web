@@ -28,6 +28,7 @@
   <thead>
     <tr>
       <th>When</th>
+      <th>Reason</th>
     </tr>
   </thead>
   <tbody>
@@ -35,6 +36,44 @@
     <tr>
       <td>
         {{ instance.created }}
+      </td>
+      <td>
+        {% switch instance.get_source_enum.name %}
+        {% case "cron" %}
+          Scheduled
+        {% endcase %}
+        {% case "manual" %}
+          Manual trigger
+        {% endcase %}
+        {% endswitch %}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <table class="table table-striped">
+          <tbody>
+            {% switch reminder.get_type_enum.name %}
+            {% case "call" %}
+              {% for x in instance.calls.all %}
+              <tr>
+                <td>
+                  {{ x }}
+                </td>
+              </tr>
+              {% endfor %}
+            {% endcase %}
+            {% case "message" %}
+              {% for x in instance.messages.all %}
+              <tr>
+                <td>
+                  {{ x }}
+                </td>
+              </tr>
+              {% endfor %}
+            {% endcase %}
+            {% endswitch %}
+          </tbody>
+        </table>
       </td>
     </tr>
     {% empty %}
