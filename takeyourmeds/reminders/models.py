@@ -40,7 +40,7 @@ class Time(models.Model):
     reminder = models.ForeignKey('Reminder', related_name='times')
 
     time = models.CharField(max_length=5)
-    last_run = models.DateTimeField(default=datetime.datetime.utcnow)
+    last_run = models.DateTimeField(default=datetime.datetime.utcnow) # unused
 
     created = models.DateTimeField(default=datetime.datetime.utcnow)
 
