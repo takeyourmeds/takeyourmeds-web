@@ -28,6 +28,12 @@ def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
         '%ss' % reminder.get_type_enum().name,
     ).create()
 
+    # We won't get a callback if Twilio is disabled, so let's set a special
+    # state to not have confusing "in progress" messages outside of a live
+    # environment.
+    if not settings.TWILIO_ENABLED:
+        notification.state = 0 # twilio_disabled
+
     try:
         resource = notify(notification)
     except:
