@@ -91,6 +91,10 @@
                 </p>
               {% endif %}
 
+            <a href="{% url "reminders:logs:view" reminder.pk %}" class="btn btn-default">
+              View logs
+            </a>
+
             <a href="#trigger-modal-{{ reminder.pk }}" class="btn btn-theme-bg" data-toggle="modal">
               Test reminder
             </a>
