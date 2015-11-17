@@ -15,9 +15,9 @@ class SmokeTest(TestCase):
     def test_call(self):
         reminder = self.create_reminder(TypeEnum.call)
 
-        self.assertGET(200, 'reminders:logs:view', reminder.pk, login=True)
+        self.assertGET(200, reminder, login=True)
 
     def test_message(self):
         reminder = self.create_reminder(TypeEnum.message)
 
-        self.assertGET(200, 'reminders:logs:view', reminder.pk, login=True)
+        self.assertGET(200, reminder, login=True)
