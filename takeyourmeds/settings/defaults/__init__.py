@@ -66,6 +66,7 @@ TEMPLATES = [
                 'takeyourmeds.utils.context_processors.settings_context',
             ],
             'builtins': [
+                'switch_templatetag.templatetags.switch',
                 'django.contrib.staticfiles.templatetags.staticfiles',
             ],
         },

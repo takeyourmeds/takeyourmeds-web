@@ -4,6 +4,7 @@ Django==1.9rc1
 django-auto-one-to-one==2.0.2
 django-celery==3.1.17
 django-email-from-template==2.0.0
+django-switch-templatetag==1.0.1
 django-template-tests==1.0.0
 enum34==1.0.4
 requests==2.8.1
