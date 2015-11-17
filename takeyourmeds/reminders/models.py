@@ -1,11 +1,12 @@
 import datetime
 import urlparse
+import functools
 
 from django.db import models
 from django.conf import settings
+from django.utils.crypto import get_random_string
 
 from .enums import TypeEnum,SourceEnum
-from .utils import get_ident_default
 
 class Reminder(models.Model):
     user = models.ForeignKey('account.User', related_name='reminders')
@@ -113,7 +114,7 @@ class AbstractNotification(models.Model):
 
     ident = models.CharField(
         unique=True,
-        default=get_ident_default,
+        default=functools.partial(get_random_string, 40),
         max_length=40,
     )
 
