@@ -1,0 +1,91 @@
+{% extends "base/base.html" %}
+
+{% block title %}{{ block.super }}{% endblock %}
+
+{% block breadcrumbs_header %}
+  {% switch reminder.get_type_enum.name %}
+    {% case "call" %}
+    <h4>Voice reminder logs</h4>
+    {% endcase %}
+    {% case "message" %}
+    <h4>SMS reminder logs</h4>
+    {% endcase %}
+  {% endswitch %}
+{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  <li>Logs</li>
+{% endblock %}
+
+{% block container_header %}
+  <div class="divide30"></div>
+{% endblock %}
+
+{% block content %}
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>When</th>
+      <th>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for instance in reminder.instances.all %}
+    <tr>
+      <td>
+        {{ instance.created }}
+      </td>
+      <td>
+        {% switch instance.get_source_enum.name %}
+        {% case "cron" %}
+          Scheduled
+        {% endcase %}
+        {% case "manual" %}
+          Manual trigger
+        {% endcase %}
+        {% endswitch %}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <table class="table table-striped">
+          <tbody>
+            {% switch reminder.get_type_enum.name %}
+            {% case "call" %}
+              {% for x in instance.calls.all %}
+              <tr>
+                <td>
+                  {{ x }}
+                </td>
+              </tr>
+              {% endfor %}
+            {% endcase %}
+            {% case "message" %}
+              {% for x in instance.messages.all %}
+              <tr>
+                <td>
+                  {{ x }}
+                </td>
+              </tr>
+              {% endfor %}
+            {% endcase %}
+            {% endswitch %}
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="1">
+        (This reminder has not been trigger yet)
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="divide30"></div>
+
+{% endblock %}

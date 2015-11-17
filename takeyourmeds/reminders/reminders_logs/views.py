@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 def view(request, reminder_id):
     reminder = get_object_or_404(request.user.reminders, pk=reminder_id)
 
-    return render(request, 'reminders/logs/view.html', {
+    template = 'reminders/logs/%s.html' % reminder.get_type_enum().name
+
+    return render(request, template, {
         'reminder': reminder,
     })
