@@ -46,7 +46,7 @@ def notify(notification):
 
     if reminder.type == TypeEnum.message:
         return get_twilio_client().messages.create(
-            to=reminder.phone_number,
+            to=reminder.get_phone_number(),
             body=reminder.message,
             from_=settings.TWILIO_MESSAGE_FROM,
             status_callback=notification.get_status_callback_url(),
@@ -54,7 +54,7 @@ def notify(notification):
 
     if reminder.type == TypeEnum.call:
         return get_twilio_client().calls.create(
-            to=reminder.phone_number,
+            to=reminder.get_phone_number(),
             from_=settings.TWILIO_CALL_FROM,
             url=notification.get_twiml_callback_url(),
             status_callback=notification.get_status_callback_url(),

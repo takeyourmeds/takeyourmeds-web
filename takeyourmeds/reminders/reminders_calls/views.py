@@ -3,6 +3,7 @@ import urlparse
 from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.contrib.staticfiles.storage import staticfiles_storage
 
@@ -24,6 +25,7 @@ def twiml_callback(request, ident):
         </Response>
     """.format(absolute_audio_url).strip())
 
+@csrf_exempt
 @require_POST
 def status_callback(request, ident):
     """
