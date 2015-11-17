@@ -32,7 +32,7 @@ def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
     # state to not have confusing "in progress" messages outside of a live
     # environment.
     if not settings.TWILIO_ENABLED:
-        notification.state = 0 # twilio_disabled
+        notification.state = 10 # twilio_disabled
 
     try:
         resource = notify(notification)
