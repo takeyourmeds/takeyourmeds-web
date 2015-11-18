@@ -10,7 +10,7 @@ from takeyourmeds.utils.dt import local_time
 from takeyourmeds.utils.twilio import get_twilio_client
 
 from .enums import TypeEnum, SourceEnum
-from .models import Reminder, Time
+from .models import Reminder, Instance, Time
 
 @shared_task()
 def schedule_reminders():
@@ -23,14 +23,27 @@ def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
 
     instance = reminder.instances.create(source=source)
 
+    return repr(create_notification(instance))
+
+@shared_task()
+def trigger_instance(instance_id):
+    instance = Instance.objects.get(pk=instance_id)
+
+    return repr(create_notification(instance))
+
+def create_notification(instance):
+    """
+    Create and fire an appropriate notification for this instance.
+    """
+
     notification = getattr(
         instance,
-        '%ss' % reminder.get_type_enum().name,
+        '%ss' % instance.reminder.get_type_enum().name,
     ).create()
 
-    # We won't get a callback if Twilio is disabled, so let's set a special
-    # state to not have confusing "in progress" messages outside of a live
-    # environment.
+    # We won't get a callback from Twilio if Twilio is disabled, so let's set a
+    # special state to not have confusing "in progress" messages outside of a
+    # live environment.
     if not settings.TWILIO_ENABLED:
         notification.state = 10 # twilio_disabled
 
@@ -45,9 +58,13 @@ def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
     finally:
         notification.save()
 
-    return repr((reminder, instance, notification))
+    return notification
 
 def notify(notification):
+    """
+    Actually perform the notification.
+    """
+
     reminder = notification.instance.reminder
 
     if reminder.type == TypeEnum.message:

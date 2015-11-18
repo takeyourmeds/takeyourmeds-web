@@ -142,7 +142,7 @@ class AbstractNotification(models.Model):
 
     class Meta:
         abstract = True
-        ordering = ('-created',)
+        ordering = ('created',)
         get_latest_by = 'created'
 
     def __unicode__(self):

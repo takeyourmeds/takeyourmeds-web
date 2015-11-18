@@ -4,6 +4,7 @@ from takeyourmeds.utils.test import TestCase
 
 from ..enums import TypeEnum, SourceEnum
 
+from . import app_settings
 from .enums import StateEnum
 
 class CallTestCase(TestCase):
@@ -79,3 +80,39 @@ class StatusCallbackTest(CallTestCase):
 
     def test_unknown(self):
         self.assertState('dummy-unknown-value', StateEnum.unknown)
+
+class RetryTest(TestCase):
+    def test_retry(self):
+        reminder = self.user.reminders.create(
+            type=TypeEnum.call,
+            audio_url='/dummy.mp3',
+        )
+
+        instance = reminder.instances.create(
+            source=SourceEnum.manual,
+        )
+
+        # We need to initiate the first call manually
+        call = instance.calls.create()
+
+        for x in range(1, app_settings.RETRY_COUNT):
+            # Mark call as busy
+            call = instance.calls.latest()
+            self.assertPOST(200, {'CallStatus': 'busy'}, call)
+
+            # This would have caused us to schedule another call automatically
+            self.assertEqual(instance.calls.count(), x + 1)
+
+            # Check that we didn't create a new Instance
+            self.assertEqual(reminder.instances.count(), 1)
+
+            # Check we marked this call as busy
+            call.refresh_from_db()
+            self.assertEqual(call.state, StateEnum.busy)
+
+        # Mark this call as busy..
+        call = instance.calls.latest()
+        self.assertPOST(200, {'CallStatus': 'busy'}, call)
+
+        # .. but check this didn't schedule another
+        self.assertEqual(instance.calls.count(), app_settings.RETRY_COUNT)

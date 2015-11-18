@@ -7,6 +7,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.contrib.staticfiles.storage import staticfiles_storage
 
+from ..tasks import trigger_instance
+
+from . import app_settings
 from .enums import StateEnum
 from .models import Call
 
@@ -68,5 +71,12 @@ def status_callback(request, ident):
         call.state = StateEnum.unknown
 
     call.save()
+
+    if call.state in (
+        StateEnum.failed,
+        StateEnum.busy,
+        StateEnum.no_answer,
+    ) and call.instance.calls.count() < app_settings.RETRY_COUNT:
+        trigger_instance.delay(call.instance_id)
 
     return HttpResponse('')
