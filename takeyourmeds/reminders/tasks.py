@@ -45,7 +45,7 @@ def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
     finally:
         notification.save()
 
-    return repr((reminder, instance, notification))
+    return repr(notification)
 
 def notify(notification):
     reminder = notification.instance.reminder
