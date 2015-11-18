@@ -23,9 +23,7 @@ def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
 
     instance = reminder.instances.create(source=source)
 
-    notification = create_notification(instance)
-
-    return repr(notification)
+    return repr(create_notification(instance))
 
 def create_notification(instance):
     """
