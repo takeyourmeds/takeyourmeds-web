@@ -9,6 +9,7 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 
 from ..tasks import trigger_instance
 
+from . import app_settings
 from .enums import StateEnum
 from .models import Call
 
@@ -75,7 +76,7 @@ def status_callback(request, ident):
         StateEnum.failed,
         StateEnum.busy,
         StateEnum.no_answer,
-    ) and call.instance.calls.count() < 3:
+    ) and call.instance.calls.count() < app_settings.RETRY_COUNT:
         trigger_instance.delay(call.instance_id)
 
     return HttpResponse('')
