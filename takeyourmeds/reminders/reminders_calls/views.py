@@ -71,11 +71,11 @@ def status_callback(request, ident):
 
     call.save()
 
-    if call.instance.calls.count() < 3 and call.state in (
+    if call.state in (
         StateEnum.failed,
         StateEnum.busy,
         StateEnum.no_answer,
-    ):
+    ) and call.instance.calls.count() < 3:
         trigger_instance.delay(call.instance_id)
 
     return HttpResponse('')
