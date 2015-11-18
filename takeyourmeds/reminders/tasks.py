@@ -23,9 +23,18 @@ def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
 
     instance = reminder.instances.create(source=source)
 
+    notification = create_notification(instance)
+
+    return repr(notification)
+
+def create_notification(instance):
+    """
+    Create and fire an appropriate notification for this instance.
+    """
+
     notification = getattr(
         instance,
-        '%ss' % reminder.get_type_enum().name,
+        '%ss' % instance.reminder.get_type_enum().name,
     ).create()
 
     # We won't get a callback from Twilio if Twilio is disabled, so let's set a
@@ -45,9 +54,13 @@ def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
     finally:
         notification.save()
 
-    return repr(notification)
+    return notification
 
 def notify(notification):
+    """
+    Actually perform the notification.
+    """
+
     reminder = notification.instance.reminder
 
     if reminder.type == TypeEnum.message:
