@@ -79,3 +79,33 @@ class StatusCallbackTest(CallTestCase):
 
     def test_unknown(self):
         self.assertState('dummy-unknown-value', StateEnum.unknown)
+
+class RetryTest(TestCase):
+    def test_retry(self):
+        instance = self.user.reminders.create(
+            type=TypeEnum.call,
+            audio_url='/dummy.mp3',
+        ).instances.create(
+            source=SourceEnum.manual,
+        )
+
+        # Initiate the first call manually
+        call = instance.calls.create()
+
+        # First call is busy
+        call = instance.calls.latest()
+        print call.pk
+        self.assertEqual(instance.calls.count(), 1)
+        self.assertPOST(200, {'CallStatus': 'busy'}, call)
+        call.refresh_from_db()
+        self.assertEqual(call.state, StateEnum.busy)
+
+        # This would have caused us to schedule another call automatically
+        call = instance.calls.latest()
+        self.assertEqual(instance.calls.count(), 2)
+        self.assertEqual(call.state, StateEnum.dialing)
+
+        # .. which is also busy
+        self.assertPOST(200, {'CallStatus': 'busy'}, call)
+        call.refresh_from_db()
+        self.assertEqual(call.state, StateEnum.busy)
