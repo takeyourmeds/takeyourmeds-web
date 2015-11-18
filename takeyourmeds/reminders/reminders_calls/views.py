@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.contrib.staticfiles.storage import staticfiles_storage
 
-from ..tasks import trigger_reminder
+from ..tasks import trigger_instance
 
 from .enums import StateEnum
 from .models import Call
@@ -76,6 +76,6 @@ def status_callback(request, ident):
         StateEnum.busy,
         StateEnum.no_answer,
     ):
-        trigger_reminder.delay(call.instance_id)
+        trigger_instance.delay(call.instance_id)
 
     return HttpResponse('')

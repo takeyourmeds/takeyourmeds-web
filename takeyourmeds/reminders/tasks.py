@@ -10,7 +10,7 @@ from takeyourmeds.utils.dt import local_time
 from takeyourmeds.utils.twilio import get_twilio_client
 
 from .enums import TypeEnum, SourceEnum
-from .models import Reminder, Time
+from .models import Reminder, Instance, Time
 
 @shared_task()
 def schedule_reminders():
@@ -22,6 +22,12 @@ def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
     reminder = Reminder.objects.get(pk=reminder_id)
 
     instance = reminder.instances.create(source=source)
+
+    return repr(create_notification(instance))
+
+@shared_task()
+def trigger_instance(instance_id):
+    instance = Instance.objects.get(pk=instance_id)
 
     return repr(create_notification(instance))
 
