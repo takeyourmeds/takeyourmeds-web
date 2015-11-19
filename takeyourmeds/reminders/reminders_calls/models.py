@@ -1,7 +1,5 @@
 from django.db import models
 
-from takeyourmeds.utils.url import resolve_absolute
-
 from ..models import AbstractNotification
 
 from .enums import StateEnum
