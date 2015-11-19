@@ -83,7 +83,7 @@ class StatusCallbackTest(CallTestCase):
         self.assertState('dummy-unknown-value', StateEnum.unknown)
 
 class RetryTest(TestCase):
-    def test_retry(self):
+    def test_retry_up_to_n_times(self):
         reminder = self.user.reminders.create(
             type=TypeEnum.call,
             audio_url='/dummy.mp3',
@@ -97,11 +97,11 @@ class RetryTest(TestCase):
         call = instance.calls.create()
 
         for x in range(1, app_settings.RETRY_COUNT):
-            # Mark call as busy
+            # Mark call as completed
             call = instance.calls.latest()
             self.assertPOST(
                 200,
-                {'CallStatus': 'busy'},
+                {'CallStatus': 'completed'},
                 'reminders:calls:status-callback',
                 call.ident,
             )
@@ -114,7 +114,7 @@ class RetryTest(TestCase):
 
             # Check we marked this call as busy
             call.refresh_from_db()
-            self.assertEqual(call.state, StateEnum.busy)
+            self.assertEqual(call.state, StateEnum.answered)
 
         # Mark this call as busy..
         call = instance.calls.latest()
