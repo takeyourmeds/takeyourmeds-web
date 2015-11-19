@@ -22,18 +22,14 @@ class CallTestCase(TestCase):
 
 class TwimlCallbackTest(CallTestCase):
     def assertContains(self, expected):
-        response = self.assertGET(
+        response = self.assertPOST(
             200,
+            {},
             'reminders:calls:twiml-callback',
             self.call.ident,
         )
 
         self.assert_(expected in response.content)
-
-    def test_url(self):
-        url = self.call.get_twiml_callback_url()
-
-        self.assert_(url.startswith('http'))
 
     def test_xml(self):
         """
@@ -55,7 +51,12 @@ class TwimlCallbackTest(CallTestCase):
 
 class StatusCallbackTest(CallTestCase):
     def assertState(self, val, expected):
-        self.assertPOST(200, {'CallStatus': val}, self.call)
+        self.assertPOST(
+            200,
+            {'CallStatus': val},
+            'reminders:calls:status-callback',
+            self.call.ident,
+        )
         self.call.refresh_from_db()
         self.assertEqual(self.call.state, expected)
 
@@ -82,7 +83,57 @@ class StatusCallbackTest(CallTestCase):
         self.assertState('dummy-unknown-value', StateEnum.unknown)
 
 class RetryTest(TestCase):
-    def test_retry(self):
+    def set_call_completed(self, call):
+        self.assertPOST(
+            200,
+            {'CallStatus': 'completed'},
+            'reminders:calls:status-callback',
+            call.ident,
+        )
+
+    def test_retry_if_button_not_pushed(self):
+        reminder = self.user.reminders.create(
+            type=TypeEnum.call,
+            audio_url='/dummy.mp3',
+        )
+
+        instance = reminder.instances.create(
+            source=SourceEnum.manual,
+        )
+
+        # We need to initiate the first call manually
+        call = instance.calls.create()
+
+        # We completed the call, but we did not press any digits
+        self.assertPOST(200, {}, 'reminders:calls:gather-callback', call.ident)
+        self.set_call_completed(call)
+
+        # Wwe marked this call as answered but no button pressed
+        call.refresh_from_db()
+        self.failIf(call.button_pressed)
+        self.assertEqual(call.state, StateEnum.answered)
+
+        # This would have caused us to schedule another call
+        self.assertEqual(instance.calls.count(), 2)
+
+        # We completed this call, we we did press digits
+        self.assertPOST(
+            200,
+            {'Digits': '1'},
+            'reminders:calls:gather-callback',
+            call.ident,
+        )
+        self.set_call_completed(call)
+
+        # We did not schedule another call
+        self.assertEqual(instance.calls.count(), 2)
+
+        # We marked this call as answered and button pressed
+        call.refresh_from_db()
+        self.assert_(call.button_pressed)
+        self.assertEqual(call.state, StateEnum.answered)
+
+    def test_retry_up_to_n_times(self):
         reminder = self.user.reminders.create(
             type=TypeEnum.call,
             audio_url='/dummy.mp3',
@@ -96,23 +147,23 @@ class RetryTest(TestCase):
         call = instance.calls.create()
 
         for x in range(1, app_settings.RETRY_COUNT):
-            # Mark call as busy
+            # Mark call as completed
             call = instance.calls.latest()
-            self.assertPOST(200, {'CallStatus': 'busy'}, call)
+            self.set_call_completed(call)
 
             # This would have caused us to schedule another call automatically
             self.assertEqual(instance.calls.count(), x + 1)
 
-            # Check that we didn't create a new Instance
+            # We didn't create a new Instance
             self.assertEqual(reminder.instances.count(), 1)
 
-            # Check we marked this call as busy
+            # We marked this call as busy
             call.refresh_from_db()
-            self.assertEqual(call.state, StateEnum.busy)
+            self.assertEqual(call.state, StateEnum.answered)
 
-        # Mark this call as busy..
+        # Mark this last call as completed
         call = instance.calls.latest()
-        self.assertPOST(200, {'CallStatus': 'busy'}, call)
+        self.set_call_completed(call)
 
-        # .. but check this didn't schedule another
+        # We didn't schedule another call
         self.assertEqual(instance.calls.count(), app_settings.RETRY_COUNT)

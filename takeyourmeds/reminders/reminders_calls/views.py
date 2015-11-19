@@ -1,11 +1,12 @@
-import urlparse
+import datetime
 
-from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.contrib.staticfiles.storage import staticfiles_storage
+
+from takeyourmeds.utils.url import resolve_absolute
 
 from ..tasks import trigger_instance
 
@@ -13,20 +14,43 @@ from . import app_settings
 from .enums import StateEnum
 from .models import Call
 
+@csrf_exempt
+@require_POST
 def twiml_callback(request, ident):
     call = get_object_or_404(Call, ident=ident)
 
-    absolute_audio_url = urlparse.urljoin(
-        settings.SITE_URL,
-        staticfiles_storage.url(call.instance.reminder.audio_url),
-    )
+    audio_url = resolve_absolute(staticfiles_storage.url(
+        call.instance.reminder.audio_url
+    ))
+
+    gather_url = resolve_absolute('reminders:calls:gather-callback', call.ident)
 
     return HttpResponse("""
         <?xml version="1.0" encoding="UTF-8"?>
         <Response>
-            <Play loop="1">{}</Play>
+            <Play loop="1">{audio_url}</Play>
+            <Gather action="{gather_url}" timeout="120" numDigits="1">
+                <Say>
+                    Please press any number to confirm.
+                </Say>
+            </Gather>
         </Response>
-    """.format(absolute_audio_url).strip())
+    """.format(
+        audio_url=audio_url,
+        gather_url=gather_url,
+    ).strip())
+
+@csrf_exempt
+@require_POST
+def gather_callback(request, ident):
+    call = get_object_or_404(Call, ident=ident)
+
+    # Mark if the user actually pressed a button
+    if request.POST.get('Digits'):
+        call.button_pressed = datetime.datetime.utcnow()
+        call.save(update_fields=('button_pressed',))
+
+    return HttpResponse("")
 
 @csrf_exempt
 @require_POST
@@ -70,13 +94,12 @@ def status_callback(request, ident):
     except KeyError:
         call.state = StateEnum.unknown
 
-    call.save()
+    call.state_updated = datetime.datetime.utcnow()
 
-    if call.state in (
-        StateEnum.failed,
-        StateEnum.busy,
-        StateEnum.no_answer,
-    ) and call.instance.calls.count() < app_settings.RETRY_COUNT:
+    call.save(update_fields=('state', 'state_updated'))
+
+    if not call.button_pressed \
+            and call.instance.calls.count() < app_settings.RETRY_COUNT:
         trigger_instance.delay(call.instance_id)
 
     return HttpResponse('')

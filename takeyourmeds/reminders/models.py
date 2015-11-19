@@ -1,9 +1,7 @@
 import datetime
-import urlparse
 import functools
 
 from django.db import models
-from django.conf import settings
 from django.utils.crypto import get_random_string
 
 from .enums import TypeEnum,SourceEnum
@@ -82,8 +80,8 @@ class Instance(models.Model):
 
     The "parent" foreign key is a ``Reminder`` and not a ``Time`` to a) allow
     for manual triggers which have no Time, and b) to allow for Time instances
-        to be removed rather than marked as "disabled" which is complicated in
-        the presence of ``unique_together``.
+    to be removed rather than marked as "disabled" which is complicated in the
+    presence of ``unique_together``.
     """
 
     reminder = models.ForeignKey(Reminder, related_name='instances')
@@ -138,6 +136,9 @@ class AbstractNotification(models.Model):
 
     traceback = models.TextField()
 
+    state = None # See concrete implementations
+    state_updated = models.DateTimeField(default=datetime.datetime.utcnow)
+
     created = models.DateTimeField(default=datetime.datetime.utcnow)
 
     class Meta:
@@ -152,14 +153,6 @@ class AbstractNotification(models.Model):
             self.twilio_sid,
             self.get_state_enum().name,
         )
-
-    @models.permalink
-    def get_absolute_url(self):
-        return 'reminders:%ss:status-callback' % self._meta.model_name, \
-            (self.ident,)
-
-    def get_status_callback_url(self):
-        return urlparse.urljoin(settings.SITE_URL, self.get_absolute_url())
 
     def get_state_enum(self):
         raise NotImplementedError()

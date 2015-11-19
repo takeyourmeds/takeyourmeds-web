@@ -1,3 +1,5 @@
+import datetime
+
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
@@ -39,6 +41,8 @@ def status_callback(request, ident):
     except KeyError:
         message.state = StateEnum.unknown
 
-    message.save()
+    message.state_updated = datetime.datetime.utcnow()
+
+    message.save(update_fields=('state', 'state_updated'))
 
     return HttpResponse('')

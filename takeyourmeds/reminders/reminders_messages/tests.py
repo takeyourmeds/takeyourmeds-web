@@ -15,7 +15,12 @@ class StatusCallbackTest(TestCase):
         ).messages.create()
 
     def assertState(self, val, expected):
-        self.assertPOST(200, {'MessageStatus': val}, self.message)
+        self.assertPOST(
+            200,
+            {'MessageStatus': val},
+            'reminders:messages:status-callback',
+            self.message.ident,
+        )
         self.message.refresh_from_db()
         self.assertEqual(self.message.state, expected)
 

@@ -37,7 +37,11 @@
             Dialing&hellip;
           {% endcase %}
           {% case "answered" %}
-            Call answered
+            {% if call.button_pressed %}
+              Call answered and button pressed.
+            {% else %}
+              Call answered but button not pressed.
+            {% endif %}
           {% endcase %}
           {% case "busy" %}
             Busy
