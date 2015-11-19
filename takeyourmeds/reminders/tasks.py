@@ -45,7 +45,7 @@ def trigger_instance(instance_id):
 
 def create_and_trigger_notification(instance):
     """
-    Creates and trigger the appropriate notification for this instance.
+    Creates and trigger the appropriate notification for this ``Instance``
     """
 
     plural = '%ss' % instance.reminder.get_type_enum().name
