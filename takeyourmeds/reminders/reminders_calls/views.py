@@ -18,7 +18,7 @@ def twiml_callback(request, ident):
 
     return render(request, 'reminders/calls/twiml_callback.xml', {
         'call': call,
-    })
+    }, content_type='text/xml')
 
 @csrf_exempt
 @require_POST
