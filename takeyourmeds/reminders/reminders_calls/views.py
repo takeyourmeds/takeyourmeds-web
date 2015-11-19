@@ -30,7 +30,11 @@ def gather_callback(request, ident):
         call.button_pressed = datetime.datetime.utcnow()
         call.save(update_fields=('button_pressed',))
 
-    return HttpResponse("")
+    return render(
+        request,
+        'reminders/calls/gather_callback.xml',
+        content_type='text/xml'
+    )
 
 @csrf_exempt
 @require_POST
