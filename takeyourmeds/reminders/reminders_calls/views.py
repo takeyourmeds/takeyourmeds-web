@@ -1,12 +1,9 @@
 import datetime
 
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-from django.contrib.staticfiles.storage import staticfiles_storage
-
-from takeyourmeds.utils.url import resolve_absolute
 
 from ..tasks import trigger_instance
 
@@ -19,26 +16,9 @@ from .models import Call
 def twiml_callback(request, ident):
     call = get_object_or_404(Call, ident=ident)
 
-    audio_url = resolve_absolute(staticfiles_storage.url(
-        call.instance.reminder.audio_url
-    ))
-
-    gather_url = resolve_absolute('reminders:calls:gather-callback', call.ident)
-
-    return HttpResponse("""
-        <?xml version="1.0" encoding="UTF-8"?>
-        <Response>
-            <Play loop="1">{audio_url}</Play>
-            <Gather action="{gather_url}" timeout="120" numDigits="1">
-                <Say>
-                    Please press any number to confirm.
-                </Say>
-            </Gather>
-        </Response>
-    """.format(
-        audio_url=audio_url,
-        gather_url=gather_url,
-    ).strip())
+    return render(request, 'reminders/calls/twiml_callback.xml', {
+        'call': call,
+    }, content_type='text/xml')
 
 @csrf_exempt
 @require_POST
@@ -50,7 +30,11 @@ def gather_callback(request, ident):
         call.button_pressed = datetime.datetime.utcnow()
         call.save(update_fields=('button_pressed',))
 
-    return HttpResponse("")
+    return render(
+        request,
+        'reminders/calls/gather_callback.xml',
+        content_type='text/xml'
+    )
 
 @csrf_exempt
 @require_POST
