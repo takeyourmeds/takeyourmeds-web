@@ -31,7 +31,7 @@ def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
 
     instance = reminder.instances.create(source=source)
 
-    return repr(create_notification(instance))
+    return repr(create_and_trigger_notification(instance))
 
 @shared_task()
 def trigger_instance(instance_id):
@@ -41,9 +41,9 @@ def trigger_instance(instance_id):
 
     instance = Instance.objects.get(pk=instance_id)
 
-    return repr(create_notification(instance))
+    return repr(create_and_trigger_notification(instance))
 
-def create_notification(instance):
+def create_and_trigger_notification(instance):
     """
     Creates and trigger the appropriate notification for this instance.
     """
