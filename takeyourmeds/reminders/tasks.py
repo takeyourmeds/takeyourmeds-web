@@ -66,13 +66,13 @@ def create_and_trigger_notification(instance):
         notification.state = 10 # twilio_disabled
 
     try:
-        resource = trigger_fn(notification)
+        twilio_resource = trigger_fn(notification)
     except:
         notification.state = 20 # failed
         notification.traceback = traceback.format_exc()
         raise
     else:
-        notification.twilio_sid = resource.sid
+        notification.twilio_sid = twilio_resource.sid
     finally:
         notification.save()
 
