@@ -15,16 +15,18 @@ from .models import Call
 def twiml_callback(request, ident):
     call = get_object_or_404(Call, ident=ident)
 
-    absolute_audio_url = resolve_absolute(staticfiles_storage.url(
+    audio_url = resolve_absolute(staticfiles_storage.url(
         call.instance.reminder.audio_url
     ))
 
     return HttpResponse("""
         <?xml version="1.0" encoding="UTF-8"?>
         <Response>
-            <Play loop="1">{}</Play>
+            <Play loop="1">{audio_url}</Play>
         </Response>
-    """.format(absolute_audio_url).strip())
+    """.format(
+        audio_url=audio_url,
+    ).strip())
 
 @csrf_exempt
 @require_POST
