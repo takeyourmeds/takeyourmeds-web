@@ -14,11 +14,19 @@ from .models import Reminder, Instance, Time
 
 @shared_task()
 def schedule_reminders():
+    """
+    Called every X seconds - see ``settings.CELERYBEAT_SCHEDULE``
+    """
+
     for x in Time.objects.filter(time='%02d:00' % local_time().hour):
         trigger_reminder.delay(x.reminder_id, SourceEnum.cron.value)
 
 @shared_task()
 def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
+    """
+    Called automatically or when a ``Reminder`` is manually triggered
+    """
+
     reminder = Reminder.objects.get(pk=reminder_id)
 
     instance = reminder.instances.create(source=source)
@@ -27,13 +35,17 @@ def trigger_reminder(reminder_id, source=SourceEnum.manual.value):
 
 @shared_task()
 def trigger_instance(instance_id):
+    """
+    Called internally when retrying a ``Reminder``
+    """
+
     instance = Instance.objects.get(pk=instance_id)
 
     return repr(create_notification(instance))
 
 def create_notification(instance):
     """
-    Create and fire an appropriate notification for this instance.
+    Creates and trigger the appropriate notification for this instance.
     """
 
     plural = '%ss' % instance.reminder.get_type_enum().name
