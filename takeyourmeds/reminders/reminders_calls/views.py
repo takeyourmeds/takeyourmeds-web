@@ -26,7 +26,7 @@ def twiml_callback(request, ident):
     return HttpResponse("""
         <?xml version="1.0" encoding="UTF-8"?>
         <Response>
-            <Play loop="1">{audio_url}</Play>
+          <Play loop="1">{audio_url}</Play>
         </Response>
     """.format(
         audio_url=audio_url,
