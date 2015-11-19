@@ -12,6 +12,8 @@ from . import app_settings
 from .enums import StateEnum
 from .models import Call
 
+@csrf_exempt
+@require_POST
 def twiml_callback(request, ident):
     call = get_object_or_404(Call, ident=ident)
 
