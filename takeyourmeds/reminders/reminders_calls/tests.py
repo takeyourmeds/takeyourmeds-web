@@ -22,8 +22,9 @@ class CallTestCase(TestCase):
 
 class TwimlCallbackTest(CallTestCase):
     def assertContains(self, expected):
-        response = self.assertGET(
+        response = self.assertPOST(
             200,
+            {},
             'reminders:calls:twiml-callback',
             self.call.ident,
         )
