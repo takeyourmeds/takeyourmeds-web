@@ -23,7 +23,7 @@
       {% for call in instance.calls.all %}
       <tr>
         <td>
-          {{ call.created }}
+          {{ call.created|date:"l jS F @ h:i:s A" }}
         </td>
         <td>
           {% switch call.get_state_enum.name %}
