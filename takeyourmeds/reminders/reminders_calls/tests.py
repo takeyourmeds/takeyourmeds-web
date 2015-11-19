@@ -30,11 +30,6 @@ class TwimlCallbackTest(CallTestCase):
 
         self.assert_(expected in response.content)
 
-    def test_url(self):
-        url = self.call.get_twiml_callback_url()
-
-        self.assert_(url.startswith('http'))
-
     def test_xml(self):
         """
         Is actually an XML document.

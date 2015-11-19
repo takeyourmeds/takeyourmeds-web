@@ -14,6 +14,3 @@ class Call(AbstractNotification):
 
     def get_state_enum(self):
         return {x.value: x for x in StateEnum}[self.state]
-
-    def get_twiml_callback_url(self):
-        return resolve_absolute('reminders:calls:twiml-callback', self.ident)
