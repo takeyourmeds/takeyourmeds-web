@@ -83,6 +83,56 @@ class StatusCallbackTest(CallTestCase):
         self.assertState('dummy-unknown-value', StateEnum.unknown)
 
 class RetryTest(TestCase):
+    def set_call_completed(self, call):
+        self.assertPOST(
+            200,
+            {'CallStatus': 'completed'},
+            'reminders:calls:status-callback',
+            call.ident,
+        )
+
+    def test_retry_if_button_not_pushed(self):
+        reminder = self.user.reminders.create(
+            type=TypeEnum.call,
+            audio_url='/dummy.mp3',
+        )
+
+        instance = reminder.instances.create(
+            source=SourceEnum.manual,
+        )
+
+        # We need to initiate the first call manually
+        call = instance.calls.create()
+
+        # We completed the call, but we did not press any digits
+        self.assertPOST(200, {}, 'reminders:calls:gather-callback', call.ident)
+        self.set_call_completed(call)
+
+        # Wwe marked this call as answered but no button pressed
+        call.refresh_from_db()
+        self.failIf(call.button_pressed)
+        self.assertEqual(call.state, StateEnum.answered)
+
+        # This would have caused us to schedule another call
+        self.assertEqual(instance.calls.count(), 2)
+
+        # We completed this call, we we did press digits
+        self.assertPOST(
+            200,
+            {'Digits': '1'},
+            'reminders:calls:gather-callback',
+            call.ident,
+        )
+        self.set_call_completed(call)
+
+        # We did not schedule another call
+        self.assertEqual(instance.calls.count(), 2)
+
+        # We marked this call as answered and button pressed
+        call.refresh_from_db()
+        self.assert_(call.button_pressed)
+        self.assertEqual(call.state, StateEnum.answered)
+
     def test_retry_up_to_n_times(self):
         reminder = self.user.reminders.create(
             type=TypeEnum.call,
