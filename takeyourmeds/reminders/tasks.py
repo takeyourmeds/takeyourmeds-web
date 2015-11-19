@@ -5,11 +5,11 @@ import traceback
 from celery import shared_task
 
 from django.conf import settings
+from django.utils.module_loading import import_string
 
 from takeyourmeds.utils.dt import local_time
-from takeyourmeds.utils.twilio import get_twilio_client
 
-from .enums import TypeEnum, SourceEnum
+from .enums import SourceEnum
 from .models import Reminder, Instance, Time
 
 @shared_task()
@@ -36,10 +36,16 @@ def create_notification(instance):
     Create and fire an appropriate notification for this instance.
     """
 
-    notification = getattr(
-        instance,
-        '%ss' % instance.reminder.get_type_enum().name,
-    ).create()
+    plural = '%ss' % instance.reminder.get_type_enum().name
+
+    # Dynamically create a concrete AbstractNotification based on the type of
+    # this Reminder
+    notification = getattr(instance, plural).create()
+
+    # Import trigger method for this notification type
+    trigger_fn = import_string(
+        'takeyourmeds.reminders.reminders_%s.utils.trigger' % plural,
+    )
 
     # We won't get a callback from Twilio if Twilio is disabled, so let's set a
     # special state to not have confusing "in progress" messages outside of a
@@ -48,7 +54,7 @@ def create_notification(instance):
         notification.state = 10 # twilio_disabled
 
     try:
-        resource = notify(notification)
+        resource = trigger_fn(notification)
     except:
         notification.state = 20 # failed
         notification.traceback = traceback.format_exc()
@@ -59,28 +65,3 @@ def create_notification(instance):
         notification.save()
 
     return notification
-
-def notify(notification):
-    """
-    Actually perform the notification.
-    """
-
-    reminder = notification.instance.reminder
-
-    if reminder.type == TypeEnum.message:
-        return get_twilio_client().messages.create(
-            to=reminder.get_phone_number(),
-            body=reminder.message,
-            from_=settings.TWILIO_MESSAGE_FROM,
-            status_callback=notification.get_status_callback_url(),
-        )
-
-    if reminder.type == TypeEnum.call:
-        return get_twilio_client().calls.create(
-            to=reminder.get_phone_number(),
-            from_=settings.TWILIO_CALL_FROM,
-            url=notification.get_twiml_callback_url(),
-            status_callback=notification.get_status_callback_url(),
-        )
-
-    raise NotImplementedError("Unhandled reminder type")
