@@ -1,10 +1,7 @@
 import urlparse
 
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.shortcuts import resolve_url
 
-def reverse_absolute(target, *args, **kwargs):
-    if not target.startswith('/'):
-        target = reverse(target, *args, **kwargs)
-
-    return urlparse.urljoin(settings.SITE_URL, target)
+def resolve_absolute(*args, **kwargs):
+    return urlparse.urljoin(settings.SITE_URL, resolve_url(*args, **kwargs))

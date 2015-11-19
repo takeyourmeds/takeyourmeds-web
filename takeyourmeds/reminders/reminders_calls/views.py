@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.contrib.staticfiles.storage import staticfiles_storage
 
-from takeyourmeds.utils.url import reverse_absolute
+from takeyourmeds.utils.url import resolve_absolute
 
 from ..tasks import trigger_instance
 
@@ -15,7 +15,7 @@ from .models import Call
 def twiml_callback(request, ident):
     call = get_object_or_404(Call, ident=ident)
 
-    absolute_audio_url = reverse_absolute(
+    absolute_audio_url = resolve_absolute(
         staticfiles_storage.url(call.instance.reminder.audio_url),
     )
 

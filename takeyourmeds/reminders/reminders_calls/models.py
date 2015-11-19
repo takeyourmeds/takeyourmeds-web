@@ -1,6 +1,6 @@
 from django.db import models
 
-from takeyourmeds.utils.url import reverse_absolute
+from takeyourmeds.utils.url import resolve_absolute
 
 from ..models import AbstractNotification
 
@@ -16,6 +16,4 @@ class Call(AbstractNotification):
         return {x.value: x for x in StateEnum}[self.state]
 
     def get_twiml_callback_url(self):
-        return reverse_absolute(
-            'reminders:calls:twiml-callback', args=(self.ident,)
-        )
+        return resolve_absolute('reminders:calls:twiml-callback', self.ident)
