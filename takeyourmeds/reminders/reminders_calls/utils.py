@@ -12,6 +12,7 @@ def trigger(call):
         url=resolve_absolute(
             'reminders:calls:twiml-callback', call.ident,
         ),
+        if_machine='Hangup',
         status_callback=resolve_absolute(
             'reminders:calls:status-callback', call.ident,
         ),
