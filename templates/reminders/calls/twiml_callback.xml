@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Play loop="1">{{ audio_url }}</Play>
+    <Gather action="{{ gather_url }}}" timeout="120" numDigits="1">
+        <Say>
+            Please press any number to confirm.
+        </Say>
+    </Gather>
+</Response>
