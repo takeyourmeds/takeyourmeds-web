@@ -10,5 +10,7 @@ def trigger(message):
         to=reminder.get_phone_number(),
         body=reminder.message,
         from_=settings.TWILIO_MESSAGE_FROM,
-        status_callback=resolve_absolute(message),
+        status_callback=resolve_absolute(
+            'reminders:messages:status-callback', message.ident,
+        ),
     )

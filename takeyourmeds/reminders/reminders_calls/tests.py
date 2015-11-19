@@ -55,7 +55,12 @@ class TwimlCallbackTest(CallTestCase):
 
 class StatusCallbackTest(CallTestCase):
     def assertState(self, val, expected):
-        self.assertPOST(200, {'CallStatus': val}, self.call)
+        self.assertPOST(
+            200,
+            {'CallStatus': val},
+            'reminders:calls:status-callback',
+            self.call.ident,
+        )
         self.call.refresh_from_db()
         self.assertEqual(self.call.state, expected)
 
@@ -98,7 +103,12 @@ class RetryTest(TestCase):
         for x in range(1, app_settings.RETRY_COUNT):
             # Mark call as busy
             call = instance.calls.latest()
-            self.assertPOST(200, {'CallStatus': 'busy'}, call)
+            self.assertPOST(
+                200,
+                {'CallStatus': 'busy'},
+                'reminders:calls:status-callback',
+                call.ident,
+            )
 
             # This would have caused us to schedule another call automatically
             self.assertEqual(instance.calls.count(), x + 1)
@@ -112,7 +122,12 @@ class RetryTest(TestCase):
 
         # Mark this call as busy..
         call = instance.calls.latest()
-        self.assertPOST(200, {'CallStatus': 'busy'}, call)
+        self.assertPOST(
+            200,
+            {'CallStatus': 'busy'},
+            'reminders:calls:status-callback',
+            call.ident,
+        )
 
         # .. but check this didn't schedule another
         self.assertEqual(instance.calls.count(), app_settings.RETRY_COUNT)

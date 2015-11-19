@@ -151,10 +151,5 @@ class AbstractNotification(models.Model):
             self.get_state_enum().name,
         )
 
-    @models.permalink
-    def get_absolute_url(self):
-        return 'reminders:%ss:status-callback' % self._meta.model_name, \
-            (self.ident,)
-
     def get_state_enum(self):
         raise NotImplementedError()
