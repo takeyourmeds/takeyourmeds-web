@@ -23,14 +23,34 @@ def twiml_callback(request, ident):
         call.instance.reminder.audio_url
     ))
 
+    gather_url = resolve_absolute('reminders:calls:gather-callback', call.ident)
+
     return HttpResponse("""
         <?xml version="1.0" encoding="UTF-8"?>
         <Response>
-          <Play loop="1">{audio_url}</Play>
+            <Play loop="1">{audio_url}</Play>
+            <Gather action="{gather_url}" timeout="120" numDigits="1">
+                <Say>
+                    Please press any number to confirm.
+                </Say>
+            </Gather>
         </Response>
     """.format(
         audio_url=audio_url,
+        gather_url=gather_url,
     ).strip())
+
+@csrf_exempt
+@require_POST
+def gather_callback(request, ident):
+    call = get_object_or_404(Call, ident=ident)
+
+    # Mark if the user actually pressed a button
+    if request.POST.get('Digits'):
+        call.button_pressed = datetime.datetime.utcnow()
+        call.save(update_fields=('button_pressed',))
+
+    return HttpResponse("")
 
 @csrf_exempt
 @require_POST
@@ -78,11 +98,8 @@ def status_callback(request, ident):
 
     call.save(update_fields=('state', 'state_updated'))
 
-    if call.state in (
-        StateEnum.failed,
-        StateEnum.busy,
-        StateEnum.no_answer,
-    ) and call.instance.calls.count() < app_settings.RETRY_COUNT:
+    if not call.button_pressed \
+            and call.instance.calls.count() < app_settings.RETRY_COUNT:
         trigger_instance.delay(call.instance_id)
 
     return HttpResponse('')
