@@ -1,9 +1,7 @@
 import datetime
-import urlparse
 import functools
 
 from django.db import models
-from django.conf import settings
 from django.utils.crypto import get_random_string
 
 from .enums import TypeEnum,SourceEnum
@@ -157,9 +155,6 @@ class AbstractNotification(models.Model):
     def get_absolute_url(self):
         return 'reminders:%ss:status-callback' % self._meta.model_name, \
             (self.ident,)
-
-    def get_status_callback_url(self):
-        return urlparse.urljoin(settings.SITE_URL, self.get_absolute_url())
 
     def get_state_enum(self):
         raise NotImplementedError()

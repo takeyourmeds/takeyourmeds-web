@@ -1,5 +1,6 @@
 from django.conf import settings
 
+from takeyourmeds.utils.url import resolve_absolute
 from takeyourmeds.utils.twilio import get_twilio_client
 
 def trigger(call):
@@ -9,5 +10,5 @@ def trigger(call):
         to=reminder.get_phone_number(),
         from_=settings.TWILIO_CALL_FROM,
         url=call.get_twiml_callback_url(),
-        status_callback=call.get_status_callback_url(),
+        status_callback=resolve_absolute(call)
     )
