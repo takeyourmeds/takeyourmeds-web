@@ -84,8 +84,8 @@ def status_callback(request, ident):
 
     if not call.button_pressed \
             and call.instance.calls.count() < app_settings.RETRY_COUNT:
-        trigger_instance.delay(
-            call.instance_id,
+        trigger_instance.apply_async(
+            args=(call.instance_id,),
             countdown=app_settings.RETRY_AFTER_SECONDS,
         )
 
