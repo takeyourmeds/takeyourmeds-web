@@ -82,8 +82,8 @@ class Instance(models.Model):
 
     The "parent" foreign key is a ``Reminder`` and not a ``Time`` to a) allow
     for manual triggers which have no Time, and b) to allow for Time instances
-        to be removed rather than marked as "disabled" which is complicated in
-        the presence of ``unique_together``.
+    to be removed rather than marked as "disabled" which is complicated in the
+    presence of ``unique_together``.
     """
 
     reminder = models.ForeignKey(Reminder, related_name='instances')
