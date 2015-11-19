@@ -15,9 +15,9 @@ from .models import Call
 def twiml_callback(request, ident):
     call = get_object_or_404(Call, ident=ident)
 
-    absolute_audio_url = resolve_absolute(
-        staticfiles_storage.url(call.instance.reminder.audio_url),
-    )
+    absolute_audio_url = resolve_absolute(staticfiles_storage.url(
+        call.instance.reminder.audio_url
+    ))
 
     return HttpResponse("""
         <?xml version="1.0" encoding="UTF-8"?>
