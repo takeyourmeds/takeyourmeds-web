@@ -109,21 +109,21 @@ class RetryTest(TestCase):
             # This would have caused us to schedule another call automatically
             self.assertEqual(instance.calls.count(), x + 1)
 
-            # Check that we didn't create a new Instance
+            # We didn't create a new Instance
             self.assertEqual(reminder.instances.count(), 1)
 
-            # Check we marked this call as busy
+            # We marked this call as busy
             call.refresh_from_db()
             self.assertEqual(call.state, StateEnum.answered)
 
-        # Mark this call as busy..
+        # Mark this last call as completed..
         call = instance.calls.latest()
         self.assertPOST(
             200,
-            {'CallStatus': 'busy'},
+            {'CallStatus': 'completed'},
             'reminders:calls:status-callback',
             call.ident,
         )
 
-        # .. but check this didn't schedule another
+        # We didn't schedule another call
         self.assertEqual(instance.calls.count(), app_settings.RETRY_COUNT)
