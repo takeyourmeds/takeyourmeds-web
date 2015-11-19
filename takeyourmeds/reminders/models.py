@@ -45,7 +45,7 @@ class Reminder(models.Model):
         """
         We store whatever number the user provided but massage it later.
         """
-        return '+44%s' % self.phone_number if \
+        return '+44%s' % self.phone_number[1:] if \
             self.phone_number.startswith('0') else self.phone_number
 
 class Time(models.Model):
