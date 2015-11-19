@@ -136,6 +136,9 @@ class AbstractNotification(models.Model):
 
     traceback = models.TextField()
 
+    state = None # See concrete implementations
+    state_updated = models.DateTimeField(default=datetime.datetime.utcnow)
+
     created = models.DateTimeField(default=datetime.datetime.utcnow)
 
     class Meta:
