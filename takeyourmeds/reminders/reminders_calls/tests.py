@@ -92,12 +92,10 @@ class RetryTest(TestCase):
         )
 
     def test_retry_if_button_not_pushed(self):
-        reminder = self.user.reminders.create(
+        instance = self.user.reminders.create(
             type=TypeEnum.call,
             audio_url='/dummy.mp3',
-        )
-
-        instance = reminder.instances.create(
+        ).instances.create(
             source=SourceEnum.manual,
         )
 
@@ -108,7 +106,7 @@ class RetryTest(TestCase):
         self.assertPOST(200, {}, 'reminders:calls:gather-callback', call.ident)
         self.set_call_completed(call)
 
-        # Wwe marked this call as answered but no button pressed
+        # We marked this call as answered but no button pressed
         call.refresh_from_db()
         self.failIf(call.button_pressed)
         self.assertEqual(call.state, StateEnum.answered)
