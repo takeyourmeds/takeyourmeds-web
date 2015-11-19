@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-    <Play loop="1">{{ audio_url }}</Play>
+    <Play loop="1">{{ settings.SITE_URL }}{% static call.instance.reminder.audio_url %}</Play>
     <Gather action="{{ gather_url }}}" timeout="120" numDigits="1">
         <Say>
             Please press any number to confirm.
