@@ -30,7 +30,7 @@
     src=role.py
     dest={{ build_dir }}/{{ package_name }}/takeyourmeds/settings/role.py
 
-- name: Set secret settings
+- name: Set custom/secret settings
   template:
     src=custom.py
     dest={{ build_dir }}/{{ package_name }}/takeyourmeds/settings/custom.py

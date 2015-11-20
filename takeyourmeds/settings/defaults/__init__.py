@@ -88,7 +88,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'media'),)
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 MEDIA_URL = '/storage/'
-MEDIA_ROOT = '/srv/storage.takeyourmeds.co.uk'
+MEDIA_ROOT = 'overriden-in-production'
 DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 BROKER_URL = 'redis://localhost:6379/0'
