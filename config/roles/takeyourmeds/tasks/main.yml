@@ -82,7 +82,9 @@
   sudo: yes
   sudo_user: www-data
   shell:
-    "{{ base_dir }}/bin/manage.py migrate --verbosity=2 --noinput"
+    "{{ base_dir }}/bin/manage.py migrate --verbosity=2 --noinput 2>&1"
+  register: out
+- debug: var=out.stdout_lines
 
 - name: collectstatic
   command:
