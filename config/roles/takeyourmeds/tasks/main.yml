@@ -42,10 +42,12 @@
     chdir: "{{ build_dir }}/{{ package_name }}"
 
 - name: Build package
-  command:
-    dpkg-buildpackage -uc -us -b
+  shell:
+    dpkg-buildpackage -uc -us -b 2>&1
   args:
     chdir: "{{ build_dir }}/{{ package_name }}"
+  register: out
+- debug: var=out.stdout_lines
 
 - name: Stop services to avoid race conditions
   action: service
@@ -79,7 +81,7 @@
 - name: Run migrations
   sudo: yes
   sudo_user: www-data
-  command:
+  shell:
     "{{ base_dir }}/bin/manage.py migrate --verbosity=2 --noinput"
 
 - name: collectstatic
