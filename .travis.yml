@@ -6,6 +6,4 @@ install:
 
 script:
   - "python setup.py test"
-
-after_script:
   - config/deploy
