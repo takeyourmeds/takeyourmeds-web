@@ -5,5 +5,5 @@ install:
   - pip install -r requirements.txt ansible
 
 script:
-  - "python setup.py test"
+  - python setup.py test
   - config/deploy
