@@ -60,6 +60,14 @@
     - takeyourmeds-gunicorn
   ignore_errors: yes # Permit initial installation
 
+- name: Create storage directory
+  file:
+    state=directory
+    path={{ storage_dir }}
+    mode=0755
+    owner=www-data
+    group=www-data
+
 - name: Install package
   shell:
     dpkg -i {{ build_dir }}/{{ package_name }}_*.deb
