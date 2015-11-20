@@ -43,9 +43,10 @@
 
 - name: Build package
   command:
-    dpkg-buildpackage -uc -us -b
+    dpkg-buildpackage -uc -us -b 2>&1
   args:
     chdir: "{{ build_dir }}/{{ package_name }}"
+- debug: var=out.stdout_lines
 
 - name: Stop services to avoid race conditions
   action: service
@@ -80,7 +81,8 @@
   sudo: yes
   sudo_user: www-data
   command:
-    "{{ base_dir }}/bin/manage.py migrate --verbosity=2 --noinput"
+    "{{ base_dir }}/bin/manage.py migrate --verbosity=2 --noinput 2>&1"
+- debug: var=out.stdout_lines
 
 - name: collectstatic
   command:
