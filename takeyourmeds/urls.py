@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.conf.urls import include, url
 
 urlpatterns = (
@@ -14,3 +15,10 @@ urlpatterns = (
     url(r'', include('takeyourmeds.static.urls',
         namespace='static')),
 )
+
+if settings.DEBUG:
+    urlpatterns += (
+        url(r'^storage/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT,
+        }),
+    )
