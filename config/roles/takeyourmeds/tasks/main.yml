@@ -34,6 +34,7 @@
   template:
     src=custom.py
     dest={{ build_dir }}/{{ package_name }}/takeyourmeds/settings/custom.py
+  no_log: true
 
 - name: Install the specific packages required to build our Debian packages
   command:
