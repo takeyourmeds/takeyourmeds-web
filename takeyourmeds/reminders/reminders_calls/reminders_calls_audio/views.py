@@ -1,35 +1,45 @@
-import datetime
+import urllib
 
-from django.http import HttpResponse
+from django.http import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, render
+from django.core.files import File
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
-from ..tasks import trigger_instance
-
-from .models import Request
+from .models import RecordRequest
 
 @csrf_exempt
 @require_POST
 def twiml_callback(request, ident):
-    call = get_object_or_404(Call, ident=ident)
+    record_request = get_object_or_404(RecordRequest, ident=ident)
 
-    return render(request, 'reminders/calls/twiml_callback.xml', {
-        'call': call,
+    return render(request, 'reminders/calls/audio/twiml_callback.xml', {
+        'record_request': record_request,
     }, content_type='text/xml')
 
 @csrf_exempt
 @require_POST
 def record_callback(request, ident):
-    call = get_object_or_404(Call, ident=ident)
+    record_request = get_object_or_404(RecordRequest, ident=ident)
 
-    # Mark if the user actually pressed a button
-    if request.POST.get('Digits'):
-        call.button_pressed = datetime.datetime.utcnow()
-        call.save(update_fields=('button_pressed',))
+    recording_url = request.POST.get('RecordingUrl', '')
+
+    if not recording_url:
+        return HttpResponseBadRequest("Could not parse RecordingUrl in output")
+
+    # "A request to the RecordingUrl will return a recording in binary WAV
+    # audio format by default. To request the recording in MP3 format, append
+    # ".mp3" to the RecordingUrl."
+    filename, _ = urllib.urlretrieve('%s.mp3' % recording_url)
+
+    with open(filename) as f:
+        recording = record_request.user.recordings.create(
+            record_request=record_request,
+        )
+        recording.recording.save(File(f))
 
     return render(
         request,
-        'reminders/calls/gather_callback.xml',
+        'reminders/calls/audio/record_callback.xml',
         content_type='text/xml'
     )
