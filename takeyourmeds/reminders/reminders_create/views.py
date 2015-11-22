@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
 from django.views.decorators.http import require_POST
 
-from takeyourmeds.utils.ajax import ajax
+from takeyourmeds.utils.ajax import ajax, get_form_errors
 
 from .forms import CreateRecordRequestForm
 
@@ -12,9 +12,7 @@ def xhr_record_request_create(request):
     form = CreateRecordRequestForm(request.POST)
 
     if not form.is_valid():
-        return {'errors': {
-            x: y.get_json_data() for x, y in form.errors.items()
-        }}
+        return {'errors': get_form_errors(form)}
 
     record_request = form.save(request.user)
 

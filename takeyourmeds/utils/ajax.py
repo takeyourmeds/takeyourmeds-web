@@ -3,6 +3,9 @@ import functools
 
 from django.http import HttpResponse, HttpResponseBadRequest
 
+def get_form_errors(form):
+    return json.loads(form.errors.as_json())
+
 class ajax(object):
     def __init__(self, required=True, login_required=False):
         self.required = required
