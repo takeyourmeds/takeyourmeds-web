@@ -1,10 +1,33 @@
-from django.shortcuts import get_object_or_404
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect, render
 from django.core.urlresolvers import reverse
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 
 from takeyourmeds.utils.ajax import ajax, get_form_errors
 
-from .forms import CreateRecordRequestForm
+from .forms import CreateForm, CreateRecordRequestForm
+
+@login_required
+def view(request):
+    if request.method == 'POST':
+        form = CreateForm(request.POST)
+
+        if form.is_valid():
+            form.save(request.user)
+
+            messages.success(
+                request,
+                "Your reminder has been created.",
+            )
+
+            return redirect('dashboard:view')
+    else:
+        form = CreateForm()
+
+    return render(request, 'reminders/create/view.html', {
+        'form': form,
+    })
 
 @require_POST
 @ajax(login_required=True)
