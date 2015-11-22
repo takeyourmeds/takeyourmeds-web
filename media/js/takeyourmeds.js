@@ -56,3 +56,17 @@ $.feature('f_reminders_create', function() {
   // Pageload
   update();
 });
+
+$.feature('f_reminders_create', function() {
+  $('select[name=audio_url]').on('change', function() {
+    var val = $('select[name=audio_url]').val();
+    console.log(val);
+
+    if (val !== '') {
+      return;
+    }
+
+    console.log("hello");
+  });
+
+});

@@ -168,11 +168,25 @@
         {% if form.audio_url.value == x %}selected{% endif %}
       >{{ y }}</option>
       {% endfor %}
+      <option value="">Record my own message</option>
     </select>
 
     {% for x in form.errors.audio_url %}
       <p class="help-block">{{ x }}</p>
     {% endfor %}
+  </div>
+
+  <div class="form-group hide">
+    <label for="record_request_phone_number">
+      Phone number:
+    </label>
+
+    <input
+      id="record_request_phone_number"
+      class="form-control"
+      value=""
+      placeholder="Enter a UK telephone number (eg. 07123456789)"
+    >
   </div>
 
   <div class="divide30"></div>
