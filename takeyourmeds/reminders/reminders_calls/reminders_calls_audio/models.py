@@ -11,7 +11,7 @@ class RecordRequest(models.Model):
 
     user = models.ForeignKey(
         'auth.User',
-        related_name='audio_recording_request',
+        related_name='audio_recording_requests',
     )
 
     phone_number = models.CharField(max_length=200)
