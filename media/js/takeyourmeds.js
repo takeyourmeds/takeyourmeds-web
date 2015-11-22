@@ -58,15 +58,36 @@ $.feature('f_reminders_create', function() {
 });
 
 $.feature('f_reminders_create', function() {
-  $('select[name=audio_url]').on('change', function() {
+  var update = function() {
     var val = $('select[name=audio_url]').val();
-    console.log(val);
 
-    if (val !== '') {
-      return;
-    }
+    $('.js-record-request')
+      .toggleClass('hide', val !== '')
+      .find('button')
+        .button('reset')
+      .end()
+      ;
+  };
 
-    console.log("hello");
+  $('select[name=audio_url]').on('change', update);
+
+  // Pageload
+  update();
+
+  $('.js-record-request button').on('click', function () {
+    var button = $(this);
+
+    button.button('loading');
+
+    $.post($(this).data('url'), function (data) {
+      switch (data.success) {
+      case 'status':
+        break;
+      case 'error':
+        break;
+      }
+    }).always(function() {
+      //button.button('reset');
+    });
   });
-
 });

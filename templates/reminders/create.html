@@ -176,17 +176,27 @@
     {% endfor %}
   </div>
 
-  <div class="form-group hide">
-    <label for="record_request_phone_number">
-      Phone number:
+  <div class="form-group hide js-record-request">
+    <label class="control-label col-sm-4">
+      Enter your phone number:
     </label>
 
-    <input
-      id="record_request_phone_number"
-      class="form-control"
-      value=""
-      placeholder="Enter a UK telephone number (eg. 07123456789)"
-    >
+    <div class="col-sm-8">
+      <input
+        class="form-control"
+        value=""
+        placeholder="Enter a UK telephone number (eg. 07123456789)"
+      >
+      <br>
+      <button
+        type="button"
+        class="btn btn-theme-fg"
+        data-url="FIXME"
+        data-loading-text="Calling &hellip;"
+      >
+        Call me
+      </button>
+    </div>
   </div>
 
   <div class="divide30"></div>
