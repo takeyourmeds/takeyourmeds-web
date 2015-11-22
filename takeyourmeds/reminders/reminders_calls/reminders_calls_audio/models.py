@@ -41,8 +41,9 @@ class RecordRequest(models.Model):
         get_latest_by = 'created'
 
     def __unicode__(self):
-        return u"pk=%d: user=%r: phone_number=%r" % (
+        return u"pk=%d user_id=%d twilio_sid=%r phone_number=%r" % (
             self.pk,
-            self.user,
+            self.user_id,
+            self.twilio_sid,
             self.phone_number,
         )
