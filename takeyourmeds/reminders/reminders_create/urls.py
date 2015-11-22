@@ -3,6 +3,8 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = (
-    url(r'^xhr/reminders/create-record-request$', views.xhr_create_record_request,
-        name='xhr-create-record-request'),
+    url(r'^xhr/reminders/create/create-record-request$', views.xhr_record_request_create,
+        name='xhr-record-request-create'),
+    url(r'^xhr/reminders/create/poll-record-request$', views.xhr_record_request_poll,
+        name='xhr-record-request-poll'),
 )

@@ -1,13 +1,38 @@
-from django.contrib import messages
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
+from django.core.urlresolvers import reverse
+from django.views.decorators.http import require_POST
 
-from reminders.utils.ajax import ajax
+from takeyourmeds.utils.ajax import ajax
 
+from .forms import CreateRecordRequestForm
+
+@require_POST
 @ajax(login_required=True)
-def xhr_create_record_request(request):
-    record_request = 
+def xhr_record_request_create(request):
+    form = CreateRecordRequestForm(request.POST)
 
-    return render(request, 'reminders/create/view.html', {
-        'record_
-    })
+    if not form.is_valid():
+        return form.errors
+
+    record_request = form.save(request.user)
+
+    url = reverse(
+        'reminders:create:xhr-record-request-poll',
+        args=(record_request.ident,),
+    )
+
+    return {'status': 'success', 'url': url}
+
+@require_POST
+@ajax(login_required=True)
+def xhr_record_request_poll(request, ident):
+    record_request = get_object_or_404(
+        request.user.audio_recording_requests,
+        ident=ident,
+    )
+
+    # FIXME
+    if record_request:
+        pass
+
+    return {'status': 'continue'}
