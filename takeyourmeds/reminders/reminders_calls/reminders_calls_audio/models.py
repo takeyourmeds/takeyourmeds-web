@@ -10,7 +10,7 @@ class RecordRequest(models.Model):
     """
 
     user = models.ForeignKey(
-        'auth.User',
+        'account.User',
         related_name='audio_recording_requests',
     )
 
