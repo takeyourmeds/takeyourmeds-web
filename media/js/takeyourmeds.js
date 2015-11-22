@@ -69,6 +69,9 @@ $.feature('f_reminders_create', function() {
       .find('button')
         .button('reset')
       .end()
+      .find('.help-block')
+        .remove()
+      .end()
       ;
   };
 
@@ -82,15 +85,32 @@ $.feature('f_reminders_create', function() {
 
     button.button('loading');
 
+    wrapper
+      .find('.help-block')
+        .remove()
+      .end()
+      ;
+
+    wrapper.removeClass('has-error');
+
     $.post($(this).data('url'), function (data) {
-      console.log(data);
       if (data.errors) {
-        wrapper.addClass('has-error')
+        wrapper.addClass('has-error');
+
+        $.each(data.errors, function (idx, errors) {
+          $.each(errors, function (idx, error) {
+            $('<p class="help-block"></p>')
+              .text(error.message)
+              .insertBefore(button)
+              ;
+          });
+        });
+
         return;
       }
+
     }).always(function() {
       button.button('reset');
-      wrapper.removeClass('has-error')
     });
   });
 });
