@@ -58,11 +58,14 @@ $.feature('f_reminders_create', function() {
 });
 
 $.feature('f_reminders_create', function() {
+  var wrapper = $('.js-record-request');
+
   var update = function() {
     var val = $('select[name=audio_url]').val();
 
-    $('.js-record-request')
+    wrapper
       .toggleClass('hide', val !== '')
+      .removeClass('has-error')
       .find('button')
         .button('reset')
       .end()
@@ -74,20 +77,20 @@ $.feature('f_reminders_create', function() {
   // Pageload
   update();
 
-  $('.js-record-request button').on('click', function () {
+  wrapper.find('button').on('click', function () {
     var button = $(this);
 
     button.button('loading');
 
     $.post($(this).data('url'), function (data) {
-      switch (data.success) {
-      case 'status':
-        break;
-      case 'error':
-        break;
+      console.log(data);
+      if (data.errors) {
+        wrapper.addClass('has-error')
+        return;
       }
     }).always(function() {
-      //button.button('reset');
+      button.button('reset');
+      wrapper.removeClass('has-error')
     });
   });
 });
