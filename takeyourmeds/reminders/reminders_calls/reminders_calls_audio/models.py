@@ -4,6 +4,8 @@ import functools
 from django.db import models
 from django.utils.crypto import get_random_string
 
+from .managers import RecordRequestManager
+
 class RecordRequest(models.Model):
     """
     Manages a request to create a custom audio message.
@@ -31,6 +33,8 @@ class RecordRequest(models.Model):
     )
 
     created = models.DateTimeField(default=datetime.datetime.utcnow)
+
+    objects = RecordRequestManager()
 
     class Meta:
         ordering = ('-created',)
