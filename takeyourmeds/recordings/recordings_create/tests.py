@@ -23,8 +23,12 @@ class CreateTest(TestCase):
         self.assertCreate({'phone_number': '07751234567'}, 'success')
 
     def test_poll(self):
-        response = self.assertCreate({'phone_number': '07751234567'}, 'success')
+        url = self.assertCreate(
+            {'phone_number': '07751234567'},
+            'success',
+        ).json()['url']
 
-        url = response.json()['url']
 
-        self.assertPOST(200, {}, url, login=True)
+        response = self.assertPOST(200, {}, url, login=True)
+
+        self.assertEqual(response.json()['status'], 'success')
