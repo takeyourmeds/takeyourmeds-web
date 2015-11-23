@@ -13,6 +13,7 @@ class Reminder(models.Model):
 
     message = models.CharField(max_length=100, blank=True)
     audio_url = models.CharField(max_length=100, blank=True)
+    recording = models.ForeignKey('recordings.Recording', null=True, blank=True)
 
     phone_number = models.CharField(max_length=200)
 
