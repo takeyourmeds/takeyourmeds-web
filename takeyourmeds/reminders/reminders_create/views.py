@@ -7,10 +7,10 @@ from .forms import CreateForm
 @login_required
 def view(request):
     if request.method == 'POST':
-        form = CreateForm(request.POST)
+        form = CreateForm(request.user, request.POST)
 
         if form.is_valid():
-            form.save(request.user)
+            form.save()
 
             messages.success(
                 request,
@@ -19,7 +19,7 @@ def view(request):
 
             return redirect('dashboard:view')
     else:
-        form = CreateForm()
+        form = CreateForm(request.user)
 
     return render(request, 'reminders/create/view.html', {
         'form': form,

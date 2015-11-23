@@ -31,7 +31,9 @@ class CreateForm(forms.ModelForm):
             'phone_number',
         )
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+
         super(CreateForm, self).__init__(*args, **kwargs)
 
         # Dynamically generate enough time selector fields
@@ -46,9 +48,9 @@ class CreateForm(forms.ModelForm):
 
         self.initial['message_type'] = self.fields['message_type'].choices[0][0]
 
-    def save(self, user):
+    def save(self):
         instance = super(CreateForm, self).save(commit=False)
-        instance.user = user
+        instance.user = self.user
         instance.type = TypeEnum.message if \
             self.cleaned_data['message_type'] == 'text' else TypeEnum.call
         instance.save()
