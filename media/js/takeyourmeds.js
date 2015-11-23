@@ -94,6 +94,7 @@ $.feature('f_reminders_create', function() {
     wrapper.removeClass('has-error');
 
     $.post($(this).data('url'), function (data) {
+      // Display validatoin errors
       if (data.errors) {
         wrapper.addClass('has-error');
 
