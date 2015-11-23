@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.shortcuts import resolve_url
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 
@@ -13,12 +14,7 @@ class TestCase(TestCase):
             user = kwargs.pop('user', self.user)
             self.client.login(email=user.email, password='password')
 
-        if hasattr(urlconf, 'get_absolute_url'):
-            url = urlconf.get_absolute_url()
-        else:
-            url = reverse(urlconf, args=args, kwargs=kwargs)
-
-        response = fn(url)
+        response = fn(resolve_url(urlconf, *args, **kwargs))
 
         self.assertEqual(
             response.status_code,
