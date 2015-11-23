@@ -21,7 +21,7 @@ def xhr_create(request):
     if not form.is_valid():
         return {
             'status': 'error',
-            'errors': [' '.join(y) for _, y in form.errors.items()],
+            'errors': [form.errors.values()],
         }
 
     record_request = form.save(request.user)
