@@ -114,6 +114,7 @@ $.feature('f_reminders_create', function() {
           });
         });
 
+        button.button('reset');
         return;
       }
 
@@ -132,7 +133,7 @@ $.feature('f_reminders_create', function() {
             timeout: 2000
         });
       })();
-    }).always(function() {
+    }).fail(function() {
       button.button('reset');
     });
   });
