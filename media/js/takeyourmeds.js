@@ -123,7 +123,6 @@ $.feature('f_reminders_create', function() {
           });
         })();
         break;
-
       case 'error':
         wrapper.addClass('has-error');
 
