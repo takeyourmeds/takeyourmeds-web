@@ -71,10 +71,9 @@ def record_callback(request, ident):
     filename, _ = urllib.urlretrieve('%s.mp3' % recording_url)
 
     with open(filename) as f:
-        recording = create_request.user.recordings.create(
-            create_request=create_request,
-        )
-        recording.recording.save(File(f))
+        recording = create_request.user.recordings.create()
+        recording.audio_file.save('%s.mp3' % ident, File(f))
+        recording.save()
 
     return render(
         request,
