@@ -28,7 +28,7 @@ class CreateTest(TestCase):
             'success',
         ).json()['url']
 
-
-        response = self.assertPOST(200, {}, url, login=True)
-
-        self.assertEqual(response.json()['status'], 'success')
+        self.assertEqual(self.assertPOST(200, {}, url, login=True).json(), {
+            'status': 'success',
+            'recording_id': self.user.recordings.get().pk,
+        })
