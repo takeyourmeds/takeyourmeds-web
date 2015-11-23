@@ -4,8 +4,7 @@ import functools
 from django.http import HttpResponse, HttpResponseBadRequest
 
 class ajax(object):
-    def __init__(self, required=True, login_required=False):
-        self.required = required
+    def __init__(self, login_required=False):
         self.login_required = login_required
 
     def __call__(self, fn):
