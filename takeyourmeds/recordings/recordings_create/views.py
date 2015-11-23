@@ -61,7 +61,7 @@ def xhr_poll(request, ident):
 def twiml_callback(request, ident):
     create_request = get_object_or_404(CreateRequest, ident=ident)
 
-    return render(request, 'reminders/calls/audio/twiml_callback.xml', {
+    return render(request, 'recordings/create/twiml_callback.xml', {
         'create_request': create_request,
     }, content_type='text/xml')
 
@@ -78,7 +78,9 @@ def record_callback(request, ident):
     # "A request to the RecordingUrl will return a recording in binary WAV
     # audio format by default. To request the recording in MP3 format, append
     # ".mp3" to the RecordingUrl."
-    filename, _ = urllib.urlretrieve('%s.mp3' % recordiggjjjjjng_url)
+    filename = '/dev/null'
+    if settings.TWILIO_ENABLED:
+        filename, _ = urllib.urlretrieve('%s.mp3' % recording_url)
 
     with open(filename) as f:
         recording = create_request.user.recordings.create()
@@ -87,6 +89,6 @@ def record_callback(request, ident):
 
     return render(
         request,
-        'reminders/calls/audio/record_callback.xml',
+        'recordings/create/record_callback.xml',
         content_type='text/xml'
     )
