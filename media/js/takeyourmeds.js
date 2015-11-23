@@ -59,6 +59,7 @@ $.feature('f_reminders_create', function() {
 
 $.feature('f_reminders_create', function() {
   var modal = $('#modal-record-own-message');
+  var recording = $('input[name=recording]');
 
   var reset = function() {
     modal.find('.js-call').button('reset');
@@ -67,11 +68,13 @@ $.feature('f_reminders_create', function() {
     modal.find('.form-group').removeClass('has-error');
   };
 
-  $('.js-record-own-message').on('click', function (e) {
-    e.preventDefault();
-    reset();
-    modal.modal();
-    modal.find('input').val('');
+  $('select[name=audio_url]').on('change', function () {
+    recording.val('');
+
+    if ($(this).val() === '') {
+      reset();
+      modal.modal();
+    }
   });
 
   modal.find('.js-call').on('click', function () {
@@ -79,7 +82,6 @@ $.feature('f_reminders_create', function() {
     var button = $(this);
 
     reset();
-
     button.button('loading');
     modal.find('.js-cancel').hide();
 
@@ -94,16 +96,16 @@ $.feature('f_reminders_create', function() {
               type: 'POST',
               success: function(data) {
                 switch (data.status) {
+
+                // The call was completed
                 case 'success':
                   modal.modal('hide');
 
                   // Save the recording_id in the "parent" form
-                  $('.js-record-own-message')
-                    .find('input[type=hidden]')
-                      .val(data.recording_id)
-                    .end()
-                    ;
+                  recording.val(data.recording_id);
                   break;
+
+                // We need to keep polling
                 case 'continue':
                   setTimeout(poll, 1000);
                   break;

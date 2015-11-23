@@ -46,6 +46,13 @@
 >
   {% csrf_token %}
 
+  <input
+    id="{{ form.recording.id_for_label }}"
+    type="hidden"
+    name="{{ form.recording.html_name }}"
+    value="{{ form.recording.value|default:"" }}"
+  >
+
   <div class="form-group {% if form.errors.frequency %}has-error{% endif %}">
     <label for="{{ form.frequency.id_for_label }}">
       How many times a day should we send reminders?
@@ -176,29 +183,6 @@
     {% endfor %}
   </div>
 
-  <div class="form-group hide js-record-request" data-complete-text="Your custom message has been recorded.">
-    <label class="control-label col-sm-4">
-      Enter your phone number:
-    </label>
-
-    <div class="col-sm-8">
-      <input
-        class="form-control js-record-request-phone-number"
-        value=""
-        placeholder="Enter a UK telephone number (eg. 07123456789)"
-      >
-      <button
-        type="button"
-        class="btn btn-theme-fg"
-        style="margin-top: 12px;"
-        data-url="{% url "recordings:create:xhr-create" %}"
-        data-loading-text="Calling &hellip;"
-      >
-        Call me to record a message
-      </button>
-    </div>
-  </div>
-
   <div class="divide30"></div>
 
   <div class="form-group">
@@ -209,5 +193,52 @@
     </div>
   </div>
 </form>
+
+<div class="modal fade" id="modal-record-own-message" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        <h4 class="modal-title">
+          Record my own message
+        </h4>
+      </div>
+      <div class="modal-body">
+        <form
+          method="POST"
+          action="{% url "recordings:create:xhr-create" %}"
+        >
+          <div class="form-group js-form-group">
+            <label>
+              Enter your phone number:
+            </label>
+
+            <input
+              class="form-control"
+              name="phone_number"
+              value=""
+              placeholder="Enter a UK telephone number (eg. 07123456789)"
+            >
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-default js-cancel"
+          data-dismiss="modal"
+        >Cancel</button>
+        <button
+          type="button"
+          class="btn btn-theme-bg js-call"
+          data-loading-text="Calling, please wait&hellip;"
+          data-complete-text="Call me to record another message"
+        >
+          Call me
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

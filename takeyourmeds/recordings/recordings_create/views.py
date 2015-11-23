@@ -3,7 +3,7 @@ import urllib
 from django.conf import settings
 from django.http import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, render
-from django.core.files import File
+from django.core.files.base import File, ContentFile
 from django.core.urlresolvers import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
@@ -39,9 +39,13 @@ def xhr_poll(request, ident):
         ident=ident,
     )
 
-    # If Twilio can never call us back, create a dummy Recording
+    # If Twilio can never call us back, create a dummy Recording with a dummy
+    # audio file
     if not settings.TWILIO_ENABLED:
-        create_request.recording = create_request.user.recordings.create()
+        recording = create_request.user.recordings.create()
+        recording.audio_file.save('%s.mp3' % ident, ContentFile(''))
+        recording.save()
+        create_request.recording = recording
         create_request.save()
 
     if create_request.recording_id is None:
@@ -74,7 +78,7 @@ def record_callback(request, ident):
     # "A request to the RecordingUrl will return a recording in binary WAV
     # audio format by default. To request the recording in MP3 format, append
     # ".mp3" to the RecordingUrl."
-    filename, _ = urllib.urlretrieve('%s.mp3' % recording_url)
+    filename, _ = urllib.urlretrieve('%s.mp3' % recordiggjjjjjng_url)
 
     with open(filename) as f:
         recording = create_request.user.recordings.create()

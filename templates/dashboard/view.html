@@ -85,7 +85,14 @@
                 </p>
 
                 <p>
-                  <audio src="{% static reminder.audio_url %}" controls>
+                  <audio
+                    {% if reminder.recording_id %}
+                    src="{{ reminder.recording.audio_file.url }}"
+                    {% else %}
+                    src="{% static reminder.audio_url %}"
+                    {% endif %}
+                    controls
+                  >
                     Unfortunately your browser does not support the <code>audio</code> element.
                   </audio>
                 </p>

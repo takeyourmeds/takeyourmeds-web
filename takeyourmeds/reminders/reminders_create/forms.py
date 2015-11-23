@@ -27,7 +27,8 @@ class CreateForm(forms.ModelForm):
         model = Reminder
         fields = (
             'message',
-            'audio_url',
+            'audio_url', # preset
+            'recording', # custom
             'phone_number',
         )
 
@@ -35,6 +36,9 @@ class CreateForm(forms.ModelForm):
         self.user = user
 
         super(CreateForm, self).__init__(*args, **kwargs)
+
+        # Restrict to this user's recordings
+        self.fields['recording'].queryset = user.recordings.all()
 
         # Dynamically generate enough time selector fields
         self.time_fields = []
