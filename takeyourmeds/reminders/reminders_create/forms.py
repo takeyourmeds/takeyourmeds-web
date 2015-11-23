@@ -1,6 +1,6 @@
-import re
-
 from django import forms
+
+from takeyourmeds.utils.twilio import validate_phone_number
 
 from ..apps import RemindersConfig
 from ..enums import TypeEnum
@@ -12,8 +12,6 @@ HOUR_MIN, HOUR_MAX = 5, 24
 TIME_CHOICES = [(y, y) for y in [
     '%02d:00' % (x % 24) for x in range(HOUR_MIN, HOUR_MAX + 1)
 ]]
-
-re_phone_number = re.compile(r'^\d{9,14}$')
 
 class CreateForm(forms.ModelForm):
     frequency = forms.ChoiceField(
@@ -79,17 +77,7 @@ class CreateForm(forms.ModelForm):
         return self.cleaned_data
 
     def clean_phone_number(self):
-        val = self.cleaned_data['phone_number']
-
-        # Strip all whitespace
-        val = ''.join(val.split())
-
-        if re_phone_number.match(val) is None:
-            raise forms.ValidationError(
-                "This does not appear to be a valid UK phone number.",
-            )
-
-        return val
+        return validate_phone_number(self.cleaned_data['phone_number'])
 
     def get_times(self):
         num_times = int(self.cleaned_data['frequency'])

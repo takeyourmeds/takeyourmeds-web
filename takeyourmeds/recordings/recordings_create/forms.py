@@ -2,7 +2,8 @@ from django import forms
 from django.conf import settings
 
 from takeyourmeds.utils.url import resolve_absolute
-from takeyourmeds.utils.twilio import get_twilio_client, sanitise_phone_number
+from takeyourmeds.utils.twilio import get_twilio_client, sanitise_phone_number, \
+    validate_phone_number
 
 from .models import CreateRequest
 
@@ -12,6 +13,9 @@ class CreateForm(forms.ModelForm):
         fields = (
             'phone_number',
         )
+
+    def clean_phone_number(self):
+        return validate_phone_number(self.cleaned_data['phone_number'])
 
     def save(self, user):
         instance = super(CreateForm, self).save(commit=False)

@@ -1,9 +1,14 @@
 from __future__ import absolute_import
 
+import re
+
 from twilio.rest import TwilioRestClient
 
+from django import forms
 from django.conf import settings
 from django.utils.crypto import get_random_string
+
+re_phone_number = re.compile(r'^\d{9,14}$')
 
 def get_twilio_client():
     if not settings.TWILIO_ENABLED:
@@ -26,6 +31,16 @@ def get_twilio_client():
         settings.TWILIO_ACCOUNT_SID,
         settings.TWILIO_AUTH_TOKEN,
     )
+
+def validate_phone_number(val):
+    val = ''.join(val.split())
+
+    if re_phone_number.match(val) is None:
+        raise forms.ValidationError(
+            "This does not appear to be a valid UK phone number.",
+        )
+
+    return val
 
 def sanitise_phone_number(val):
     """
