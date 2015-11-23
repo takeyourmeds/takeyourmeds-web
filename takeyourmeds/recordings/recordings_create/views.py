@@ -3,9 +3,8 @@ import urllib
 from django.http import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, render
 from django.core.files import File
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
 from django.core.urlresolvers import reverse
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
 from takeyourmeds.utils.ajax import ajax
@@ -69,7 +68,7 @@ def record_callback(request, ident):
     recording_url = request.POST.get('RecordingUrl', '')
 
     if not recording_url:
-        return HttpResponseBadRequest("Could not parse RecordingUrl in output")
+        return HttpResponseBadRequest("Could not find RecordingUrl")
 
     # "A request to the RecordingUrl will return a recording in binary WAV
     # audio format by default. To request the recording in MP3 format, append
