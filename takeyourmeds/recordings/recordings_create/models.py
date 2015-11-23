@@ -4,7 +4,7 @@ import functools
 from django.db import models
 from django.utils.crypto import get_random_string
 
-class RecordRequest(models.Model):
+class CreateRequest(models.Model):
     """
     Manages a request to create a ``Recording``.
 
@@ -13,7 +13,7 @@ class RecordRequest(models.Model):
 
     user = models.ForeignKey(
         'account.User',
-        related_name='record_requests',
+        related_name='recording_create_requests',
     )
 
     recording = models.OneToOneField(
@@ -45,7 +45,7 @@ class RecordRequest(models.Model):
         get_latest_by = 'created'
 
     def __unicode__(self):
-        return u"pk=%d recording_id=%d user_id=%d phone_number=%r" % (
+        return u"pk=%d recording_id=%s user_id=%d phone_number=%r" % (
             self.pk,
             self.recording_id,
             self.user_id,

@@ -4,17 +4,20 @@ from django.conf import settings
 from takeyourmeds.utils.url import resolve_absolute
 from takeyourmeds.utils.twilio import get_twilio_client, sanitise_phone_number
 
-from .models import RecordRequest
+from .models import CreateRequest
 
 class CreateForm(forms.ModelForm):
     class Meta:
-        model = RecordRequest
+        model = CreateRequest
         fields = (
             'phone_number',
         )
 
     def save(self, user):
-        instance = super(CreateForm, self).save()
+        instance = super(CreateForm, self).save(commit=False)
+        instance.user = user
+        instance.twilio_sid = None # We populate this later
+        instance.save()
 
         resource = get_twilio_client().calls.create(
             to=sanitise_phone_number(instance.phone_number),

@@ -4,5 +4,5 @@
     Hello, this is TakeYourMeds. After the beep, please record your own
     message and then hang up.
   </Say>
-  <Record action="{{ settings.SITE_URL }}{% url "recordings:create:record-callback" record_request.ident %}"/>
+  <Record action="{{ settings.SITE_URL }}{% url "recordings:create:record-callback" create_request.ident %}"/>
 </Response>

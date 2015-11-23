@@ -10,7 +10,7 @@ from django.views.decorators.http import require_POST
 from takeyourmeds.utils.ajax import ajax
 
 from .forms import CreateForm
-from .models import RecordRequest
+from .models import CreateRequest
 
 @require_POST
 @ajax(login_required=True)
@@ -23,47 +23,42 @@ def xhr_create(request):
             'errors': [form.errors.values()],
         }
 
-    record_request = form.save(request.user)
-
-    url = reverse(
-        'reminders:create:xhr-record-request-poll',
-        args=(record_request.ident,),
-    )
+    instance = form.save(request.user)
 
     return {
         'status': 'success',
-        'url': url,
+        'url': reverse('recordings:create:xhr-poll', args=(instance.ident,)),
     }
 
 @require_POST
 @ajax(login_required=True)
 def xhr_poll(request, ident):
-    record_request = get_object_or_404(
-        request.user.audio_record_requests,
+    create_request = get_object_or_404(
+        request.user.recording_create_requests,
         ident=ident,
     )
 
-    if record_request.recording_id is None:
+    if create_request.recording_id is None:
         return {'status': 'continue'}
 
     return {
         'status': 'success',
-        'recording_id': record_request.recording_id,
+        'recording_id': create_request.recording_id,
     }
 
 @csrf_exempt
 @require_POST
 def twiml_callback(request, ident):
-    record_request = get_object_or_404(RecordRequest, ident=ident)
+    create_request = get_object_or_404(CreateRequest, ident=ident)
 
     return render(request, 'reminders/calls/audio/twiml_callback.xml', {
-        'record_request': record_request,
+        'create_request': create_request,
     }, content_type='text/xml')
 
 @csrf_exempt
 @require_POST
 def record_callback(request, ident):
-    record_request = get_object_or_404(RecordRequest, ident=ident)
+    create_request = get_object_or_404(CreateRequest, ident=ident)
 
     recording_url = request.POST.get('RecordingUrl', '')
 
@@ -76,8 +71,8 @@ def record_callback(request, ident):
     filename, _ = urllib.urlretrieve('%s.mp3' % recording_url)
 
     with open(filename) as f:
-        recording = record_request.user.recordings.create(
-            record_request=record_request,
+        recording = create_request.user.recordings.create(
+            create_request=create_request,
         )
         recording.recording.save(File(f))
 
