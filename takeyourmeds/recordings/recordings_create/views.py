@@ -1,5 +1,6 @@
 import urllib
 
+from django.conf import settings
 from django.http import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, render
 from django.core.files import File
@@ -37,6 +38,11 @@ def xhr_poll(request, ident):
         request.user.recording_create_requests,
         ident=ident,
     )
+
+    # If Twilio can never call us back, create a dummy Recording
+    if not settings.TWILIO_ENABLED:
+        create_request.recording = create_request.user.recordings.create()
+        create_request.save()
 
     if create_request.recording_id is None:
         return {'status': 'continue'}
