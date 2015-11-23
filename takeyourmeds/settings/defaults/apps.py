@@ -16,6 +16,7 @@ INSTALLED_APPS = (
     'takeyourmeds.groups.groups_admin',
     'takeyourmeds.groups.groups_billing',
     'takeyourmeds.profile',
+    'takeyourmeds.recordings',
     'takeyourmeds.registration',
     'takeyourmeds.reminders',
     'takeyourmeds.reminders.reminders_create',

@@ -9,6 +9,8 @@ urlpatterns = (
         namespace='dashboard')),
     url(r'', include('takeyourmeds.groups.urls',
         namespace='groups')),
+    url(r'', include('takeyourmeds.recordings.urls',
+        namespace='recordings')),
     url(r'', include('takeyourmeds.registration.urls',
         namespace='registration')),
     url(r'', include('takeyourmeds.reminders.urls',
