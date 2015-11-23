@@ -8,7 +8,7 @@ class Recording(models.Model):
         related_name='recordings',
     )
 
-    audio_file = models.FileField()
+    audio_file = models.FileField(upload_to='recordings')
 
     created = models.DateTimeField(default=datetime.datetime.utcnow)
 
