@@ -110,6 +110,11 @@ $.feature('f_reminders_create', function() {
               success: function(data) {
                 switch (data.status) {
                 case 'success':
+                  button.button('reset');
+                  $('<p class="help-block"></p>')
+                    .text(wrapper.data('complete-text'))
+                    .insertBefore(button)
+                    ;
                   break;
                 case 'continue':
                   setTimeout(function() {
