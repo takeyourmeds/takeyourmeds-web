@@ -117,6 +117,21 @@ $.feature('f_reminders_create', function() {
         return;
       }
 
+      (function poll() {
+        $.ajax({
+            url: data.url,
+            type: 'POST',
+            success: function(data) {
+              console.log("polling");
+              console.log("data");
+            },
+            dataType: 'son',
+            complete: setTimeout(function() {
+              poll();
+            }, 1000),
+            timeout: 2000
+        });
+      })();
     }).always(function() {
       button.button('reset');
     });
