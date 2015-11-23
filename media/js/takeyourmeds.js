@@ -93,7 +93,14 @@ $.feature('f_reminders_create', function() {
 
     wrapper.removeClass('has-error');
 
-    $.post($(this).data('url'), function (data) {
+    var phone_number = wrapper
+      .find('.js-record-request-phone-number')
+      .val()
+      ;
+
+    $.post($(this).data('url'), {
+      'phone_number': phone_number
+    }, function (data) {
       // Display validatoin errors
       if (data.errors) {
         wrapper.addClass('has-error');
