@@ -17,7 +17,7 @@ class Recording(models.Model):
         get_latest_by = 'created'
 
     def __unicode__(self):
-        return u"pk=%d title=%r" % (
+        return u"pk=%d audio_file=%r" % (
             self.pk,
-            self.title,
+            self.audio_file.name,
         )
