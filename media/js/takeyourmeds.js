@@ -58,50 +58,35 @@ $.feature('f_reminders_create', function() {
 });
 
 $.feature('f_reminders_create', function() {
-  var wrapper = $('.js-record-request');
+  var modal = $('#modal-record-own-message');
 
-  var update = function() {
-    var val = $('select[name=audio_url]').val();
-
-    wrapper
-      .toggleClass('hide', val !== '')
-      .removeClass('has-error')
-      .find('button')
-        .button('reset')
-      .end()
-      .find('.help-block')
-        .remove()
-      .end()
-      ;
+  var reset = function() {
+    modal.find('.js-call').button('reset');
+    modal.find('.js-cancel').show();
+    modal.find('.help-block').remove();
+    modal.find('.form-group').removeClass('has-error');
   };
 
-  $('select[name=audio_url]').on('change', update);
+  $('.js-record-own-message').on('click', function (e) {
+    e.preventDefault();
+    reset();
+    modal.modal();
+    modal.find('input').val('');
+  });
 
-  // Pageload
-  update();
-
-  wrapper.find('button').on('click', function () {
+  modal.find('.js-call').on('click', function () {
+    var form = modal.find('form');
     var button = $(this);
 
+    reset();
+
     button.button('loading');
+    modal.find('.js-cancel').hide();
 
-    wrapper
-      .find('.help-block')
-        .remove()
-      .end()
-      ;
-
-    wrapper.removeClass('has-error');
-
-    var phone_number = wrapper
-      .find('.js-record-request-phone-number')
-      .val()
-      ;
-
-    $.post($(this).data('url'), {
-      'phone_number': phone_number
-    }, function (data) {
+    $.post(form.attr('action'), form.serialize(), function (data) {
       switch (data.status) {
+
+      // Our request to call has been submitted
       case 'success':
         var poll = function() {
           $.ajax({
@@ -110,10 +95,13 @@ $.feature('f_reminders_create', function() {
               success: function(data) {
                 switch (data.status) {
                 case 'success':
-                  button.button('reset');
-                  $('<p class="help-block"></p>')
-                    .text(wrapper.data('complete-text'))
-                    .insertBefore(button)
+                  modal.modal('hide');
+
+                  // Save the recording_id in the "parent" form
+                  $('.js-record-own-message')
+                    .find('input[type=hidden]')
+                      .val(data.recording_id)
+                    .end()
                     ;
                   break;
                 case 'continue':
@@ -131,21 +119,25 @@ $.feature('f_reminders_create', function() {
         setTimeout(poll, 2000);
         break;
 
+      // Validation errors
       case 'error':
-        wrapper.addClass('has-error');
+        var form_group = modal.find('.js-form-group');
+
+        reset();
+
+        form_group.addClass('has-error');
 
         $.each(data.errors, function (idx, error) {
           $('<p class="help-block"></p>')
             .text(error)
-            .insertBefore(button)
+            .appendTo(form_group)
             ;
         });
-
-        button.button('reset');
         break;
+
       }
     }).fail(function() {
-      button.button('reset');
+      reset();
     });
   });
 });
