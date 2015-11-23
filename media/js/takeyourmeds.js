@@ -98,7 +98,7 @@ $.feature('f_reminders_create', function() {
       if (data.errors) {
         wrapper.addClass('has-error');
 
-        $.each(data.errors, function (idx, errors) {
+        $.each(data.errors, function (field, errors) {
           $.each(errors, function (idx, error) {
             $('<p class="help-block"></p>')
               .text(error.message)
