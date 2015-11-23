@@ -101,8 +101,30 @@ $.feature('f_reminders_create', function() {
     $.post($(this).data('url'), {
       'phone_number': phone_number
     }, function (data) {
-      // Display validatoin errors
-      if (data.errors) {
+      switch (data.status) {
+      case 'success':
+        (function poll() {
+          $.ajax({
+              url: data.url,
+              type: 'POST',
+              success: function(data) {
+                switch (data.status) {
+                case 'success':
+                  break;
+                case 'continue':
+                  setTimeout(function() {
+                    poll();
+                  }, 1000);
+                  break;
+                }
+              },
+              dataType: 'json',
+              timeout: 2000
+          });
+        })();
+        break;
+
+      case 'error':
         wrapper.addClass('has-error');
 
         $.each(data.errors, function (field, errors) {
@@ -115,24 +137,8 @@ $.feature('f_reminders_create', function() {
         });
 
         button.button('reset');
-        return;
+        break;
       }
-
-      (function poll() {
-        $.ajax({
-            url: data.url,
-            type: 'POST',
-            success: function(data) {
-              console.log("polling");
-              console.log("data");
-            },
-            dataType: 'son',
-            complete: setTimeout(function() {
-              poll();
-            }, 1000),
-            timeout: 2000
-        });
-      })();
     }).fail(function() {
       button.button('reset');
     });

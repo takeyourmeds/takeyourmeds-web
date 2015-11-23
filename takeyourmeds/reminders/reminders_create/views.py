@@ -35,7 +35,10 @@ def xhr_record_request_create(request):
     form = CreateRecordRequestForm(request.POST)
 
     if not form.is_valid():
-        return {'errors': get_form_errors(form)}
+        return {
+            'status': 'error',
+            'errors': get_form_errors(form),
+        }
 
     record_request = form.save(request.user)
 
@@ -44,7 +47,10 @@ def xhr_record_request_create(request):
         args=(record_request.ident,),
     )
 
-    return {'url': url}
+    return {
+        'status': 'success',
+        'url': url,
+    }
 
 @require_POST
 @ajax(login_required=True)
