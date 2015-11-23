@@ -6,7 +6,7 @@ from django.utils.crypto import get_random_string
 
 class RecordRequest(models.Model):
     """
-    Manages a request to create a custom audio message.
+    Manages a request to create a ``Recording``.
 
     The ``recording`` field is populated once we have completed successfully.
     """
