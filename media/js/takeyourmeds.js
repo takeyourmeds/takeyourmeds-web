@@ -103,7 +103,7 @@ $.feature('f_reminders_create', function() {
     }, function (data) {
       switch (data.status) {
       case 'success':
-        (function poll() {
+        var poll = function() {
           $.ajax({
               url: data.url,
               type: 'POST',
@@ -117,17 +117,20 @@ $.feature('f_reminders_create', function() {
                     ;
                   break;
                 case 'continue':
-                  setTimeout(function() {
-                    poll();
-                  }, 1000);
+                  setTimeout(poll, 1000);
                   break;
                 }
               },
               dataType: 'json',
               timeout: 2000
           });
-        })();
+        };
+
+        // No need to start polling for a while, which also helps to test the
+        // UI when settings.TWILIO_ENABLED = False.
+        setTimeout(poll, 2000);
         break;
+
       case 'error':
         wrapper.addClass('has-error');
 
