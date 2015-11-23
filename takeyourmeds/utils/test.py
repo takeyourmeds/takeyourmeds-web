@@ -1,7 +1,6 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url
 from django.contrib.auth import get_user_model
-from django.core.urlresolvers import reverse
 
 User = get_user_model()
 
@@ -48,7 +47,7 @@ class TestCase(TestCase):
 
         return self.assertRedirects(
             response,
-            reverse(urlconf, args=args, kwargs=kwargs),
+            resolve_url(urlconf, *args, **kwargs),
             status_code,
             target_status_code,
         )
