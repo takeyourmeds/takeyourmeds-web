@@ -4,16 +4,22 @@ import functools
 from django.db import models
 from django.utils.crypto import get_random_string
 
-from .managers import RecordRequestManager
-
 class RecordRequest(models.Model):
     """
     Manages a request to create a custom audio message.
+
+    The ``recording`` field is populated once we have completed successfully.
     """
 
     user = models.ForeignKey(
         'account.User',
-        related_name='audio_recording_requests',
+        related_name='record_requests',
+    )
+
+    recording = models.OneToOneField(
+        'recordings.Recording',
+        null=True,
+        unique=True,
     )
 
     phone_number = models.CharField(max_length=200)
@@ -34,16 +40,14 @@ class RecordRequest(models.Model):
 
     created = models.DateTimeField(default=datetime.datetime.utcnow)
 
-    objects = RecordRequestManager()
-
     class Meta:
         ordering = ('-created',)
         get_latest_by = 'created'
 
     def __unicode__(self):
-        return u"pk=%d user_id=%d twilio_sid=%r phone_number=%r" % (
+        return u"pk=%d recording_id=%d user_id=%d phone_number=%r" % (
             self.pk,
+            self.recording_id,
             self.user_id,
-            self.twilio_sid,
             self.phone_number,
         )

@@ -127,13 +127,11 @@ $.feature('f_reminders_create', function() {
       case 'error':
         wrapper.addClass('has-error');
 
-        $.each(data.errors, function (field, errors) {
-          $.each(errors, function (idx, error) {
-            $('<p class="help-block"></p>')
-              .text(error.message)
-              .insertBefore(button)
-              ;
-          });
+        $.each(data.errors, function (idx, error) {
+          $('<p class="help-block"></p>')
+            .text(error)
+            .insertBefore(button)
+            ;
         });
 
         button.button('reset');

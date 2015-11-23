@@ -2,8 +2,6 @@ import re
 
 from django import forms
 
-from ..reminders_calls.reminders_calls_audio.models import RecordRequest
-
 from ..apps import RemindersConfig
 from ..enums import TypeEnum
 from ..models import Reminder
@@ -97,16 +95,3 @@ class CreateForm(forms.ModelForm):
         num_times = int(self.cleaned_data['frequency'])
 
         return self.time_fields[:num_times]
-
-
-class CreateRecordRequestForm(forms.ModelForm):
-    class Meta:
-        model = RecordRequest
-        fields = (
-            'phone_number',
-        )
-
-    def save(self, user):
-        return user.audio_recording_requests.start_record_request(
-            self.cleaned_data['phone_number'],
-        )

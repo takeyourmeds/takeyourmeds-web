@@ -1,8 +1,6 @@
-from django.conf.urls import url
-
-from . import views
+from django.conf.urls import url, include
 
 urlpatterns = (
-    url(r'^recordings$', views.view,
-        name='view'),
+    url(r'', include('takeyourmeds.recordings.recordings_create.urls',
+        namespace='create')),
 )
