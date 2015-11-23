@@ -8,6 +8,6 @@ urlpatterns = (
 
     url(r'^xhr/reminders/create/create-record-request$', views.xhr_record_request_create,
         name='xhr-record-request-create'),
-    url(r'^xhr/reminders/create/poll-record-request$', views.xhr_record_request_poll,
+    url(r'^xhr/reminders/create/poll-record-request/(?P<ident>\w{40})$', views.xhr_record_request_poll,
         name='xhr-record-request-poll'),
 )
