@@ -5,17 +5,5 @@ install:
   - pip install -r requirements.txt ansible
 
 script:
-  - "python setup.py test"
-
-after_script:
+  - python setup.py test
   - config/deploy
-
-notifications:
-  irc:
-    channels:
-      - "irc.freenode.org#takeyourmeds"
-    use_notice: true
-    on_success: change
-    on_failure: change
-    template:
-      - "%{repository}#%{build_number} (%{branch}): %{message}: %{compare_url} - %{build_url}"

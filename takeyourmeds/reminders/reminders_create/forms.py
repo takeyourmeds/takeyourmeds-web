@@ -1,10 +1,10 @@
-import re
-
 from django import forms
 
-from .apps import RemindersConfig
-from .enums import TypeEnum
-from .models import Reminder
+from takeyourmeds.utils.twilio import validate_phone_number
+
+from ..apps import RemindersConfig
+from ..enums import TypeEnum
+from ..models import Reminder
 
 NUM_REMINDERS = 4
 HOUR_MIN, HOUR_MAX = 5, 24
@@ -12,8 +12,6 @@ HOUR_MIN, HOUR_MAX = 5, 24
 TIME_CHOICES = [(y, y) for y in [
     '%02d:00' % (x % 24) for x in range(HOUR_MIN, HOUR_MAX + 1)
 ]]
-
-re_phone_number = re.compile(r'^\d{9,14}$')
 
 class CreateForm(forms.ModelForm):
     frequency = forms.ChoiceField(
@@ -29,12 +27,18 @@ class CreateForm(forms.ModelForm):
         model = Reminder
         fields = (
             'message',
-            'audio_url',
+            'audio_url', # preset
+            'recording', # custom
             'phone_number',
         )
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+
         super(CreateForm, self).__init__(*args, **kwargs)
+
+        # Restrict to this user's recordings
+        self.fields['recording'].queryset = user.recordings.all()
 
         # Dynamically generate enough time selector fields
         self.time_fields = []
@@ -48,9 +52,9 @@ class CreateForm(forms.ModelForm):
 
         self.initial['message_type'] = self.fields['message_type'].choices[0][0]
 
-    def save(self, user):
+    def save(self):
         instance = super(CreateForm, self).save(commit=False)
-        instance.user = user
+        instance.user = self.user
         instance.type = TypeEnum.message if \
             self.cleaned_data['message_type'] == 'text' else TypeEnum.call
         instance.save()
@@ -79,17 +83,7 @@ class CreateForm(forms.ModelForm):
         return self.cleaned_data
 
     def clean_phone_number(self):
-        val = self.cleaned_data['phone_number']
-
-        # Strip all whitespace
-        val = ''.join(val.split())
-
-        if re_phone_number.match(val) is None:
-            raise forms.ValidationError(
-                "This does not appear to be a valid UK phone number.",
-            )
-
-        return val
+        return validate_phone_number(self.cleaned_data['phone_number'])
 
     def get_times(self):
         num_times = int(self.cleaned_data['frequency'])

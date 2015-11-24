@@ -13,6 +13,7 @@ class Reminder(models.Model):
 
     message = models.CharField(max_length=100, blank=True)
     audio_url = models.CharField(max_length=100, blank=True)
+    recording = models.ForeignKey('recordings.Recording', null=True, blank=True)
 
     phone_number = models.CharField(max_length=200)
 
@@ -40,13 +41,6 @@ class Reminder(models.Model):
 
     def get_type_enum(self):
         return {x.value: x for x in TypeEnum}[self.type]
-
-    def get_phone_number(self):
-        """
-        We store whatever number the user provided but massage it later.
-        """
-        return '+44%s' % self.phone_number[1:] if \
-            self.phone_number.startswith('0') else self.phone_number
 
 class Time(models.Model):
     """
