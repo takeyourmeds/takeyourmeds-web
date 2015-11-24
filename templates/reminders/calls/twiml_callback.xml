@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<Response>
   {% with call.instance.reminder as reminder %}
   <Play loop="1">
     {% if reminder.recording_id %}
