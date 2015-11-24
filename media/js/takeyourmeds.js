@@ -76,7 +76,7 @@ $.feature('f_reminders_create', function() {
       form.find('.modal')
         .modal()
         .on('shown.bs.modal', function () {
-          form.find('input').eq(0).focus()
+          form.find('.form-control').eq(0).focus()
         })
         ;
     }
