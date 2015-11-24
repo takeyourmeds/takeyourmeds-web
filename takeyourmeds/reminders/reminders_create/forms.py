@@ -57,6 +57,15 @@ class CreateForm(forms.ModelForm):
         instance.user = self.user
         instance.type = TypeEnum.message if \
             self.cleaned_data['message_type'] == 'text' else TypeEnum.call
+
+        # Don't save the "other" metadata if we receive it. We don't remove it
+        # in clean so the user can redo it *before* saving.
+        if instance.type == TypeEnum.call:
+            instance.message = ''
+        elif instance.type == TypeEnum.message:
+            instance.audio_url = ''
+            instance.recording = None
+
         instance.save()
 
         for x in self.get_times():
