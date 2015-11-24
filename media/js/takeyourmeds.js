@@ -59,6 +59,7 @@ $.feature('f_reminders_create', function() {
 
 $.feature('f_reminders_create', function() {
   var form = $('form.js-record-own-message');
+  var select = $('select[name=audio_url]');
   var recording = $('input[name=recording]');
 
   var reset = function() {
@@ -68,7 +69,7 @@ $.feature('f_reminders_create', function() {
     form.find('.form-group').removeClass('has-error');
   };
 
-  $('select[name=audio_url]').on('change', function () {
+  select.on('change', function () {
     recording.val('');
 
     if ($(this).val() === '') {
@@ -107,6 +108,20 @@ $.feature('f_reminders_create', function() {
 
                   // Save the recording_id in the "parent" form
                   recording.val(data.recording_id);
+
+                  // Change the text in the parent input
+                  select.find('option[value=""]').remove();
+
+                  $('<option value=""/>')
+                    .text(select.data('complete-text'))
+                    .prop('selected', true)
+                    .appendTo(select)
+                    ;
+                  $('<option value=""/>')
+                    .text(select.data('another-text'))
+                    .prop('selected', false)
+                    .appendTo(select)
+                    ;
                   break;
 
                 // We need to keep polling

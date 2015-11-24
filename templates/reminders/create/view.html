@@ -168,6 +168,8 @@
       id="{{ form.audio_url.id_for_label }}"
       class="form-control"
       name="{{ form.audio_url.html_name }}"
+      data-another-text="Record another message"
+      data-complete-text="Use my own recorded message"
     >
       {% for x, y in form.fields.audio_url.choices %}
       <option
@@ -175,7 +177,9 @@
         {% if form.audio_url.value == x %}selected{% endif %}
       >{{ y }}</option>
       {% endfor %}
-      <option value="">Record my own message</option>
+      <option
+        value=""
+      >Record my own message</option>
     </select>
 
     {% for x in form.errors.audio_url %}
