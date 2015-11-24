@@ -87,6 +87,10 @@ def record_callback(request, ident):
         recording.audio_file.save('%s.mp3' % ident, File(f))
         recording.save()
 
+    # Mark this CreateRequest as fulfilled
+    create_request.recording = recording
+    create_request.save(update_fields=('recording',))
+
     return render(
         request,
         'recordings/create/record_callback.xml',
