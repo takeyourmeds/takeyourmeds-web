@@ -58,14 +58,14 @@ $.feature('f_reminders_create', function() {
 });
 
 $.feature('f_reminders_create', function() {
-  var modal = $('#modal-record-own-message');
+  var form = $('form.js-record-own-message');
   var recording = $('input[name=recording]');
 
   var reset = function() {
-    modal.find('.js-call').button('reset');
-    modal.find('.js-cancel').show();
-    modal.find('.help-block').remove();
-    modal.find('.form-group').removeClass('has-error');
+    form.find('.js-call').button('reset');
+    form.find('.js-cancel').show();
+    form.find('.help-block').remove();
+    form.find('.form-group').removeClass('has-error');
   };
 
   $('select[name=audio_url]').on('change', function () {
@@ -73,17 +73,21 @@ $.feature('f_reminders_create', function() {
 
     if ($(this).val() === '') {
       reset();
-      modal.modal();
+      form.find('.modal')
+        .modal()
+        .on('shown.bs.modal', function () {
+          form.find('input').eq(0).focus()
+        })
+        ;
     }
   });
 
-  modal.find('.js-call').on('click', function () {
-    var form = modal.find('form');
-    var button = $(this);
+  form.on('submit', function (e) {
+    e.preventDefault();
 
     reset();
-    button.button('loading');
-    modal.find('.js-cancel').hide();
+    form.find('.js-call').button('loading');
+    form.find('.js-cancel').hide();
 
     $.post(form.attr('action'), form.serialize(), function (data) {
       switch (data.status) {
@@ -99,7 +103,7 @@ $.feature('f_reminders_create', function() {
 
                 // The call was completed
                 case 'success':
-                  modal.modal('hide');
+                  form.find('.modal').modal('hide');
 
                   // Save the recording_id in the "parent" form
                   recording.val(data.recording_id);
@@ -123,7 +127,7 @@ $.feature('f_reminders_create', function() {
 
       // Validation errors
       case 'error':
-        var form_group = modal.find('.js-form-group');
+        var form_group = form.find('.js-form-group');
 
         reset();
 
