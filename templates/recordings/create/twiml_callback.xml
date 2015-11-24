@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
   <Say>
-    Hello, this is TakeYourMeds. After the beep, please record your own
-    message and then hang up.
+    Hello, this is Take Your Meds Dot Co Dot You Kay. After the beep, please
+    record your own message and then hang up.
   </Say>
   <Record action="{{ settings.SITE_URL }}{% url "recordings:create:record-callback" create_request.ident %}"/>
 </Response>
