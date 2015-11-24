@@ -3,3 +3,6 @@
 /takeyourmeds/settings/custom.py
 /static/
 /storage/
+/.coverage
+/coverage.xml
+/pep8.txt
