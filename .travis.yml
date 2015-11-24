@@ -2,11 +2,8 @@ language: python
 python: "2.7"
 
 install:
-  - pip install -r requirements.txt ansible coveralls
+  - pip install -r requirements.txt ansible
 
 script:
   - python setup.py test
   - config/deploy
-
-after_success:
-  - coveralls
