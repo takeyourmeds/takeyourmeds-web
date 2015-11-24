@@ -10,4 +10,5 @@ PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.CryptPasswordHasher',
 )
 
+MEDIA_ROOT = '/tmp'
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'

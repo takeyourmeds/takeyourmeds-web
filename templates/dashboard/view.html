@@ -21,7 +21,7 @@
   <div class="col-sm-3 hidden-xs">
     <div class="results-sidebar-box">
       <ul class="list-unstyled">
-        <li><a href="{% url "reminders:create" %}">Create reminder</a></li>
+        <li><a href="{% url "reminders:create:view" %}">Create reminder</a></li>
         <li><a href="{% url "account:logout" %}">Logout</a></li>
       </ul>
       <hr>
@@ -29,7 +29,7 @@
   </div>
   <div class="col-sm-9">
     <a
-      href="{% url "reminders:create" %}"
+      href="{% url "reminders:create:view" %}"
       class="btn btn-theme-bg pull-right"
     ><i class="fa fa-plus"></i> Create a new reminder</a>
 
@@ -85,7 +85,14 @@
                 </p>
 
                 <p>
-                  <audio src="{% static reminder.audio_url %}" controls>
+                  <audio
+                    {% if reminder.recording_id %}
+                    src="{{ reminder.recording.audio_file.url }}"
+                    {% else %}
+                    src="{% static reminder.audio_url %}"
+                    {% endif %}
+                    controls
+                  >
                     Unfortunately your browser does not support the <code>audio</code> element.
                   </audio>
                 </p>

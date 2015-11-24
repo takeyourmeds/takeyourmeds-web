@@ -2,10 +2,6 @@ from takeyourmeds.utils.test import TestCase
 
 from .enums import TypeEnum
 
-class SmokeTest(TestCase):
-    def test_create(self):
-        self.assertGET(200, 'reminders:create', login=True)
-
 class DeleteTests(TestCase):
     def setUp(self):
         super(DeleteTests, self).setUp()
