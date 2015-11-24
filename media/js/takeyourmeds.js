@@ -109,9 +109,13 @@ $.feature('f_reminders_create', function() {
                   // Save the recording_id in the "parent" form
                   recording.val(data.recording_id);
 
-                  // Change the text in the parent input
+                  // Delete any dummy options in the "which voice message"
+                  // selector
                   select.find('option[value=""]').remove();
 
+                  // .. then add some extra ones. We need to do this so that
+                  // the .change() event fires correct and thus you can record
+                  // another message immediately afterwards.
                   $('<option value=""/>')
                     .text(select.data('complete-text'))
                     .prop('selected', true)
