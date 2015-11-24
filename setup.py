@@ -15,11 +15,6 @@ def find_data_files(dirs):
             ))
     return result
 
-if sys.argv[1:2] == ['test']:
-    # Monkey patch https://github.com/praekelt/django-setuptest/pull/26
-    import importlib
-    sys.modules['django.utils.importlib'] = importlib
-
 setup(
     name='takeyourmeds',
     scripts=('takeyourmeds/manage.py',),

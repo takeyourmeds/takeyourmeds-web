@@ -4,7 +4,7 @@ Django==1.9rc1
 django-auto-one-to-one==2.0.2
 django-celery==3.1.17
 django-email-from-template==2.0.0
-django-setuptest==0.2
+https://github.com/lamby/django-setuptest/zipball/django-1.9-support#egg=django-setuptest
 django-switch-templatetag==2.0.0
 django-template-tests==1.0.0
 enum34==1.0.4
