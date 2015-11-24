@@ -16,9 +16,9 @@ def find_data_files(dirs):
     return result
 
 if sys.argv[1:2] == ['test']:
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'takeyourmeds.settings')
-    from django.core.management import execute_from_command_line
-    sys.exit(execute_from_command_line(sys.argv + ['--verbosity=2']))
+    # Monkey patch https://github.com/praekelt/django-setuptest/pull/26
+    import importlib
+    sys.modules['django.utils.importlib'] = importlib
 
 setup(
     name='takeyourmeds',
@@ -26,4 +26,5 @@ setup(
     packages=find_packages(),
     zip_safe=False,
     data_files=find_data_files(('media', 'templates')),
+    test_suite='setuptest.setuptest.SetupTestSuite',
 )
