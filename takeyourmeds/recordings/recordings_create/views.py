@@ -21,7 +21,7 @@ def xhr_create(request):
     if not form.is_valid():
         return {
             'status': 'error',
-            'errors': [form.errors.values()],
+            'errors': form.errors,
         }
 
     instance = form.save(request.user)

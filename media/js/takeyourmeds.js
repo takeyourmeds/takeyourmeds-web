@@ -127,17 +127,15 @@ $.feature('f_reminders_create', function() {
 
       // Validation errors
       case 'error':
-        var form_group = form.find('.js-form-group');
-
         reset();
-
-        form_group.addClass('has-error');
-
-        $.each(data.errors, function (idx, error) {
-          $('<p class="help-block"></p>')
-            .text(error)
-            .appendTo(form_group)
-            ;
+        $.each(data.errors, function (name, errors) {
+          $.each(errors, function (_, error) {
+            form.find('.form-control[name=' + name + ']')
+              .closest('.form-group')
+              .addClass('has-error')
+              .append($('<p class="help-block"></p>').text(error))
+              ;
+            });
         });
         break;
 
