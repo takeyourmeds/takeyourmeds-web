@@ -134,6 +134,9 @@ $.feature('f_reminders_create', function() {
                   break;
                 }
               },
+              error: function() {
+                setTimeout(poll, 2000);
+              },
               dataType: 'json',
               timeout: 2000
           });
