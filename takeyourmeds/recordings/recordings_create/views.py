@@ -26,9 +26,15 @@ def xhr_create(request):
 
     instance = form.save(request.user)
 
+    url = reverse('recordings:create:xhr-poll', args=(instance.ident,))
+
     return {
         'status': 'ok',
-        'url': reverse('recordings:create:xhr-poll', args=(instance.ident,)),
+        'result': {
+            'create_request': {
+                'xhr-poll-url': url,
+            }
+        },
     }
 
 @require_POST
@@ -48,12 +54,13 @@ def xhr_poll(request, ident):
         create_request.recording = recording
         create_request.save()
 
-    if create_request.recording_id is None:
-        return {'status': 'continue'}
-
     return {
         'status': 'ok',
-        'recording_id': create_request.recording_id,
+        'result': {
+            'create_request': {
+                'recording_id': create_request.recording_id,
+            },
+        },
     }
 
 @csrf_exempt

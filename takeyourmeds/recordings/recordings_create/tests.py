@@ -21,15 +21,15 @@ class CreateTest(TestCase):
 
     def test_create(self):
         self.assertEqual(self.user.recording_create_requests.count(), 0)
-        self.assertCreate({'phone_number': '07751234567'}, 'success')
+        self.assertCreate({'phone_number': '07751234567'}, 'ok')
         self.assertEqual(self.user.recording_create_requests.count(), 1)
         self.assertEqual(self.user.recordings.count(), 0)
 
     def test_poll_creates_in_tests(self):
         url = self.assertCreate(
             {'phone_number': '07751234567'},
-            'success',
-        ).json()['url']
+            'ok',
+        ).json()['result']['create_request']['xhr-poll-url']
 
         data = self.assertPOST(200, {}, url, login=True).json()
 
@@ -40,12 +40,16 @@ class CreateTest(TestCase):
             recording.pk,
         )
         self.assertEqual(data, {
-            'status': 'success',
-            'recording_id': recording.pk,
+            'status': 'ok',
+            'result': {
+                'create_request': {
+                    'recording_id': recording.pk,
+                },
+            },
         })
 
     def test_twiml_callback(self):
-        self.assertCreate({'phone_number': '07751234567'}, 'success')
+        self.assertCreate({'phone_number': '07751234567'}, 'ok')
 
         create_request = self.user.recording_create_requests.get()
 
@@ -57,7 +61,7 @@ class CreateTest(TestCase):
         )
 
     def test_record_callback(self):
-        self.assertCreate({'phone_number': '07751234567'}, 'success')
+        self.assertCreate({'phone_number': '07751234567'}, 'ok')
 
         create_request = self.user.recording_create_requests.get()
 
@@ -71,7 +75,7 @@ class CreateTest(TestCase):
         self.assertEqual(self.user.recordings.get().audio_file.size, 0)
 
     def test_record_callback_missing_recording_url(self):
-        self.assertCreate({'phone_number': '07751234567'}, 'success')
+        self.assertCreate({'phone_number': '07751234567'}, 'ok')
 
         create_request = self.user.recording_create_requests.get()
 

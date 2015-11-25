@@ -91,40 +91,44 @@ $.feature('f_reminders_create', function() {
     form.find('.js-cancel').hide();
 
     $.post(form.attr('action'), form.serialize(), function (data) {
-      switch (data.status) {
+      switch (data['status']) {
 
       // Our request to call has been submitted
       case 'ok':
         var poll = function() {
           $.ajax({
-              url: data.url,
+              url: data['result']['create_request']['xhr-poll-url'],
               type: 'POST',
               success: function(data) {
-                switch (data.status) {
+                // Unknown error
+                if (data['status'] != 'ok') {
+                  setTimeout(poll, 2000);
+                  return;
+                }
 
-                // The call was completed
-                case 'ok':
-                  form.find('.modal').modal('hide');
-
-                  // Save the recording_id in the "parent" form
-                  recording.val(data.recording_id);
-
-                  // Update the UI so that .change() fires again
-                  select
-                    .find('option')
-                    .hide()
-                    .filter('[data-show-on-custom-recording]')
-                    .show()
-                    .eq(-2)
-                      .prop('selected', true)
-                    ;
-                  break;
+                var recording_id = data['result']['create_request']['recording_id'];
 
                 // We need to keep polling
-                case 'continue':
+                if (recording_id === null) {
                   setTimeout(poll, 1000);
-                  break;
+                  return;
                 }
+
+                // The call was completed
+                form.find('.modal').modal('hide');
+
+                // Save the recording_id in the "parent" form
+                recording.val(recording_id);
+
+                // Update the UI so that .change() fires again
+                select
+                  .find('option')
+                  .hide()
+                  .filter('[data-show-on-custom-recording]')
+                  .show()
+                  .eq(-2)
+                    .prop('selected', true)
+                  ;
               },
               error: function() {
                 setTimeout(poll, 2000);
@@ -142,7 +146,7 @@ $.feature('f_reminders_create', function() {
       // Validation errors
       case 'error':
         reset();
-        $.each(data.errors, function (name, errors) {
+        $.each(data['errors'], function (name, errors) {
           $.each(errors, function (_, error) {
             form.find('.form-control[name=' + name + ']')
               .closest('.form-group')
