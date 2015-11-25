@@ -94,7 +94,7 @@ $.feature('f_reminders_create', function() {
       switch (data.status) {
 
       // Our request to call has been submitted
-      case 'success':
+      case 'ok':
         var poll = function() {
           $.ajax({
               url: data.url,
@@ -103,7 +103,7 @@ $.feature('f_reminders_create', function() {
                 switch (data.status) {
 
                 // The call was completed
-                case 'success':
+                case 'ok':
                   form.find('.modal').modal('hide');
 
                   // Save the recording_id in the "parent" form

@@ -27,7 +27,7 @@ def xhr_create(request):
     instance = form.save(request.user)
 
     return {
-        'status': 'success',
+        'status': 'ok',
         'url': reverse('recordings:create:xhr-poll', args=(instance.ident,)),
     }
 
@@ -52,7 +52,7 @@ def xhr_poll(request, ident):
         return {'status': 'continue'}
 
     return {
-        'status': 'success',
+        'status': 'ok',
         'recording_id': create_request.recording_id,
     }
 
