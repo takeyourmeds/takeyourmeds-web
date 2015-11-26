@@ -15,15 +15,11 @@ def find_data_files(dirs):
             ))
     return result
 
-if sys.argv[1:2] == ['test']:
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'takeyourmeds.settings')
-    from django.core.management import execute_from_command_line
-    sys.exit(execute_from_command_line(sys.argv + ['--verbosity=2']))
-
 setup(
     name='takeyourmeds',
     scripts=('takeyourmeds/manage.py',),
     packages=find_packages(),
     zip_safe=False,
     data_files=find_data_files(('media', 'templates')),
+    test_suite='setuptest.setuptest.SetupTestSuite',
 )

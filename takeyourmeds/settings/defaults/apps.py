@@ -7,6 +7,7 @@ INSTALLED_APPS = (
 
     'djcelery',
     'email_from_template',
+    'template_tests',
 
     'takeyourmeds.account',
     'takeyourmeds.account.forgot_password',
@@ -15,9 +16,13 @@ INSTALLED_APPS = (
     'takeyourmeds.groups.groups_admin',
     'takeyourmeds.groups.groups_billing',
     'takeyourmeds.profile',
+    'takeyourmeds.recordings',
+    'takeyourmeds.recordings.recordings_create',
     'takeyourmeds.registration',
     'takeyourmeds.reminders',
+    'takeyourmeds.reminders.reminders_create',
+    'takeyourmeds.reminders.reminders_calls',
+    'takeyourmeds.reminders.reminders_messages',
     'takeyourmeds.static',
-    'takeyourmeds.telephony',
     'takeyourmeds.utils',
 )
