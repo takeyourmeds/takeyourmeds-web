@@ -1,0 +1,22 @@
+{% extends "base/base.html" %}
+
+{% block breadcrumbs_header %}
+  <h4>SMS reminder logs</h4>
+{% endblock %}
+
+{% block breadcrumbs %}
+ {{ block.super }}
+  <li><a href="{% url "dashboard:view" %}">Reminders</a></li>
+{% endblock %}
+
+{% block container_header %}
+  <div class="divide30"></div>
+{% endblock %}
+
+{% block content %}
+
+{% block log_content %}{% endblock %}
+
+<div class="divide30"></div>
+
+{% endblock %}

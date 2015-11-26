@@ -19,7 +19,7 @@
 
 - name: Download code
   command:
-    wget -O {{ build_dir }}/{{ package_name }}.tar.gz {{ source }}/archive/{{ branch }}.tar.gz
+    wget -O {{ build_dir }}/{{ package_name }}.tar.gz {{ source }}/archive/{{ commit }}.tar.gz
 
 - name: Extract
   command:
@@ -30,10 +30,11 @@
     src=role.py
     dest={{ build_dir }}/{{ package_name }}/takeyourmeds/settings/role.py
 
-- name: Set secret settings
+- name: Set custom/secret settings
   template:
     src=custom.py
     dest={{ build_dir }}/{{ package_name }}/takeyourmeds/settings/custom.py
+  no_log: true
 
 - name: Install the specific packages required to build our Debian packages
   command:
@@ -42,10 +43,12 @@
     chdir: "{{ build_dir }}/{{ package_name }}"
 
 - name: Build package
-  command:
-    dpkg-buildpackage -uc -us -b
+  shell:
+    dpkg-buildpackage -uc -us -b 2>&1
   args:
     chdir: "{{ build_dir }}/{{ package_name }}"
+  register: out
+- debug: var=out.stdout_lines
 
 - name: Stop services to avoid race conditions
   action: service
@@ -56,6 +59,14 @@
     - takeyourmeds-celery
     - takeyourmeds-gunicorn
   ignore_errors: yes # Permit initial installation
+
+- name: Create storage directory
+  file:
+    state=directory
+    path={{ storage_dir }}
+    mode=0755
+    owner=www-data
+    group=www-data
 
 - name: Install package
   shell:
@@ -79,8 +90,10 @@
 - name: Run migrations
   sudo: yes
   sudo_user: www-data
-  command:
-    "{{ base_dir }}/bin/manage.py migrate --verbosity=2 --noinput --run-syncdb"
+  shell:
+    "{{ base_dir }}/bin/manage.py migrate --verbosity=2 --noinput 2>&1"
+  register: out
+- debug: var=out.stdout_lines
 
 - name: collectstatic
   command:

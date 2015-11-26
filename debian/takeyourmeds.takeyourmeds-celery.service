@@ -10,6 +10,6 @@ Restart=always
 PermissionsStartOnly=true
 ExecStartPre=-/usr/bin/install -o www-data -g www-data -d /var/lib/takeyourmeds-celery
 
-ExecStart=/usr/share/python/takeyourmeds/bin/manage.py celery worker --beat --schedule=/var/lib/takeyourmeds-celery/schedule
+ExecStart=/usr/share/python/takeyourmeds/bin/manage.py celery worker --beat --schedule=/var/lib/takeyourmeds-celery/schedule --loglevel=info
 
 PrivateTmp=true

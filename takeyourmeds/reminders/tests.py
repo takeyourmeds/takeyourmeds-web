@@ -1,21 +1,19 @@
-import datetime
-
 from takeyourmeds.utils.test import TestCase
 
-class SmokeTest(TestCase):
-    def test_create(self):
-        self.assertGET(200, 'reminders:create', login=True)
+from .enums import TypeEnum
 
 class DeleteTests(TestCase):
+    def setUp(self):
+        super(DeleteTests, self).setUp()
+
+        self.reminder = self.user.reminders.create(type=TypeEnum.message)
+
     def test_GET(self):
-        instance = self.user.reminders.create()
-        self.assertGET(405, 'reminders:delete', instance.pk, login=True)
+        self.assertGET(405, 'reminders:delete', self.reminder.slug, login=True)
 
     def test_POST(self):
-        instance = self.user.reminders.create()
-        self.assert_(self.user.reminders.exists())
         response = self.assertPOST(
-            302, {}, 'reminders:delete', instance.pk, login=True
+            302, {}, 'reminders:delete', self.reminder.slug, login=True
         )
         self.assertRedirectsTo(response, 'dashboard:view')
         self.failIf(self.user.reminders.exists())
@@ -26,43 +24,31 @@ class DeleteTests(TestCase):
         """
 
         other = self.create_user('other')
-        instance = self.user.reminders.create()
 
         self.assertPOST(
             404,
             {},
             'reminders:delete',
-            instance.pk,
+            self.reminder.slug,
             login=True,
             user=other,
         )
 
         self.assert_(self.user.reminders.exists())
 
-class TestCron(TestCase):
-    def test_cron(self):
-        ten_min_ago = datetime.datetime.utcnow() - \
-            datetime.timedelta(minutes=10)
-
-        reminder = self.user.reminders.create(
-            message="test",
-            phone_number='123',
-        )
-
-        reminder.times.create(
-            time='10:00',
-            last_run=ten_min_ago,
-        )
-
 class TriggerTest(TestCase):
     def test_trigger_now(self):
-        instance = self.user.reminders.create()
+        reminder = self.user.reminders.create(type=TypeEnum.message)
 
         response = self.assertPOST(
             302,
             {},
-            'reminders:trigger', instance.pk,
+            'reminders:trigger', reminder.slug,
             login=True,
         )
 
         self.assertRedirectsTo(response, 'dashboard:view')
+
+        message = reminder.instances.get().messages.get()
+
+        self.assert_(message.twilio_sid, message.traceback)

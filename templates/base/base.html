@@ -7,7 +7,7 @@
     <div class="row ">
       <div class="col-sm-7 col-sm-offset-5 text-right">
         <ul class="list-inline top-dark-right">
-          <li class="hidden-sm hidden-xs"><i class="fa fa-envelope"></i> {{ settings.DEFAULT_FROM_EMAIL }}</li>
+          <li class="hidden-sm hidden-xs"><a href="mailto:{{ settings.DEFAULT_FROM_EMAIL_MAILTO }}"<i class="fa fa-envelope"></i> {{ settings.DEFAULT_FROM_EMAIL_MAILTO }}</a></li>
           {% if request.user.is_authenticated %}
           <li>
             <form method="POST" action="{% url "account:logout" %}">
@@ -106,68 +106,89 @@
 <footer id="footer">
   <div class="divide40"></div>
 
-                <div class="row">
-                    <div class="col-md-4 col-sm-6 margin30">
-                        <div class="footer-col">
-                            <h3>Take Your Meds</h3>
-                            <p>
-                                Take Your Meds Ltd is registered in England and Wales
-                            </p>
-                            <p>
-                              Company Registration Number 9686492
-                            </p>
-                            <p>
-                              <a href="/terms-and-conditions">Terms and Conditions</a> &bull;
-                              <a href="/privacy-policy">Privacy Policy</a>
-                            </p>
-                        </div>            
+    <div class="row">
+        <div class="col-md-4 col-sm-6 margin30">
+            <div class="footer-col">
+                <h3>Take Your Meds</h3>
+                <p>
+                    Take Your Meds Ltd is registered in England and Wales
+                </p>
+                <p>
+                  Company Registration Number 9686492
+                </p>
+                <p>
+                  <a href="{% url "static:terms" %}">Terms and Conditions</a> &bull;
+                  <a href="{% url "static:privacy" %}">Privacy Policy</a>
+                </p>
+            </div>            
 
-                    </div><!--footer col-->
-                    <div class="col-md-4 col-sm-6 margin30">
-                        <div class="footer-col">
-                            <h3>Contact</h3>
-                            <ul class="list-unstyled contact">
-                                <li><p><strong><i class="fa fa-map-marker"></i> Address:</strong>London, SE6 1NJ, England</p></li> 
-                                <li><p><strong><i class="fa fa-envelope"></i> Email:</strong> <a href="#">hello@takeyourmeds.co.uk</a></p></li>
-                                <li> <p><strong><i class="fa fa-github"></i> GitHub:</strong><a href="https://github.com/takeyourmeds/takeyourmeds-web">takeyourmeds</a></p></li>
-                                <li> <p><strong><i class="fa fa-keyboard-o"></i> Freenode IRC:</strong><a href="https://webchat.freenode.net/#takeyourmeds">#takeyourmeds</a></p></li>
-                            </ul>
-                            
-                        </div>                        
-                    </div><!--footer col-->
+        </div><!--footer col-->
+        <div class="col-md-4 col-sm-6 margin30">
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <ul class="list-unstyled contact">
+                    <li><p><strong><i class="fa fa-map-marker"></i> Address:</strong>London, SE6 1NJ, England</p></li> 
+                    <li><p><strong><i class="fa fa-envelope"></i> Email:</strong> <a href="#">hello@takeyourmeds.co.uk</a></p></li>
+                    <li> <p><strong><i class="fa fa-github"></i> GitHub:</strong><a href="https://github.com/takeyourmeds/takeyourmeds-web">github.com/takeyourmeds</a></p></li>
+                    <li> <p><strong><i class="fa fa-keyboard-o"></i> Freenode IRC:</strong><a href="https://webchat.freenode.net/#takeyourmeds">#takeyourmeds</a></p></li>
+                    <li> <p><strong><i class="fa fa-twitter"></i> Twitter:</strong><a href="https://twitter.com/takeyourmedsapp">@takeyourmedsapp</a></p></li>
+                </ul>
+                
+            </div>                        
+        </div><!--footer col-->
 
-                    <div class="col-md-4 col-sm-6 margin30">
-                        <div class="footer-col">
-                            <h3>Newsletter</h3>
-                            <p>
-                                Subscribe to our newsletter: 
-                            </p>
-                            <form role="form" class="subscribe-form" action="https://tinyletter.com/takeyourmeds" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/takeyourmeds', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Enter email to subscribe">
-                                    <span class="input-group-btn">
-                                      <input type="hidden" value="1" name="embed"/>
-                                        <button class="btn btn-theme-dark btn-lg" type="submit">Ok</button>
-                                    </span>
-                                </div>
-                            </form>
-                            <div class="divide10"></div>
-                            <p class="pull-right">Powered by <a href="https://tinyletter.com" target="_blank">TinyLetter</a></p>
-                        </div>             
-
-
-
-         
+        <div class="col-md-4 col-sm-6 margin30">
+            <div class="footer-col">
+                <h3>Newsletter</h3>
+                <p>
+                    Subscribe to our newsletter: 
+                </p>
+                <form role="form" class="subscribe-form" action="https://tinyletter.com/takeyourmeds" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/takeyourmeds', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter email to subscribe">
+                        <span class="input-group-btn">
+                          <input type="hidden" value="1" name="embed"/>
+                            <button class="btn btn-theme-dark btn-lg" type="submit">Ok</button>
+                        </span>
+                    </div>
+                </form>
+                <div class="divide10"></div>
+                <p class="pull-right">Powered by <a href="https://tinyletter.com" target="_blank">TinyLetter</a></p>
+            </div>             
+        </div><!--footer col-->
 
 
-
-
-
-                    </div><!--footer col-->
-
-
+    <div class="col-md-4 col-sm-6 margin30">
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <ul class="list-unstyled contact">
+          <li><p><strong><i class="fa fa-map-marker"></i> Address:</strong>London, SE6 1NJ, England</p></li> 
+          <li><p><strong><i class="fa fa-envelope"></i> Email:</strong> <a href="mailto:{{ settings.DEFAULT_FROM_EMAIL_MAILTO }}">{{ settings.DEFAULT_FROM_EMAIL_MAILTO }}</a></p></li>
+          <li> <p><strong><i class="fa fa-github"></i> GitHub:</strong><a href="https://github.com/takeyourmeds/takeyourmeds-web">takeyourmeds</a></p></li>
+          <li> <p><strong><i class="fa fa-keyboard-o"></i> Freenode IRC:</strong><a href="https://webchat.freenode.net/#takeyourmeds">#takeyourmeds</a></p></li>
+        </ul>
       </div>
-      
+    </div>
+
+    <div class="col-md-4 col-sm-6 margin30">
+      <div class="footer-col">
+        <h3>Newsletter</h3>
+        <p>
+            Subscribe to our newsletter: 
+        </p>
+        <form role="form" class="subscribe-form" action="https://tinyletter.com/takeyourmeds" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/takeyourmeds', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Enter email to subscribe">
+                <span class="input-group-btn">
+                  <input type="hidden" value="1" name="embed"/>
+                    <button class="btn btn-theme-dark btn-lg" type="submit">Ok</button>
+                </span>
+            </div>
+        </form>
+        <div class="divide10"></div>
+        <p class="pull-right">Powered by <a href="https://tinyletter.com" target="_blank">TinyLetter</a></p>
+      </div>
+
     </div>
   </div>
 </footer>
