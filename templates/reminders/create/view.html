@@ -1,0 +1,266 @@
+{% extends "base/base.html" %}
+
+{% block body_classes %}{{ block.super }} f_reminders_create{% endblock %}
+
+{% block title %}Create new reminder &mdash; {{ block.super }}{% endblock %}
+
+{% block breadcrumbs_header %}
+  <h4>Create new reminder</h4>
+{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  <li><a href="{% url "dashboard:view" %}">My reminders</a></li>
+  <li>Create new reminder</li>
+{% endblock %}
+
+{% block container_header %}
+  <div class="divide50"></div>
+{% endblock %}
+
+{% block content %}
+
+<h3>
+  Create a new reminder
+</h3>
+
+<p>
+  Fill out the form below to set up a new telephone reminder for you or someone
+  you care for.
+</p>
+
+<div class="divide30"></div>
+
+{% if form.non_field_errors %}
+<div class="has-error">
+  {% for x in form.non_field_errors %}
+  <p class="help-block">{{ x }}</p>
+  {% endfor %}
+</div>
+{% endif %}
+
+<form
+  method="POST"
+  class="form-horizontal"
+  action=""
+>
+  {% csrf_token %}
+
+  <input
+    id="{{ form.recording.id_for_label }}"
+    type="hidden"
+    name="{{ form.recording.html_name }}"
+    value="{{ form.recording.value|default:"" }}"
+  >
+
+  <div class="form-group {% if form.errors.frequency %}has-error{% endif %}">
+    <label for="{{ form.frequency.id_for_label }}">
+      How many times a day should we send reminders?
+    </label>
+
+    <select
+      id="{{ form.frequency.id_for_label }}"
+      class="form-control"
+      name="{{ form.frequency.html_name }}"
+      {% if form.fields.frequency.required %}required{% endif %}
+    >
+      {% for x, y in form.fields.frequency.choices %}
+      <option
+        value="{{ x }}"
+        {% if form.frequency.value|slugify == x|slugify %}selected{% endif %}
+      >{{ y }}</option>
+      {% endfor %}
+    </select>
+
+    {% for x in form.errors.frequency %}
+      <p class="help-block">{{ x }}</p>
+    {% endfor %}
+  </div>
+
+  {% for field in form.time_fields %}
+  <div class="form-group {% if field.errors %}has-error{% endif %}" data-time_field="{{ forloop.counter }}">
+    <label for="{{ field.id_for_label }}">
+      Time #{{ forloop.counter }}
+    </label>
+    <select
+      id="{{ field.id_for_label }}"
+      class="form-control"
+      name="{{ field.html_name }}"
+    >
+      {% for x, y in field.field.choices %}
+      <option
+        value="{{ x }}"
+        {% if field.value == x %}selected{% endif %}
+      >{{ y }}</option>
+      {% endfor %}
+    </select>
+
+    {% for x in field.errors %}
+      <p class="help-block">{{ x }}</p>
+    {% endfor %}
+  </div>
+  {% endfor %}
+
+  <div class="form-group {% if form.errors.phone_number %}has-error{% endif %}">
+    <label for="{{ form.phone_number.id_for_label }}">
+      What phone number should we send them to?
+    </label>
+    <input
+      id="{{ form.phone_number.id_for_label }}"
+      class="form-control"
+      name="{{ form.phone_number.html_name }}"
+      value="{{ form.phone_number.value|default:"" }}"
+      maxlength="{{ form.fields.phone_number.max_length }}"
+      placeholder="Enter a UK telephone number (eg. 07123456789)"
+      {% if form.fields.phone_number.required %}required{% endif %}
+    >
+    {% for x in form.errors.phone_number %}
+      <p class="help-block">{{ x }}</p>
+    {% endfor %}
+  </div>
+
+  <div class="form-group {% if form.errors.message_type %}has-error{% endif %}">
+    <label for="{{ form.message_type.id_for_label }}">
+      What kind of message would you like to send?
+    </label>
+    <div class="">
+    {% for x, y in form.fields.message_type.choices %}
+      <label class="radio-inline">
+        <input
+          id="{{ form.message_type.id_for_label }}_{{ forloop.counter0 }}" value="{{ x }}"
+          type="radio"
+          name="{{ form.message_type.html_name }}"
+          {% if form.message_type.value == x %}checked{% endif %}
+        >
+        {{ y }}
+      </label>
+    {% endfor %}
+    </div>
+
+    {% for x in form.errors.message_type %}
+      <p class="help-block">{{ x }}</p>
+    {% endfor %}
+  </div>
+
+  <div class="form-group {% if form.errors.message %}has-error{% endif %} hide" data-message_type="text">
+    <label for="{{ form.message.id_for_label }}">
+      What message would you like to send?
+    </label>
+    <textarea
+      id="{{ form.message.id_for_label }}"
+      rows="3"
+      name="{{ form.message.html_name }}"
+      class="form-control"
+      maxlength="{{ form.fields.message.max_length }}"
+    >{{ form.message.value|default:"" }}</textarea>
+
+    {% for x in form.errors.message %}
+      <p class="help-block">{{ x }}</p>
+    {% endfor %}
+  </div>
+
+  <div class="form-group {% if form.errors.audio_url %}has-error{% endif %} hide" data-message_type="voice">
+    <label for="{{ form.audio_url.id_for_label }}">
+      Which voice message would you like to send?
+    </label>
+
+    <select
+      id="{{ form.audio_url.id_for_label }}"
+      class="form-control"
+      name="{{ form.audio_url.html_name }}"
+    >
+      {% for x, y in form.fields.audio_url.choices %}
+      <option
+        value="{{ x }}"
+        data-show-on-custom-recording
+        {% if form.audio_url.value == x %}selected{% endif %}
+      >{{ y }}</option>
+      {% endfor %}
+
+      {% if not form.recording.value %}
+        <option
+          value=""
+          {% if not form.audio_url.value == x %}selected{% endif %}
+        >Record my own message</option>
+      {% endif %}
+
+      <option
+        value=""
+        {% if form.recording.value %}
+          selected
+        {% else %}
+          style="display: none;"
+        {% endif %}
+        data-show-on-custom-recording
+      >Use my own recorded message</option>
+      <option
+        value=""
+        {% if not form.recording.value %}style="display: none;"{% endif %}
+        data-show-on-custom-recording
+      >Record another message</option>
+    </select>
+
+    {% for x in form.errors.audio_url %}
+      <p class="help-block">{{ x }}</p>
+    {% endfor %}
+  </div>
+
+  <div class="divide30"></div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-theme-bg">
+        Create this reminder
+      </button>
+    </div>
+  </div>
+</form>
+
+<form
+  class="js-record-own-message"
+  method="POST"
+  action="{% url "recordings:create:xhr-create" %}"
+>
+  <div class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+          <h4 class="modal-title">
+            Record my own message
+          </h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>
+              Enter your phone number:
+            </label>
+
+            <input
+              class="form-control"
+              name="phone_number"
+              value=""
+              placeholder="Enter a UK telephone number (eg. 07123456789)"
+            >
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-default js-cancel"
+            data-dismiss="modal"
+          >Cancel</button>
+          <button
+            type="submit"
+            class="btn btn-theme-bg js-call"
+            data-loading-text="Calling, please wait&hellip;"
+          >
+            Call me
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+{% endblock %}

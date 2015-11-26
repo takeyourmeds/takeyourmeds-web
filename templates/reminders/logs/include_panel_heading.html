@@ -1,0 +1,15 @@
+<div class="panel-heading">
+  <div class="pull-right">
+    {% switch instance.get_source_enum.name %}
+    {% case "cron" %}
+      Automatically scheduled
+    {% endcase %}
+    {% case "manual" %}
+      Manually triggered
+    {% endcase %}
+    {% endswitch %}
+  </div>
+  <h3 class="panel-title">
+    {{ instance.created|date:"l jS F @ h:i:s A" }}
+  </h3>
+</div>

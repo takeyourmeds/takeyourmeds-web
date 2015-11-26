@@ -1,0 +1,71 @@
+{% extends "reminders/logs/base.html" %}
+
+{% block title %}Voice reminder logs &mdash; {{ block.super }}{% endblock %}
+
+{% block breadcrumbs_header %}
+  <h4>Voice reminder logs</h4>
+{% endblock %}
+
+{% block log_content %}
+
+{% for instance in reminder.instances.all %}
+<div class="panel panel-primary">
+  {% include "reminders/logs/include_panel_heading.html" %}
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Call time</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for call in instance.calls.all %}
+      <tr>
+        <td>
+          {{ call.created|date:"l jS F @ h:i:s A" }}
+        </td>
+        <td>
+          {% switch call.get_state_enum.name %}
+          {% case "twilio_disabled" %}
+            Twilio disabled
+          {% endcase %}
+          {% case "failed" %}
+            Call failed
+          {% endcase %}
+          {% case "dialing" %}
+            Dialing&hellip;
+          {% endcase %}
+          {% case "answered" %}
+            {% if call.button_pressed %}
+              Call answered and button pressed.
+            {% else %}
+              Call answered but button not pressed.
+            {% endif %}
+          {% endcase %}
+          {% case "busy" %}
+            Busy
+          {% endcase %}
+          {% case "no_answer" %}
+            No answer
+          {% endcase %}
+          {% case "unknown" %}
+            Unknown
+          {% endcase %}
+          {% endswitch %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% empty %}
+
+<p class="text-center">
+  This reminder has not been triggered yet.
+</p>
+
+{% endfor %}
+
+{% endblock %}

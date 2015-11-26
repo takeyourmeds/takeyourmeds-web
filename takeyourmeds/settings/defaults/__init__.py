@@ -1,5 +1,6 @@
 import os
 import copy
+import email
 import djcelery
 
 from os.path import dirname, abspath
@@ -65,6 +66,7 @@ TEMPLATES = [
                 'takeyourmeds.utils.context_processors.settings_context',
             ],
             'builtins': [
+                'switch_templatetag.templatetags.switch',
                 'django.contrib.staticfiles.templatetags.staticfiles',
             ],
         },
@@ -85,6 +87,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'media'),)
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
+MEDIA_URL = '/storage/'
+MEDIA_ROOT = 'overriden-in-production'
+DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+
 BROKER_URL = 'redis://localhost:6379/0'
 
 CELERYBEAT_SCHEDULE = {
@@ -96,7 +102,14 @@ CELERYBEAT_SCHEDULE = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = 'hello@takeyourmeds.co.uk'
+
+DEFAULT_FROM_EMAIL_NAME = "Take Your Meds"
+DEFAULT_FROM_EMAIL_MAILTO = 'hello@takeyourmeds.co.uk'
+
+DEFAULT_FROM_EMAIL = email.utils.formataddr((
+    DEFAULT_FROM_EMAIL_NAME,
+    DEFAULT_FROM_EMAIL_MAILTO,
+))
 
 SITE_URL = 'http://www.takeyourmeds.co.uk'
 
@@ -128,6 +141,8 @@ STRIPE_SECRET_KEY = 'overriden-in-production'
 STRIPE_PUBLISHABLE_KEY = 'overriden-in-production'
 
 TWILIO_ENABLED = True
-TWILIO_FROM = 'overriden-in-production'
 TWILIO_AUTH_TOKEN = 'overriden-in-production'
 TWILIO_ACCOUNT_SID = 'overriden-in-production'
+
+TWILIO_CALL_FROM = '+441143032046'
+TWILIO_MESSAGE_FROM = 'TakeYourMed' # 11-character limit

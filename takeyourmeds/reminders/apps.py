@@ -15,4 +15,4 @@ class RemindersConfig(AppConfig):
     )
 
     def ready(self):
-        from . import checks # NOQA
+        from . import checks #pylint: disable=unused-variable

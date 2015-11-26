@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  {% with call.instance.reminder as reminder %}
+  <Play loop="1">
+    {% if reminder.recording_id %}
+    {{ settings.SITE_URL }}{{ reminder.recording.audio_file.url }}
+    {% else %}
+    {{ settings.SITE_URL }}{% static reminder.audio_url %}
+    {% endif %}
+  </Play>
+  {% endwith %}
+  <Gather action="{{ settings.SITE_URL }}{% url "reminders:calls:gather-callback" call.ident %}" timeout="30" numDigits="1">
+    <Say>
+      Please press any number to confirm.
+    </Say>
+  </Gather>
+</Response>
