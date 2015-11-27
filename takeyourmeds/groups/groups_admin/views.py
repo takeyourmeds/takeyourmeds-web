@@ -14,7 +14,7 @@ def index(request):
 
         if form.is_valid():
             form.save()
-            messages.success(request, "Group was created.")
+            messages.success(request, "Group created.")
 
             return redirect(request.path)
     else:
