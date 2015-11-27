@@ -23,10 +23,8 @@ class Group(models.Model):
         get_latest_by = 'created'
 
     def __unicode__(self):
-        return u"#%d: %s (%s)" % (
-            self.pk,
+        return u"name=%r" % (
             self.name,
-            self.slug,
         )
 
 class Token(models.Model):
