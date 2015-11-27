@@ -27,10 +27,10 @@ class Group(models.Model):
             self.name,
         )
 
-class Token(models.Model):
-    group = models.ForeignKey(Group, related_name='tokens')
+class AccessToken(models.Model):
+    group = models.ForeignKey(Group, related_name='access_tokens')
 
-    token = models.CharField(
+    access_token = models.CharField(
         unique=True,
         max_length=8,
         default=functools.partial(get_random_string, 8, 'ACEFHKJMLNPRUTWVYX'),

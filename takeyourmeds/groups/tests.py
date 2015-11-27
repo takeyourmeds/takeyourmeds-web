@@ -4,4 +4,4 @@ from .models import Group
 
 class SmokeTest(TestCase):
     def test_token(self):
-        self.user.profile.group.tokens.create()
+        self.user.profile.group.access_tokens.create()
