@@ -74,7 +74,7 @@
                 {% if form.fields.email.required %}required{% endif %}
               >
             </label>
-            {% for x in form.errors.username %}
+            {% for x in form.errors.email %}
               <p class="help-block">{{ x }}</p>
             {% endfor %}
           </section>
