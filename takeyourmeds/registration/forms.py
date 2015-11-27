@@ -21,9 +21,6 @@ class RegistrationForm(forms.ModelForm):
 
         return user
 
-    def clean_password(self):
-        return validate_password(self.cleaned_data.get('password'))
-
     def clean_email(self):
         email = self.cleaned_data['email'].strip()
 
@@ -34,3 +31,6 @@ class RegistrationForm(forms.ModelForm):
             raise forms.ValidationError("That email address is already in use.")
 
         return email
+
+    def clean_password(self):
+        return validate_password(self.cleaned_data.get('password'))
