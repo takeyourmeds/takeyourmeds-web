@@ -14,12 +14,6 @@ class Group(models.Model):
 
     name = models.CharField(max_length=255, unique=True)
 
-    slug = models.CharField(
-        unique=True,
-        default=lambda: get_random_string(6).upper(),
-        max_length=6,
-    )
-
     created = models.DateTimeField(default=datetime.datetime.utcnow)
 
     objects = GroupManager()
