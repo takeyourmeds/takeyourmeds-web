@@ -16,7 +16,7 @@ def index(request):
             form.save()
             messages.success(request, "Group created.")
 
-            return redirect(request.path)
+            return redirect('groups:admin:index')
     else:
         form = GroupForm()
 
@@ -38,7 +38,7 @@ def view(request, group_id):
             form.save()
             messages.success(request, "Group updated.")
 
-            return redirect(request.path)
+            return redirect('groups:admin:index')
     else:
         form = GroupForm(instance=group)
 
