@@ -51,6 +51,6 @@ class AccessToken(models.Model):
     def __unicode__(self):
         return u"group_id=%r token=%r user_id=%s" % (
             self.group_id,
-            self.token,
+            self.access_token,
             self.user_id,
         )
