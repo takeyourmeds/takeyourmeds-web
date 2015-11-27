@@ -14,17 +14,16 @@ def index(request):
 
         if form.is_valid():
             form.save()
+
             messages.success(request, "Group created.")
 
             return redirect('groups:admin:index')
     else:
         form = GroupForm()
 
-    groups = Group.objects.all()
-
     return render(request, 'groups/admin/index.html', {
         'form': form,
-        'groups': groups,
+        'groups': Group.objects.all(),
     })
 
 @superuser_required
@@ -36,6 +35,7 @@ def view(request, group_id):
 
         if form.is_valid():
             form.save()
+
             messages.success(request, "Group updated.")
 
             return redirect('groups:admin:index')
