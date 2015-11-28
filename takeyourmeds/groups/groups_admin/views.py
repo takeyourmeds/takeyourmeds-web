@@ -5,12 +5,12 @@ from takeyourmeds.utils.decorators import superuser_required
 
 from ..models import Group
 
-from .forms import GroupForm
+from .forms import AddEditForm
 
 @superuser_required
 def index(request):
     if request.method == 'POST':
-        form = GroupForm(request.POST)
+        form = AddEditForm(request.POST)
 
         if form.is_valid():
             form.save()
@@ -19,7 +19,7 @@ def index(request):
 
             return redirect('groups:admin:index')
     else:
-        form = GroupForm()
+        form = AddEditForm()
 
     return render(request, 'groups/admin/index.html', {
         'form': form,
@@ -31,7 +31,7 @@ def view(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
 
     if request.method == 'POST':
-        form = GroupForm(request.POST, instance=group)
+        form = AddEditForm(request.POST, instance=group)
 
         if form.is_valid():
             form.save()
@@ -40,7 +40,7 @@ def view(request, group_id):
 
             return redirect('groups:admin:index')
     else:
-        form = GroupForm(instance=group)
+        form = AddEditForm(instance=group)
 
     access_tokens = group.access_tokens.select_related('user')
 
