@@ -42,7 +42,10 @@ def view(request, group_id):
     else:
         form = GroupForm(instance=group)
 
+    access_tokens = group.access_tokens.select_related('user')
+
     return render(request, 'groups/admin/view.html', {
         'form': form,
         'group': group,
+        'access_tokens': access_tokens,
     })

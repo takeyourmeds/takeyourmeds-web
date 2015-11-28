@@ -92,4 +92,46 @@
   </div>
 </form>
 
+<div class="divide60"></div>
+
+<h3 class="heading">
+  Access tokens ({{ group.access_tokens.count }})
+</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Token</th>
+      <th>Created</th>
+      <th>User</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for x in access_tokens %}
+    <tr>
+      <td>
+        <code>{{ x.access_token }}</code>
+      </td>
+      <td>
+        <abbr title="{{ x.created|timesince }}">
+          {{ x.created }}
+        </abbr>
+      </td>
+      <td>
+        {% if x.user_id %}
+          <code>{{ x.user.email }}</code>
+        {% else %}
+          (Unused)
+        {% endif %}
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="1">
+        No access tokens have been generated.
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
 {% endblock %}
