@@ -91,7 +91,7 @@
   sudo: yes
   sudo_user: www-data
   shell:
-    "{{ base_dir }}/bin/manage.py migrate --verbosity=2 --noinput 2>&1"
+    "{{ base_dir }}/bin/manage.py migrate --verbosity=2 --noinput --fake-initial 2>&1"
   register: out
 - debug: var=out.stdout_lines
 

@@ -1,0 +1,20 @@
+{% extends "base/base.html" %}
+
+{% block title %}Admin &mdash; {{ block.super }}{% endblock %}
+
+{% block breadcrumbs_header %}
+<h4>TakeYourMeds administration</h4>
+{% endblock %}
+
+{% block breadcrumbs_classes %}{{ block.super }} breadcrumb-light{% endblock %}
+
+{% block container_header %}
+  <div class="divide40"></div>
+{% endblock %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li>
+  <a href="{% url "static:admin" %}">Admin</a>
+</li>
+{% endblock %}

@@ -1,12 +1,16 @@
-{% extends "base/base.html" %}
+{% extends "base/admin.html" %}
 
 {% block title %}Groups &mdash; {{ block.super }}{% endblock %}
 
-{% block container %}
+{% block breadcrumbs_header %}
+<h4>Groups</h4>
+{% endblock %}
 
-<div class="page-header">
-  <h1>Groups</h1>
-</div>
+{% block content %}
+
+<h2 class="heading">
+  Groups
+</h2>
 
 <table class="table table-striped">
   <thead>
@@ -26,7 +30,7 @@
       </td>
       <td>
         <a href="{% url "groups:admin:view" group.pk %}" class="btn btn-primary">
-          Edit
+          View
         </a>
       </td>
     </tr>
@@ -40,11 +44,11 @@
   </tbody>
 </table>
 
-<hr>
+<div class="divide60"></div>
 
-<h2>
+<h3 class="heading">
   Create group
-</h2>
+</h3>
 
 {% if form.non_field_errors %}
 <div class="has-error">

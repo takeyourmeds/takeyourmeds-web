@@ -1,12 +1,23 @@
-{% extends "base/base.html" %}
+{% extends "base/admin.html" %}
 
-{% block title %}{{ group.name }} &mdash; Groups &mdash; {{ block.super }}{% endblock %}
+{% block title %}Groups &mdash; {{ block.super }}{% endblock %}
 
-{% block container %}
+{% block breadcrumbs_header %}
+<h4>{{ group.name }}</h4>
+{% endblock %}
 
-<div class="page-header">
-  <h1>Group: <em>{{ group.name }}</em></h1>
-</div>
+{% block breadcrumbs %}
+  {{ block.super }}
+  <li>
+    <a href="{% url "groups:admin:index" %}">Groups</a>
+  </li>
+{% endblock %}
+
+{% block content %}
+
+<h2 class="heading">
+  Group: <em>{{ group.name }}</em>
+</h2>
 
 {% if form.non_field_errors %}
 <div class="has-error">
@@ -49,31 +60,121 @@
 
   <div class="form-group">
     <label class="control-label col-sm-2">
-      Slug
-    </label>
-    <div class="col-sm-10">
-      <input
-        type="text"
-        class="form-control"
-        value="{{ form.instance.slug }}"
-        disabled
-      >
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label class="control-label col-sm-2">
       Plan
     </label>
     <div class="col-sm-10">
-      {{ group.billing.get_plan_object.display }}
+      <p class="form-control-static">
+        {{ group.billing.get_plan_object.display }}
+      </p>
     </div>
   </div>
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-primary">
-        Update group
+        Save
+      </button>
+    </div>
+  </div>
+</form>
+
+<div class="divide60"></div>
+
+<h3 class="heading">
+  Access tokens ({{ group.access_tokens.count }})
+</h3>
+
+<p>
+  <a
+    href="{% url "groups:admin:access-tokens-csv" group.pk %}"
+    class="btn btn-default"
+  >Download as .csv</a>
+</p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Token</th>
+      <th>Created</th>
+      <th>User</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for x in access_tokens %}
+    <tr>
+      <td>
+        <code>{{ x.access_token }}</code>
+      </td>
+      <td>
+        <abbr title="{{ x.created|timesince }}">
+          {{ x.created }}
+        </abbr>
+      </td>
+      <td>
+        {% if x.user_id %}
+          <code>{{ x.user.email }}</code>
+        {% else %}
+          &mdash;
+        {% endif %}
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="1">
+        No access tokens have been generated.
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h3 class="heading">
+  Create access tokens
+</h3>
+
+{% if access_token_form.non_field_errors %}
+<div class="has-error">
+  {% for x in access_token_form.non_field_errors %}
+  <p class="help-block">{{ x }}</p>
+  {% endfor %}
+</div>
+{% endif %}
+
+<form
+  method="POST"
+  class="form-horizontal"
+  action="{% url "groups:admin:create-access-tokens" group.pk %}"
+>
+  {% csrf_token %}
+
+  <div class="form-group {% if access_token_form.errors.num_tokens %}has-error{% endif %}">
+    <label
+      for="{{ access_token_form.num_tokens.id_for_label }}"
+      class="control-label col-sm-2"
+    >
+      Number of tokens to create
+    </label>
+    <div class="col-sm-3">
+      <input
+        id="{{ access_token_form.num_tokens.id_for_label }}"
+        type="text"
+        class="form-control"
+        min="{{ access_token_form.fields.num_tokens.min_value }}"
+        name="{{ access_token_form.num_tokens.html_name }}"
+        value="{{ access_token_form.num_tokens.value|default:"" }}"
+        maxlength="{{ access_token_form.fields.num_tokens.max_length }}"
+        placeholder=""
+        {% if access_token_form.fields.num_tokens.required %}required{% endif %}
+      >
+      {% for x in access_token_form.errors.num_tokens %}
+        <p class="help-block">{{ x }}</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">
+        Create tokens
       </button>
     </div>
   </div>

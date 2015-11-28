@@ -4,8 +4,7 @@ from django import forms
 from django.utils.http import int_to_base36
 from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import default_token_generator
-
-from ..utils import validate_password
+from django.contrib.auth.password_validation import validate_password
 
 User = get_user_model()
 

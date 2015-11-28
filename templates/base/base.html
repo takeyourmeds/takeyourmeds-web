@@ -103,6 +103,10 @@
 </div>
 {% endblock %}
 
+{% block container_footer %}
+  <div class="divide30"></div>
+{% endblock %}
+
 <footer id="footer">
   <div class="divide40"></div>
 
@@ -123,28 +127,28 @@
                   <a href="{% url "static:terms" %}">Terms and Conditions</a> &bull;
                   <a href="{% url "static:privacy" %}">Privacy Policy</a>
                 </p>
-            </div>            
+            </div>
 
         </div><!--footer col-->
         <div class="col-md-4 col-sm-6 margin30">
             <div class="footer-col">
                 <h3>Contact</h3>
                 <ul class="list-unstyled contact">
-                    <li><p><strong><i class="fa fa-map-marker"></i> Address:</strong>London, SE6 1NJ, England</p></li> 
+                    <li><p><strong><i class="fa fa-map-marker"></i> Address:</strong>London, SE6 1NJ, England</p></li>
                     <li><p><strong><i class="fa fa-envelope"></i> Email:</strong> <a href="#">hello@takeyourmeds.co.uk</a></p></li>
                     <li> <p><strong><i class="fa fa-github"></i> GitHub:</strong><a href="https://github.com/takeyourmeds/takeyourmeds-web">github.com/takeyourmeds</a></p></li>
                     <li> <p><strong><i class="fa fa-keyboard-o"></i> Freenode IRC:</strong><a href="https://webchat.freenode.net/#takeyourmeds">#takeyourmeds</a></p></li>
                     <li> <p><strong><i class="fa fa-twitter"></i> Twitter:</strong><a href="https://twitter.com/takeyourmedsapp">@takeyourmedsapp</a></p></li>
                 </ul>
-                
-            </div>                        
+
+            </div>
         </div><!--footer col-->
 
         <div class="col-md-4 col-sm-6 margin30">
             <div class="footer-col">
                 <h3>Newsletter</h3>
                 <p>
-                    Subscribe to our newsletter: 
+                    Subscribe to our newsletter:
                 </p>
                 <form role="form" class="subscribe-form" action="https://tinyletter.com/takeyourmeds" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/takeyourmeds', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
                     <div class="input-group">
@@ -157,9 +161,9 @@
                 </form>
                 <div class="divide10"></div>
                 <p class="pull-right">Powered by <a href="https://tinyletter.com" target="_blank">TinyLetter</a></p>
-            </div>             
+            </div>
         </div><!--footer col-->
-        
+
     </div>
   </div>
 </footer>
