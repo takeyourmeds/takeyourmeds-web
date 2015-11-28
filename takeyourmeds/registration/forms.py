@@ -1,6 +1,5 @@
 from django import forms
-
-from takeyourmeds.account.utils import validate_password
+from django.contrib.auth.password_validation import validate_password
 
 from takeyourmeds.groups.models import AccessToken
 from takeyourmeds.account.models import User
