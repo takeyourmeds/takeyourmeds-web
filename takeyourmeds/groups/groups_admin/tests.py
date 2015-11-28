@@ -12,6 +12,14 @@ class SmokeTest(SuperuserTestCase):
             login=True,
         )
 
+    def test_access_tokens_csv(self):
+        self.assertGET(
+            200,
+            'groups:admin:access-tokens-csv',
+            self.user.profile.group_id,
+            login=True,
+        )
+
     def test_create_access_tokens(self):
         group = self.user.profile.group
 
