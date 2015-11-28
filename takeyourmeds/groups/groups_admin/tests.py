@@ -19,7 +19,7 @@ class SmokeTest(SuperuserTestCase):
 
         self.assertPOST(
             302,
-            {'num_access_tokens': 10},
+            {'num_tokens': 10},
             'groups:admin:create-access-tokens',
             group.pk,
             login=True,
