@@ -5,8 +5,8 @@ from django.db import models
 class GroupManager(models.Manager):
     def create_group(self, *args, **kwargs):
         """
-        Create a Group, ensuring Stripe is correctly configured. This should be
-        the only entry point for creating group instances.
+        Create a Group, ensuring Stripe is correctly configured. This is the
+        only entry point for creating group instances.
         """
 
         stripe_kwargs = kwargs.pop('stripe_kwargs')

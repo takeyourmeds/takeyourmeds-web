@@ -7,4 +7,8 @@ urlpatterns = (
         name='index'),
     url(r'^admin/groups/(?P<group_id>\d+)$', views.view,
         name='view'),
+    url(r'^admin/groups/(?P<group_id>\d+)/access-tokens-csv$', views.access_tokens_csv,
+        name='access-tokens-csv'),
+    url(r'^admin/groups/(?P<group_id>\d+)/create-access-tokens$', views.create_access_tokens,
+        name='create-access-tokens'),
 )

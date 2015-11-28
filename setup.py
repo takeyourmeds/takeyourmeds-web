@@ -2,6 +2,7 @@
 
 import os
 import sys
+import setuptest
 
 from setuptools import setup, find_packages
 
@@ -15,16 +16,11 @@ def find_data_files(dirs):
             ))
     return result
 
-if sys.argv[1:2] == ['test']:
-    # Monkey patch https://github.com/praekelt/django-setuptest/pull/26
-    import importlib
-    sys.modules['django.utils.importlib'] = importlib
-
 setup(
     name='takeyourmeds',
     scripts=('takeyourmeds/manage.py',),
+    cmdclass={'test': setuptest.test},
     packages=find_packages(),
     zip_safe=False,
     data_files=find_data_files(('media', 'templates')),
-    test_suite='setuptest.setuptest.SetupTestSuite',
 )

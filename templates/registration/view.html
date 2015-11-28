@@ -74,7 +74,7 @@
                 {% if form.fields.email.required %}required{% endif %}
               >
             </label>
-            {% for x in form.errors.username %}
+            {% for x in form.errors.email %}
               <p class="help-block">{{ x }}</p>
             {% endfor %}
           </section>
@@ -95,6 +95,30 @@
             </label>
             {% for x in form.errors.password %}
               <p class="help-block">{{ x }}</p>
+            {% endfor %}
+          </section>
+
+          <section class="{% if form.errors.access_token %}state-error{% endif %}">
+            <label class="input">
+              <i class="icon-append fa fa-lock"></i>
+              <input
+                id="{{ form.access_token.id_for_label }}"
+                type="text"
+                class="form-control"
+                name="{{ form.access_token.html_name }}"
+                value="{{ form.access_token.value|default:"" }}"
+                maxlength="{{ form.fields.access_token.max_length }}"
+                placeholder="Access token (optional)"
+                {% if form.fields.access_token.required %}required{% endif %}
+              >
+            </label>
+            {% for x in form.errors.access_token %}
+              <p class="help-block">{{ x }}</p>
+            {% empty %}
+              <p class="help-block">
+                If your GP or medical practioner has given you a TakeYourMeds
+                access token, please enter it here.
+              </p>
             {% endfor %}
           </section>
         </fieldset>

@@ -81,6 +81,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = False
 USE_L10N = False
 LANGUAGE_CODE = 'en-gb'
+DATETIME_FORMAT = 'r' # RFC 2822
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -117,6 +118,24 @@ AUTH_USER_MODEL = 'account.User'
 
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+)
+
+AUTH_PASSWORD_VALIDATORS = (
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 6,
+        }
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 )
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'

@@ -1,0 +1,2 @@
+token,created,user_id{% for x in access_tokens %}
+{{ x.access_token }},{{ x.created|date:"U" }},{{ x.user.email }}{% endfor %}
