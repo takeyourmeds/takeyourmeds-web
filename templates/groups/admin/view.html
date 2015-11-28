@@ -84,6 +84,13 @@
   Access tokens ({{ group.access_tokens.count }})
 </h3>
 
+<p>
+  <a
+    href="{% url "groups:admin:access-tokens-csv" group.pk %}"
+    class="btn btn-default"
+  >Download as .csv</a>
+</p>
+
 <table class="table table-striped">
   <thead>
     <tr>

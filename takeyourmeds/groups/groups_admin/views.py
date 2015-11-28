@@ -70,3 +70,17 @@ def create_access_tokens(request, group_id):
         messages.error(request, "Please enter a valid number.")
 
     return redirect('groups:admin:view', group.pk)
+
+@superuser_required
+def access_tokens_csv(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+
+    access_tokens = group.access_tokens.select_related('user')
+
+    response = render(request, 'groups/admin/access_tokens.csv', {
+        'access_tokens': access_tokens,
+    }, content_type='text/csv')
+
+    response['Content-Disposition'] = 'attachment; filename=%d.csv' % group.pk
+
+    return response
