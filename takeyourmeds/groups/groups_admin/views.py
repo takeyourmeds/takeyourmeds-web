@@ -1,11 +1,12 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.http import require_POST
 
 from takeyourmeds.utils.decorators import superuser_required
 
 from ..models import Group
 
-from .forms import AddEditForm
+from .forms import AddEditForm, AccessTokenForm
 
 @superuser_required
 def index(request):
@@ -48,4 +49,24 @@ def view(request, group_id):
         'form': form,
         'group': group,
         'access_tokens': access_tokens,
+        'access_token_form': AccessTokenForm(initial={'num_tokens': 10})
     })
+
+@require_POST
+@superuser_required
+def create_access_tokens(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+
+    form = AccessTokenForm(request.POST)
+
+    if form.is_valid():
+        access_tokens = form.save(group)
+
+        messages.success(
+            request,
+            "%d access token(s) created." % len(access_tokens),
+        )
+    else:
+        messages.error(request, "Please enter a valid number.")
+
+    return redirect('groups:admin:view', group.pk)

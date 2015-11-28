@@ -120,4 +120,57 @@
   </tbody>
 </table>
 
+<h3 class="heading">
+  Create access tokens
+</h3>
+
+{% if access_token_form.non_field_errors %}
+<div class="has-error">
+  {% for x in access_token_form.non_field_errors %}
+  <p class="help-block">{{ x }}</p>
+  {% endfor %}
+</div>
+{% endif %}
+
+<form
+  method="POST"
+  class="form-horizontal"
+  action="{% url "groups:admin:create-access-tokens" group.pk %}"
+>
+  {% csrf_token %}
+
+  <div class="form-group {% if access_token_form.errors.num_tokens %}has-error{% endif %}">
+    <label
+      for="{{ access_token_form.num_tokens.id_for_label }}"
+      class="control-label col-sm-2"
+    >
+      Number of tokens to create
+    </label>
+    <div class="col-sm-3">
+      <input
+        id="{{ access_token_form.num_tokens.id_for_label }}"
+        type="text"
+        class="form-control"
+        min="{{ access_token_form.fields.num_tokens.min_value }}"
+        name="{{ access_token_form.num_tokens.html_name }}"
+        value="{{ access_token_form.num_tokens.value|default:"" }}"
+        maxlength="{{ access_token_form.fields.num_tokens.max_length }}"
+        placeholder=""
+        {% if access_token_form.fields.num_tokens.required %}required{% endif %}
+      >
+      {% for x in access_token_form.errors.num_tokens %}
+        <p class="help-block">{{ x }}</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">
+        Create tokens
+      </button>
+    </div>
+  </div>
+</form>
+
 {% endblock %}

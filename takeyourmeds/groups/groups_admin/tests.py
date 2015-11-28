@@ -11,3 +11,18 @@ class SmokeTest(SuperuserTestCase):
             self.user.profile.group_id,
             login=True,
         )
+
+    def test_create_access_tokens(self):
+        group = self.user.profile.group
+
+        self.assertEqual(group.access_tokens.count(), 0)
+
+        self.assertPOST(
+            302,
+            {'num_access_tokens': 10},
+            'groups:admin:create-access-tokens',
+            group.pk,
+            login=True,
+        )
+
+        self.assertEqual(group.access_tokens.count(), 10)
