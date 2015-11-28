@@ -81,6 +81,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = False
 USE_L10N = False
 LANGUAGE_CODE = 'en-gb'
+DATETIME_FORMAT = 'r' # RFC 2822
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
