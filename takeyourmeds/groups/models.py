@@ -39,7 +39,7 @@ class AccessToken(models.Model):
     user = models.OneToOneField(
         'account.User',
         null=True,
-        related_name='token',
+        related_name='access_token',
     )
 
     created = models.DateTimeField(default=datetime.datetime.utcnow)

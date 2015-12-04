@@ -35,11 +35,13 @@ class ForgotPasswordForm(forms.Form):
 class ResetPasswordForm(forms.Form):
     password = forms.CharField()
 
-    def save(self):
-        self.user.set_password(self.cleaned_data['password'])
-        self.user.save()
+    def save(self, user):
+        user.set_password(self.cleaned_data['password'])
+        user.save()
 
-        return self.user
+        return user
 
     def clean_password(self):
-        return validate_password(self.cleaned_data.get('password'))
+        val = self.cleaned_data.get('password')
+        validate_password(val)
+        return val

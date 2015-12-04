@@ -116,6 +116,7 @@
         {% else %}
           &mdash;
         {% endif %}
+      </td>
     </tr>
     {% empty %}
     <tr>
@@ -179,5 +180,35 @@
     </div>
   </div>
 </form>
+
+{% if without_access_tokens.exists %}
+<div class="divide60"></div>
+
+<h3 class="heading">
+  Users in this group who did not register with an access token ({{ without_access_tokens.count }})
+</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>User</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for x in without_access_tokens %}
+    <tr>
+      <td>
+        {% if x.user_id %}
+          <code>{{ x.user.email }}</code>
+        {% else %}
+          &mdash;
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endif %}
 
 {% endblock %}
