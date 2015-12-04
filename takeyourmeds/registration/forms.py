@@ -44,7 +44,9 @@ class RegistrationForm(forms.ModelForm):
         return email
 
     def clean_password(self):
-        return validate_password(self.cleaned_data.get('password'))
+        val = self.cleaned_data.get('password')
+        validate_password(val)
+        return val
 
     def clean_access_token(self):
         val = self.cleaned_data['access_token'].strip()
