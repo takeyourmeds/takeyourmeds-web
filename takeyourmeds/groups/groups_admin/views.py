@@ -45,11 +45,16 @@ def view(request, group_id):
 
     access_tokens = group.access_tokens.select_related('user')
 
+    without_access_tokens = group.users.filter(
+        user__access_token__isnull=True,
+    ).select_related('user')
+
     return render(request, 'groups/admin/view.html', {
         'form': form,
         'group': group,
         'access_tokens': access_tokens,
         'access_token_form': AccessTokenForm(initial={'num_tokens': 10}),
+        'without_access_tokens': without_access_tokens,
     })
 
 @require_POST
