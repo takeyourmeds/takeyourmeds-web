@@ -49,7 +49,7 @@ def view(request, group_id):
         'form': form,
         'group': group,
         'access_tokens': access_tokens,
-        'access_token_form': AccessTokenForm(initial={'num_tokens': 10})
+        'access_token_form': AccessTokenForm(initial={'num_tokens': 10}),
     })
 
 @require_POST
