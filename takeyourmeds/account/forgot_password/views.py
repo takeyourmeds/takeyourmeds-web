@@ -50,6 +50,8 @@ def reset(request, uidb36, token):
         form = ResetPasswordForm(request.POST)
 
         if form.is_valid():
+            form.save(user)
+
             login(request, user)
 
             messages.success(
