@@ -1,54 +1,8 @@
 ---
-- name: Install packages required to build Debian packages in general
-  action: apt
-    pkg={{ item }}
-  with_items:
-    - equivs
-    - devscripts
-    - build-essential
-
-- name: Remove any existing build directory
-  file:
-    state=absent
-    path={{ build_dir }}
-
-- name: Create build directory
-  file:
-    state=directory
-    path={{ build_dir }}/{{ package_name }}
-
-- name: Download code
-  command:
-    wget -O {{ build_dir }}/{{ package_name }}.tar.gz {{ source }}/archive/{{ commit }}.tar.gz
-
-- name: Extract
-  command:
-    tar xfz {{ build_dir }}/{{ package_name }}.tar.gz --strip-components=1 --directory={{ build_dir }}/{{ package_name }}
-
-- name: Set role
-  template:
-    src=role.py
-    dest={{ build_dir }}/{{ package_name }}/takeyourmeds/settings/role.py
-
-- name: Set custom/secret settings
-  template:
-    src=custom.py
-    dest={{ build_dir }}/{{ package_name }}/takeyourmeds/settings/custom.py
-  no_log: true
-
-- name: Install the specific packages required to build our Debian packages
-  command:
-    mk-build-deps --install --remove --tool "apt-get --no-install-recommends --target-release={{ debian_release }}-backports --yes" debian/control
-  args:
-    chdir: "{{ build_dir }}/{{ package_name }}"
-
-- name: Build package
-  shell:
-    dpkg-buildpackage -uc -us -b 2>&1
-  args:
-    chdir: "{{ build_dir }}/{{ package_name }}"
-  register: out
-- debug: var=out.stdout_lines
+- name: Copy package
+  copy:
+    src=takeyourmeds.deb
+    dest=/tmp/takeyourmeds.deb
 
 - name: Stop services to avoid race conditions
   action: service
@@ -66,11 +20,27 @@
     path={{ storage_dir }}
     mode=0755
     owner=www-data
-    group=www-data
 
 - name: Install package
   shell:
-    dpkg -i {{ build_dir }}/{{ package_name }}_*.deb
+    dpkg -i /tmp/takeyourmeds.deb
+  ignore_errors: yes # For new dependencies
+
+- name: Ensure dependencies
+  shell:
+    apt-get -f --yes install
+
+- name: Set role
+  template:
+    src=role.py
+    dest={{ site_packages }}/takeyourmeds/role.py
+  no_log: true
+
+- name: Set custom/secret settings
+  template:
+    src=custom.py
+    dest={{ site_packages }}/takeyourmeds/settings/custom.py
+  no_log: true
 
 - name: Setup PostgreSQL user
   sudo: yes

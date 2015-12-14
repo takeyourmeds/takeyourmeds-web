@@ -2,16 +2,8 @@
 
 set -eu
 
-cd "$(dirname "${0}")/../"
-
 TEMP="$(mktemp -d)"
-trap "rm -rf ${TEMP}" EXIT
-
-if [ "${ANSIBLE_VAULT_PASSWORD:-}" = "" ]
-then
-	echo "E: ANSIBLE_VAULT_PASSWORD not set"
-	exit 1
-fi
+SOURCE="$(dpkg-parsechangelog --show-field Source)"
 
 case "${TRAVIS_BRANCH:-}" in
 	master)
@@ -27,22 +19,19 @@ case "${TRAVIS_BRANCH:-}" in
 		exit 0
 esac
 
-echo "${ANSIBLE_VAULT_PASSWORD}" > ${TEMP}/ansible-vault-password
+pip install ansible
+install -v -D -m644 *.deb config/roles/${SOURCE}/files/${SOURCE}.deb
+
+echo "${ANSIBLE_VAULT_PASSWORD}" > ${TEMP}/password
+echo "${HOSTNAME} ansible_ssh_user=root ansible_ssh_private_key_file=${TEMP}/id_rsa role=${ROLE}" > ${TEMP}/hosts
 
 cp config/id_rsa ${TEMP}
-ansible-vault decrypt --vault-password-file=${TEMP}/ansible-vault-password ${TEMP}/id_rsa
+ansible-vault decrypt --vault-password-file=${TEMP}/password ${TEMP}/id_rsa
 chmod 600 "${TEMP}/id_rsa"
 
-cat > ${TEMP}/hosts <<EOF
-[${ROLE}]
-${HOSTNAME} ansible_ssh_user=root ansible_ssh_private_key_file=${TEMP}/id_rsa commit=${TRAVIS_COMMIT}
-EOF
-
-export ANSIBLE_HOST_KEY_CHECKING=0
-
-exec ansible-playbook \
+exec env ANSIBLE_HOST_KEY_CHECKING=0 ansible-playbook \
 	config/playbook.yml \
 	--verbose \
 	--inventory=${TEMP}/hosts \
-	--vault-password-file=${TEMP}/ansible-vault-password \
+	--vault-password-file=${TEMP}/password \
 	"${@}"

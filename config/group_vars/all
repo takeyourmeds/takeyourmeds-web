@@ -1,12 +1,7 @@
 ---
-source: https://github.com/takeyourmeds/takeyourmeds-web
 base_dir: /usr/share/python/takeyourmeds
+root_email: support@takeyourmeds.co.uk
 storage_dir: /srv/storage.takeyourmeds.co.uk
-
-build_dir: /tmp/buildd
-package_name: takeyourmeds
-
+site_packages: /usr/share/python/takeyourmeds/lib/python2.7/site-packages
 debian_mirror: http://httpredir.debian.org
 debian_release: jessie
-
-root_email: support@takeyourmeds.co.uk
