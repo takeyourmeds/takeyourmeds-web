@@ -7,8 +7,6 @@ Re-imaging
   - Don't worry about the non-root user.
   - Select all other defaults
 * Get IP of server (via `ip addr`)
-* Add the Ansible Vault password to /root/vault-password-file. This is the
-  retrosnub control panel password.
 * `sed -i -e 's@PermitRootLogin.*@@g' /etc/ssh/sshd_config && service ssh restart`
 * `mkdir /root/deployhq`
 * Add/update DNS A record in 123-reg
