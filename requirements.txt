@@ -8,6 +8,7 @@ https://github.com/lamby/django-setuptest/zipball/django-1.9-support#egg=django-
 django-switch-templatetag==2.0.2
 django-template-tests==1.0.0
 enum34==1.0.4
+kombu==3.0.30
 requests==2.8.1
 stripe==1.27.1
 twilio==4.9.0
