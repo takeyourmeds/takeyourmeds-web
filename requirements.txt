@@ -1,6 +1,6 @@
 bcrypt==2.0.0
 celery==3.1.19
-Django==1.9rc2
+Django==1.9
 django-auto-one-to-one==2.0.3
 django-celery==3.1.17
 django-email-from-template==2.0.0
