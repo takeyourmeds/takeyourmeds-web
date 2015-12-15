@@ -20,7 +20,7 @@ case "${TRAVIS_BRANCH:-}" in
 esac
 
 pip install ansible
-install -v -D -m644 *.deb config/roles/${SOURCE}/files/${SOURCE}.deb
+install -v -D -m644 ../${SOURCE}_*.deb config/roles/${SOURCE}/files/${SOURCE}.deb
 
 echo "${ANSIBLE_VAULT_PASSWORD}" > ${TEMP}/password
 echo "${HOSTNAME} ansible_ssh_user=root ansible_ssh_private_key_file=${TEMP}/id_rsa role=${ROLE}" > ${TEMP}/hosts
