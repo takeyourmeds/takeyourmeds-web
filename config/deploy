@@ -19,7 +19,7 @@ case "${TRAVIS_BRANCH:-}" in
 		exit 0
 esac
 
-pip install ansible
+pip install ansible==1.9.4
 install -v -D -m644 ../${SOURCE}_*.deb config/roles/${SOURCE}/files/${SOURCE}.deb
 
 echo "${ANSIBLE_VAULT_PASSWORD}" > ${TEMP}/password
