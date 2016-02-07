@@ -2,6 +2,9 @@
 Description=takeyourmeds-celery
 After=network.target
 
+[Install]
+WantedBy=multi-user.target
+
 [Service]
 User=www-data
 Group=www-data
